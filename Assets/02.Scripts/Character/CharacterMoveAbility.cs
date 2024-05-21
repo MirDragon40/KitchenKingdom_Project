@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(CharacterController))]
-public class PlayerMoveAbility : PlayerAbility
+public class CharacterMoveAbility : CharacterAbility
 {
     private float _gravity = -9.8f;   // 중력 변수
     private float _yVelocity = 0f;
