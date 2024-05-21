@@ -8,19 +8,27 @@ public class PlayerMoveAbility : PlayerAbility
     private float _gravity = -9.8f;   // 중력 변수
     private float _yVelocity = 0f;
 
-    public float MoveSpeed = 7f;
-    public float DashSpeed = 12f;
-    public float RotationSpeed = 700;
-    public float DashDuration = 0.2f;
+    public float MoveSpeed;
+    public float DashSpeed;
+    public float RotationSpeed;
+    public float DashDuration;
 
 
     private CharacterController _characterController;
+    private Animator _animator;
 
     private bool isDashing = false;
 
     private void Start()
     {
         _characterController = GetComponent<CharacterController>();
+        _animator = GetComponent<Animator>();
+
+        MoveSpeed = 7f;
+        DashSpeed = 12f;
+        RotationSpeed = 700;
+        DashDuration = 0.2f;
+
     }
 
     private void Update()
@@ -33,6 +41,8 @@ public class PlayerMoveAbility : PlayerAbility
         dir.Normalize();
 
         _characterController.Move(dir * (MoveSpeed * Time.deltaTime));
+
+        _animator.SetFloat("Move", dir.magnitude);
 
 
         // 이동하는 방향을 바라보도록 회전
