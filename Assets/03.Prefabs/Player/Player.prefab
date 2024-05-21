@@ -704,7 +704,7 @@ GameObject:
   - component: {fileID: 8460931183189954854}
   - component: {fileID: 3032953453555878288}
   m_Layer: 0
-  m_Name: Chef
+  m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -737,7 +737,7 @@ Animator:
   m_GameObject: {fileID: 2877006375439491702}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: df7c6159310e03547aa9aeaae966ad66, type: 3}
-  m_Controller: {fileID: 9100000, guid: 82bafa1f4b5dcba45b4a5a9d5da8c1ad, type: 2}
+  m_Controller: {fileID: 9100000, guid: ba29128692f962841b86a5bca6f55857, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -827,7 +827,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MoveSpeed: 7
-  DashSpeed: 12
+  DashSpeed: 10
+  DashDuration: 0.2
 --- !u!1 &2886218162498918775
 GameObject:
   m_ObjectHideFlags: 0

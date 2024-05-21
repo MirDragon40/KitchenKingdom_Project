@@ -10,7 +10,9 @@ public class PlayerMoveAbility : PlayerAbility
 
     public float MoveSpeed = 7f;
     public float DashSpeed = 12f;
+    public float RotationSpeed = 700;
     public float DashDuration = 0.2f;
+
 
     private CharacterController _characterController;
 
@@ -37,7 +39,7 @@ public class PlayerMoveAbility : PlayerAbility
         if (dir != Vector3.zero)
         {
             Quaternion toRotation = Quaternion.LookRotation(dir, Vector3.up);
-            transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, 800 * Time.deltaTime);
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, RotationSpeed * Time.deltaTime);
         }
 
         if (Input.GetKeyDown(KeyCode.Space))
@@ -46,6 +48,8 @@ public class PlayerMoveAbility : PlayerAbility
         }
     }
 
+
+    // 대쉬 코루틴 함수
     private IEnumerator Dash()
     {
         isDashing = true;
