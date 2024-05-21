@@ -2,17 +2,62 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerMoveAbility : MonoBehaviour
+[RequireComponent(typeof(CharacterController))]
+public class PlayerMoveAbility : PlayerAbility
 {
-    // Start is called before the first frame update
-    void Start()
+    private float _gravity = -9.8f;   // 중력 변수
+    private float _yVelocity = 0f;
+
+    public float MoveSpeed = 7f;
+    public float DashSpeed = 12f;
+    public float DashDuration = 0.2f;
+
+    private CharacterController _characterController;
+
+    private bool isDashing = false;
+
+    private void Start()
     {
-        
+        _characterController = GetComponent<CharacterController>();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        
+        // 사용자 키보드 입력
+        float h = Input.GetAxis("Horizontal");
+        float v = Input.GetAxis("Vertical");
+
+        Vector3 dir = new Vector3(h, 0, v);
+        dir.Normalize();
+
+        _characterController.Move(dir * (MoveSpeed * Time.deltaTime));
+
+
+        // 이동하는 방향을 바라보도록 회전
+        if (dir != Vector3.zero)
+        {
+            Quaternion toRotation = Quaternion.LookRotation(dir, Vector3.up);
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, 800 * Time.deltaTime);
+        }
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            StartCoroutine(Dash());
+        }
+    }
+
+    private IEnumerator Dash()
+    {
+        isDashing = true;
+        float startTime = Time.time;
+
+        while (Time.time < startTime + DashDuration)
+        {
+            Vector3 dashDirection = transform.forward;
+            _characterController.Move(dashDirection * (DashSpeed * Time.deltaTime));
+            yield return null; // 다음 프레임까지 대기
+        }
+
+        isDashing = false;
     }
 }

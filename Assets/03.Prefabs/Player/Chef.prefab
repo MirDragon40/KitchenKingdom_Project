@@ -700,6 +700,9 @@ GameObject:
   - component: {fileID: 3190654200990774715}
   - component: {fileID: 6528590754894943737}
   - component: {fileID: 748119256627098138}
+  - component: {fileID: 3668852141442671585}
+  - component: {fileID: 8460931183189954854}
+  - component: {fileID: 3032953453555878288}
   m_Layer: 0
   m_Name: Chef
   m_TagString: Untagged
@@ -787,6 +790,44 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 1, z: 0}
+--- !u!114 &3668852141442671585
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2877006375439491702}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fde044d8ebcd5ea418983f5e279981e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &8460931183189954854
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2877006375439491702}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee9fc05bde3cd6c4192feb022f303974, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &3032953453555878288
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2877006375439491702}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 250bfd5818c30014b80f9fe7e5819893, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MoveSpeed: 7
+  DashSpeed: 12
 --- !u!1 &2886218162498918775
 GameObject:
   m_ObjectHideFlags: 0
