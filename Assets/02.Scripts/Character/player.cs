@@ -8,12 +8,20 @@ public class player : MonoBehaviour
 
     public Transform handTransform;
     private GameObject heldFood;
-    private AnimationController animator;
+    private Animator animator;
 
-    public void Awake()
+    void Awake()
     {
-        instance = this;
-        animator = GetComponent<AnimationController>();
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+
+        animator = GetComponent<Animator>();
     }
 
     void Update()
@@ -31,37 +39,54 @@ public class player : MonoBehaviour
             }
         }
     }
+    public bool IsHoldingFood()
+    {
+        return heldFood != null;
+    }
 
-    public void SpawnFood(GameObject foodPrefab, Transform spawnPoint)
+    public void SpawnFood (FoodType foodType, Transform spawnPoint)
     {
         // 음식 생성
-        GameObject food = Instantiate(foodPrefab, spawnPoint.position, spawnPoint.rotation);
 
-        // 음식을 플레이어의 손 위치에 배치
-        if (handTransform != null)
+        if (FoodManager.instance != null)
         {
-            food.transform.parent = handTransform; // 손의 자식으로 설정
-            food.transform.localPosition = Vector3.zero; // 손 위치에 맞게 조정
-            food.transform.localRotation = Quaternion.identity; // 손 위치에 맞게 회전 초기화
-        }
-        else
-        {
-            Debug.LogError("Hand transform not assigned!");
-            return;
-        }
+            GameObject foodPrefab = FoodManager.instance.GetFoodPrefab(foodType);
+            if (foodPrefab != null)
+            {
+                GameObject food = Instantiate(foodPrefab, spawnPoint.position, spawnPoint.rotation);
 
-        // 음식을 들고 다니는 애니메이션 재생
-        if (animator != null)
-        {
-            animator.Carry();
-        }
-        else
-        {
-            Debug.LogError("Animation controller not assigned!");
-        }
+                // 음식을 세로로 서게 회전 조정
+                //food.transform.rotation = Quaternion.Euler(-90, 0, 0);
 
-        // 들고 있는 음식 설정
-        heldFood = food;
+                // 음식을 플레이어의 손 위치에 배치
+                if (handTransform != null)
+                {
+                    food.transform.parent = handTransform; // 손의 자식으로 설정
+                    food.transform.localPosition = Vector3.zero; // 손 위치에 맞게 조정
+                  //food.transform.localRotation = Quaternion.identity; // 손 위치에 맞게 회전 초기화
+                }
+                else
+                {
+                    Debug.LogError("Hand transform not assigned!");
+                    return;
+                }
+
+                // 음식을 들고 다니는 애니메이션 재생
+                if (animator != null)
+                {
+                    animator.SetBool("Carry", true);
+                }
+                else
+                {
+                    Debug.LogError("Animation controller not assigned!");
+                }
+
+                // 들고 있는 음식 설정
+                heldFood = food;
+            }
+        }
+       
+       
     }
 
     void PickUpFood()
@@ -86,7 +111,7 @@ public class player : MonoBehaviour
                 heldFood.transform.parent = handTransform;
 
                 // 음식을 들고 다니는 애니메이션 재생
-                animator.Carry();
+                animator.SetBool("Carry", true);
                 break;
             }
         }
@@ -101,10 +126,10 @@ public class player : MonoBehaviour
         }
 
         heldFood.transform.parent = null; // 부모 해제
-        heldFood.transform.position = new Vector3(transform.position.x, transform.position.y + 1, transform.position.z); // 플레이어 근처에 놓음
+        heldFood.transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z); // 플레이어 근처에 놓음
         heldFood = null; // 들고 있는 음식 초기화
 
         // 음식을 들고 다니는 애니메이션 정지
-        animator.StopCarry();
+        animator.SetBool("Carry", false);
     }
 }
