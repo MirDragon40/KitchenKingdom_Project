@@ -23,7 +23,7 @@ public class Knife : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            if (Input.GetMouseButtonDown(0))
+            if (Input.GetKeyDown(KeyCode.LeftControl))
             {
                 _animator.SetBool("Chopping",true);
 
