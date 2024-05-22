@@ -5356,8 +5356,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.4401401, y: 0.27196586, z: 1.6258926}
-  m_Center: {x: 0.36719808, y: -0.09499018, z: 0.16564322}
+  m_Size: {x: 0.6261051, y: 0.27196586, z: 1.6258926}
+  m_Center: {x: 0.46017975, y: -0.09499017, z: 0.16564322}
 --- !u!114 &7383708824262921626
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5370,7 +5370,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6fef57a8ca2281f48a81d14ec44e4918, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  slider: {fileID: 0}
+  ProgressSlider: {fileID: 97692759}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
