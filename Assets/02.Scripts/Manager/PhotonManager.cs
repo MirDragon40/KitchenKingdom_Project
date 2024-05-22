@@ -23,6 +23,7 @@ public class PhotonManager : MonoBehaviourPunCallbacks //PUN의 다양한 서버
         {
             Destroy(gameObject);
         }
+        PhotonNetwork.AutomaticallySyncScene = true;
     }
 
     private void Start()
@@ -87,7 +88,7 @@ public class PhotonManager : MonoBehaviourPunCallbacks //PUN의 다양한 서버
         Debug.Log("방 join 성공!");
         Debug.Log($"RoomName: {PhotonNetwork.CurrentRoom.Name}");
         Debug.Log($"Current Players: {PhotonNetwork.CurrentRoom.PlayerCount}");
-        int sizeOfPlayers = PhotonNetwork.CurrentRoom.PlayerCount;
+        GatherManager.Instance.UpdatePlayerSlots();
 
     }
     public override void OnCreateRoomFailed(short returnCode, string message)

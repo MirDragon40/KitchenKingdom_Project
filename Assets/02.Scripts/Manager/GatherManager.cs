@@ -14,7 +14,9 @@ public class Slot
 public class GatherManager : MonoBehaviourPunCallbacks
 {
     public static GatherManager Instance { get; private set; }
-    public Slot[] playerSlots = new Slot[4]; // 4개의 Text UI 요소를 연결
+    public Slot[] playerSlots = new Slot[4];
+    public GameObject[] CharacterSlots = new GameObject[4];
+
     private int _playerCount = 0;
 
     private void Awake()
@@ -27,6 +29,10 @@ public class GatherManager : MonoBehaviourPunCallbacks
         {
             Destroy(this.gameObject);
         }
+        foreach (var slot in CharacterSlots)
+        {
+            slot.SetActive(false);
+        }
 
     }
     private void Start()
@@ -34,40 +40,34 @@ public class GatherManager : MonoBehaviourPunCallbacks
         UpdatePlayerSlots();
     }
 
-    public override void OnJoinedRoom()
-    {
-        base.OnJoinedRoom();
-        UpdatePlayerSlots();
-    }
-
     public override void OnPlayerEnteredRoom(Photon.Realtime.Player newPlayer)
     {
-        _playerCount++;
         base.OnPlayerEnteredRoom(newPlayer);
         UpdatePlayerSlots();
     }
 
     public override void OnPlayerLeftRoom(Photon.Realtime.Player otherPlayer)
     {
-        _playerCount--;
         base.OnPlayerLeftRoom(otherPlayer);
         UpdatePlayerSlots();
     }
 
-    void UpdatePlayerSlots()
+    public void UpdatePlayerSlots()
     {
         _playerCount = PhotonNetwork.PlayerList.Length;
-        for (int i = 0; i < _playerCount; i++)
+        Debug.Log(_playerCount);
+
+        for (int i = 0; i < playerSlots.Length; i++)
         {
             playerSlots[i].Nickname = string.Empty;
         }
 
         for (int i = 0; i < _playerCount; i++)
         {
-            if (playerSlots[i].IsOccupied)
-            {
-                playerSlots[i].Nickname = PhotonNetwork.PlayerList[i].NickName;
-            }
+            playerSlots[i].IsOccupied = true;
+            playerSlots[i].Nickname = PhotonNetwork.PlayerList[i].NickName;
+            CharacterSlots[i].SetActive(true);
         }
+
     }
 }
