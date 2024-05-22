@@ -7,20 +7,17 @@ public class Knife : MonoBehaviour
 {
     private Animator _animator;
 
-    public Slider slider;
+    public Slider ProgressSlider;
+
+    private Coroutine fillSliderCoroutine;
+    private float elapsedTime;
 
     private void Awake()
     {
         _animator = GetComponent<Animator>();
+        ProgressSlider.gameObject.SetActive(false);
     }
 
-    private void Update()
-    {
-
-        
-
-        
-    }
 
     private void OnTriggerStay(Collider other)
     {
@@ -28,17 +25,14 @@ public class Knife : MonoBehaviour
         {
             if (Input.GetMouseButtonDown(0))
             {
-               
-            }
-            else if (Input.GetMouseButton(0))
-            {
-                _animator.SetTrigger("Chopping");
+                _animator.SetBool("Chopping",true);
 
+                if (fillSliderCoroutine != null)
+                {
+                    StopCoroutine(fillSliderCoroutine);
+                }
 
-            }
-            else if (Input.GetMouseButtonUp(0))
-            {
-                _animator.SetTrigger("Chopping");
+                fillSliderCoroutine = StartCoroutine(FillSliderOverTime(3.0f));
             }
         }
 
@@ -49,8 +43,33 @@ public class Knife : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            _animator.ResetTrigger("Chopping");
+            _animator.SetBool("Chopping", false);
+
+            if (fillSliderCoroutine != null)
+            {
+                StopCoroutine(fillSliderCoroutine);
+            }
+
         }
+    }
+
+
+
+    private IEnumerator FillSliderOverTime(float duration)
+    {
+        ProgressSlider.gameObject.SetActive(true);
+
+        while (elapsedTime < duration)
+        {
+            elapsedTime += Time.deltaTime;
+            ProgressSlider.value = Mathf.Clamp01(elapsedTime / duration);
+            yield return null;
+        }
+
+        ProgressSlider.value = 1f;
+        ProgressSlider.gameObject.SetActive(false); // 3초가 다 지나면 슬라이더를 비활성화
+        _animator.SetBool("Chopping", false);
+        elapsedTime = 0f; // 초기화
     }
 }
 
