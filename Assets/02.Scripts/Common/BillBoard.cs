@@ -2,10 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Billboard : MonoBehaviour
+public class BillBoard : MonoBehaviour
 {
     void Update()
     {
-        transform.rotation = Camera.main.transform.rotation;
+        transform.forward = Camera.main.transform.forward;
     }
 }
