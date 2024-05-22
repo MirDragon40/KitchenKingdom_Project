@@ -14,7 +14,7 @@ public class FoodManager : MonoBehaviour
     public static FoodManager instance;
 
     public GameObject[] foodPrefabs;
-    public Dictionary<FoodType, GameObject> foodPrefabContainer = new Dictionary<FoodType, GameObject>();
+    //public Dictionary<FoodType, GameObject> foodPrefabContainer = new Dictionary<FoodType, GameObject>();
 
     void Awake()
     {
