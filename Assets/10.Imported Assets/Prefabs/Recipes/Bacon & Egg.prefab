@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6972678876547616298}
   m_Layer: 0
   m_Name: Bacon & Egg
-  m_TagString: Untagged
+  m_TagString: Food
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -24,15 +24,16 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7034586982166571598}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8174928676059437108}
   - {fileID: 6524581106535925895}
   - {fileID: 1806717152587393016}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &6972678876547616298
 MonoBehaviour:
@@ -60,6 +61,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 8846015751030823278}
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: f7c8da0f318bdac4eb0897431be2cfc7, type: 3}
@@ -111,6 +113,9 @@ PrefabInstance:
       value: Bacon_Cooked (1)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f7c8da0f318bdac4eb0897431be2cfc7, type: 3}
 --- !u!4 &1806717152587393016 stripped
 Transform:
@@ -122,6 +127,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 8846015751030823278}
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: f7c8da0f318bdac4eb0897431be2cfc7, type: 3}
@@ -173,6 +179,9 @@ PrefabInstance:
       value: Bacon_Cooked (0)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f7c8da0f318bdac4eb0897431be2cfc7, type: 3}
 --- !u!4 &6524581106535925895 stripped
 Transform:
@@ -184,6 +193,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 8846015751030823278}
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: a232484536e74644f8bd449e3795b1bb, type: 3}
@@ -235,6 +245,9 @@ PrefabInstance:
       value: Egg_Cooked
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a232484536e74644f8bd449e3795b1bb, type: 3}
 --- !u!4 &8174928676059437108 stripped
 Transform:
