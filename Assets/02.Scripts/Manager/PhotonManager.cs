@@ -11,8 +11,6 @@ using UnityEngine.UI;
 public class PhotonManager : MonoBehaviourPunCallbacks //PUN의 다양한 서버 이벤트(콜백 함수)를 받는다.
 {
     public static PhotonManager Instance { get; private set; }
-    public Button startButton;
-    public TMP_Text startBtnText;
 
 
     private void Awake()
@@ -90,15 +88,7 @@ public class PhotonManager : MonoBehaviourPunCallbacks //PUN의 다양한 서버
         Debug.Log($"RoomName: {PhotonNetwork.CurrentRoom.Name}");
         Debug.Log($"Current Players: {PhotonNetwork.CurrentRoom.PlayerCount}");
         int sizeOfPlayers = PhotonNetwork.CurrentRoom.PlayerCount;
-        AssignTeam(sizeOfPlayers);
-        if (PhotonNetwork.IsMasterClient)//만약 내가 마스터 클라이언트라면
-        {
-            startBtnText.text = "waiting for players";
-        }
-        else
-        {
-            startBtnText.text = "Ready!";
-        }
+
     }
     public override void OnCreateRoomFailed(short returnCode, string message)
     {
@@ -117,70 +107,5 @@ public class PhotonManager : MonoBehaviourPunCallbacks //PUN의 다양한 서버
         base.OnJoinRoomFailed(returnCode, message);
         Debug.Log("Join 실패!");
     }
-    void AssignTeam(int sizeOfPlayer)
-    {
-        ExitGames.Client.Photon.Hashtable hash = new ExitGames.Client.Photon.Hashtable();
-        if (sizeOfPlayer % 2 == 0)
-        {
-            hash.Add("Team", 0);
-        }
-        else
-        {
-            hash.Add("Team", 1);
-        }
-        PhotonNetwork.LocalPlayer.SetCustomProperties(hash);
-    }
-    public void OnClickStartButton()
-    {
-        if (!PhotonNetwork.IsMasterClient)//방장이 아닌 참가자라면
-        {
-        //    SendMsg();
-            startButton.interactable = false;//한번 레디 누르면 못 바꾼다
-            startBtnText.text = "Wait...";
-        }
-        else
-        {
-            if (_count == 4)//모든 플레이어가(4명) 준비 완료되었다면
-            {
-          //      lobbyText.text = "All Set : Play the Game Scene";
-                PhotonNetwork.LoadLevel(1);//1번째 씬을 불러온다
-            }
-        }
-    }
-    private void OnEnable()
-    {
-        base.OnEnable();
-        PhotonNetwork.NetworkingClient.EventReceived += OnEvent;
-    }
-    private void OnDisable()
-    {
-        PhotonNetwork.NetworkingClient.EventReceived -= OnEvent;
-    }
-    private enum EventCodes
-    {
-        ready = 1
-    }
-    private int _count = 1;
-    public void OnEvent(EventData photonEvent)
-    {
-        byte eventCode = photonEvent.Code;
-        object content = photonEvent.CustomData;
-        EventCodes code = (EventCodes)eventCode;
-        if (code == EventCodes.ready)//받은 이벤트의 분류가 ready라면
-        {
-            object[] datas = content as object[];
-            if (PhotonNetwork.IsMasterClient)//내가 마스터클라이언트라면
-            {
-                _count++;
-                if (_count == 4)//모두 준비완료가 되었다면
-                {
-                    startBtnText.text = "START !";
-                }
-                else
-                {
-                    startBtnText.text = "Only " + _count + " / 4 players are Ready";
-                }
-            }
-        }
-    }
+
 }

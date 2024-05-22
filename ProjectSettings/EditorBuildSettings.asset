@@ -4,5 +4,8 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/01.Scenes/GatheringScene_Joon.unity
+    guid: da109ba800a58134fb3e169039a91bdd
   m_configObjects: {}
