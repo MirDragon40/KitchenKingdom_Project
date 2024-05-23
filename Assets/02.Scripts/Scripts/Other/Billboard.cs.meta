@@ -1,2 +1,15 @@
 fileFormatVersion: 2
-guid: ad4f94829c89e0a4f999b91547ca2eb0
+<<<<<<<< HEAD:Assets/02.Scripts/Scripts/Player/Player_Script_Ref.cs.meta
+guid: 115425f61ce58f84b81f73683516bacb
+========
+guid: f99b95a1f8b621e4084c3b29a8826760
+>>>>>>>> 8d676f7ef7570aca2a857ece6a1665880809f825:Assets/02.Scripts/Scripts/Other/Billboard.cs.meta
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
