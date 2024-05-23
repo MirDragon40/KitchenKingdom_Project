@@ -4,10 +4,16 @@ using UnityEngine;
 
 public class Makefood : MonoBehaviour
 {
+    public static Makefood instace;
+
     public FoodType foodType;
     public Transform spawnPoint;  
     private bool isPlayerNearby = false; // 박스근처 확인
 
+    public void Awake()
+    {
+        
+    }
     private void Start()
     {
 
