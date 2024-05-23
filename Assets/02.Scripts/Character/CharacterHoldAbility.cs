@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class Player : MonoBehaviour
+public class CharacterHoldAbility : MonoBehaviour
 {
-    public static Player instance;
+    public static CharacterHoldAbility instance;
 
     public Transform handTransform;
     public GameObject heldFood;

@@ -12,7 +12,7 @@ public class ChoppingBoard : MonoBehaviour
     private Coroutine fillSliderCoroutine;
     private float elapsedTime;
 
-    private bool _isPossibleChopping;
+    private bool _isPossibleChopping = false;
 
 
     private void Awake()
@@ -24,8 +24,6 @@ public class ChoppingBoard : MonoBehaviour
     {
         if (_isPossibleChopping)
         {
-
-
             if (Input.GetKeyDown(KeyCode.LeftControl))
             {
                 Animator.SetBool("Chopping", true);
@@ -57,9 +55,10 @@ public class ChoppingBoard : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Player") && _isPossibleChopping)
         {
             Animator.SetBool("Chopping", false);
+            _isPossibleChopping = false;
 
             if (fillSliderCoroutine != null)
             {

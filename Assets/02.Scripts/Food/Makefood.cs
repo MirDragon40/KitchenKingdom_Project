@@ -14,9 +14,9 @@ public class Makefood : MonoBehaviour
     void Update()
     {
         
-        if (isPlayerNearby && Input.GetKeyDown(KeyCode.E) && !Player.instance.IsHoldingFood())
+        if (isPlayerNearby && Input.GetKeyDown(KeyCode.E) && !CharacterHoldAbility.instance.IsHoldingFood())
         {
-            SpawnFood(foodType, Player.instance.handTransform);
+            SpawnFood(foodType, CharacterHoldAbility.instance.handTransform);
         }
     }
 
