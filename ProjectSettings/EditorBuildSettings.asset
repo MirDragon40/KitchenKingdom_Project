@@ -8,4 +8,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/01.Scenes/GatheringScene_Joon.unity
     guid: da109ba800a58134fb3e169039a91bdd
+  - enabled: 1
+    path: Assets/01.Scenes/Stage1Scene.unity
+    guid: 2ecc9500eb8397e409e7c9f393fa0a32
   m_configObjects: {}

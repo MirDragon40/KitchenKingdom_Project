@@ -12,7 +12,6 @@ public class PhotonManager : MonoBehaviourPunCallbacks //PUN의 다양한 서버
 {
     public static PhotonManager Instance { get; private set; }
 
-
     private void Awake()
     {
         if (Instance == null)
@@ -74,7 +73,7 @@ public class PhotonManager : MonoBehaviourPunCallbacks //PUN의 다양한 서버
         roomOptions.MaxPlayers = 4; // 입장가능한 최대 플레이어수
         roomOptions.IsVisible = true; // 로비에서 방 목록에 노출할 것인가?
         roomOptions.IsOpen = true;
-        PhotonNetwork.JoinOrCreateRoom("PlayRoom",roomOptions, TypedLobby.Default);
+        //PhotonNetwork.JoinOrCreateRoom("PlayRoom",roomOptions, TypedLobby.Default);
 
     }
     public override void OnCreatedRoom()
@@ -89,7 +88,6 @@ public class PhotonManager : MonoBehaviourPunCallbacks //PUN의 다양한 서버
         Debug.Log($"RoomName: {PhotonNetwork.CurrentRoom.Name}");
         Debug.Log($"Current Players: {PhotonNetwork.CurrentRoom.PlayerCount}");
         GatherManager.Instance.UpdatePlayerSlots();
-
     }
     public override void OnCreateRoomFailed(short returnCode, string message)
     {
