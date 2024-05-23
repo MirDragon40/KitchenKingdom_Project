@@ -5,10 +5,10 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
+  - enabled: 1
     path: Assets/01.Scenes/GatheringScene_Joon.unity
     guid: da109ba800a58134fb3e169039a91bdd
   - enabled: 1
-    path: Assets/01.Scenes/SubinScene.unity
-    guid: 06f27cad50a15684cb1b0c5272712e43
+    path: Assets/01.Scenes/Stage1Scene.unity
+    guid: 2ecc9500eb8397e409e7c9f393fa0a32
   m_configObjects: {}

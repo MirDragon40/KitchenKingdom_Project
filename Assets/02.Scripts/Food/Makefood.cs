@@ -10,14 +10,30 @@ public class Makefood : MonoBehaviour
     public FoodType foodType;
     public Transform spawnPoint;  
     private bool isPlayerNearby = false; // 박스근처 확인
- 
+
+
+    // 박스 열리는 애니메이션
+    public Animator Animator;
+
+    private bool _isPlayerBox = false;
+
+
     void Update()
     {
-        
-        if (isPlayerNearby && Input.GetKeyDown(KeyCode.E) && !CharacterHoldAbility.instance.IsHoldingFood())
+        if (_isPlayerBox) 
         {
-            SpawnFood(foodType, CharacterHoldAbility.instance.handTransform);
+            if (isPlayerNearby && Input.GetKeyDown(KeyCode.E) && !CharacterHoldAbility.instance.IsHoldingFood())
+            {
+                SpawnFood(foodType, CharacterHoldAbility.instance.handTransform);
+
+                // 박스 애니메이션
+
+                Animator.SetBool("PlayerBoxOpen", true);
+
+                StartCoroutine(BoxOpenAnimation());
+            }
         }
+        
     }
 
     public void SpawnFood(FoodType foodType, Transform spawnPoint)
@@ -39,6 +55,9 @@ public class Makefood : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             isPlayerNearby = true;
+
+            // 애니메이션
+            _isPlayerBox = true;
         }
     }
 
@@ -48,6 +67,15 @@ public class Makefood : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             isPlayerNearby = false;
+
+            // 애니메이션
+            _isPlayerBox = false;
         }
+    }
+
+    private IEnumerator BoxOpenAnimation()
+    {
+        yield return new WaitForSeconds(1f);
+        Animator.SetBool("PlayerBoxOpen", false);
     }
 }
