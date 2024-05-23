@@ -39,10 +39,23 @@ public class CharacterMoveAbility : CharacterAbility
 
 
 
-        Vector3 dir = new Vector3(h, 0, v);
+        Vector3 dir = new Vector3(h,0, v);
         dir.Normalize();
 
-        _characterController.Move(dir * (MoveSpeed * Time.deltaTime));
+        if (_characterController.isGrounded)
+        {
+            _yVelocity = 0f; // 땅에 있을 때 y 속도를 초기화
+        }
+        else
+        {
+            _yVelocity += _gravity * Time.deltaTime; // 중력 적용
+        }
+
+        Vector3 move = dir * MoveSpeed * Time.deltaTime;
+        move.y = _yVelocity * Time.deltaTime; // 중력으로 인한 y축 이동 추가
+
+        _characterController.Move(move);
+
 
         _animator.SetFloat("Move", dir.magnitude);
 
