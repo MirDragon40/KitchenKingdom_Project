@@ -8,13 +8,17 @@ public class Makefood : MonoBehaviour
     public Transform spawnPoint;  
     private bool isPlayerNearby = false; // 박스근처 확인
 
+    private void Start()
+    {
+
+    }
     void Update()
     {
-        if (isPlayerNearby && Input.GetKeyDown(KeyCode.E) && !player.instance.IsHoldingFood())
+        if (isPlayerNearby && Input.GetKeyDown(KeyCode.E) && !Player.instance.IsHoldingFood())
         {
-            if (player.instance != null)
+            if (Player.instance != null)
             {
-                player.instance.SpawnFood(foodType, spawnPoint);
+                Player.instance.SpawnFood(foodType, spawnPoint);
             }
         }
     }

@@ -9,7 +9,7 @@ public class Trash : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.E) && other.CompareTag("Food"))
         {
-            player.instance.gameObject.SetActive(false);
+            Player.instance.gameObject.SetActive(false);
         }
     }
 }
