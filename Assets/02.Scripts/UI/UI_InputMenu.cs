@@ -13,7 +13,7 @@ public class UI_InputMenu : MonoBehaviourPunCallbacks
 {
     [HideInInspector]
     public TMP_InputField MyInputField;
-    public UI_GatheringMenu GatheringMenu;
+    public GameObject GatheringMenu;
     public CinemachineVirtualCamera NameInputCamera;
 
 

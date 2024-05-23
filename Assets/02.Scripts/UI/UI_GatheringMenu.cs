@@ -19,24 +19,6 @@ public class UI_GatheringMenu : MonoBehaviour
     private void Update()
     {
 
-        if (PhotonNetwork.IsMasterClient)
-        {
-            if (PhotonNetwork.CurrentRoom.PlayerCount == 1)
-            {
-                ButtonText.text = "게임 시작";
-                _isStartButton = true;
-            }
-            else
-            {
-                ButtonText.text = "대기중..";
-                _isStartButton = false;
-            }
-        }
-        else
-        {
-            ButtonText.text = "Ready";
-            _isStartButton = false;
 
-        }
     }
 }
