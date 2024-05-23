@@ -10,6 +10,7 @@ public class Player : MonoBehaviour
     public Transform handTransform;
     private GameObject heldFood;
     private Animator animator;
+    private float _findfood = 1f;
 
     void Awake()
     {
@@ -81,7 +82,7 @@ public class Player : MonoBehaviour
         }
 
         // 주변에 있는 음식을 찾음
-        Collider[] colliders = Physics.OverlapSphere(transform.position, 2f); // 적절한 반경 설정
+        Collider[] colliders = Physics.OverlapSphere(transform.position, _findfood);
 
         foreach (Collider collider in colliders)
         {
@@ -89,9 +90,11 @@ public class Player : MonoBehaviour
             {
                 // 찾은 음식을 플레이어의 손 위치로 이동시킴
                 heldFood = collider.gameObject;
-                heldFood.transform.localPosition = handTransform.position;
-                heldFood.transform.localRotation = Quaternion.Euler(-90, 0, 0);
                 heldFood.transform.parent = handTransform;
+
+                heldFood.transform.localPosition = Vector3.zero; ;
+                heldFood.transform.localRotation = Quaternion.Euler(-90,0, 0);
+
 
                 // 음식을 들고 다니는 애니메이션 재생
                 animator.SetBool("Carry", true);
@@ -108,12 +111,23 @@ public class Player : MonoBehaviour
             return;
         }
 
-        heldFood.transform.parent = null; // 부모 해제
-        heldFood.transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z); // 플레이어 근처에 놓음
-        heldFood.transform.rotation = Quaternion.Euler(-90, 0, 0); // 특정 회전 값으로 설정
-        heldFood = null; // 들고 있는 음식 초기화
+        // 부모 해제 전에 현재 위치와 회전을 저장
+        Vector3 dropPosition = handTransform.position + transform.forward * 0.5f; // 캐릭터 앞의 위치, 1.0f는 원하는 거리 조절
+        dropPosition.y -= 1f;
 
-        // 음식을 들고 다니는 애니메이션 정지
+        Quaternion dropRotation = handTransform.rotation * Quaternion.Euler(-90, 0, 0); // 손의 회전 + 90도 회전
+
+        // 부모 해제
+        heldFood.transform.parent = null;
+
+        // 저장한 위치와 회전으로 음식 배치
+        heldFood.transform.position = dropPosition;
+        heldFood.transform.rotation = dropRotation;
+
+        // 음식 초기화
+        heldFood = null;
+
+        // 애니메이션 정지
         animator.SetBool("Carry", false);
     }
 }
