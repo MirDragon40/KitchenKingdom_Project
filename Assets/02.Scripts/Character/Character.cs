@@ -7,4 +7,5 @@ public class Character : MonoBehaviour
 {
     public PhotonView PhotonView { get; private set; }
 
+
 }
