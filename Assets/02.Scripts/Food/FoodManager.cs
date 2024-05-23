@@ -4,9 +4,9 @@ using UnityEngine;
 
 public enum FoodType
 {
-    Egg,
     Bread,
-    Bacon
+    Lettuce,
+    Patty
 }
 
 public class FoodManager : MonoBehaviour

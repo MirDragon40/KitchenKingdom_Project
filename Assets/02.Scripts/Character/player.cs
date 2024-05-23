@@ -65,9 +65,8 @@ public class Player : MonoBehaviour
                 // 찾은 음식을 플레이어의 손 위치로 이동시킴
                 heldFood = collider.gameObject;
                 heldFood.transform.parent = handTransform;
-                Debug.Log("food의 부모 " + heldFood.transform.parent);
                 heldFood.transform.localPosition = Vector3.zero; ;
-                heldFood.transform.localRotation = Quaternion.Euler(-90,0, 0);
+                //heldFood.transform.localRotation = Quaternion.Euler(-90,0, 0);
 
 
                 // 음식을 들고 다니는 애니메이션 재생
@@ -95,7 +94,7 @@ public class Player : MonoBehaviour
         Vector3 dropPosition = handTransform.position + transform.forward * 0.5f + Vector3.up * 0.8f; // 캐릭터 앞의 위치, 0.5f는 원하는 거리 조절
         dropPosition.y -= 1f;
 
-        Quaternion dropRotation = handTransform.rotation * Quaternion.Euler(-90, 0, 0); // 손의 회전 + 90도 회전
+        Quaternion dropRotation = handTransform.rotation; /** Quaternion.Euler(-90, 0, 0);*/ // 손의 회전 + 90도 회전
 
 
         // 저장한 위치와 회전으로 음식 배치
