@@ -11,6 +11,7 @@ public class Player : MonoBehaviour
     private GameObject heldFood;
     private Animator animator;
     private float _findfood = 1f;
+    private bool isHoldingFood = false;
 
     void Awake()
     {
@@ -98,6 +99,9 @@ public class Player : MonoBehaviour
 
                 // 음식을 들고 다니는 애니메이션 재생
                 animator.SetBool("Carry", true);
+
+                isHoldingFood = true;
+
                 break;
             }
         }
@@ -105,6 +109,9 @@ public class Player : MonoBehaviour
 
     void DropFood()
     {
+        // 부모 해제
+        heldFood.transform.parent = null;
+
         // 들고 있는 음식이 없으면 아무 작업도 수행하지 않음
         if (heldFood == null)
         {
@@ -112,22 +119,25 @@ public class Player : MonoBehaviour
         }
 
         // 부모 해제 전에 현재 위치와 회전을 저장
-        Vector3 dropPosition = handTransform.position + transform.forward * 0.5f; // 캐릭터 앞의 위치, 1.0f는 원하는 거리 조절
+        Vector3 dropPosition = handTransform.position + transform.forward * 0.5f + Vector3.up * 0.8f; // 캐릭터 앞의 위치, 0.5f는 원하는 거리 조절
         dropPosition.y -= 1f;
 
         Quaternion dropRotation = handTransform.rotation * Quaternion.Euler(-90, 0, 0); // 손의 회전 + 90도 회전
 
-        // 부모 해제
-        heldFood.transform.parent = null;
 
         // 저장한 위치와 회전으로 음식 배치
         heldFood.transform.position = dropPosition;
         heldFood.transform.rotation = dropRotation;
 
-        // 음식 초기화
-        heldFood = null;
+
+
 
         // 애니메이션 정지
         animator.SetBool("Carry", false);
+
+        isHoldingFood = false;
+
+        // 음식 초기화
+        heldFood = null;
     }
 }

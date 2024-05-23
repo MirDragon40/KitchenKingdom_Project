@@ -12,20 +12,23 @@ public class ChoppingBoard : MonoBehaviour
     private Coroutine fillSliderCoroutine;
     private float elapsedTime;
 
+    private bool _isPossibleChopping;
+
 
     private void Awake()
     {
         ProgressSlider.gameObject.SetActive(false);
     }
 
-
-    private void OnTriggerStay(Collider other)
+    private void Update()
     {
-        if (other.CompareTag("Player"))
+        if (_isPossibleChopping)
         {
+
+
             if (Input.GetKeyDown(KeyCode.LeftControl))
             {
-                Animator.SetBool("Chopping",true);
+                Animator.SetBool("Chopping", true);
 
                 if (fillSliderCoroutine != null)
                 {
@@ -35,7 +38,20 @@ public class ChoppingBoard : MonoBehaviour
                 fillSliderCoroutine = StartCoroutine(FillSliderOverTime(3.0f));
             }
         }
+    }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            _isPossibleChopping = true;
+
+        }
+    }
+
+
+    private void OnTriggerStay(Collider other)
+    {
 
     }
 
