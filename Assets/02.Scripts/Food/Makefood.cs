@@ -10,19 +10,11 @@ public class Makefood : MonoBehaviour
 
     private void Start()
     {
-        GameObject spawnPointObject = GameObject.Find("SpawnPoint");
-        if (spawnPointObject != null)
-        {
-            spawnPoint = spawnPointObject.transform;
-        }
-        else
-        {
-            Debug.LogError("SpawnPoint GameObject not found!");
-        }
+
     }
     void Update()
     {
-        if (isPlayerNearby && Input.GetKeyDown(KeyCode.E) /*&& !Player.instance.IsHoldingFood()*/)
+        if (isPlayerNearby && Input.GetKeyDown(KeyCode.E) && !Player.instance.IsHoldingFood())
         {
             if (Player.instance != null)
             {

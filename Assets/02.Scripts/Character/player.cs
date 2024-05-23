@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Player : MonoBehaviour
@@ -57,7 +58,8 @@ public class Player : MonoBehaviour
             {
                 food.transform.parent = handTransform; // 손의 자식으로 설정
                 food.transform.localPosition = Vector3.zero; // 손 위치에 맞게 조정
-              //food.transform.localRotation = Quaternion.identity; // 손 위치에 맞게 회전 초기화
+                food.transform.localRotation = Quaternion.identity; // 손 위치에 맞게 회전 초기화
+                food.transform.localRotation = Quaternion.Euler(-90, 0, 0); // 특정 회전 값으로 설정 (필요에 따라 조정)
             }
 
             // 음식을 들고 다니는 애니메이션 재생
@@ -87,8 +89,8 @@ public class Player : MonoBehaviour
             {
                 // 찾은 음식을 플레이어의 손 위치로 이동시킴
                 heldFood = collider.gameObject;
-                heldFood.transform.position = handTransform.position;
-                heldFood.transform.rotation = handTransform.rotation;
+                heldFood.transform.localPosition = handTransform.position;
+                heldFood.transform.localRotation = Quaternion.Euler(-90, 0, 0);
                 heldFood.transform.parent = handTransform;
 
                 // 음식을 들고 다니는 애니메이션 재생
@@ -108,6 +110,7 @@ public class Player : MonoBehaviour
 
         heldFood.transform.parent = null; // 부모 해제
         heldFood.transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z); // 플레이어 근처에 놓음
+        heldFood.transform.rotation = Quaternion.Euler(-90, 0, 0); // 특정 회전 값으로 설정
         heldFood = null; // 들고 있는 음식 초기화
 
         // 음식을 들고 다니는 애니메이션 정지

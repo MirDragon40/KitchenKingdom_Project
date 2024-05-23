@@ -324,7 +324,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6b5a626e31e3de42825369e43bed056, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  foodType: 0
+  foodType: 1
   spawnPoint: {fileID: 1538993417}
 --- !u!1 &970206131
 GameObject:
@@ -641,7 +641,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0255209d42be99345896e41f6bbdea70, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  foodPrefabs: []
+  foodPrefabs:
+  - {fileID: 8147489339204244543, guid: fd2722ae70657eff08667c5f8700ad65, type: 3}
+  - {fileID: 6302309192485112165, guid: 414102be50662e1348eea465c1054e58, type: 3}
+  - {fileID: 7028098987288477594, guid: 9c0daf86860f4dd80987fcf2fa0b62b9, type: 3}
 --- !u!4 &1399202555
 Transform:
   m_ObjectHideFlags: 0
@@ -667,7 +670,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1538993417}
   m_Layer: 0
-  m_Name: CarryFood
+  m_Name: CarryPosition
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1535,7 +1538,6 @@ GameObject:
   - component: {fileID: 6528590755983903835}
   - component: {fileID: 748119257750662072}
   - component: {fileID: 3032953452428152882}
-  - component: {fileID: 6528590755983903836}
   m_Layer: 0
   m_Name: Character
   m_TagString: Player
@@ -2384,19 +2386,6 @@ MonoBehaviour:
   mouthMaterialIndex: 2
   leftEyeMaterialIndex: 1
   rightEyeMaterialIndex: 3
---- !u!114 &6528590755983903836
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2877006376564079572}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e981d37f532d686478a19d9965731fec, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  handTransform: {fileID: 1538993417}
 --- !u!4 &6792977269145284524
 Transform:
   m_ObjectHideFlags: 0
