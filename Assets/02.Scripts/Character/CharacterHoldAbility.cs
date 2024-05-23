@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class CharacterHoldAbility : MonoBehaviour
+public class CharacterHoldAbility : CharacterAbility
 {
     public static CharacterHoldAbility instance;
 
@@ -11,6 +11,8 @@ public class CharacterHoldAbility : MonoBehaviour
     public GameObject heldFood;
     private Animator animator;
     private float _findfood = 1f;
+
+    public bool IsHolding;
 
     void Awake()
     {
@@ -62,6 +64,7 @@ public class CharacterHoldAbility : MonoBehaviour
         {
             if (collider.CompareTag("Food"))
             {
+                IsHolding = true;
                 // 찾은 음식을 플레이어의 손 위치로 이동시킴
                 heldFood = collider.gameObject;
                 heldFood.transform.parent = handTransform;
@@ -75,11 +78,33 @@ public class CharacterHoldAbility : MonoBehaviour
 
                 break;
             }
+
+            if (collider.CompareTag("Extinguisher"))
+            {
+                IsHolding = true;
+                // 찾은 음식을 플레이어의 손 위치로 이동시킴
+                heldFood = collider.gameObject;
+                heldFood.transform.parent = handTransform;
+                heldFood.transform.localPosition = new Vector3(0.52f,0f, -0.722f);
+                heldFood.transform.localRotation = Quaternion.Euler(0,90, 0);
+                
+
+
+                //들고 다니는 애니메이션 재생
+                animator.SetBool("Carry", true);
+
+
+                break;
+            }
         }
+
+
     }
 
     void DropFood()
     {
+        IsHolding = false;
+
         Debug.Log(heldFood.transform.parent);
         // 부모 해제
         heldFood.transform.parent = null;
