@@ -700,11 +700,11 @@ GameObject:
   - component: {fileID: 3190654200990774715}
   - component: {fileID: 6528590754894943737}
   - component: {fileID: 748119256627098138}
-  - component: {fileID: 5072575577816733216}
+  - component: {fileID: 5954645422451609781}
   - component: {fileID: 3032953453555878288}
-  - component: {fileID: 2657332289812601577}
-  - component: {fileID: 2141529740684500978}
-  - component: {fileID: 5495423269957059306}
+  - component: {fileID: 5889511571048131193}
+  - component: {fileID: 3403437113633323695}
+  - component: {fileID: 4734923295967791691}
   m_Layer: 0
   m_Name: Character
   m_TagString: Player
@@ -720,15 +720,15 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2877006375439491702}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: -0, y: -0.7181795, z: -0, w: 0.69585794}
+  m_LocalPosition: {x: 1.08, y: 0, z: 4.58}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5936127247202637811}
   - {fileID: 139122849371422324}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -91.809, z: 0}
 --- !u!95 &3190654200990774715
 Animator:
   serializedVersion: 5
@@ -792,7 +792,7 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 1, z: 0}
---- !u!114 &5072575577816733216
+--- !u!114 &5954645422451609781
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -820,7 +820,7 @@ MonoBehaviour:
   DashSpeed: 7
   RotationSpeed: 0
   DashDuration: 0.2
---- !u!114 &2657332289812601577
+--- !u!114 &5889511571048131193
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -834,9 +834,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_SynchronizePosition: 1
   m_SynchronizeRotation: 1
-  m_SynchronizeScale: 0
+  m_SynchronizeScale: 1
   m_UseLocal: 1
---- !u!114 &2141529740684500978
+--- !u!114 &3403437113633323695
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -855,12 +855,12 @@ MonoBehaviour:
   OwnershipTransfer: 0
   observableSearch: 2
   ObservedComponents:
-  - {fileID: 2657332289812601577}
-  - {fileID: 5495423269957059306}
+  - {fileID: 5889511571048131193}
+  - {fileID: 4734923295967791691}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
---- !u!114 &5495423269957059306
+--- !u!114 &4734923295967791691
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
