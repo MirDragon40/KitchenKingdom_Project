@@ -4,15 +4,18 @@ using UnityEngine;
 
 public class Makefood : MonoBehaviour
 {
-    public GameObject foodPrefab; // 음식 프리팹
-    public Transform spawnPoint;  // 음식이 생성될 위치
-    private bool isPlayerNearby = false; // 플레이어가 근처에 있는지 여부
+    public FoodType foodType;
+    public Transform spawnPoint;  
+    private bool isPlayerNearby = false; // 박스근처 확인
 
     void Update()
     {
-        if (isPlayerNearby && Input.GetKeyDown(KeyCode.E))
+        if (isPlayerNearby && Input.GetKeyDown(KeyCode.E) && !player.instance.IsHoldingFood())
         {
-            player.instance.SpawnFood(foodPrefab, spawnPoint);
+            if (player.instance != null)
+            {
+                player.instance.SpawnFood(foodType, spawnPoint);
+            }
         }
     }
 

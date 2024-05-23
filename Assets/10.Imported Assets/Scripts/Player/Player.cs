@@ -15,14 +15,14 @@ public class Player : MonoBehaviour
     private CutTable cuttingTable;
     private AudioManager audioManager;
 
-    private AnimationController1 animationController;
+    private AnimationController animationController;
     public Transform rightFist;
 
     // Start is called before the first frame update
     public void Start() {
         audioManager = GameObject.Find("AudioManager").GetComponent<AudioManager>();
         rb = GetComponent<Rigidbody>();
-        animationController = GetComponent<AnimationController1>();
+        animationController = GetComponent<AnimationController>();
     }
 
     // Update is called once per frame

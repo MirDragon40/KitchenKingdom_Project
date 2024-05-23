@@ -37,6 +37,8 @@ public class CharacterMoveAbility : CharacterAbility
         float h = Input.GetAxis("Horizontal");
         float v = Input.GetAxis("Vertical");
 
+
+
         Vector3 dir = new Vector3(h, 0, v);
         dir.Normalize();
 
@@ -52,13 +54,13 @@ public class CharacterMoveAbility : CharacterAbility
             transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, RotationSpeed * Time.deltaTime);
         }
 
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) && !isDashing)
         {
             StartCoroutine(Dash());
         }
     }
 
-
+    
     // 대쉬 코루틴 함수
     private IEnumerator Dash()
     {
