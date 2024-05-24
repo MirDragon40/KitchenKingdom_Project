@@ -14,6 +14,7 @@ public class ChoppingBoard : MonoBehaviour
 
     private bool _isPossibleChopping = false;
 
+    public Transform PlacePosition;
 
     private void Awake()
     {
@@ -86,5 +87,8 @@ public class ChoppingBoard : MonoBehaviour
         Animator.SetBool("Chopping", false);
         elapsedTime = 0f; // 초기화
     }
+
+ 
+
 }
 
