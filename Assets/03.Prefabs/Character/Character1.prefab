@@ -1232,6 +1232,7 @@ GameObject:
   - component: {fileID: 6095127565000983455}
   - component: {fileID: 3400736635461618269}
   - component: {fileID: 6798839918590393101}
+  - component: {fileID: 931179674539283756}
   m_Layer: 0
   m_Name: Character1
   m_TagString: Player
@@ -1349,6 +1350,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   handTransform: {fileID: 4488283689321051576}
+--- !u!114 &931179674539283756
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6803552421452212376}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2c29259353b69549b8e8e0bf1a262ed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HoldAbility: {fileID: 6798839918590393101}
 --- !u!1 &7061740560527563558
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,3 +1,4 @@
+using Photon.Pun;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -8,32 +9,40 @@ public class Makefood : MonoBehaviour
     public static Makefood instace;
 
     public FoodType foodType;
-    public Transform spawnPoint;  
-    private bool isPlayerNearby = false; // 박스근처 확인
+    public Transform spawnPoint;
+
+
+
+    private Character _nearbyCharacter;
+    private bool isPlayerNearby => _nearbyCharacter != null;
 
 
     // 박스 열리는 애니메이션
     public Animator Animator;
 
-    private bool _isPlayerBox = false;
-
+    public void Start()
+    {
+        Animator = GetComponent<Animator>();
+    }
 
     void Update()
     {
-        if (_isPlayerBox) 
+        if(!isPlayerNearby)
         {
-            if (isPlayerNearby && Input.GetKeyDown(KeyCode.E) && !CharacterHoldAbility.instance.IsHoldingFood())
-            {
-                SpawnFood(foodType, CharacterHoldAbility.instance.handTransform);
-
-                // 박스 애니메이션
-
-                Animator.SetBool("PlayerBoxOpen", true);
-
-                StartCoroutine(BoxOpenAnimation());
-            }
+            return;
         }
-        
+
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            SpawnFood(foodType, _nearbyCharacter.HoldAbility.handTransform);
+
+
+            // 박스 애니메이션
+            //Animator.SetBool("PlayerBoxOpen", true);
+
+            StartCoroutine(BoxOpenAnimation());
+        }
+
     }
 
     public void SpawnFood(FoodType foodType, Transform spawnPoint)
@@ -51,13 +60,16 @@ public class Makefood : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        if(isPlayerNearby)
+        {
+            return;
+        }
+
+
         // 플레이어가 상자에 가까이 왔을 때
         if (other.CompareTag("Player"))
         {
-            isPlayerNearby = true;
-
-            // 애니메이션
-            _isPlayerBox = true;
+            _nearbyCharacter = other.GetComponent<Character>();
         }
     }
 
@@ -66,16 +78,17 @@ public class Makefood : MonoBehaviour
         // 플레이어가 상자에서 멀어졌을 때
         if (other.CompareTag("Player"))
         {
-            isPlayerNearby = false;
-
-            // 애니메이션
-            _isPlayerBox = false;
+            var a = other.GetComponent<Character>();
+            if (a == _nearbyCharacter)
+            {
+                _nearbyCharacter = null;
+            }
         }
     }
 
     private IEnumerator BoxOpenAnimation()
     {
         yield return new WaitForSeconds(1f);
-        Animator.SetBool("PlayerBoxOpen", false);
+        //Animator.SetBool("PlayerBoxOpen", false);
     }
 }

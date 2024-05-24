@@ -22,7 +22,7 @@ public class ChoppingBoard : MonoBehaviour
 
     private void Update()
     {
-        if (_isPossibleChopping && !CharacterHoldAbility.instance.IsHolding)
+        if (_isPossibleChopping )
         {
             if (Input.GetKeyDown(KeyCode.LeftControl))
             {
