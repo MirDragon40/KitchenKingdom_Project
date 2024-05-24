@@ -32,4 +32,9 @@ public class FoodObject : IHoldable
         _holdCharacter = null;
 
     }
+
+    public void Dispose()
+    {
+        Destroy(gameObject);
+    }
 }
