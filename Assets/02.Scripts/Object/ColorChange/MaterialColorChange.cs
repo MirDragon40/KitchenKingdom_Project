@@ -3,8 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+public enum CookingType
+{
+    CookStand,
+    Stove
+}
 public class MaterialColorChange: MonoBehaviour
 {
+    public CookingType CookType;
     public MeshRenderer RendererThisMaterial;
     public Material ThisMaterial;
     public Material ChangeMaterial;
@@ -26,7 +32,11 @@ public class MaterialColorChange: MonoBehaviour
             {
                 RendererThisMaterial.material = ThisMaterial;
 
-                PlusImageUI.gameObject.SetActive(false);
+                if (CookType == CookingType.Stove) 
+                {
+                    PlusImageUI.gameObject.SetActive(false);
+                }
+                
             }
         }
         
@@ -55,6 +65,9 @@ public class MaterialColorChange: MonoBehaviour
             RendererThisMaterial.material = ThisMaterial;
         }
 
+        
         _isReached = false;
+
+        
     }
 }
