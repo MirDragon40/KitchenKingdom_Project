@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class MaterialColorChange: MonoBehaviour
 {
@@ -10,6 +11,13 @@ public class MaterialColorChange: MonoBehaviour
 
     private bool _isReached = false;
 
+    public Image PlusImageUI;
+
+    private void Start()
+    {
+        
+    }
+
     void Update()
     {
         if (_isReached) 
@@ -17,6 +25,8 @@ public class MaterialColorChange: MonoBehaviour
             if (Input.GetKeyDown(KeyCode.I))
             {
                 RendererThisMaterial.material = ThisMaterial;
+
+                PlusImageUI.gameObject.SetActive(false);
             }
         }
         
