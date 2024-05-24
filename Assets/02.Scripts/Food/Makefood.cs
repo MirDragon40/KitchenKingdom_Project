@@ -20,7 +20,10 @@ public class Makefood : MonoBehaviour
     // 박스 열리는 애니메이션
     public Animator Animator;
 
-
+    public void Start()
+    {
+        Animator = GetComponent<Animator>();
+    }
 
     void Update()
     {
@@ -33,9 +36,9 @@ public class Makefood : MonoBehaviour
         {
             SpawnFood(foodType, _nearbyCharacter.HoldAbility.handTransform);
 
-            // 박스 애니메이션
 
-            Animator.SetBool("PlayerBoxOpen", true);
+            // 박스 애니메이션
+            //Animator.SetBool("PlayerBoxOpen", true);
 
             StartCoroutine(BoxOpenAnimation());
         }
@@ -86,6 +89,6 @@ public class Makefood : MonoBehaviour
     private IEnumerator BoxOpenAnimation()
     {
         yield return new WaitForSeconds(1f);
-        Animator.SetBool("PlayerBoxOpen", false);
+        //Animator.SetBool("PlayerBoxOpen", false);
     }
 }

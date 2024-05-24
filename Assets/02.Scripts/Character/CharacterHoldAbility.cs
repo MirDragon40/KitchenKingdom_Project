@@ -18,7 +18,7 @@ public class CharacterHoldAbility : CharacterAbility
 
 
 
-    void Awake()
+    void Start()
     {
         animator = GetComponent<Animator>();
     }
