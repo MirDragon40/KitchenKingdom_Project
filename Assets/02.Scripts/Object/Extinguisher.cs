@@ -4,32 +4,36 @@ using UnityEngine;
 
 public class Extinguisher : IHoldable
 {
-    public ParticleSystem PowderEffect;
+    private ParticleSystem _powderEffect;
 
-
+    private void Awake()
+    {
+        _powderEffect = GetComponentInChildren<ParticleSystem>();
+    }
     public override void Hold(Character character, Transform handTransform)
     {
         _holdCharacter = character;
+        Debug.Log(_holdCharacter.name);
 
         // 각 아이템이 잡혔을 때 해줄 초기화 로직
         transform.parent = handTransform;
 
-         transform.localPosition = new Vector3(0.52f, 0f, -0.722f);
+         transform.localPosition = new Vector3(0.52f, 0f, -0.1f);
         transform.localRotation = Quaternion.Euler(0, 90, 0);
 
     }
 
     public void Shot()
     {
-        Debug.Log("Shot");
 
-        if (Input.GetKey(KeyCode.LeftControl))
+        if (Input.GetKeyDown(KeyCode.LeftControl))
         {
-            PowderEffect.Play();
+            Debug.Log("Shot");
+           _powderEffect.Play();
         }
         if (Input.GetKeyUp(KeyCode.LeftControl))
         {
-            PowderEffect.Stop();
+            _powderEffect.Stop();
         }
 
     }    
@@ -37,6 +41,7 @@ public class Extinguisher : IHoldable
 
     private void Update()
     {
+
         if(IsHold)
         {
             Shot();
