@@ -162,7 +162,7 @@ GameObject:
   - component: {fileID: 1569283696589936807}
   - component: {fileID: 8475895173140497962}
   m_Layer: 5
-  m_Name: Image
+  m_Name: Bilge
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

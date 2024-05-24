@@ -18,6 +18,8 @@ public class GatherManager : MonoBehaviourPunCallbacks
     private PhotonView _pv;
     private bool _isReady = false;
     private bool _isStartButton;
+    public Button ReadyStartButton;
+
     public TMP_Text ButtonText;
 
     public static GatherManager Instance { get; private set; }
@@ -55,15 +57,17 @@ public class GatherManager : MonoBehaviourPunCallbacks
     {
         if (PhotonNetwork.IsMasterClient)
         {
-            if (_playerCount == _readyPlayerCount)
+            if (_playerCount == _readyPlayerCount + 1 || _playerCount == 1)
             {
                 ButtonText.text = "게임 시작";
+                ReadyStartButton.interactable = true;
                 _isStartButton = true;
 
             }
             else
             {
                 ButtonText.text = "대기중..";
+                ReadyStartButton.interactable = false;
                 _isStartButton = false;
             }
         }
@@ -125,7 +129,6 @@ public class GatherManager : MonoBehaviourPunCallbacks
     [PunRPC]
     public void PlayerReady(int actorNumber, bool readyState)
     {
-        Debug.Log("PlayerReady Function");
         if (!_playerReadyStatus.ContainsKey(actorNumber))
         {
             _playerReadyStatus.Add(actorNumber, readyState);
@@ -155,8 +158,8 @@ public class GatherManager : MonoBehaviourPunCallbacks
         }
         else
         {
-            _isReady = !_isReady;
-            _pv.RPC("PlayerReady", RpcTarget.All, PhotonNetwork.LocalPlayer.ActorNumber, _isReady);
+            _pv.RPC("PlayerReady", RpcTarget.AllBuffered, PhotonNetwork.LocalPlayer.ActorNumber, true);
+            ReadyStartButton.interactable = false;
         }
     }
 

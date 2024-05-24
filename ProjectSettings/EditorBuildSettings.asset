@@ -6,7 +6,7 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/01.Scenes/GatheringScene_Joon.unity
+    path: Assets/01.Scenes/GatheringScene.unity
     guid: da109ba800a58134fb3e169039a91bdd
   - enabled: 1
     path: Assets/01.Scenes/Stage1Scene.unity
