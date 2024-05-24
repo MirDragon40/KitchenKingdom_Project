@@ -52,13 +52,13 @@ public class Extinguisher : IHoldable
     public override void UnHold(Vector3 dropPosition, Quaternion dropRotation)
     {
 
-        // 저장한 위치와 회전으로 음식 배치
+        // 저장한 위치와 회전으로 소화기 배치
         transform.position = dropPosition;
         transform.rotation = dropRotation;
 
 
         transform.parent = null;
-        // 각 아이템이 ㄴ 때 해줄 초기화 로직
+        // 각 아이템이 놓여질 때 해줄 초기화 로직
 
 
         _holdCharacter = null;

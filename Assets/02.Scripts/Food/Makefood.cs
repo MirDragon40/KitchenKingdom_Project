@@ -14,6 +14,10 @@ public class Makefood : MonoBehaviour
     private Character _nearbyCharacter;
     private bool isPlayerNearby => _nearbyCharacter != null;
 
+
+    public IHoldable _placedItem;
+    public bool HavePlacedItem => _placedItem != null;
+
     private Transform handTransform;
 
     // 박스 열리는 애니메이션
@@ -32,17 +36,35 @@ public class Makefood : MonoBehaviour
             return;
         }
 
+        if (_nearbyCharacter.HoldAbility.IsHolding)
+        {
+            return;
+        }
+
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            SpawnFood(foodType, _nearbyCharacter.HoldAbility.handTransform);
+            if(!HavePlacedItem)
+            {
+                SpawnFood(foodType, _nearbyCharacter.HoldAbility.handTransform);
 
-            // 드는 애니메이션
-            _nearbyCharacter.GetComponent<Animator>().SetBool("Carry", true);
+                // 드는 애니메이션
+                _nearbyCharacter.GetComponent<Animator>().SetBool("Carry", true);
 
-            // 박스 애니메이션
-            //Animator.SetBool("PlayerBoxOpen", true);
-            
-            StartCoroutine(BoxOpenAnimation());
+                // 박스 애니메이션
+                //Animator.SetBool("PlayerBoxOpen", true);
+
+                StartCoroutine(BoxOpenAnimation());
+            }
+            else
+            {
+
+            }
+        
+        }
+
+        if (!_nearbyCharacter.HoldAbility.IsHolding && Input.GetKeyDown(KeyCode.Space))
+        {
+            _nearbyCharacter = null;
         }
 
     }
@@ -50,10 +72,12 @@ public class Makefood : MonoBehaviour
     public void SpawnFood(FoodType foodType, Transform spawnPoint)
     {
         // 음식 생성
-        Debug.Log("음식 생성");
+        
         GameObject foodPrefab = FoodManager.instance.GetFoodPrefab(foodType);
+        Debug.Log(foodPrefab.transform.position);
         if (foodPrefab != null)
         {
+        Debug.Log("음식 생성");
             GameObject food = Instantiate(foodPrefab, spawnPoint.position, spawnPoint.rotation);
 
             // 음식 오브젝트를 손에 들도록 설정
