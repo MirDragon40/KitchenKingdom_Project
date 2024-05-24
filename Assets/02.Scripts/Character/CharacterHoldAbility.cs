@@ -5,26 +5,21 @@ using UnityEngine;
 
 public class CharacterHoldAbility : CharacterAbility
 {
-    public static CharacterHoldAbility instance;
+
 
     public Transform handTransform;
-    public GameObject heldFood;
     private Animator animator;
     private float _findfood = 1f;
 
-    public bool IsHolding;
+
+
+    private IHoldable _holdableItem;
+    public bool IsHolding => _holdableItem != null;
+
+
 
     void Awake()
     {
-        if (instance == null)
-        {
-            instance = this;
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
-
         animator = GetComponent<Animator>();
     }
 
@@ -32,7 +27,7 @@ public class CharacterHoldAbility : CharacterAbility
     {
         if (Input.GetKeyDown(KeyCode.E))
         {
-            if (heldFood == null)
+            if (!IsHolding)
             {
                 PickUpFood();
             }
@@ -41,61 +36,34 @@ public class CharacterHoldAbility : CharacterAbility
                 DropFood();
             }
         }
-
     }
-    public bool IsHoldingFood()
-    {
-        return heldFood != null;
-    }
+  
    
     public void PickUpFood()
     {
-     
-        // 들고 있는 음식이 없으면 아무 작업도 수행하지 않음
-        if (heldFood != null)
+        // 들고 있는 음식이 있으면 아무 작업도 수행하지 않음
+        if (IsHolding)
         {
             return;
         }
+       
 
-        // 주변에 있는 음식을 찾음
+        // 주변에 있는 잡을 수 있는 아이템을 찾음
         Collider[] colliders = Physics.OverlapSphere(transform.position, _findfood);
 
         foreach (Collider collider in colliders)
         {
-            if (collider.CompareTag("Food"))
+            IHoldable holdable = collider.GetComponent<IHoldable>();
+            if(holdable != null)
             {
-                IsHolding = true;
-                // 찾은 음식을 플레이어의 손 위치로 이동시킴
-                heldFood = collider.gameObject;
-                heldFood.transform.parent = handTransform;
-                heldFood.transform.localPosition = Vector3.zero; ;
-                //heldFood.transform.localRotation = Quaternion.Euler(-90,0, 0);
 
-
-                // 음식을 들고 다니는 애니메이션 재생
+                _holdableItem = holdable;
+                holdable.Hold(_owner, transform);
                 animator.SetBool("Carry", true);
-   
 
                 break;
             }
 
-            if (collider.CompareTag("Extinguisher"))
-            {
-                IsHolding = true;
-                // 찾은 음식을 플레이어의 손 위치로 이동시킴
-                heldFood = collider.gameObject;
-                heldFood.transform.parent = handTransform;
-                heldFood.transform.localPosition = new Vector3(0.52f,0f, -0.722f);
-                heldFood.transform.localRotation = Quaternion.Euler(0,90, 0);
-                
-
-
-                //들고 다니는 애니메이션 재생
-                animator.SetBool("Carry", true);
-
-
-                break;
-            }
         }
 
 
@@ -103,14 +71,8 @@ public class CharacterHoldAbility : CharacterAbility
 
     void DropFood()
     {
-        IsHolding = false;
-
-        Debug.Log(heldFood.transform.parent);
-        // 부모 해제
-        heldFood.transform.parent = null;
-
         // 들고 있는 음식이 없으면 아무 작업도 수행하지 않음
-        if (heldFood == null)
+        if (!IsHolding)
         {
             return;
         }
@@ -121,19 +83,10 @@ public class CharacterHoldAbility : CharacterAbility
 
         Quaternion dropRotation = handTransform.rotation; /** Quaternion.Euler(-90, 0, 0);*/ // 손의 회전 + 90도 회전
 
-
-        // 저장한 위치와 회전으로 음식 배치
-        heldFood.transform.position = dropPosition;
-        heldFood.transform.rotation = dropRotation;
-
-
-
+        _holdableItem.UnHold(dropPosition, dropRotation);
+        _holdableItem = null;
 
         // 애니메이션 정지
         animator.SetBool("Carry", false);
-  
-
-        // 음식 초기화
-        heldFood = null;
     }
 }
