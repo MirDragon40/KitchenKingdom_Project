@@ -13,10 +13,10 @@ public class Character : MonoBehaviour
 
     private void Start()
     {
-        if (PhotonView.IsMine)
+/*        if (PhotonView.IsMine)
         {
             Instance = this;
-        }
+        }*/
 
     }
 }
