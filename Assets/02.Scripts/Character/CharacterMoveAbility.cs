@@ -67,7 +67,7 @@ public class CharacterMoveAbility : CharacterAbility
             transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, RotationSpeed * Time.deltaTime);
         }
 
-        if (Input.GetKeyDown(KeyCode.Space) && !isDashing)
+        if (Input.GetKeyDown(KeyCode.LeftAlt) && !isDashing)
         {
             StartCoroutine(Dash());
         }
