@@ -24,8 +24,8 @@ public class CharacterMoveAbility : CharacterAbility
         _characterController = GetComponent<CharacterController>();
         _animator = GetComponent<Animator>();
 
-        MoveSpeed = 7f;
-        DashSpeed = 12f;
+        MoveSpeed = 5f;
+        DashSpeed = 7f;
         RotationSpeed = 700;
         DashDuration = 0.2f;
 
@@ -67,7 +67,7 @@ public class CharacterMoveAbility : CharacterAbility
             transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, RotationSpeed * Time.deltaTime);
         }
 
-        if (Input.GetKeyDown(KeyCode.Space) && !isDashing)
+        if (Input.GetKeyDown(KeyCode.LeftAlt) && !isDashing)
         {
             StartCoroutine(Dash());
         }
