@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class Extinguisher : IHoldable
 {
-    public GameObject PowderEffect;
+    public ParticleSystem PowderEffect;
+
 
     public override void Hold(Character character, Transform handTransform)
     {
@@ -20,30 +21,27 @@ public class Extinguisher : IHoldable
 
     public void Shot()
     {
-        Debug.Log("Thek");
+        Debug.Log("Shot");
+
+        if (Input.GetKey(KeyCode.LeftControl))
+        {
+            PowderEffect.Play();
+        }
+        if (Input.GetKeyUp(KeyCode.LeftControl))
+        {
+            PowderEffect.Stop();
+        }
+
     }    
 
 
     private void Update()
     {
-        if(IsHold  && Input.GetKeyDown(KeyCode.K))
+        if(IsHold)
         {
             Shot();
         }
-        /*
-         if (CharacterHoldAbility.instance.IsHolding )
-         {
-             if (Input.GetKey(KeyCode.LeftControl))
-             {
-                 PowderEffect.SetActive(true);
-
-             }
-             if (Input.GetKeyUp(KeyCode.LeftControl))
-             {
-                 PowderEffect.SetActive(false);
-             }
-         }
-        */
+        
     }
 
     public override void UnHold(Vector3 dropPosition, Quaternion dropRotation)
