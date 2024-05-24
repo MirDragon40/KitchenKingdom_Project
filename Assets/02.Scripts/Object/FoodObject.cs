@@ -13,7 +13,8 @@ public class FoodObject : IHoldable
         // 각 아이템이 잡혔을 때 해줄 초기화 로직
         // 찾은 음식을 플레이어의 손 위치로 이동시킴
         transform.parent = handTransform;
-        transform.localPosition = Vector3.zero; ;
+        transform.localPosition = new Vector3(0, 0.4F, 0.5F);
+        transform.localRotation = Quaternion.identity;
     }
 
 
@@ -27,10 +28,13 @@ public class FoodObject : IHoldable
 
 
         transform.parent = null;
-        // 각 아이템이 ㄴ 때 해줄 초기화 로직
-
-
+        //각 아이템이 떼어질 때 해줄 초기화 로직
         _holdCharacter = null;
 
+    }
+
+    public void Dispose()
+    {
+        Destroy(gameObject);
     }
 }

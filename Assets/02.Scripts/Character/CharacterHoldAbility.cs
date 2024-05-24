@@ -9,7 +9,7 @@ public class CharacterHoldAbility : CharacterAbility
 
     public Transform handTransform;
     private Animator animator;
-    private float _findfood = 1f;
+    private float _findfood = 1f; //음식을 찾는 범위
 
 
 
@@ -18,14 +18,14 @@ public class CharacterHoldAbility : CharacterAbility
 
 
 
-    void Awake()
+    void Start()
     {
         animator = GetComponent<Animator>();
     }
 
     private void LateUpdate()
     {
-        if (Input.GetKeyDown(KeyCode.E))
+        if (Input.GetKeyDown(KeyCode.Space))
         {
             if (!IsHolding)
             {
@@ -78,15 +78,21 @@ public class CharacterHoldAbility : CharacterAbility
         }
 
         // 부모 해제 전에 현재 위치와 회전을 저장
-        Vector3 dropPosition = handTransform.position + transform.forward * 0.5f + Vector3.up * 0.8f; // 캐릭터 앞의 위치, 0.5f는 원하는 거리 조절
+        Vector3 dropPosition = handTransform.position + transform.forward * 0.2f + Vector3.up * 0.5f; // 캐릭터 앞의 위치, 0.5f는 원하는 거리 조절
         dropPosition.y -= 1f;
-
         Quaternion dropRotation = handTransform.rotation; /** Quaternion.Euler(-90, 0, 0);*/ // 손의 회전 + 90도 회전
 
         _holdableItem.UnHold(dropPosition, dropRotation);
         _holdableItem = null;
 
         // 애니메이션 정지
+        animator.SetBool("Carry", false);
+    }
+
+    // 음식 버린후 초기화
+    public void FoodTrashDrop()
+    {
+        _holdableItem = null;
         animator.SetBool("Carry", false);
     }
 }
