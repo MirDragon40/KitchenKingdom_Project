@@ -59,14 +59,14 @@ public class GatherManager : MonoBehaviourPunCallbacks
         {
             if (_playerCount == _readyPlayerCount + 1 || _playerCount == 1)
             {
-                ButtonText.text = "게임 시작";
+                ButtonText.text = "Start";
                 ReadyStartButton.interactable = true;
                 _isStartButton = true;
 
             }
             else
             {
-                ButtonText.text = "대기중..";
+                ButtonText.text = "Waiting";
                 ReadyStartButton.interactable = false;
                 _isStartButton = false;
             }

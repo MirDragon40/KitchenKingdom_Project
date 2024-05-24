@@ -844,6 +844,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 1337426934}
     m_Modifications:
     - target: {fileID: 157704236576427658, guid: 55073aa0f5aa99d4a9c9d86c44518107, type: 3}
+      propertyPath: CookType
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 157704236576427658, guid: 55073aa0f5aa99d4a9c9d86c44518107, type: 3}
       propertyPath: PlusImageUI
       value: 
       objectReference: {fileID: 2005504594}
@@ -9790,6 +9794,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 1337426934}
     m_Modifications:
     - target: {fileID: 157704236576427658, guid: 55073aa0f5aa99d4a9c9d86c44518107, type: 3}
+      propertyPath: CookType
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 157704236576427658, guid: 55073aa0f5aa99d4a9c9d86c44518107, type: 3}
       propertyPath: PlusImageUI
       value: 
       objectReference: {fileID: 2092905531}
@@ -13994,6 +14002,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1e7c07ea50250647879eb87cc6c20b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  CookType: 0
   RendererThisMaterial: {fileID: 5248891001977111055}
   ThisMaterial: {fileID: 2100000, guid: 6493a5714a5eddc45bb33d006de5b93e, type: 2}
   ChangeMaterial: {fileID: 2100000, guid: 76a2fc3e91ab917438620a1ceed1bb8c, type: 2}
