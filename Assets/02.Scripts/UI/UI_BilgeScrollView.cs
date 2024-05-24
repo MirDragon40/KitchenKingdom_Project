@@ -12,11 +12,6 @@ public class UI_BilgeScrollView : MonoBehaviour
 
     public HorizontalLayoutGroup _horizontalLayoutGroup;
 
-    private void Start()
-    {
-        StartCoroutine(StartAddItem());
-        StartCoroutine(AddItemPrefab());
-    }
 
     private void Update()
     {
@@ -27,19 +22,11 @@ public class UI_BilgeScrollView : MonoBehaviour
     }
 
     // 아이템을 추가하는 함수
-    public void AddItem()
+    public GameObject AddItem()
     {
-        if (content.transform.childCount < maxItems)
-        {
             GameObject newItem = Instantiate(itemPrefab, content.transform);
-            //_horizontalLayoutGroup.enabled = false;
             AnimateItem(newItem);
-            //StartCoroutine(ReenablehorizontalLayoutGroup());
-        }
-        else
-        {
-            Debug.Log("아이템 개수 제한 도달");
-        }
+            return newItem;
     }
 
 
