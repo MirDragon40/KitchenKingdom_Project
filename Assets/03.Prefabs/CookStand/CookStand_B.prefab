@@ -143,4 +143,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   RendererThisMaterial: {fileID: 3915931578567336585}
   ThisMaterial: {fileID: 2100000, guid: 2a4628a3786b87e44aa969367b59f5b8, type: 2}
-  ChangeMaterial: {fileID: 2100000, guid: ba5732cfe019abb4cbb335deaf8cabce, type: 2}
+  ChangeMaterial: {fileID: 2100000, guid: 76a2fc3e91ab917438620a1ceed1bb8c, type: 2}

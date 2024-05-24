@@ -13,18 +13,33 @@ public class ItemBoxColorChange : MonoBehaviour
 
     public Material ChangeMaterial;
 
+    private bool _isReached = false;
+
     void Update()
     {
-
+        if (_isReached)
+        {
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                RendererBoxMaterial.material = BoxMaterial;
+                RendererBoxCapMaterial.material = BoxCapMaterial;
+                RendererBoxPlaneMaterial.material = BoxPlaneMaterial;
+            }
+        }
     }
 
     private void OnTriggerStay(Collider other)
     {
         if (other.CompareTag("Player"))
         {
-            RendererBoxMaterial.material = ChangeMaterial;
-            RendererBoxCapMaterial.material = ChangeMaterial;
-            RendererBoxPlaneMaterial.material = ChangeMaterial;
+            if(!_isReached) 
+            {
+                RendererBoxMaterial.material = ChangeMaterial;
+                RendererBoxCapMaterial.material = ChangeMaterial;
+                RendererBoxPlaneMaterial.material = ChangeMaterial;
+            }
+
+            _isReached = true;
         }
     }
 
@@ -36,5 +51,7 @@ public class ItemBoxColorChange : MonoBehaviour
             RendererBoxCapMaterial.material = BoxCapMaterial;
             RendererBoxPlaneMaterial.material = BoxPlaneMaterial;
         }
+
+        _isReached = false;
     }
 }
