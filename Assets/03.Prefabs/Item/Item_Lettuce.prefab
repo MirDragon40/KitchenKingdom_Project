@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 8812945648773235133}
   - component: {fileID: 4074378538772900087}
   - component: {fileID: 4083407029506484815}
+  - component: {fileID: -3950443886466216716}
   m_Layer: 0
   m_Name: Item_Lettuce
   m_TagString: Food
@@ -28,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 4604428373163909466}
   serializedVersion: 2
   m_LocalRotation: {x: 0.000000021855694, y: 0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.819, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -106,3 +107,16 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -9195390934930376359, guid: e02978ccf9628c04da50a3e73c8f2929, type: 3}
+--- !u!114 &-3950443886466216716
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4604428373163909466}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 74443335f70d7794ba419eae0c594e2a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ItemType: 1

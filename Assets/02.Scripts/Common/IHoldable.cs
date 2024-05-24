@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -18,5 +19,9 @@ public abstract class IHoldable : MonoBehaviour
     
     public abstract void Hold(Character character, Transform handTransform);
     public abstract void UnHold(Vector3 dropPosition, Quaternion dropRotation);
-   
+
+    internal void Hold(Character nearbyCharacter, object handTransform)
+    {
+        throw new NotImplementedException();
+    }
 }
