@@ -11,9 +11,9 @@ public class CharacterHoldAbility : CharacterAbility
     private Animator animator;
     private float _findfood = 1f; //음식을 찾는 범위
 
-
-
     private IHoldable _holdableItem;
+
+    public bool IsPlaceable = false;
     public bool IsHolding => _holdableItem != null;
 
 
@@ -29,17 +29,17 @@ public class CharacterHoldAbility : CharacterAbility
         {
             if (!IsHolding)
             {
-                PickUpFood();
+                PickUp();
             }
             else
             {
-                DropFood();
+                Drop();
             }
         }
     }
   
    
-    public void PickUpFood()
+    public void PickUp()
     {
         // 들고 있는 음식이 있으면 아무 작업도 수행하지 않음
         if (IsHolding)
@@ -69,7 +69,7 @@ public class CharacterHoldAbility : CharacterAbility
 
     }
 
-    void DropFood()
+    void Drop()
     {
         // 들고 있는 음식이 없으면 아무 작업도 수행하지 않음
         if (!IsHolding)
