@@ -39,7 +39,7 @@ public class Makefood : MonoBehaviour
 
             // 박스 애니메이션
             //Animator.SetBool("PlayerBoxOpen", true);
-
+            
             StartCoroutine(BoxOpenAnimation());
         }
 
