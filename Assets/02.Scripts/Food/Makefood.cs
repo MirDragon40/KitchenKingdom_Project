@@ -6,8 +6,6 @@ using UnityEngine;
 
 public class Makefood : MonoBehaviour
 {
-    public static Makefood instace;
-
     public FoodType foodType;
     public Transform spawnPoint;
 
