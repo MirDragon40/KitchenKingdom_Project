@@ -13,9 +13,7 @@ public class CookStand : MonoBehaviour
 
     private void Update()
     {
-
-   
-        /* if (_isPlaceable && Input.GetKeyDown(KeyCode.Space))
+          /* if (_isPlaceable && Input.GetKeyDown(KeyCode.Space))
          {
              // 플레이어의 자식들 중에서 Food 태그를 가진 오브젝트를 찾음
              Transform foodObject = null;
@@ -58,6 +56,7 @@ public class CookStand : MonoBehaviour
             if (characterHoldAbility != null)
             {
                 characterHoldAbility.IsPlaceable = true;
+                characterHoldAbility.PlacePosition = PlacePosition;
             }
             player = other.gameObject; // 플레이어 오브젝트 저장
         }
@@ -71,10 +70,9 @@ public class CookStand : MonoBehaviour
             if (characterHoldAbility != null)
             {
                 characterHoldAbility.IsPlaceable = false;
+                characterHoldAbility.PlacePosition = null;
             }
             player = null; // 플레이어 오브젝트 해제
         }
     }
-
-
 }

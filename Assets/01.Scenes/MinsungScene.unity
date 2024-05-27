@@ -21604,9 +21604,10 @@ GameObject:
   - component: {fileID: 2120983448}
   - component: {fileID: 2120983447}
   - component: {fileID: 2120983446}
+  - component: {fileID: 2120983449}
   m_Layer: 0
   m_Name: Cook_Stand_A (20)
-  m_TagString: Untagged
+  m_TagString: Table
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -21698,6 +21699,27 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2120983444}
   m_Mesh: {fileID: 8717784633731444892, guid: b43e985fd30008343b4087793681dcea, type: 3}
+--- !u!65 &2120983449
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2120983444}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.0739117, y: 0.13734928, z: 1.0739112}
+  m_Center: {x: 0.00000047683716, y: 0.9763302, z: 0.00000091709694}
 --- !u!1 &2121844112
 GameObject:
   m_ObjectHideFlags: 0

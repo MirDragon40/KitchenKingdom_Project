@@ -2,8 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class DishObject : IHoldable
 {
+    public override Vector3 DropOffset => new Vector3(0.3f, 0.1f, 0f);
+   
+
     public override void Hold(Character character, Transform handTransform)
     {
         transform.parent = handTransform;

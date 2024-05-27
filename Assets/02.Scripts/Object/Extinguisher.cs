@@ -6,6 +6,7 @@ public class Extinguisher : IHoldable
 {
     private ParticleSystem _powderEffect;
 
+    public override Vector3 DropOffset => new Vector3(0.3f, 1f, 0f);
     private void Awake()
     {
         _powderEffect = GetComponentInChildren<ParticleSystem>();
