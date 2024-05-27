@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 7996924841784584353}
   - component: {fileID: 8017632737696590889}
   - component: {fileID: 6770868100746283926}
+  - component: {fileID: 4543173554636092083}
   m_Layer: 0
   m_Name: Box_cap
   m_TagString: Untagged
@@ -188,6 +189,19 @@ MonoBehaviour:
   BoxCapMaterial: {fileID: 2100000, guid: 8c4cdd03154a9dc449efa7eca30086ae, type: 2}
   BoxPlaneMaterial: {fileID: 2100000, guid: 8c4cdd03154a9dc449efa7eca30086ae, type: 2}
   ChangeMaterial: {fileID: 2100000, guid: 76a2fc3e91ab917438620a1ceed1bb8c, type: 2}
+--- !u!114 &4543173554636092083
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 884589941740172595}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70ea2a79cfab0474fa34297f8dcd0e6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Animator: {fileID: 2029777054488270824}
 --- !u!1 &1227241372778167392
 GameObject:
   m_ObjectHideFlags: 0

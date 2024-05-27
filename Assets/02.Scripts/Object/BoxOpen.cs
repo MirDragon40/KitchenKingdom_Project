@@ -12,7 +12,7 @@ public class BoxOpen : MonoBehaviour
     {
         if (_isPlayerBox) 
         {
-            if (Input.GetKeyDown(KeyCode.Escape))
+            if (Input.GetKeyDown(KeyCode.Space))
             {
                 Animator.SetBool("PlayerBoxOpen", true);
 
