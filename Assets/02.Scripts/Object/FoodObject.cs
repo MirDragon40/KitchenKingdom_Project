@@ -6,7 +6,9 @@ using UnityEngine.TextCore.Text;
 public class FoodObject : IHoldable
 {
 
-    public override Vector3 DropOffset => new Vector3(0.3f, 0.1f, 0f); 
+    public override Vector3 DropOffset => new Vector3(0.3f, 0.1f, 0f);
+
+    public override bool IsProcessed => false;
     public override void Hold(Character character, Transform handTransform)
     {
         _holdCharacter = character;
