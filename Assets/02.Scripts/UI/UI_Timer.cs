@@ -13,8 +13,11 @@ public class UI_Timer : MonoBehaviour
 
     private bool timerStarted = false;
 
+    public GameObject SpeedUpFireUI;
+
     private void Start()
     {
+        SpeedUpFireUI.gameObject.SetActive(false);
         StartTimer();
     }
     private void Update()
@@ -26,6 +29,11 @@ public class UI_Timer : MonoBehaviour
 
             // UI에 시간 표시
             DisplayTime(_currentTime);
+
+            if (_currentTime <= 30f) 
+            {
+                SpeedUpFireUI.gameObject.SetActive(true);
+            }
 
             // 타이머가 종료되었을 때 처리
             if (_currentTime <= 0f)
@@ -45,13 +53,13 @@ public class UI_Timer : MonoBehaviour
     {
         int minutes = Mathf.FloorToInt(timeInSeconds / 60f);
         int seconds = Mathf.FloorToInt(timeInSeconds % 60f);
-        string timeString = string.Format("{0:00}:{1:00}", minutes, seconds);
+        string timeString = string.Format("{0:00} : {1:00}", minutes, seconds);
         TimerTextUI.text = timeString;
     }
 
     public void TimerEnded()
     {
-        // 타이머 종료 시 필요한 작업을 여기에 추가
+        // 타이머 종료 시
         // 종료 시 씬 이동
     }
 }
