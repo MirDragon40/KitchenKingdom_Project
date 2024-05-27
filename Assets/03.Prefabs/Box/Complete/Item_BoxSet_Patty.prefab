@@ -167,7 +167,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   foodType: 2
   spawnPoint: {fileID: 0}
-  Animator: {fileID: 2029777054488270824}
+  _placedItem: {fileID: 0}
+  animator: {fileID: 0}
 --- !u!114 &6770868100746283926
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -187,6 +188,37 @@ MonoBehaviour:
   BoxCapMaterial: {fileID: 2100000, guid: 8c4cdd03154a9dc449efa7eca30086ae, type: 2}
   BoxPlaneMaterial: {fileID: 2100000, guid: 8c4cdd03154a9dc449efa7eca30086ae, type: 2}
   ChangeMaterial: {fileID: 2100000, guid: 76a2fc3e91ab917438620a1ceed1bb8c, type: 2}
+--- !u!1 &1227241372778167392
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1737988185406310475}
+  m_Layer: 0
+  m_Name: PlacePosition
+  m_TagString: Untagged
+  m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1737988185406310475
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1227241372778167392}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.622, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2291806654751543331}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1250704999608671764
 GameObject:
   m_ObjectHideFlags: 0
@@ -430,6 +462,7 @@ Transform:
   m_Children:
   - {fileID: 1758108147802850220}
   - {fileID: 5246692309926730374}
+  - {fileID: 1737988185406310475}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!1 &1933714877031312625
