@@ -28,6 +28,7 @@ public abstract class IHoldable : MonoBehaviour
     {
         transform.position = placePosition;
         transform.rotation = placeRotation;
+        transform.parent = null;
         _holdCharacter = null;
     }
 

@@ -86,7 +86,5 @@ public class ChoppingBoard : MonoBehaviour
         elapsedTime = 0f; // 초기화
     }
 
- 
-
 }
 
