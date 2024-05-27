@@ -1,3 +1,4 @@
+using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -33,6 +34,10 @@ public class CharacterMoveAbility : CharacterAbility
 
     private void Update()
     {
+        if (!_owner.PhotonView.IsMine)
+        {
+            return;
+        }
         // 사용자 키보드 입력
         float h = Input.GetAxis("Horizontal");
         float v = Input.GetAxis("Vertical");
