@@ -19,7 +19,7 @@ public class Coke : MonoBehaviour
 
     private void Update()
     {
-        /*if(Input.GetKeyUp(KeyCode.Escape)) 
+        /*if (Input.GetKeyUp(KeyCode.Escape))
         {
             CokePour();
         }*/
@@ -32,7 +32,7 @@ public class Coke : MonoBehaviour
         StartCoroutine(CokePourCoroutine());
     }
 
-    // 1초뒤에 파티클 생김 3초뒤에 파티클 없어짐 콜라 따라진 것처럼 보이게
+    // 1초뒤에 파티클 생김 3초뒤에 파티클 없어짐 콜라 따라진 것처럼 보이게 (시간변경가능)
     private IEnumerator CokePourCoroutine() 
     {
         yield return new WaitForSeconds(1f);

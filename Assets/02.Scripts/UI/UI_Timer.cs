@@ -34,7 +34,7 @@ public class UI_Timer : MonoBehaviour
             DisplayTime(_currentTime);
 
             // 30초가 남으면 불 애니메이션 나옴
-            if (_currentTime <= 30f) 
+            if (_currentTime <= 175f) // 테스트 위해 5초뒤로.. 30초로 변경하기
             {
                 SpeedUpFireUI.gameObject.SetActive(true);
 
