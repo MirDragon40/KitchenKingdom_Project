@@ -12,8 +12,9 @@ public class CharacterHoldAbility : CharacterAbility
     private float _findfood = 1f; //음식을 찾는 범위
 
     private IHoldable _holdableItem;
+    private Transform _placeableSurface;
 
-    public bool IsPlaceable = false;
+    public bool IsPlaceable => _placeableSurface != null;
     public bool IsHolding => _holdableItem != null;
 
 
@@ -25,6 +26,17 @@ public class CharacterHoldAbility : CharacterAbility
 
     private void LateUpdate()
     {
+        /*        if (Input.GetKeyDown(KeyCode.Space))
+                {
+                    if (!IsHolding)
+                    {
+                        PickUp();
+                    }
+                    else
+                    {
+                        Drop();
+                    }
+                }*/
         if (Input.GetKeyDown(KeyCode.Space))
         {
             if (!IsHolding)
@@ -33,7 +45,14 @@ public class CharacterHoldAbility : CharacterAbility
             }
             else
             {
-                Drop();
+                if (IsPlaceable)
+                {
+                    Place();
+                }
+                else
+                {
+                    Drop();
+                }
             }
         }
     }
@@ -78,8 +97,8 @@ public class CharacterHoldAbility : CharacterAbility
         }
 
         // 부모 해제 전에 현재 위치와 회전을 저장
-        Vector3 dropPosition = handTransform.position + transform.forward * 0.2f + Vector3.up * 0.5f; // 캐릭터 앞의 위치, 0.5f는 원하는 거리 조절
-        dropPosition.y -= 1f;
+        Vector3 dropPosition = handTransform.position + transform.forward * _holdableItem.DropOffset.x + Vector3.up * _holdableItem.DropOffset.y;
+        dropPosition.y -= 0.5f;
         Quaternion dropRotation = handTransform.rotation; /** Quaternion.Euler(-90, 0, 0);*/ // 손의 회전 + 90도 회전
 
         _holdableItem.UnHold(dropPosition, dropRotation);
@@ -95,4 +114,36 @@ public class CharacterHoldAbility : CharacterAbility
         _holdableItem = null;
         animator.SetBool("Carry", false);
     }
+
+    void Place()
+    {
+        if (!IsHolding )
+        {
+            return;
+        }
+
+        Vector3 placePosition = transform.position + transform.forward * 0.5f + Vector3.up * 0.2f; 
+        Quaternion placeRotation = Quaternion.identity; 
+
+        _holdableItem.Place(placePosition, placeRotation);
+        _holdableItem = null;
+        animator.SetBool("Carry", false);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Table"))
+        {
+            _placeableSurface = other.transform;
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Table"))
+        {
+            _placeableSurface = null;
+        }
+    }
+
 }
