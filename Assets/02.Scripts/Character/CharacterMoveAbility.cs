@@ -34,7 +34,7 @@ public class CharacterMoveAbility : CharacterAbility
 
     private void Update()
     {
-        if (!_owner.PhotonView.IsMine || PhotonNetwork.IsConnected)
+        if (!_owner.PhotonView.IsMine && PhotonNetwork.IsConnected)
         {
             return;
         }
