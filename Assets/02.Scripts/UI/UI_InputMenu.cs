@@ -14,6 +14,7 @@ public class UI_InputMenu : MonoBehaviourPunCallbacks
     [HideInInspector]
     public TMP_InputField MyInputField;
     public GameObject GatheringMenu;
+    public GameObject TitleImage;
     public CinemachineVirtualCamera NameInputCamera;
 
 
@@ -45,6 +46,8 @@ public class UI_InputMenu : MonoBehaviourPunCallbacks
         roomOptions.IsVisible = true; // 로비에서 방 목록에 노출할 것인가?
         roomOptions.IsOpen = true;
         PhotonNetwork.JoinOrCreateRoom("PlayRoom", roomOptions, TypedLobby.Default);
+        TitleImage.SetActive(false);
+
         this.gameObject.SetActive(false);
 
     }
