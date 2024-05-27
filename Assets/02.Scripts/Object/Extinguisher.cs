@@ -19,7 +19,7 @@ public class Extinguisher : IHoldable
         // 각 아이템이 잡혔을 때 해줄 초기화 로직
         transform.parent = handTransform;
 
-         transform.localPosition = new Vector3(0.52f, 0f, -0.1f);
+        transform.localPosition = new Vector3(0.52f, 0f, -0.1f);
         transform.localRotation = Quaternion.Euler(0, 90, 0);
 
     }
