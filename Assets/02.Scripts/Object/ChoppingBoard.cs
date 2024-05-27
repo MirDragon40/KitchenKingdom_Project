@@ -44,7 +44,6 @@ public class ChoppingBoard : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             _isPossibleChopping = true;
-
         }
     }
 
@@ -65,10 +64,9 @@ public class ChoppingBoard : MonoBehaviour
             {
                 StopCoroutine(fillSliderCoroutine);
             }
-
         }
     }
-
+    
 
 
     private IEnumerator FillSliderOverTime(float duration)
