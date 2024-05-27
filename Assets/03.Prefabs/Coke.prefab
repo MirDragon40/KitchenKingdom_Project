@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4630380822214011115}
   - component: {fileID: 5548057217689352844}
+  - component: {fileID: 7364024232130201408}
   m_Layer: 0
   m_Name: Coke
   m_TagString: Untagged
@@ -46,11 +47,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7104a22dd644e3846b1b5f32eb7705d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ItemType: 4
+  Placeable: 0
   CokeObject: {fileID: 6789706837920808927}
   CokeRenderer: {fileID: 3804017872961156233}
   ThisCokeMaterial: {fileID: 0}
   ChangeCokeMaterial: {fileID: 2100000, guid: 5294e1b9f82eb50459540445986474b4, type: 2}
   CokeParticle: {fileID: 6245819853513931166}
+--- !u!65 &7364024232130201408
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1796028654022039200}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.41988277, y: 0.48247194, z: 0.8090978}
+  m_Center: {x: 0.004532337, y: 0.13470954, z: -0.21122292}
 --- !u!1 &6245819853513931166
 GameObject:
   m_ObjectHideFlags: 0
@@ -78,7 +102,7 @@ Transform:
   m_GameObject: {fileID: 6245819853513931166}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 9.317, y: 1.224, z: 1.303}
+  m_LocalPosition: {x: 0, y: 0.61, z: 0}
   m_LocalScale: {x: 0.099719964, y: 0.099719964, z: 0.099719964}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -4910,7 +4934,7 @@ Transform:
   m_GameObject: {fileID: 6789706837920808927}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 1, z: -0, w: 0}
-  m_LocalPosition: {x: 9.33, y: 0.734, z: 1.32}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.73310953, y: 0.73310953, z: 0.73310953}
   m_ConstrainProportionsScale: 0
   m_Children: []
