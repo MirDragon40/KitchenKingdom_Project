@@ -29,7 +29,7 @@ public class Makefood : MonoBehaviour
 
     void Update()
     {
-        if(!isPlayerNearby)
+        if (!isPlayerNearby)
         {
             return;
         }
@@ -83,12 +83,12 @@ public class Makefood : MonoBehaviour
     public void SpawnFood(FoodType foodType, Transform spawnPoint)
     {
         // 음식 생성
-        
+
         GameObject foodPrefab = FoodManager.instance.GetFoodPrefab(foodType);
         Debug.Log(foodPrefab.transform.position);
         if (foodPrefab != null)
         {
-        Debug.Log("음식 생성");
+            Debug.Log("음식 생성");
             GameObject food = Instantiate(foodPrefab, spawnPoint.position, spawnPoint.rotation);
 
             // 음식 오브젝트를 손에 들도록 설정
@@ -104,7 +104,7 @@ public class Makefood : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(isPlayerNearby)
+        if (isPlayerNearby)
         {
             return;
         }

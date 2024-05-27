@@ -23932,6 +23932,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   handTransform: {fileID: 73083690114935722}
   IsPlaceable: 0
+  PlacePosition: {fileID: 0}
 --- !u!1 &6998912575126484618
 GameObject:
   m_ObjectHideFlags: 0
