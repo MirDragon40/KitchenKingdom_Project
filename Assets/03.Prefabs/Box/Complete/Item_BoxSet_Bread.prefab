@@ -759,6 +759,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7044634654008912100}
+  - component: {fileID: 5292912726739808552}
   m_Layer: 0
   m_Name: Item_BoxSet_Bread
   m_TagString: Untagged
@@ -788,6 +789,19 @@ Transform:
   - {fileID: 1107214628287204610}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+--- !u!114 &5292912726739808552
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7650598858107843011}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8379dc7aabe7d8240a86201b9c269166, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PlacePosition: {fileID: 1107214628287204610}
 --- !u!1 &8518883020676964311
 GameObject:
   m_ObjectHideFlags: 0

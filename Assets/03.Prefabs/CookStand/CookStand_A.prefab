@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 1271525100153116606}
   - component: {fileID: 493944086383279856}
   - component: {fileID: 3761356413387491301}
+  - component: {fileID: 1957720455463710802}
   m_Layer: 0
   m_Name: CookStand_A
   m_TagString: Untagged
@@ -147,6 +148,19 @@ MonoBehaviour:
   ThisMaterial: {fileID: 2100000, guid: 2a4628a3786b87e44aa969367b59f5b8, type: 2}
   ChangeMaterial: {fileID: 2100000, guid: 76a2fc3e91ab917438620a1ceed1bb8c, type: 2}
   PlusImageUI: {fileID: 0}
+--- !u!114 &1957720455463710802
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7935356144928406868}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8379dc7aabe7d8240a86201b9c269166, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PlacePosition: {fileID: 1362744422399350385}
 --- !u!1 &8931734911812680101
 GameObject:
   m_ObjectHideFlags: 0
