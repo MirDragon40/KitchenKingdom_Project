@@ -70,6 +70,7 @@ public class CookStand : MonoBehaviour
             if (characterHoldAbility != null)
             {
                 characterHoldAbility.IsPlaceable = false;
+                characterHoldAbility.PlacePosition = null;
             }
             player = null; // 플레이어 오브젝트 해제
         }

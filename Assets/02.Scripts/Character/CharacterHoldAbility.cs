@@ -12,10 +12,12 @@ public class CharacterHoldAbility : CharacterAbility
     private float _findfood = 1f; //음식을 찾는 범위
 
     private IHoldable _holdableItem;
-    private Transform _placeableSurface;
+   // private Transform _placeableSurface;
 
-    public bool IsPlaceable => _placeableSurface != null;
+    public bool IsPlaceable =false;
     public bool IsHolding => _holdableItem != null;
+
+    public Transform PlacePosition = null;
 
 
 
@@ -122,15 +124,15 @@ public class CharacterHoldAbility : CharacterAbility
             return;
         }
 
-        Vector3 placePosition = transform.position + transform.forward * 0.5f + Vector3.up * 0.2f; 
+        //Vector3 placePosition = transform.position + transform.forward * 0.5f + Vector3.up * 0.2f; 
         Quaternion placeRotation = Quaternion.identity; 
 
-        _holdableItem.Place(placePosition, placeRotation);
+        _holdableItem.Place(PlacePosition.position, placeRotation);
         _holdableItem = null;
         animator.SetBool("Carry", false);
     }
 
-    private void OnTriggerEnter(Collider other)
+/*    private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Table"))
         {
@@ -144,6 +146,6 @@ public class CharacterHoldAbility : CharacterAbility
         {
             _placeableSurface = null;
         }
-    }
+    }*/
 
 }
