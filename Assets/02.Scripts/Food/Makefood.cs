@@ -23,7 +23,7 @@ public class Makefood : MonoBehaviour
     // 박스 열리는 애니메이션
     public Animator animator;
 
-
+    private float checkRange = 1f;
     public void Start()
     {
         animator = GetComponent<Animator>();
@@ -43,23 +43,22 @@ public class Makefood : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            if(!HavePlacedItem)
+            if (!HavePlacedItem)
             {
-                SpawnFood(foodType, _nearbyCharacter.HoldAbility.handTransform);
+                // 음식을 생성하기 전에 근처에 들 수 있는 오브젝트가 있는지 확인합니다
+                if (!IsNearbyHoldable())
+                {
+                    SpawnFood(foodType, _nearbyCharacter.HoldAbility.handTransform);
 
-                // 드는 애니메이션
-                _nearbyCharacter.GetComponent<Animator>().SetBool("Carry", true);
+                    // 들기 애니메이션 실행
+                    _nearbyCharacter.GetComponent<Animator>().SetBool("Carry", true);
 
-                // 박스 애니메이션
-                //Animator.SetBool("PlayerBoxOpen", true);
+                    // 상자 애니메이션 실행
+                    // Animator.SetBool("PlayerBoxOpen", true);
 
-                StartCoroutine(BoxOpenAnimation());
+                    StartCoroutine(BoxOpenAnimation());
+                }
             }
-            else
-            {
-
-            }
-        
         }
 
         if (!_nearbyCharacter.HoldAbility.IsHolding && Input.GetKeyDown(KeyCode.Space))
@@ -67,6 +66,20 @@ public class Makefood : MonoBehaviour
             _nearbyCharacter = null;
         }
 
+    }
+
+    private bool IsNearbyHoldable()
+    {
+        Collider[] colliders = Physics.OverlapSphere(spawnPoint.position, checkRange);
+        foreach (Collider collider in colliders)
+        {
+            IHoldable holdable = collider.GetComponent<IHoldable>();
+            if (holdable != null)
+            {
+                return true; // 근처에 들 수 있는 오브젝트가 있음
+            }
+        }
+        return false; // 근처에 들 수 있는 오브젝트가 없음
     }
 
     public void SpawnFood(FoodType foodType, Transform spawnPoint)
