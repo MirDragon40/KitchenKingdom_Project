@@ -8,6 +8,7 @@ public enum EItemType
     Extinguisher,
     Food,
     Dish,
+    Pan,
 }
 public abstract class IHoldable : MonoBehaviour
 {

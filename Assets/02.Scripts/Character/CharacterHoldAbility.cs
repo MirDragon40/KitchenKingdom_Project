@@ -104,7 +104,9 @@ public class CharacterHoldAbility : CharacterAbility
         Quaternion dropRotation = handTransform.rotation; /** Quaternion.Euler(-90, 0, 0);*/ // 손의 회전 + 90도 회전
 
         _holdableItem.UnHold(dropPosition, dropRotation);
-        _holdableItem = null;
+
+
+         _holdableItem = null;
 
         // 애니메이션 정지
         animator.SetBool("Carry", false);
@@ -124,21 +126,12 @@ public class CharacterHoldAbility : CharacterAbility
             return;
         }
 
-        bool hasDish = false;
-
-
-        // 접시 위에 손질되지 않은 음식을 놓지 않도록 검사
-        if (hasDish && !_holdableItem.IsProcessed)
-        {
-            return;
-        }
 
         //Vector3 placePosition = transform.position + transform.forward * 0.5f + Vector3.up * 0.2f; 
-        Quaternion placeRotation = Quaternion.identity; 
+        Quaternion placeRotation = Quaternion.identity;
 
         _holdableItem.Place(PlacePosition.position, placeRotation);
         _holdableItem = null;
         animator.SetBool("Carry", false);
     }
-
 }
