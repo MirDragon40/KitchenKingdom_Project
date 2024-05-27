@@ -9329,6 +9329,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1137049860}
   m_CullTransparentMesh: 1
+--- !u!1 &1152847859
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1152847860}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1152847860
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1152847859}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.007, y: 0.972, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2120983445}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1156740657
 GameObject:
   m_ObjectHideFlags: 0
@@ -21605,9 +21636,10 @@ GameObject:
   - component: {fileID: 2120983447}
   - component: {fileID: 2120983446}
   - component: {fileID: 2120983449}
+  - component: {fileID: 2120983450}
   m_Layer: 0
   m_Name: Cook_Stand_A (20)
-  m_TagString: Table
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -21624,7 +21656,8 @@ Transform:
   m_LocalPosition: {x: 5.098, y: -0.024, z: 1.513}
   m_LocalScale: {x: 1, y: 0.85707974, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1152847860}
   m_Father: {fileID: 1119965836}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!64 &2120983446
@@ -21718,8 +21751,21 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1.0739117, y: 0.13734928, z: 1.0739112}
-  m_Center: {x: 0.00000047683716, y: 0.9763302, z: 0.00000091709694}
+  m_Size: {x: 0.70337534, y: 1.0323439, z: 1.1906542}
+  m_Center: {x: -0.01838851, y: 0.5288297, z: -0.058370907}
+--- !u!114 &2120983450
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2120983444}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8379dc7aabe7d8240a86201b9c269166, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PlacePosition: {fileID: 1152847860}
 --- !u!1 &2121844112
 GameObject:
   m_ObjectHideFlags: 0
