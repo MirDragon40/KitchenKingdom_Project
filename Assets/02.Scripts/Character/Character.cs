@@ -17,6 +17,6 @@ public class Character : MonoBehaviour
         {
             Instance = this;
         }*/
-
+        PhotonView = GetComponent<PhotonView>();
     }
 }
