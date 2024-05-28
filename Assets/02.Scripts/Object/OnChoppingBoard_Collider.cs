@@ -13,15 +13,10 @@ public class OnChoppingBoard_Collider : MonoBehaviour
         if (other.CompareTag("Food"))
         {
             FoodObject foodObject = other.GetComponent<FoodObject>();
-            if (foodObject.State == FoodState.Raw && foodObject.FoodType == FoodType.Lettuce )
+            if (foodObject.State == FoodState.Raw && foodObject.FoodType == FoodType.Lettuce)
             {
                 IsCuttable = true;
             }
-            else
-            {
-                IsCuttable = false;
-            }
-
         }
     }
 
