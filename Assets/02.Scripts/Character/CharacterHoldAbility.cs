@@ -12,11 +12,12 @@ public class CharacterHoldAbility : CharacterAbility
     private Animator animator;
     private float _findfood = 1f; //음식을 찾는 범위
 
-    private IHoldable _holdableItem;
+    [HideInInspector]
+    public IHoldable HoldableItem;
    // private Transform _placeableSurface;
 
     public bool IsPlaceable =false;
-    public bool IsHolding => _holdableItem != null;
+    public bool IsHolding => HoldableItem != null;
 
     public Transform PlacePosition = null;
 
@@ -79,7 +80,7 @@ public class CharacterHoldAbility : CharacterAbility
             if(holdable != null)
             {
 
-                _holdableItem = holdable;
+                HoldableItem = holdable;
                 holdable.Hold(_owner, transform);
                 animator.SetBool("Carry", true);
 
@@ -100,14 +101,14 @@ public class CharacterHoldAbility : CharacterAbility
         }
 
         // 부모 해제 전에 현재 위치와 회전을 저장
-        Vector3 dropPosition = handTransform.position + transform.forward * _holdableItem.DropOffset.x + Vector3.up * _holdableItem.DropOffset.y;
+        Vector3 dropPosition = handTransform.position + transform.forward * HoldableItem.DropOffset.x + Vector3.up * HoldableItem.DropOffset.y;
         dropPosition.y -= 0.5f;
         Quaternion dropRotation = handTransform.rotation; /** Quaternion.Euler(-90, 0, 0);*/ // 손의 회전 + 90도 회전
 
-        _holdableItem.UnHold(dropPosition, dropRotation);
+        HoldableItem.UnHold(dropPosition, dropRotation);
 
 
-         _holdableItem = null;
+         HoldableItem = null;
 
         // 애니메이션 정지
         animator.SetBool("Carry", false);
@@ -116,7 +117,7 @@ public class CharacterHoldAbility : CharacterAbility
     // 음식 버린후 초기화
     public void FoodTrashDrop()
     {
-        _holdableItem = null;
+        HoldableItem = null;
         animator.SetBool("Carry", false);
     }
 
@@ -131,8 +132,8 @@ public class CharacterHoldAbility : CharacterAbility
         //Vector3 placePosition = transform.position + transform.forward * 0.5f + Vector3.up * 0.2f; 
         Quaternion placeRotation = Quaternion.identity;
 
-        _holdableItem.Place(PlacePosition.position, placeRotation);
-        _holdableItem = null;
+        HoldableItem.Place(PlacePosition.position, placeRotation);
+        HoldableItem = null;
         animator.SetBool("Carry", false);
     }
 }

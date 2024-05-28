@@ -3,13 +3,32 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.TextCore.Text;
 
+
+public enum FoodState
+{
+    Raw,
+    Cut,
+}
+
 public class FoodObject : IHoldable
 {
+
+    private EItemType itemType = EItemType.Food;
+
+    public FoodState State;
+
 
     public override Vector3 DropOffset => new Vector3(0.3f, 0.1f, 0f);
     //public override Quaternion DropOffset_Rotation => Quaternion.Euler(0, 0, 0);
 
     public override bool IsProcessed => false;
+
+
+    private void Awake()
+    {
+        State = FoodState.Raw;
+    }
+
     public override void Hold(Character character, Transform handTransform)
     {
         _holdCharacter = character;
@@ -44,6 +63,10 @@ public class FoodObject : IHoldable
 
     public override void Place(Vector3 placePosition, Quaternion placeRotation)
     {
-        throw new System.NotImplementedException();
+        transform.position = placePosition;
+        //transform.rotation = placeRotation;
+        placeRotation = Quaternion.Euler(0, 0, 0);
+        transform.parent = null;
+        _holdCharacter = null;
     }
 }
