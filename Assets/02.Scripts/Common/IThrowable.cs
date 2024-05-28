@@ -5,5 +5,5 @@ using UnityEngine;
 
 public interface IThrowable
 {
-    public void ThrowObject();
+    public void ThrowObject(Vector3 direction);
 }
