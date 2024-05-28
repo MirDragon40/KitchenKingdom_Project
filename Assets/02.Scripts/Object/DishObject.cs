@@ -17,7 +17,11 @@ public class DishObject : IHoldable
 
     public override void Place(Vector3 placePosition, Quaternion placeRotation)
     {
-        throw new System.NotImplementedException();
+        transform.position = placePosition;
+        transform.rotation = placeRotation;
+        //placeRotation = Quaternion.Euler(0, 0, 0);
+        transform.parent = null;
+        _holdCharacter = null;
     }
 
     public override void UnHold(Vector3 dropPosition, Quaternion dropRotation)

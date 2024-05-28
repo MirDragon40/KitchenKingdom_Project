@@ -34,7 +34,7 @@ public class PanObject : IHoldable
 
             transform.position = placePosition;
             //transform.rotation = placeRotation;
-            Quaternion panplaceRotation = Quaternion.Euler(-90, 0, 180);
+            //Quaternion panplaceRotation = Quaternion.Euler(-90, 0, 180);
             transform.parent = null;
             _holdCharacter = null;
         
