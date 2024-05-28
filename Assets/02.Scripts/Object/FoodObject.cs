@@ -41,4 +41,9 @@ public class FoodObject : IHoldable
     {
         Destroy(gameObject);
     }
+
+    public override void Place(Vector3 placePosition, Quaternion placeRotation)
+    {
+        throw new System.NotImplementedException();
+    }
 }

@@ -15,6 +15,9 @@ public class UI_Timer : MonoBehaviour
 
     public GameObject SpeedUpFireUI;
 
+    public Animator TimerAnimator;
+    public Animator FireAnimator;
+
     private void Start()
     {
         SpeedUpFireUI.gameObject.SetActive(false);
@@ -30,9 +33,13 @@ public class UI_Timer : MonoBehaviour
             // UI에 시간 표시
             DisplayTime(_currentTime);
 
-            if (_currentTime <= 30f) 
+            // 30초가 남으면 불 애니메이션 나옴
+            if (_currentTime <= 175f) // 테스트 위해 5초뒤로.. 30초로 변경하기
             {
                 SpeedUpFireUI.gameObject.SetActive(true);
+
+                TimerAnimator.SetTrigger("SpeedUp");
+                FireAnimator.SetTrigger("SpeedUp");
             }
 
             // 타이머가 종료되었을 때 처리

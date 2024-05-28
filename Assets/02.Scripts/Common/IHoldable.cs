@@ -8,6 +8,8 @@ public enum EItemType
     Extinguisher,
     Food,
     Dish,
+    Pan,
+    Coke,
 }
 public abstract class IHoldable : MonoBehaviour
 {
@@ -28,13 +30,8 @@ public abstract class IHoldable : MonoBehaviour
 
     public virtual bool IsProcessed => true;
 
-    public void Place(Vector3 placePosition, Quaternion placeRotation)
-    {
-        transform.position = placePosition;
-        transform.rotation = placeRotation;
-        transform.parent = null;
-        _holdCharacter = null;
-    }
+    public abstract void Place(Vector3 placePosition, Quaternion placeRotation);
+
 
     internal void Hold(Character nearbyCharacter, object handTransform)
     {

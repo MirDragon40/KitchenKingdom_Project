@@ -7,8 +7,6 @@ public class Extinguisher : IHoldable
     private ParticleSystem _powderEffect;
 
     public override Vector3 DropOffset => new Vector3(0f, 0f, 0f);
-
-    //public override Quaternion DropOffset_Rotation => Quaternion.Euler(0, -90, 0);
     private void Awake()
     {
         _powderEffect = GetComponentInChildren<ParticleSystem>();
@@ -20,7 +18,8 @@ public class Extinguisher : IHoldable
 
         // 각 아이템이 잡혔을 때 해줄 초기화 로직
         transform.parent = handTransform;
-         transform.localPosition = new Vector3(-0.042f, 0f, -0.068f);
+
+        transform.localPosition = new Vector3(0.52f, 0f, -0.1f);
         transform.localRotation = Quaternion.Euler(0, 90, 0);
 
     }
@@ -56,9 +55,8 @@ public class Extinguisher : IHoldable
 
         // 저장한 위치와 회전으로 소화기 배치
         transform.position = dropPosition;
-        //transform.rotation = dropRotation;
-        Quaternion additionalRotation = Quaternion.Euler(0, -90, 0);
-        Quaternion finalRotation = dropRotation * additionalRotation;
+        transform.rotation = dropRotation;
+
 
         transform.parent = null;
         // 각 아이템이 놓여질 때 해줄 초기화 로직
@@ -66,5 +64,10 @@ public class Extinguisher : IHoldable
 
         _holdCharacter = null;
 
+    }
+
+    public override void Place(Vector3 placePosition, Quaternion placeRotation)
+    {
+        throw new System.NotImplementedException();
     }
 }

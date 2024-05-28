@@ -19,6 +19,8 @@ public class MaterialColorChange: MonoBehaviour
 
     public Image PlusImageUI;
 
+    public Coke Coke;
+
     private void Start()
     {
         
@@ -37,6 +39,8 @@ public class MaterialColorChange: MonoBehaviour
                 {
                     PlusImageUI.gameObject.SetActive(false);
                 }
+
+               // Coke.CokePour();
             }
         }
     }
