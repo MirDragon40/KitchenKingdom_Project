@@ -26,6 +26,8 @@ public abstract class IHoldable : MonoBehaviour
     public abstract void UnHold(Vector3 dropPosition, Quaternion dropRotation);
     public abstract Vector3 DropOffset { get; }
 
+    //public abstract Quaternion DropOffset_Rotation { get; }
+
     public virtual bool IsProcessed => true;
 
     public abstract void Place(Vector3 placePosition, Quaternion placeRotation);

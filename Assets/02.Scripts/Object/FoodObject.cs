@@ -7,6 +7,7 @@ public class FoodObject : IHoldable
 {
 
     public override Vector3 DropOffset => new Vector3(0.3f, 0.1f, 0f);
+    //public override Quaternion DropOffset_Rotation => Quaternion.Euler(0, 0, 0);
 
     public override bool IsProcessed => false;
     public override void Hold(Character character, Transform handTransform)
