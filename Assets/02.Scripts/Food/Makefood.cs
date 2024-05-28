@@ -6,7 +6,9 @@ using UnityEngine;
 
 public class Makefood : MonoBehaviour
 {
+
     public FoodType foodType;
+
     public Transform spawnPoint;
 
     private Character _nearbyCharacter;
