@@ -12,7 +12,7 @@ public enum FoodState
 
 
 
-public class FoodObject : IHoldable
+public class FoodObject : IHoldable, IThrowable
 {
 
     private EItemType itemType = EItemType.Food;
@@ -47,7 +47,7 @@ public class FoodObject : IHoldable
         transform.localRotation = Quaternion.identity;
     }
 
-
+    
 
     public override void UnHold(Vector3 dropPosition, Quaternion dropRotation)
     {
@@ -66,6 +66,13 @@ public class FoodObject : IHoldable
     public void Dispose()
     {
         Destroy(gameObject);
+    }
+    public void ThrowObject(Vector3 direction)
+    {
+        _rigidbody.isKinematic = false;
+        transform.parent = null;
+        _holdCharacter = null;
+        _rigidbody.AddForce(direction*10f, ForceMode.Impulse);
     }
 
     public override void Place(Vector3 placePosition, Quaternion placeRotation)
