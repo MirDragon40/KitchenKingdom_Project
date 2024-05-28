@@ -18,6 +18,7 @@ public class FoodObject : IHoldable
     private EItemType itemType = EItemType.Food;
 
     public FoodState State;
+    private Rigidbody _rigidbody;
 
     public FoodType FoodType;
 
@@ -31,10 +32,12 @@ public class FoodObject : IHoldable
     private void Awake()
     {
         State = FoodState.Raw;
+        _rigidbody = GetComponent<Rigidbody>();
     }
 
     public override void Hold(Character character, Transform handTransform)
     {
+        _rigidbody.isKinematic = true;
         _holdCharacter = character;
 
         // 각 아이템이 잡혔을 때 해줄 초기화 로직
@@ -48,10 +51,10 @@ public class FoodObject : IHoldable
 
     public override void UnHold(Vector3 dropPosition, Quaternion dropRotation)
     {
-
+        _rigidbody.isKinematic = false;
         // 저장한 위치와 회전으로 음식 배치
-        transform.position = dropPosition;
-        transform.rotation = dropRotation;
+/*        transform.position = dropPosition;
+        transform.rotation = dropRotation;*/
 
 
         transform.parent = null;
