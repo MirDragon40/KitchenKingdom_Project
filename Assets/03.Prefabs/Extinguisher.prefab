@@ -132,7 +132,7 @@ Transform:
   m_GameObject: {fileID: 1816714927406644451}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.3379, y: 0.10285, z: -0.56331}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 3.1702535, y: 2.305345, z: 3.1702535}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -152,7 +152,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ItemType: 0
-  PowderEffect: {fileID: 3544866028740605957}
+  Placeable: 0
 --- !u!65 &6654251320375364341
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1356,11 +1356,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2d375605610a4e84d8e1d80a70c9340a, type: 3}
---- !u!198 &3544866028740605957 stripped
-ParticleSystem:
-  m_CorrespondingSourceObject: {fileID: 198922435788909546, guid: 2d375605610a4e84d8e1d80a70c9340a, type: 3}
-  m_PrefabInstance: {fileID: 3743426123806233583}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &3738908403537369989 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4529282608138346, guid: 2d375605610a4e84d8e1d80a70c9340a, type: 3}
