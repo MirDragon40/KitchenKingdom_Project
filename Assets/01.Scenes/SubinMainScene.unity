@@ -6388,6 +6388,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TimerTextUI: {fileID: 2079287454378475147}
   SpeedUpFireUI: {fileID: 2014254991206864388}
+  TimerAnimator: {fileID: 0}
+  FireAnimator: {fileID: 0}
 --- !u!222 &555945006734907934
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -9781,7 +9783,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 3236868563524652713, guid: e46866d054e053c47bebd257df76a198, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: e46866d054e053c47bebd257df76a198, type: 3}
 --- !u!4 &3586789984125841656
 Transform:
@@ -14693,6 +14698,7 @@ MonoBehaviour:
   ThisMaterial: {fileID: 2100000, guid: 6493a5714a5eddc45bb33d006de5b93e, type: 2}
   ChangeMaterial: {fileID: 2100000, guid: 76a2fc3e91ab917438620a1ceed1bb8c, type: 2}
   PlusImageUI: {fileID: 0}
+  Coke: {fileID: 0}
 --- !u!222 &8014551742061780403
 CanvasRenderer:
   m_ObjectHideFlags: 0
