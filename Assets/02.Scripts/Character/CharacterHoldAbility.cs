@@ -127,7 +127,7 @@ public class CharacterHoldAbility : CharacterAbility
         }
 
         Quaternion placeRotation = Quaternion.identity;
-        HoldableItem.Place(PlacePosition.position, placeRotation);
+        HoldableItem.Place(PlacePosition);
         HoldableItem = null;
         animator.SetBool("Carry", false);
     }

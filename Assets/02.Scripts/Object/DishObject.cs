@@ -15,12 +15,12 @@ public class DishObject : IHoldable
         transform.localRotation = Quaternion.identity;
     }
 
-    public override void Place(Vector3 placePosition, Quaternion placeRotation)
+    public override void Place(Transform place)
     {
-        transform.position = placePosition;
-        transform.rotation = placeRotation;
+        transform.position = place.position;
+        // transform.rotation = place.rotation;
         //placeRotation = Quaternion.Euler(0, 0, 0);
-        transform.parent = null;
+        transform.parent = place;
         _holdCharacter = null;
     }
 

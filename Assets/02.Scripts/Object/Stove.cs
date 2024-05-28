@@ -1,18 +1,36 @@
+using Photon.Realtime;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Stove : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public Transform PlacePosition;
+    void OnTriggerEnter(Collider other)
     {
-        
+        if (other.CompareTag("Player"))
+        {
+            CharacterHoldAbility characterHoldAbility = other.GetComponent<CharacterHoldAbility>();
+            if (characterHoldAbility != null)
+            {
+                characterHoldAbility.IsPlaceable = true;
+                characterHoldAbility.PlacePosition = PlacePosition;
+            }
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    void OnTriggerExit(Collider other)
     {
-        
+        if (other.CompareTag("Player"))
+        {
+            CharacterHoldAbility characterHoldAbility = other.GetComponent<CharacterHoldAbility>();
+            if (characterHoldAbility != null)
+            {
+                characterHoldAbility.IsPlaceable = false;
+                characterHoldAbility.PlacePosition = null;
+            }
+        }
     }
+
 }
+

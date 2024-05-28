@@ -29,13 +29,15 @@ public class PanObject : IHoldable
         _holdCharacter = null;
     }
 
-    public override void Place(Vector3 placePosition, Quaternion placeRotation)
+    public override void Place(Transform place)
     {
 
-            transform.position = placePosition;
+            transform.position = place.position;
+           // transform.rotation = place.rotation;
+            transform.parent = place;
+
             //transform.rotation = placeRotation;
             //Quaternion panplaceRotation = Quaternion.Euler(-90, 0, 180);
-            transform.parent = null;
             _holdCharacter = null;
         
     }

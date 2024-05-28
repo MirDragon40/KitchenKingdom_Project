@@ -72,15 +72,15 @@ public class FoodObject : IHoldable, IThrowable
         _rigidbody.isKinematic = false;
         transform.parent = null;
         _holdCharacter = null;
+        
         _rigidbody.AddForce(direction*10f, ForceMode.Impulse);
     }
 
-    public override void Place(Vector3 placePosition, Quaternion placeRotation)
+    public override void Place(Transform place)
     {
-        transform.position = placePosition;
+        transform.position = place.position;
         //transform.rotation = placeRotation;
-        placeRotation = Quaternion.Euler(0, 0, 0);
-        transform.parent = null;
+        transform.parent = place;
         _holdCharacter = null;
     }
 }

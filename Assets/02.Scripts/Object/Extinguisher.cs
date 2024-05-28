@@ -69,10 +69,10 @@ public class Extinguisher : IHoldable
 
     }
 
-    public override void Place(Vector3 placePosition, Quaternion placeRotation)
+    public override void Place(Transform place)
     {
-        transform.parent = null;
-        transform.position = placePosition;
+        transform.parent = place;
+        transform.position = place.position;
         //Quaternion additionalRotation = Quaternion.Euler(0, -90, 0);
 
 
