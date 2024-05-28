@@ -67,4 +67,9 @@ public class Coke : IHoldable
         //각 아이템이 떼어질 때 해줄 초기화 로직
         _holdCharacter = null;
     }
+
+    public override void Place(Vector3 placePosition, Quaternion placeRotation)
+    {
+        throw new System.NotImplementedException();
+    }
 }

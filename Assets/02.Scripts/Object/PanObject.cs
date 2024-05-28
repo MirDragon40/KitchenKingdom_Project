@@ -15,6 +15,16 @@ public class PanObject : IHoldable
         transform.localRotation = Quaternion.Euler(-90f, 180f, 0f);
     }
 
+    public override void Place(Vector3 placePosition, Quaternion placeRotation)
+    {
+        {
+            transform.position = placePosition;
+            //transform.rotation = placeRotation;
+            Quaternion panplaceRotation = Quaternion.Euler(-90,0,180);
+            transform.parent = null;
+            _holdCharacter = null;
+        }
+    }
 
     public override void UnHold(Vector3 dropPosition, Quaternion dropRotation)
     {

@@ -65,4 +65,9 @@ public class Extinguisher : IHoldable
         _holdCharacter = null;
 
     }
+
+    public override void Place(Vector3 placePosition, Quaternion placeRotation)
+    {
+        throw new System.NotImplementedException();
+    }
 }
