@@ -19,7 +19,7 @@ public class Extinguisher : IHoldable
         // 각 아이템이 잡혔을 때 해줄 초기화 로직
         transform.parent = handTransform;
 
-        transform.localPosition = new Vector3(-0.108f, 0f, 0.113f);
+        transform.localPosition = new Vector3(0.52f, 0f, -0.1f);
         transform.localRotation = Quaternion.Euler(0, 90, 0);
 
     }
@@ -30,24 +30,24 @@ public class Extinguisher : IHoldable
         if (Input.GetKeyDown(KeyCode.LeftControl))
         {
             Debug.Log("Shot");
-            _powderEffect.Play();
+           _powderEffect.Play();
         }
         if (Input.GetKeyUp(KeyCode.LeftControl))
         {
             _powderEffect.Stop();
         }
 
-    }
+    }    
 
 
     private void Update()
     {
 
-        if (IsHold)
+        if(IsHold)
         {
             Shot();
         }
-
+        
     }
 
     public override void UnHold(Vector3 dropPosition, Quaternion dropRotation)
@@ -55,8 +55,7 @@ public class Extinguisher : IHoldable
 
         // 저장한 위치와 회전으로 소화기 배치
         transform.position = dropPosition;
-        Quaternion additionalRotation = Quaternion.Euler(0, -90, 0);
-        Quaternion finalRotation = dropRotation * additionalRotation;
+        transform.rotation = dropRotation;
 
 
         transform.parent = null;
@@ -69,12 +68,6 @@ public class Extinguisher : IHoldable
 
     public override void Place(Vector3 placePosition, Quaternion placeRotation)
     {
-
-        transform.position = placePosition;
-        //transform.rotation = placeRotation;
-        placeRotation = Quaternion.Euler(0, 0, 0);
-        transform.parent = null;
-        _holdCharacter = null;
-
+        throw new System.NotImplementedException();
     }
 }
