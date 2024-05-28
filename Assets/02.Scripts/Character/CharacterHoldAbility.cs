@@ -127,10 +127,7 @@ public class CharacterHoldAbility : CharacterAbility
             return;
         }
 
-
-        //Vector3 placePosition = transform.position + transform.forward * 0.5f + Vector3.up * 0.2f; 
         Quaternion placeRotation = Quaternion.identity;
-
         _holdableItem.Place(PlacePosition.position, placeRotation);
         _holdableItem = null;
         animator.SetBool("Carry", false);
