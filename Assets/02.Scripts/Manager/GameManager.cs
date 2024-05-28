@@ -44,7 +44,7 @@ public class GameManager : MonoBehaviour
 
         Vector3 spawnPosition = SpawnPoints[spawnIndex].position;
         Quaternion spawnRotation = SpawnPoints[spawnIndex].rotation;
-        PhotonNetwork.Instantiate("Character", spawnPosition, spawnRotation);
+        PhotonNetwork.Instantiate("Character1", spawnPosition, spawnRotation);
 
     }
 
