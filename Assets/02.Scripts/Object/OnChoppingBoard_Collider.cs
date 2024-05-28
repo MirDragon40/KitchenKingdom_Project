@@ -7,6 +7,8 @@ public class OnChoppingBoard_Collider : MonoBehaviour
     [HideInInspector]
     public bool IsCuttable = false;
 
+    public GameObject FoodOnBoard;
+
 
     private void OnTriggerEnter(Collider other)
     {
@@ -16,6 +18,8 @@ public class OnChoppingBoard_Collider : MonoBehaviour
             if (foodObject.State == FoodState.Raw && foodObject.FoodType == FoodType.Lettuce)
             {
                 IsCuttable = true;
+
+                FoodOnBoard = other.gameObject;
             }
         }
     }
@@ -26,7 +30,8 @@ public class OnChoppingBoard_Collider : MonoBehaviour
         {
             FoodObject foodObject = other.GetComponent<FoodObject>();
             IsCuttable = false;
-
+            
+            FoodOnBoard = null; 
         }
     }
 }

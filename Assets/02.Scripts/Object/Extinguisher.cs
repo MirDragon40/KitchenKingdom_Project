@@ -7,7 +7,6 @@ public class Extinguisher : IHoldable
 {
     private ParticleSystem _powderEffect;
 
-
     public override Vector3 DropOffset => new Vector3(-0.5f, 0f, 0f);
     private void Awake()
     {
@@ -22,7 +21,6 @@ public class Extinguisher : IHoldable
         transform.parent = handTransform;
         transform.localPosition = new Vector3(-0.108f, 0f, 0.113f);
         transform.localRotation = Quaternion.Euler(0, 90, 0);
-
     }
 
     public void Shot()
