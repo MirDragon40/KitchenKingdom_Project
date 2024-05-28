@@ -1,9 +1,10 @@
+using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Collections;
 using UnityEngine;
 
-public class OrderManager : MonoBehaviour
+public class OrderManager : MonoBehaviourPun
 {
     public static OrderManager Instance { get; private set; }
     [HideInInspector]
@@ -13,6 +14,7 @@ public class OrderManager : MonoBehaviour
     private int _orderCount = 0;
     public int MaxOrderNumber = 5;
     public Dictionary<string, List<string>> Recipies = new Dictionary<string, List<string>>();
+    private PhotonView _pv;
 
 
     private void Awake()
@@ -26,6 +28,7 @@ public class OrderManager : MonoBehaviour
             Destroy(this);
 
         }
+        _pv = GetComponent<PhotonView>();
         MyScrollView = GameObject.FindObjectOfType<UI_BilgeScrollView>();
         Recipies["burger"] = new List<string> { "bread", "lettuce", "patty" };
     }
@@ -34,8 +37,18 @@ public class OrderManager : MonoBehaviour
         if (!isGenerating && _orderCount < MaxOrderNumber)
         {
             _orderCount++;
-            StartCoroutine(GenerateOrder("burger"));
+            if (PhotonNetwork.IsMasterClient)
+            {
+                _pv.RPC("GenerateOrderRPC", RpcTarget.All, "burger");
+            }
         }
+    }
+
+
+    [PunRPC]
+    void GenerateOrderRPC(string order)
+    {
+        StartCoroutine(GenerateOrder(order));
     }
 
     private bool isGenerating = false;

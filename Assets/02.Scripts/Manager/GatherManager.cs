@@ -154,7 +154,7 @@ public class GatherManager : MonoBehaviourPunCallbacks
     {
         if (_isStartButton)
         {
-            PhotonNetwork.LoadLevel("JoonScene");
+            PhotonNetwork.LoadLevel("JoonScene1");
         }
         else
         {

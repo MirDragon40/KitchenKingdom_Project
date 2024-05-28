@@ -148,6 +148,7 @@ MonoBehaviour:
   ThisMaterial: {fileID: 2100000, guid: 2a4628a3786b87e44aa969367b59f5b8, type: 2}
   ChangeMaterial: {fileID: 2100000, guid: 76a2fc3e91ab917438620a1ceed1bb8c, type: 2}
   PlusImageUI: {fileID: 0}
+  Coke: {fileID: 0}
 --- !u!114 &107849720911665950
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -192,6 +193,59 @@ Transform:
   m_Children: []
   m_Father: {fileID: 2212674242853587031}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &7709604284564134043
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2782601193524967283}
+  - component: {fileID: 3495153334864399295}
+  m_Layer: 0
+  m_Name: OnChoppingBoard_TriggerCollider
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2782601193524967283
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7709604284564134043}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2212674242853587031}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &3495153334864399295
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7709604284564134043}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 0.45084274, z: 0.65749496}
+  m_Center: {x: 0, y: 0.27457952, z: 0.026385533}
 --- !u!1001 &7252228559949662617
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -270,6 +324,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 8796067680312345038, guid: e310811b6d43e4b49910171a4d8104b7, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2595893016094513626}
+    - targetCorrespondingSourceObject: {fileID: 8796067680312345038, guid: e310811b6d43e4b49910171a4d8104b7, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2782601193524967283}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e310811b6d43e4b49910171a4d8104b7, type: 3}
 --- !u!4 &2212674242853587031 stripped
