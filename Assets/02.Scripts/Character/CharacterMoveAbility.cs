@@ -13,6 +13,7 @@ public class CharacterMoveAbility : CharacterAbility
     public float DashSpeed;
     public float RotationSpeed;
     public float DashDuration;
+    private float _dirMagnitude;
 
 
     private CharacterController _characterController;
@@ -36,6 +37,7 @@ public class CharacterMoveAbility : CharacterAbility
     {
         if (!_owner.PhotonView.IsMine && PhotonNetwork.IsConnected)
         {
+            SynchronizeAnimation();
             return;
         }
         // 사용자 키보드 입력
@@ -61,8 +63,8 @@ public class CharacterMoveAbility : CharacterAbility
 
         _characterController.Move(move);
 
-
-        _animator.SetFloat("Move", dir.magnitude);
+        _dirMagnitude = dir.magnitude;
+        _animator.SetFloat("Move", _dirMagnitude);
 
 
         // 이동하는 방향을 바라보도록 회전
@@ -93,5 +95,20 @@ public class CharacterMoveAbility : CharacterAbility
         }
 
         isDashing = false;
+    }
+    void SynchronizeAnimation()
+    {
+        // 애니메이터 파라미터 동기화
+        foreach (var param in _animator.parameters)
+        {
+            if (param.type == AnimatorControllerParameterType.Float)
+            {
+                _animator.SetFloat(param.name, _animator.GetFloat(param.name));
+            }
+            else if (param.type == AnimatorControllerParameterType.Bool)
+            {
+                _animator.SetBool(param.name, _animator.GetBool(param.name));
+            }
+        }
     }
 }
