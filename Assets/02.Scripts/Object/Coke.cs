@@ -11,7 +11,7 @@ public class Coke : IHoldable
     public Material ChangeCokeMaterial;
     public GameObject CokeParticle;
 
-    public override Vector3 DropOffset => throw new System.NotImplementedException();
+    public override Vector3 DropOffset => new Vector3(-0.5f, 0f, 0f);
 
 
     private void Start()
@@ -70,6 +70,10 @@ public class Coke : IHoldable
 
     public override void Place(Vector3 placePosition, Quaternion placeRotation)
     {
-        throw new System.NotImplementedException();
+        transform.position = placePosition;
+        transform.rotation = placeRotation;
+        //placeRotation = Quaternion.Euler(0, 0, 0);
+        transform.parent = null;
+        _holdCharacter = null;
     }
 }

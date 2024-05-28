@@ -56,7 +56,6 @@ public class Extinguisher : IHoldable
 
         // 저장한 위치와 회전으로 소화기 배치
         transform.position = dropPosition;
-        Debug.Log($"unHold transform set :{transform.position}");
         Quaternion additionalRotation = Quaternion.Euler(0, -90, 0);
         Quaternion finalRotation = dropRotation * additionalRotation;
 
@@ -74,8 +73,8 @@ public class Extinguisher : IHoldable
     {
         transform.parent = null;
         transform.position = placePosition;
-       // Quaternion additionalRotation = Quaternion.Euler(0, -90, 0);
-        //Quaternion finalRotation = placeRotation * additionalRotation;
+        Quaternion additionalRotation = Quaternion.Euler(0, -90, 0);
+
 
         _powderEffect.Stop();
         _holdCharacter = null;
