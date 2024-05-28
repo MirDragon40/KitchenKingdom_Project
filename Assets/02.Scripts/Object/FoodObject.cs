@@ -10,12 +10,16 @@ public enum FoodState
     Cut,
 }
 
+
+
 public class FoodObject : IHoldable
 {
 
     private EItemType itemType = EItemType.Food;
 
     public FoodState State;
+
+    public FoodType FoodType;
 
 
     public override Vector3 DropOffset => new Vector3(0.3f, 0.1f, 0f);

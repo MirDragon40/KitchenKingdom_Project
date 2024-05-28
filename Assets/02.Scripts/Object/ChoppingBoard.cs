@@ -1,12 +1,13 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class ChoppingBoard : MonoBehaviour
 {
     public Animator Animator;
-
     public Slider ProgressSlider;
 
     private Coroutine fillSliderCoroutine;
@@ -15,6 +16,13 @@ public class ChoppingBoard : MonoBehaviour
     private bool _isPossibleChopping = false;
 
     public Transform PlacePosition;
+
+    private GameObject currentFood;
+
+    public GameObject Item_Lettuce_Raw; // 처음 상태의 음식
+    public GameObject Item_Lettuce_Cutting; // 중간 상태의 음식
+    public GameObject Item_Lettuce_Cut; // 완전히 잘린 상태의 음식
+
 
     private void Awake()
     {
@@ -66,8 +74,15 @@ public class ChoppingBoard : MonoBehaviour
             }
         }
     }
-    
 
+    private void UpdateFoodPrefab(GameObject newPrefab)
+    {
+        if (currentFood != null)
+        {
+            Destroy(currentFood);
+        }
+        currentFood = Instantiate(newPrefab, PlacePosition.position, PlacePosition.rotation, PlacePosition);
+    }
 
     private IEnumerator FillSliderOverTime(float duration)
     {
@@ -75,8 +90,23 @@ public class ChoppingBoard : MonoBehaviour
 
         while (elapsedTime < duration)
         {
+
             elapsedTime += Time.deltaTime;
-            ProgressSlider.value = Mathf.Clamp01(elapsedTime / duration);
+            float progress = Mathf.Clamp01(elapsedTime / duration);
+            ProgressSlider.value = progress;
+
+
+            // 음식 오브젝트 변경
+            if (progress >= 0.33f && progress < 0.66f)
+            {
+                UpdateFoodPrefab(Item_Lettuce_Cutting);
+            }
+            else if (progress >= 0.66f)
+            {
+                UpdateFoodPrefab(Item_Lettuce_Cut);
+            }
+
+
             yield return null;
         }
 
