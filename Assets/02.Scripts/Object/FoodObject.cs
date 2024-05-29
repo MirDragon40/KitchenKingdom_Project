@@ -79,6 +79,7 @@ public class FoodObject : IHoldable, IThrowable
     public override void Place(Transform place)
     {
         transform.position = place.position;
+        _rigidbody.isKinematic = true;
         //transform.rotation = placeRotation;
         transform.parent = place;
         _holdCharacter = null;
