@@ -19,8 +19,6 @@ public class MaterialColorChange: MonoBehaviour
 
     public Image PlusImageUI;
 
-    public Coke Coke;
-
     private void Start()
     {
         
@@ -30,7 +28,7 @@ public class MaterialColorChange: MonoBehaviour
     {
         if (_isReached) 
         {
-            if (Input.GetKeyDown(KeyCode.I))
+            if (Input.GetKeyDown(KeyCode.Space))
             {
                 RendererThisMaterial.material = ThisMaterial;
 

@@ -11,33 +11,21 @@ public class Coke : IHoldable
     public Material ChangeCokeMaterial;
     public GameObject CokeParticle;
 
-    public override Vector3 DropOffset => new Vector3(-0.5f, 0f, 0f);
 
+    public override Vector3 DropOffset => new Vector3(-0.5f, 0f, 0f);
 
     private void Start()
     {
-        CokeObject.gameObject.SetActive(false);
-        CokeParticle.gameObject.SetActive(false);
+        CokePour();
     }
-
-    private void Update()
-    {
-        if (Input.GetKeyUp(KeyCode.Escape))
-        {
-            CokePour();
-        }
-    }
-
+   
     // 콜라 컵이 생성되며 색 변경됨
     public void CokePour() 
     {
-        CokeObject.gameObject.SetActive(true);
         StartCoroutine(CokePourCoroutine());
     }
 
-
-
-    // 1초뒤에 파티클 생김 3초뒤에 파티클 없어짐 콜라 따라진 것처럼 보이게 (시간변경가능)
+    // 1초뒤에 파티클 생김 3초뒤에 파티클 없어짐 -> 콜라 따라진 것처럼 보이게 (시간변경가능)
     private IEnumerator CokePourCoroutine() 
     {
         yield return new WaitForSeconds(1f);
@@ -46,10 +34,6 @@ public class Coke : IHoldable
         CokeParticle.gameObject.SetActive(false);
         CokeRenderer.material = ChangeCokeMaterial;
     }
-
-
-
-
 
     public override void Hold(Character character, Transform handTransform)
     {
