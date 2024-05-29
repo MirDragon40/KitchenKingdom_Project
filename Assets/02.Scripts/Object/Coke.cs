@@ -35,6 +35,8 @@ public class Coke : IHoldable
         StartCoroutine(CokePourCoroutine());
     }
 
+
+
     // 1초뒤에 파티클 생김 3초뒤에 파티클 없어짐 콜라 따라진 것처럼 보이게 (시간변경가능)
     private IEnumerator CokePourCoroutine() 
     {
@@ -45,6 +47,10 @@ public class Coke : IHoldable
         CokeRenderer.material = ChangeCokeMaterial;
     }
 
+
+
+
+
     public override void Hold(Character character, Transform handTransform)
     {
         _holdCharacter = character;
@@ -54,7 +60,7 @@ public class Coke : IHoldable
         transform.parent = handTransform;
         transform.localPosition = new Vector3(0, 0.4F, 0.5F);
         transform.localRotation = Quaternion.identity;
-    }
+    } 
 
     public override void UnHold(Vector3 dropPosition, Quaternion dropRotation)
     {
