@@ -19,7 +19,7 @@ public abstract class IHoldable : MonoBehaviour
     
     public bool IsHold => _holdCharacter != null;
 
-    public bool Placeable = false;
+    //public bool Placeable = false;
 
     
     public abstract void Hold(Character character, Transform handTransform);

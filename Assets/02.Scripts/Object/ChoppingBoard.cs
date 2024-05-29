@@ -13,22 +13,23 @@ public class ChoppingBoard : CookStand
     private void Awake()
     {
         ChoppingProgressSlider.value = 0f; // 슬라이더 초기화
+        ChoppingProgressSlider.gameObject.SetActive(false);
     }
 
-    private void Update()
+    protected override void Update()
     {
-        if (_isPossibleChopping && onChoppingBoard.FoodObject != null)
+        base.Update();
+
+        if (_isPossibleChopping && onChoppingBoard.FoodOnBoard != null)
         {
             if (Input.GetKeyDown(KeyCode.LeftControl))
             {
-                Animator.SetBool("Chopping", true);
-
                 if (fillSliderCoroutine != null)
                 {
                     StopCoroutine(fillSliderCoroutine);
                 }
-
                 onChoppingBoard.FoodObject.StartCooking();
+                ChoppingProgressSlider.gameObject.SetActive(true);
                 fillSliderCoroutine = StartCoroutine(FillSliderOverTime(3.0f));
             }
         }
@@ -40,13 +41,22 @@ public class ChoppingBoard : CookStand
         {
             _isPossibleChopping = true;
         }
+
+        if (other.CompareTag("Player") && !IsOccupied)
+        {
+            CharacterHoldAbility characterHoldAbility = other.GetComponent<CharacterHoldAbility>();
+            if (characterHoldAbility != null)
+            {
+                characterHoldAbility.IsPlaceable = true;
+                characterHoldAbility.PlacePosition = PlacePosition;
+            }
+        }
     }
 
     private void OnTriggerExit(Collider other)
     {
         if (other.CompareTag("Player") && _isPossibleChopping)
         {
-            Animator.SetBool("Chopping", false);
             _isPossibleChopping = false;
 
             if (fillSliderCoroutine != null)
@@ -57,6 +67,19 @@ public class ChoppingBoard : CookStand
             if (onChoppingBoard.FoodObject != null)
             {
                 onChoppingBoard.FoodObject.StopCooking();
+                
+            }
+
+            Animator.SetBool("Chopping", false); // 슬라이더가 진행되지 않을 때 애니메이션을 중지
+        }
+
+        if (other.CompareTag("Player"))
+        {
+            CharacterHoldAbility characterHoldAbility = other.GetComponent<CharacterHoldAbility>();
+            if (characterHoldAbility != null)
+            {
+                characterHoldAbility.IsPlaceable = false;
+                characterHoldAbility.PlacePosition = null;
             }
         }
     }
@@ -67,6 +90,8 @@ public class ChoppingBoard : CookStand
 
         if (foodObject == null)
             yield break;
+
+        Animator.SetBool("Chopping", true); // 슬라이더가 진행될 때 애니메이션을 시작
 
         float startProgress = foodObject.CookProgress;
         float elapsedTime = startProgress * duration;
@@ -91,7 +116,8 @@ public class ChoppingBoard : CookStand
             yield return null;
         }
 
-        Animator.SetBool("Chopping", false);
+        Animator.SetBool("Chopping", false); // 슬라이더가 완료되면 애니메이션을 중지
         foodObject.StopCooking();
+        ChoppingProgressSlider.gameObject.SetActive(false);
     }
 }

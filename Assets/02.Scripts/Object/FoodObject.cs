@@ -21,17 +21,19 @@ public class FoodObject : IHoldable, IThrowable
 
 
     public GameObject FoodPrefab1;
-    public GameObject FoodPrefab2; 
+    public GameObject FoodPrefab2;
     public GameObject FoodPrefab3;
 
     private Rigidbody _rigidbody;
 
     [HideInInspector]
     public bool IsCooking = false;
-
+    public bool IsGrillable = false;
     public float CookProgress;
 
     private Coroutine cookingCoroutine;
+
+    private BoxCollider colliderThis;
 
 
     public override Vector3 DropOffset => new Vector3(0.3f, 0.1f, 0f);
@@ -42,14 +44,24 @@ public class FoodObject : IHoldable, IThrowable
 
     private void Awake()
     {
+
         State = FoodState.Raw;
         _rigidbody = GetComponent<Rigidbody>();
+        colliderThis = GetComponent<BoxCollider>();
 
         CookProgress = 0f;
+        if (FoodType == FoodType.Lettuce)
+        {
+            FoodPrefab1.SetActive(true);
+            FoodPrefab2.SetActive(false);
+            FoodPrefab3.SetActive(false);
+        }
+        if (FoodType == FoodType.Patty && State == FoodState.Raw)
+        {
+            IsGrillable = true;
+        }
 
-        FoodPrefab1.SetActive(true);
-        FoodPrefab2.SetActive(false);
-        FoodPrefab3.SetActive(false);
+
     }
 
     private void Update()
@@ -72,7 +84,6 @@ public class FoodObject : IHoldable, IThrowable
         transform.localRotation = Quaternion.identity;
     }
 
-    
 
     public override void UnHold(Vector3 dropPosition, Quaternion dropRotation)
     {
@@ -114,6 +125,8 @@ public class FoodObject : IHoldable, IThrowable
     {
         while (IsCooking && State == FoodState.Raw)  // 잘리지 않은 상태에서의 양배추만 썰기가 가능하도록 설정
         {
+            colliderThis.enabled = false;
+
             CookProgress += Time.deltaTime / 3f; // 3초동안 CookProgress 증가
             CookProgress = Mathf.Clamp(CookProgress, 0f, 1f);
 
@@ -135,7 +148,8 @@ public class FoodObject : IHoldable, IThrowable
             yield return null;
         }
 
-        cookingCoroutine = null; 
+        cookingCoroutine = null;
+        colliderThis.enabled = true;
     }
 
 
