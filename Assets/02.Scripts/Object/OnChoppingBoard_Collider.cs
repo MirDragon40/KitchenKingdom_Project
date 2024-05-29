@@ -22,6 +22,8 @@ public class OnChoppingBoard_Collider : MonoBehaviour
                 FoodObject = foodObject; // FoodObject 할당
             }
         }
+
+
     }
 
     private void OnTriggerExit(Collider other)

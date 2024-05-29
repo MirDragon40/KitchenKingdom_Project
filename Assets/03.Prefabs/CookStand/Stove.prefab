@@ -120,9 +120,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1e7c07ea50250647879eb87cc6c20b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  CookType: 0
   RendererThisMaterial: {fileID: 2751321017002781971}
   ThisMaterial: {fileID: 2100000, guid: 2a4628a3786b87e44aa969367b59f5b8, type: 2}
   ChangeMaterial: {fileID: 2100000, guid: 76a2fc3e91ab917438620a1ceed1bb8c, type: 2}
+  PlusImageUI: {fileID: 0}
 --- !u!65 &2646201070075244070
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -142,5 +144,5 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.20250408, y: 1.1248447, z: 1.4741822}
-  m_Center: {x: 0.048402842, y: 0.56242234, z: 0.20013535}
+  m_Size: {x: 0.64150983, y: 1.1248447, z: 1.4741822}
+  m_Center: {x: -0.00080262125, y: 0.56242234, z: 0.20013535}
