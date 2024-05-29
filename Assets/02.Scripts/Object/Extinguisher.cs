@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Mathematics;
@@ -6,17 +7,18 @@ using UnityEngine;
 public class Extinguisher : IHoldable
 {
     private ParticleSystem _powderEffect;
-
+    public bool isPress = false;
 
     public override Vector3 DropOffset => new Vector3(0.3f, 0, 0);
     private void Awake()
     {
         _powderEffect = GetComponentInChildren<ParticleSystem>();
+        
+
     }
     public override void Hold(Character character, Transform handTransform)
     {
         _holdCharacter = character;
-        Debug.Log(_holdCharacter.name);
 
         // 각 아이템이 잡혔을 때 해줄 초기화 로직
         transform.parent = handTransform;
@@ -32,10 +34,14 @@ public class Extinguisher : IHoldable
         {
             Debug.Log("Shot");
             _powderEffect.Play();
+            isPress = true;
+
+
         }
         if (Input.GetKeyUp(KeyCode.LeftControl))
         {
             _powderEffect.Stop();
+            isPress = false;
         }
 
     }
@@ -79,5 +85,21 @@ public class Extinguisher : IHoldable
         _powderEffect.Stop();
         _holdCharacter = null;
 
+    }
+
+    public void A(Collider other)
+    {
+        if (!isPress)
+            return;
+
+        if (other.CompareTag("Fire"))
+        {
+            Debug.Log(other.gameObject.name);
+            var fireEffect = other.GetComponent<ParticleSystem>();
+            if (fireEffect != null)
+            {
+                fireEffect.Stop();
+            }
+        }
     }
 }

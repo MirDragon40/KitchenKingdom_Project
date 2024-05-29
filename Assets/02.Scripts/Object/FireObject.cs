@@ -3,12 +3,12 @@ using UnityEngine;
 
 public class FireObject : MonoBehaviour
 {
-    public ParticleSystem _fireEffect;
-    public Collider extinguisherCollider;
+    public ParticleSystem fireEffect;
+    public ParticleSystem powderEffect; // 분말 파티클 추가
 
     private void Awake()
     {
-        _fireEffect = GetComponentInChildren<ParticleSystem>();
+        fireEffect = GetComponentInChildren<ParticleSystem>();
     }
 
     void Update()
@@ -27,28 +27,32 @@ public class FireObject : MonoBehaviour
     private IEnumerator StartFireCoroutine(float delay)
     {
         yield return new WaitForSeconds(delay);
-        _fireEffect.Play();
+        fireEffect.Play();
         // 추가적인 화재 발생 로직을 여기에 작성
     }
 
     public void Extinguish()
     {
-        _fireEffect.Stop();
+        fireEffect.Stop();
         Debug.Log("STOP");
     }
 
-   
+    // 분말 파티클과 불이 닿았을 때 처리
     void OnParticleCollision(GameObject other)
     {
-
+        if (other.CompareTag("Powder"))
+        {
+            // 불 파티클을 중지시킴
+            fireEffect.Stop();
+        }
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other == extinguisherCollider.gameObject)
+        if (other.CompareTag("Extinguisher"))
         {
             Extinguish();
-            Debug.Log(00);
+            Debug.Log("00");
         }
     }
 }
