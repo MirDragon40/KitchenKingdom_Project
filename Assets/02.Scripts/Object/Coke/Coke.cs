@@ -11,6 +11,7 @@ public class Coke : IHoldable
     public Material ChangeCokeMaterial;
     public GameObject CokeParticle;
 
+    private bool _isCokeComplete = false;
 
     public override Vector3 DropOffset => new Vector3(-0.5f, 0f, 0f);
 
@@ -33,17 +34,21 @@ public class Coke : IHoldable
         yield return new WaitForSeconds(3f);
         CokeParticle.gameObject.SetActive(false);
         CokeRenderer.material = ChangeCokeMaterial;
+        _isCokeComplete = true;
     }
 
     public override void Hold(Character character, Transform handTransform)
     {
-        _holdCharacter = character;
+        if(_isCokeComplete) 
+        {
+            _holdCharacter = character;
 
-        // 각 아이템이 잡혔을 때 해줄 초기화 로직
-        // 찾은 음식을 플레이어의 손 위치로 이동시킴
-        transform.parent = handTransform;
-        transform.localPosition = new Vector3(0, 0.4F, 0.5F);
-        transform.localRotation = Quaternion.identity;
+            // 각 아이템이 잡혔을 때 해줄 초기화 로직
+            // 찾은 음식을 플레이어의 손 위치로 이동시킴
+            transform.parent = handTransform;
+            transform.localPosition = new Vector3(0, 0.4F, 0.5F);
+            transform.localRotation = Quaternion.identity;
+        }
     } 
 
     public override void UnHold(Vector3 dropPosition, Quaternion dropRotation)

@@ -8,16 +8,33 @@ public class MakeCoke : MonoBehaviour
 
     public Transform CokeSpawnPoint;
 
+    private bool _isPlayerAround;
+
+    public bool _isCokeOK = false;
+
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (_isPlayerAround && Input.GetKeyDown(KeyCode.I)) 
         {
-            SpawnCoke();
+            
+            if (!_isCokeOK) 
+            {
+                SpawnCoke();
+            }
         }
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player")) 
+        {
+            _isPlayerAround = true;
+        }
+    }
+
     private void SpawnCoke() 
     {
         Instantiate(CokePrefab, CokeSpawnPoint);
+        _isCokeOK = true;
     }
-
 }
