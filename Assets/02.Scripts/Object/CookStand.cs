@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class CookStand : MonoBehaviour
 {
+
     // 플레이어가 들고있는 음식을 PlacePosition위에 올려놓음
     public Transform PlacePosition;
 

@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class ChoppingBoard : MonoBehaviour
+public class ChoppingBoard : CookStand
 {
     public Animator Animator;
 
@@ -10,7 +10,6 @@ public class ChoppingBoard : MonoBehaviour
 
     private bool _isPossibleChopping = false;
 
-    public Transform PlacePosition;
     public CuttingAnimation cuttingAnimation; // CuttingAnimation 스크립트를 참조하는 변수 추가
 
     public OnChoppingBoard_Collider onChoppingBoard;
