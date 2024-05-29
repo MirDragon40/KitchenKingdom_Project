@@ -4585,7 +4585,8 @@ PrefabInstance:
       propertyPath: m_PresetInfoIsWorld
       value: 1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 5421768714728427877, guid: 596fe3a83e79c75418b0b120934e8209, type: 3}
     m_RemovedGameObjects:
     - {fileID: 1308314135588755373, guid: 596fe3a83e79c75418b0b120934e8209, type: 3}
     m_AddedGameObjects: []
@@ -13373,7 +13374,6 @@ MonoBehaviour:
   ThisMaterial: {fileID: 2100000, guid: 6493a5714a5eddc45bb33d006de5b93e, type: 2}
   ChangeMaterial: {fileID: 2100000, guid: 76a2fc3e91ab917438620a1ceed1bb8c, type: 2}
   PlusImageUI: {fileID: 0}
-  Coke: {fileID: 0}
 --- !u!222 &8014551742061780403
 CanvasRenderer:
   m_ObjectHideFlags: 0

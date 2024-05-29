@@ -14,9 +14,9 @@ GameObject:
   - component: {fileID: 495525460789581994}
   - component: {fileID: 923625881847771681}
   - component: {fileID: 1562647603641186976}
-  - component: {fileID: 107849720911665950}
+  - component: {fileID: 8793971931414919264}
   m_Layer: 0
-  m_Name: CookStand_B 1
+  m_Name: ChoppingBoard
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -149,8 +149,7 @@ MonoBehaviour:
   ThisMaterial: {fileID: 2100000, guid: 2a4628a3786b87e44aa969367b59f5b8, type: 2}
   ChangeMaterial: {fileID: 2100000, guid: 76a2fc3e91ab917438620a1ceed1bb8c, type: 2}
   PlusImageUI: {fileID: 0}
-  Coke: {fileID: 0}
---- !u!114 &107849720911665950
+--- !u!114 &8793971931414919264
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -159,11 +158,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 2983876176531163984}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8379dc7aabe7d8240a86201b9c269166, type: 3}
+  m_Script: {fileID: 11500000, guid: 6fef57a8ca2281f48a81d14ec44e4918, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   PlacePosition: {fileID: 2595893016094513626}
   PlacedItem: {fileID: 0}
+  ChoppingProgressSlider: {fileID: 2484539774823390766}
+  Animator: {fileID: 286258069410163707}
+  onChoppingBoard: {fileID: 7934171919170835107}
 --- !u!1 &3386784769351644402
 GameObject:
   m_ObjectHideFlags: 0
@@ -449,12 +451,20 @@ PrefabInstance:
       value: 1.3401351
       objectReference: {fileID: 0}
     - target: {fileID: 7153005443899523287, guid: e310811b6d43e4b49910171a4d8104b7, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7153005443899523287, guid: e310811b6d43e4b49910171a4d8104b7, type: 3}
       propertyPath: m_Center.y
       value: -0.29581136
       objectReference: {fileID: 0}
     - target: {fileID: 7153005443899523287, guid: e310811b6d43e4b49910171a4d8104b7, type: 3}
       propertyPath: m_Center.z
       value: 0.31312633
+      objectReference: {fileID: 0}
+    - target: {fileID: 7967252919745577370, guid: e310811b6d43e4b49910171a4d8104b7, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7967252919745577370, guid: e310811b6d43e4b49910171a4d8104b7, type: 3}
       propertyPath: ProgressSlider
@@ -480,6 +490,11 @@ PrefabInstance:
       addedObject: {fileID: 2782601193524967283}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e310811b6d43e4b49910171a4d8104b7, type: 3}
+--- !u!95 &286258069410163707 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 7448365824206053986, guid: e310811b6d43e4b49910171a4d8104b7, type: 3}
+  m_PrefabInstance: {fileID: 7252228559949662617}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &2212674242853587031 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8796067680312345038, guid: e310811b6d43e4b49910171a4d8104b7, type: 3}
