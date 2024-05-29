@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -14,12 +15,12 @@ public class CharacterHoldAbility : CharacterAbility
     public IHoldable HoldableItem;
    // private Transform _placeableSurface;
 
-    public bool IsPlaceable =false;
+    public bool IsPlaceable = false;
     public bool IsHolding => HoldableItem != null;
 
     public Transform PlacePosition = null;
 
-
+    private bool nearTrashBin = false;
 
     void Start()
     {
@@ -28,17 +29,6 @@ public class CharacterHoldAbility : CharacterAbility
 
     private void LateUpdate()
     {
-        /*        if (Input.GetKeyDown(KeyCode.Space))
-                {
-                    if (!IsHolding)
-                    {
-                        PickUp();
-                    }
-                    else
-                    {
-                        Drop();
-                    }
-                }*/
         if (Input.GetKeyDown(KeyCode.Space))
         {
             if (!IsHolding)
@@ -53,13 +43,20 @@ public class CharacterHoldAbility : CharacterAbility
                 }
                 else
                 {
-                    Drop();
+                    if (nearTrashBin)
+                    {
+                        DropFood();
+                    }
+                    else
+                    {
+                        Drop();
+                    }
                 }
             }
         }
     }
-  
-   
+
+
     public void PickUp()
     {
         // 들고 있는 음식이 있으면 아무 작업도 수행하지 않음
@@ -98,26 +95,35 @@ public class CharacterHoldAbility : CharacterAbility
             return;
         }
 
-        // 부모 해제 전에 현재 위치와 회전을 저장
         Vector3 dropPosition = handTransform.position + transform.forward * HoldableItem.DropOffset.x + Vector3.up * HoldableItem.DropOffset.y;
         dropPosition.y -= 0.5f;
-        Quaternion dropRotation = handTransform.rotation; /** Quaternion.Euler(-90, 0, 0);*/ // 손의 회전 + 90도 회전
+        Quaternion dropRotation = handTransform.rotation;
 
         HoldableItem.UnHold(dropPosition, dropRotation);
+        HoldableItem = null;
 
-
-         HoldableItem = null;
-
-        // 애니메이션 정지
         animator.SetBool("Carry", false);
-    }
 
+    }
     // 음식 버린후 초기화
+
+    private void DropFood()
+    {
+        if (HoldableItem is FoodObject)
+        {
+            FoodTrashDrop();
+        }
+    }
     public void FoodTrashDrop()
     {
-        HoldableItem = null;
-        animator.SetBool("Carry", false);
+        if (HoldableItem is FoodObject food)
+        {
+            food.Destroy();
+            HoldableItem = null;
+            animator.SetBool("Carry", false);
+        }
     }
+
 
     void Place()
     {
@@ -126,9 +132,14 @@ public class CharacterHoldAbility : CharacterAbility
             return;
         }
 
-        Quaternion placeRotation = Quaternion.identity;
+        //Quaternion placeRotation = Quaternion.identity;
         HoldableItem.Place(PlacePosition);
         HoldableItem = null;
         animator.SetBool("Carry", false);
     }
+    public void SetNearTrashBin(bool value)
+    {
+        nearTrashBin = value;
+    }
+
 }
