@@ -6,19 +6,25 @@ public class TrashBin : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        // 플레이어 가까워짐
         if (other.CompareTag("Player"))
         {
             _nearbyCharacterHoldAbility = other.GetComponent<CharacterHoldAbility>();
+            if (_nearbyCharacterHoldAbility != null)
+            {
+                _nearbyCharacterHoldAbility.SetNearTrashBin(true);
+            }
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        // 플레이어 멀어짐
         if (other.CompareTag("Player"))
         {
-            _nearbyCharacterHoldAbility = null;
+            if (_nearbyCharacterHoldAbility != null)
+            {
+                _nearbyCharacterHoldAbility.SetNearTrashBin(false);
+                _nearbyCharacterHoldAbility = null;
+            }
         }
     }
 
@@ -37,10 +43,9 @@ public class TrashBin : MonoBehaviour
             return;
         }
 
-        FoodObject food = _nearbyCharacterHoldAbility.GetComponentInChildren<FoodObject>();
-        if (food != null)
+        // 음식일 때만 Drop 메서드를 호출
+        if (_nearbyCharacterHoldAbility.HoldableItem is FoodObject)
         {
-            food.Dispose();
             _nearbyCharacterHoldAbility.FoodTrashDrop();
         }
     }
