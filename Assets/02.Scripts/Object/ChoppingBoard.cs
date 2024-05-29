@@ -1,27 +1,23 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ChoppingBoard : CookStand
 {
+    public Slider ChoppingProgressSlider;
     public Animator Animator;
-
     private Coroutine fillSliderCoroutine;
-    private float elapsedTime;
-
     private bool _isPossibleChopping = false;
-
-    public CuttingAnimation cuttingAnimation; // CuttingAnimation 스크립트를 참조하는 변수 추가
-
     public OnChoppingBoard_Collider onChoppingBoard;
 
     private void Awake()
     {
-        // 슬라이더 관련 초기화 제거
+        ChoppingProgressSlider.value = 0f; // 슬라이더 초기화
     }
 
     private void Update()
     {
-        if (_isPossibleChopping)
+        if (_isPossibleChopping && onChoppingBoard.FoodObject != null)
         {
             if (Input.GetKeyDown(KeyCode.LeftControl))
             {
@@ -32,15 +28,15 @@ public class ChoppingBoard : CookStand
                     StopCoroutine(fillSliderCoroutine);
                 }
 
+                onChoppingBoard.FoodObject.StartCooking();
                 fillSliderCoroutine = StartCoroutine(FillSliderOverTime(3.0f));
-                cuttingAnimation.StartCuttingAnimation(3.0f); // CuttingAnimation의 슬라이더 애니메이션 시작
             }
         }
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player") && onChoppingBoard.FoodOnBoard != null )
+        if (other.CompareTag("Player") && onChoppingBoard.FoodOnBoard != null)
         {
             _isPossibleChopping = true;
         }
@@ -57,21 +53,45 @@ public class ChoppingBoard : CookStand
             {
                 StopCoroutine(fillSliderCoroutine);
             }
-            cuttingAnimation.StopCuttingAnimation(); // CuttingAnimation의 슬라이더 애니메이션 중지
+
+            if (onChoppingBoard.FoodObject != null)
+            {
+                onChoppingBoard.FoodObject.StopCooking();
+            }
         }
     }
-    
+
     private IEnumerator FillSliderOverTime(float duration)
     {
-        // 슬라이더 관련 로직 제거
+        FoodObject foodObject = onChoppingBoard.FoodObject;
+
+        if (foodObject == null)
+            yield break;
+
+        float startProgress = foodObject.CookProgress;
+        float elapsedTime = startProgress * duration;
 
         while (elapsedTime < duration)
         {
+            if (!foodObject.IsCooking)
+            {
+                yield return null;
+                continue;
+            }
+
             elapsedTime += Time.deltaTime;
+            foodObject.CookProgress = Mathf.Clamp01(elapsedTime / duration);
+            ChoppingProgressSlider.value = foodObject.CookProgress;
+
+            if (foodObject.CookProgress >= 1f)
+            {
+                break;
+            }
+
             yield return null;
         }
 
         Animator.SetBool("Chopping", false);
-        elapsedTime = 0f; // 초기화
+        foodObject.StopCooking();
     }
 }
