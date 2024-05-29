@@ -88,7 +88,7 @@ public class FoodObject : IHoldable, IThrowable
 
     }
 
-    public void Dispose()
+    public void Destroy()
     {
         Destroy(gameObject);
     }

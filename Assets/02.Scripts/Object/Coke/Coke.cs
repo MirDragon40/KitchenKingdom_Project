@@ -11,33 +11,26 @@ public class Coke : IHoldable
     public Material ChangeCokeMaterial;
     public GameObject CokeParticle;
 
-    public override Vector3 DropOffset => new Vector3(-0.5f, 0f, 0f);
+    public bool _isCokeComplete = false;
 
+    public MakeCoke MakeCoke;
+
+    public override Vector3 DropOffset => new Vector3(-0.5f, 0f, 0f);
 
     private void Start()
     {
-        CokeObject.gameObject.SetActive(false);
-        CokeParticle.gameObject.SetActive(false);
-    }
+        MakeCoke = GetComponentInParent<MakeCoke>();
 
-    private void Update()
-    {
-        if (Input.GetKeyUp(KeyCode.Escape))
-        {
-            CokePour();
-        }
+        CokePour();
     }
-
+   
     // 콜라 컵이 생성되며 색 변경됨
     public void CokePour() 
     {
-        CokeObject.gameObject.SetActive(true);
         StartCoroutine(CokePourCoroutine());
     }
 
-
-
-    // 1초뒤에 파티클 생김 3초뒤에 파티클 없어짐 콜라 따라진 것처럼 보이게 (시간변경가능)
+    // 1초뒤에 파티클 생김 3초뒤에 파티클 없어짐 -> 콜라 따라진 것처럼 보이게 (시간변경가능)
     private IEnumerator CokePourCoroutine() 
     {
         yield return new WaitForSeconds(1f);
@@ -45,21 +38,23 @@ public class Coke : IHoldable
         yield return new WaitForSeconds(3f);
         CokeParticle.gameObject.SetActive(false);
         CokeRenderer.material = ChangeCokeMaterial;
+        _isCokeComplete = true;
     }
-
-
-
-
 
     public override void Hold(Character character, Transform handTransform)
     {
-        _holdCharacter = character;
+        if(_isCokeComplete) 
+        {
+            _holdCharacter = character;
 
-        // 각 아이템이 잡혔을 때 해줄 초기화 로직
-        // 찾은 음식을 플레이어의 손 위치로 이동시킴
-        transform.parent = handTransform;
-        transform.localPosition = new Vector3(0, 0.4F, 0.5F);
-        transform.localRotation = Quaternion.identity;
+            // 각 아이템이 잡혔을 때 해줄 초기화 로직
+            // 찾은 음식을 플레이어의 손 위치로 이동시킴
+            transform.parent = handTransform;
+            transform.localPosition = new Vector3(0, 0.4F, 0.5F);
+            transform.localRotation = Quaternion.identity;
+
+            MakeCoke._isCokeGenerate = false;
+        }
     } 
 
     public override void UnHold(Vector3 dropPosition, Quaternion dropRotation)
