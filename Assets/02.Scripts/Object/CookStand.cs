@@ -5,14 +5,25 @@ using UnityEngine;
 
 public class CookStand : MonoBehaviour
 {
+
     // 플레이어가 들고있는 음식을 PlacePosition위에 올려놓음
     public Transform PlacePosition;
+    public GameObject PlacedItem;
 
     // 플레이어의 정보를 받아올 변수
     private GameObject player;
 
     private void Update()
     {
+        if (PlacePosition.childCount != 0)
+        {
+            PlacedItem = PlacePosition.transform.GetChild(0).gameObject;
+
+        }
+        else
+        {
+            PlacedItem = null;
+        }
           /* if (_isPlaceable && Input.GetKeyDown(KeyCode.Space))
          {
              // 플레이어의 자식들 중에서 Food 태그를 가진 오브젝트를 찾음
@@ -45,7 +56,7 @@ public class CookStand : MonoBehaviour
              }
          }
         */
-
+          
     }
 
     void OnTriggerEnter(Collider other)

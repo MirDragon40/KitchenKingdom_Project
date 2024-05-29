@@ -259,6 +259,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f9e29e8222e1e94c9628889aad41cd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  IsCuttable: 0
+  FoodOnBoard: {fileID: 0}
 --- !u!1001 &7252228559949662617
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -267,6 +269,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 8983943682632534526}
     m_Modifications:
+    - target: {fileID: 1998508730589288917, guid: e310811b6d43e4b49910171a4d8104b7, type: 3}
+      propertyPath: m_PresetInfoIsWorld
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4226891419552055680, guid: e310811b6d43e4b49910171a4d8104b7, type: 3}
       propertyPath: m_Name
       value: Knife_Board
@@ -331,8 +337,17 @@ PrefabInstance:
       propertyPath: m_Center.z
       value: 0.31312633
       objectReference: {fileID: 0}
+    - target: {fileID: 7967252919745577370, guid: e310811b6d43e4b49910171a4d8104b7, type: 3}
+      propertyPath: ProgressSlider
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7967252919745577370, guid: e310811b6d43e4b49910171a4d8104b7, type: 3}
+      propertyPath: onChoppingBoard
+      value: 
+      objectReference: {fileID: 7934171919170835107}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 8542492545448271412, guid: e310811b6d43e4b49910171a4d8104b7, type: 3}
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 8796067680312345038, guid: e310811b6d43e4b49910171a4d8104b7, type: 3}
       insertIndex: -1

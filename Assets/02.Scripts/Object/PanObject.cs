@@ -6,6 +6,7 @@ using UnityEngine;
 
 public class PanObject : IHoldable
 {
+    public Transform PanPlacePositon;
     public override Vector3 DropOffset => new Vector3(0.3f, 0.1f, 0f);
 
     public override void Hold(Character character, Transform handTransform)
@@ -33,11 +34,11 @@ public class PanObject : IHoldable
     {
 
             transform.position = place.position;
-           // transform.rotation = place.rotation;
+            Quaternion panplaceRotation = Quaternion.Euler(-90, 0, 180);
+            transform.rotation = place.rotation * panplaceRotation;
             transform.parent = place;
 
             //transform.rotation = placeRotation;
-            //Quaternion panplaceRotation = Quaternion.Euler(-90, 0, 180);
             _holdCharacter = null;
         
     }
