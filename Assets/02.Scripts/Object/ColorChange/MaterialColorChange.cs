@@ -6,7 +6,8 @@ using UnityEngine.UI;
 public enum CookingType
 {
     CookStand,
-    Stove
+    Stove,
+    SodaMachine
 }
 public class MaterialColorChange: MonoBehaviour
 {
@@ -28,6 +29,7 @@ public class MaterialColorChange: MonoBehaviour
     {
         if (_isReached) 
         {
+            // 임시
             if (Input.GetKeyDown(KeyCode.Space))
             {
                 RendererThisMaterial.material = ThisMaterial;
@@ -37,8 +39,10 @@ public class MaterialColorChange: MonoBehaviour
                 {
                     PlusImageUI.gameObject.SetActive(false);
                 }
-
-               // Coke.CokePour();
+            }
+            else if(Input.GetKeyDown(KeyCode.LeftControl) && CookType == CookingType.SodaMachine) 
+            {
+                RendererThisMaterial.material = ThisMaterial;
             }
         }
     }
