@@ -30,6 +30,7 @@ public class Coke : IHoldable
     private IEnumerator CokePourCoroutine() 
     {
         CokeCollider.enabled = false;
+
         CokeParticle.gameObject.SetActive(false);
 
         yield return new WaitForSeconds(1f);
@@ -39,7 +40,7 @@ public class Coke : IHoldable
         CokeParticle.gameObject.SetActive(false);
 
         CokeRenderer.material = ChangeCokeMaterial;
-
+        yield return new WaitForSeconds(0.5f);
         CokeCollider.enabled = true;
     }
 
