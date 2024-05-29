@@ -3,32 +3,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Stove : MonoBehaviour
+public class Stove : CookStand
 {
-    public Transform PlacePosition;
-    void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("Player"))
-        {
-            CharacterHoldAbility characterHoldAbility = other.GetComponent<CharacterHoldAbility>();
-            if (characterHoldAbility != null)
-            {
-                characterHoldAbility.IsPlaceable = true;
-                characterHoldAbility.PlacePosition = PlacePosition;
-            }
-        }
-    }
+    public GameObject PlusUI;
+    public PanObject PlacedPan = null;
+    public bool IsPanPlaced => PlacedPan != null;
 
-    void OnTriggerExit(Collider other)
+    private void Update()
     {
-        if (other.CompareTag("Player"))
+
+        PlacedPan = PlacePosition.GetComponentInChildren<PanObject>();
+        
+        if (IsPanPlaced && PlusUI.activeSelf)
         {
-            CharacterHoldAbility characterHoldAbility = other.GetComponent<CharacterHoldAbility>();
-            if (characterHoldAbility != null)
-            {
-                characterHoldAbility.IsPlaceable = false;
-                characterHoldAbility.PlacePosition = null;
-            }
+            PlusUI.SetActive(false);
+        }
+        else if (!IsPanPlaced && !PlusUI.activeSelf)
+        {
+            PlusUI.SetActive(true);
         }
     }
 
