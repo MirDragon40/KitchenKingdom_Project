@@ -67,7 +67,7 @@ public class CookStand : MonoBehaviour
           
     }
 
-    void OnTriggerEnter(Collider other)
+    protected virtual void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player") && !IsOccupied)
         {
@@ -80,7 +80,7 @@ public class CookStand : MonoBehaviour
         }
     }
 
-    void OnTriggerExit(Collider other)
+    protected virtual void OnTriggerExit(Collider other)
     {
         if (other.CompareTag("Player"))
         {

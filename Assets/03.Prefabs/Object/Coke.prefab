@@ -76,6 +76,7 @@ MonoBehaviour:
   ChangeCokeMaterial: {fileID: 2100000, guid: 5294e1b9f82eb50459540445986474b4, type: 2}
   CokeParticle: {fileID: 6245819853513931166}
   _isCokeComplete: 0
+  CokeCollider: {fileID: 7364024232130201408}
 --- !u!1 &6245819853513931166
 GameObject:
   m_ObjectHideFlags: 0

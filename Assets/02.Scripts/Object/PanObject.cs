@@ -2,14 +2,49 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.UI;
+
 
 
 public class PanObject : IHoldable
 {
     public Transform PanPlacePositon;
+    public FoodObject GrillingIngrediant;
+    public float GrillingTime = 5.0f;
+    public Slider GrillingSlider;
+    public BoxCollider BoxCollider;
+    public Stove MyStove;
+
+
     private Rigidbody _rigid;
     public override Vector3 DropOffset => new Vector3(0.3f, 0.1f, 0f);
 
+    private void Awake()
+    {
+        BoxCollider = GetComponent<BoxCollider>();
+    }
+    private void Update()
+    {
+        if (MyStove != null)
+        {
+           MyStove = GetComponentInParent<Stove>();
+        }
+        if(PanPlacePositon.childCount != 0)
+        {
+            if (PanPlacePositon.GetChild(0).TryGetComponent<FoodObject>(out GrillingIngrediant))
+            {
+                GrillingSlider.gameObject.SetActive(true);
+
+                GrillingIngrediant.CookProgress += Time.deltaTime / GrillingTime;
+                GrillingSlider.value = GrillingIngrediant.CookProgress;
+            }
+        }
+        else
+        {
+            GrillingIngrediant = null;
+            GrillingSlider.gameObject.SetActive(false);
+        }
+    }
     public override void Hold(Character character, Transform handTransform)
     {
         GetComponent<Rigidbody>().isKinematic = true;
@@ -45,6 +80,28 @@ public class PanObject : IHoldable
             _holdCharacter = null;
         
     }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (!other.CompareTag("Player"))
+        {
+            return;
+        }
+        IHoldable playerHoldingItem = other.GetComponent<CharacterHoldAbility>().HoldableItem;
+
+        if (playerHoldingItem.GetComponent<FoodObject>().IsGrillable)
+        {
+            Debug.Log("able to grill");
+            other.GetComponent<CharacterHoldAbility>().PlacePosition = PanPlacePositon;
+            other.GetComponent<CharacterHoldAbility>().IsPlaceable = true;
+        }
+        
+    }
+    private void OnTriggerExit(Collider other)
+    {
+        other.GetComponent<CharacterHoldAbility>().PlacePosition = null;
+        other.GetComponent<CharacterHoldAbility>().IsPlaceable = false;
+    }
+
 }
 
 

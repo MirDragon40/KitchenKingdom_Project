@@ -122,9 +122,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ItemType: 1
-  Placeable: 0
   State: 0
   FoodType: 2
+  FoodPrefab1: {fileID: 7949917558003115404}
+  FoodPrefab2: {fileID: 7949917558003115404}
+  FoodPrefab3: {fileID: 7949917558003115404}
+  IsCooking: 0
+  IsChoppable: 0
+  IsGrillable: 0
+  CookProgress: 0
 --- !u!65 &665714806910722407
 BoxCollider:
   m_ObjectHideFlags: 0
