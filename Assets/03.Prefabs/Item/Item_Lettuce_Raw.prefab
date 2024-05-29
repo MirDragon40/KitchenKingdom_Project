@@ -124,7 +124,7 @@ MonoBehaviour:
   ItemType: 1
   Placeable: 0
   State: 0
-  FoodType: 0
+  FoodType: 1
 --- !u!65 &3478648878840013737
 BoxCollider:
   m_ObjectHideFlags: 0
