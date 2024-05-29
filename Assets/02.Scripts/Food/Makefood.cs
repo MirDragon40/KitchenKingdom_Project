@@ -24,6 +24,7 @@ public class Makefood : MonoBehaviour
     public Animator animator;
 
     private float checkRange = 1f;
+
     public void Start()
     {
         animator = GetComponent<Animator>();

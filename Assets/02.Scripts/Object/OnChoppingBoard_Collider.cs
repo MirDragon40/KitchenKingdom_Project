@@ -8,7 +8,7 @@ public class OnChoppingBoard_Collider : MonoBehaviour
     public bool IsCuttable = false;
 
     public GameObject FoodOnBoard;
-
+    public FoodObject FoodObject { get; private set; } // FoodObject를 가져오는 프로퍼티 추가
 
     private void OnTriggerEnter(Collider other)
     {
@@ -18,8 +18,8 @@ public class OnChoppingBoard_Collider : MonoBehaviour
             if (foodObject.State == FoodState.Raw && foodObject.FoodType == FoodType.Lettuce)
             {
                 IsCuttable = true;
-
                 FoodOnBoard = other.gameObject;
+                FoodObject = foodObject; // FoodObject 할당
             }
         }
     }
@@ -29,9 +29,12 @@ public class OnChoppingBoard_Collider : MonoBehaviour
         if (other.CompareTag("Food"))
         {
             FoodObject foodObject = other.GetComponent<FoodObject>();
-            IsCuttable = false;
-            
-            FoodOnBoard = null; 
+            if (foodObject != null && foodObject == FoodOnBoard.GetComponent<FoodObject>())
+            {
+                IsCuttable = false;
+                FoodOnBoard = null;
+                FoodObject = null; // FoodObject 해제
+            }
         }
     }
 }

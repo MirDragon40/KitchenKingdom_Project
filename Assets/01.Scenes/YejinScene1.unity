@@ -229,6 +229,37 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 217297}
   m_Mesh: {fileID: -9195390934930376359, guid: e02978ccf9628c04da50a3e73c8f2929, type: 3}
+--- !u!1 &12942339
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 12942340}
+  m_Layer: 0
+  m_Name: CokeSpawnPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &12942340
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 12942339}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -1, z: -0, w: 0}
+  m_LocalPosition: {x: 0.15299988, y: 1.0078784, z: 0.16100001}
+  m_LocalScale: {x: 1, y: 1.3583267, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6385227217169348960}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &13183736
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4243,63 +4274,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5498556674941739244, guid: 61a5605c41609634bac5baf8ef0820f1, type: 3}
   m_PrefabInstance: {fileID: 1351838258}
   m_PrefabAsset: {fileID: 0}
---- !u!1001 &1449956586
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 1796028654022039200, guid: 501928fb08b948b4fbfd3c6d3857f8d4, type: 3}
-      propertyPath: m_Name
-      value: Coke (1)
-      objectReference: {fileID: 0}
-    - target: {fileID: 4630380822214011115, guid: 501928fb08b948b4fbfd3c6d3857f8d4, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 9.32
-      objectReference: {fileID: 0}
-    - target: {fileID: 4630380822214011115, guid: 501928fb08b948b4fbfd3c6d3857f8d4, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.743
-      objectReference: {fileID: 0}
-    - target: {fileID: 4630380822214011115, guid: 501928fb08b948b4fbfd3c6d3857f8d4, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 1.311
-      objectReference: {fileID: 0}
-    - target: {fileID: 4630380822214011115, guid: 501928fb08b948b4fbfd3c6d3857f8d4, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4630380822214011115, guid: 501928fb08b948b4fbfd3c6d3857f8d4, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4630380822214011115, guid: 501928fb08b948b4fbfd3c6d3857f8d4, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4630380822214011115, guid: 501928fb08b948b4fbfd3c6d3857f8d4, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4630380822214011115, guid: 501928fb08b948b4fbfd3c6d3857f8d4, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4630380822214011115, guid: 501928fb08b948b4fbfd3c6d3857f8d4, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4630380822214011115, guid: 501928fb08b948b4fbfd3c6d3857f8d4, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 501928fb08b948b4fbfd3c6d3857f8d4, type: 3}
 --- !u!1 &1459460027
 GameObject:
   m_ObjectHideFlags: 0
@@ -12222,6 +12196,7 @@ GameObject:
   - component: {fileID: 5248891001977111055}
   - component: {fileID: 6291789208837878984}
   - component: {fileID: 8012811691560007367}
+  - component: {fileID: 8012811691560007368}
   - component: {fileID: 8012811691560007366}
   m_Layer: 0
   m_Name: Soda_Machine_A
@@ -12714,7 +12689,8 @@ Transform:
   m_LocalPosition: {x: 9.478, y: 0, z: 1.472}
   m_LocalScale: {x: 1, y: 0.7362, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 12942340}
   m_Father: {fileID: 292883106}
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!1 &6388142860284538639
@@ -13384,6 +13360,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1780653220}
     m_Modifications:
+    - target: {fileID: 733676982916735899, guid: 3d66be16aa5aab845b5bca28c700603a, type: 3}
+      propertyPath: MakeCoke
+      value: 
+      objectReference: {fileID: 8012811691560007368}
     - target: {fileID: 733676982916735899, guid: 3d66be16aa5aab845b5bca28c700603a, type: 3}
       propertyPath: spawnPoint
       value: 
@@ -14068,6 +14048,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   handTransform: {fileID: 4501584601153720883}
+  HoldableItem: {fileID: 0}
   IsPlaceable: 0
   PlacePosition: {fileID: 0}
 --- !u!4 &7516219852905369984
@@ -14726,7 +14707,21 @@ MonoBehaviour:
   ThisMaterial: {fileID: 2100000, guid: 6493a5714a5eddc45bb33d006de5b93e, type: 2}
   ChangeMaterial: {fileID: 2100000, guid: 76a2fc3e91ab917438620a1ceed1bb8c, type: 2}
   PlusImageUI: {fileID: 0}
-  Coke: {fileID: 0}
+--- !u!114 &8012811691560007368
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6041353492771677146}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3070f9d9304981a46b7024bd8c29750e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CokePrefab: {fileID: 1796028654022039200, guid: 501928fb08b948b4fbfd3c6d3857f8d4, type: 3}
+  CokeSpawnPoint: {fileID: 12942340}
+  _isCokeOK: 0
 --- !u!222 &8014551742061780403
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -20725,4 +20720,3 @@ SceneRoots:
   - {fileID: 1975863346957450319}
   - {fileID: 2019171126}
   - {fileID: 411292476}
-  - {fileID: 1449956586}
