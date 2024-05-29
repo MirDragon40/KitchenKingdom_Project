@@ -28,7 +28,7 @@ public class FoodObject : IHoldable, IThrowable
 
     [HideInInspector]
     public bool IsCooking = false;
-
+    public bool IsGrillable = false;
     public float CookProgress;
 
     private Coroutine cookingCoroutine;
@@ -50,10 +50,16 @@ public class FoodObject : IHoldable, IThrowable
         colliderThis = GetComponent<BoxCollider>();
 
         CookProgress = 0f;
-
-        FoodPrefab1.SetActive(true);
-        FoodPrefab2.SetActive(false);
-        FoodPrefab3.SetActive(false);
+        if (FoodType == FoodType.Lettuce)
+        {
+            FoodPrefab1.SetActive(true);
+            FoodPrefab2.SetActive(false);
+            FoodPrefab3.SetActive(false);
+        }
+        if (FoodType == FoodType.Patty && State == FoodState.Raw)
+        {
+            IsGrillable = true;
+        }
 
 
     }
