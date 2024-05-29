@@ -11,12 +11,16 @@ public class Coke : IHoldable
     public Material ChangeCokeMaterial;
     public GameObject CokeParticle;
 
-    private bool _isCokeComplete = false;
+    public bool _isCokeComplete = false;
+
+    public MakeCoke MakeCoke;
 
     public override Vector3 DropOffset => new Vector3(-0.5f, 0f, 0f);
 
     private void Start()
     {
+        MakeCoke = GetComponentInParent<MakeCoke>();
+
         CokePour();
     }
    
@@ -48,6 +52,8 @@ public class Coke : IHoldable
             transform.parent = handTransform;
             transform.localPosition = new Vector3(0, 0.4F, 0.5F);
             transform.localRotation = Quaternion.identity;
+
+            MakeCoke._isCokeGenerate = false;
         }
     } 
 
