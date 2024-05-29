@@ -28,8 +28,10 @@ public class FoodObject : IHoldable, IThrowable
 
     [HideInInspector]
     public bool IsCooking = false;
+    public bool IsChoppable = false;
+    public bool IsGrillable = false;
 
-    public float CookProgress;
+    public float CookProgress; // 0 ~ 1f
 
     private Coroutine cookingCoroutine;
 
@@ -44,12 +46,22 @@ public class FoodObject : IHoldable, IThrowable
     {
         State = FoodState.Raw;
         _rigidbody = GetComponent<Rigidbody>();
-
+        if (FoodType == FoodType.Lettuce && State == FoodState.Raw)
+        {
+            IsChoppable = true;
+        }
+        if (FoodType == FoodType.Patty && State == FoodState.Raw)
+        {
+            IsGrillable = true;
+        }
         CookProgress = 0f;
 
-        FoodPrefab1.SetActive(true);
-        FoodPrefab2.SetActive(false);
-        FoodPrefab3.SetActive(false);
+        if (FoodType == FoodType.Lettuce)
+        {
+            FoodPrefab1.SetActive(true);
+            FoodPrefab2.SetActive(false);
+            FoodPrefab3.SetActive(false);
+        }
     }
 
     private void Update()
