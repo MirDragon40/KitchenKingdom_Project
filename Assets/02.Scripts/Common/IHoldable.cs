@@ -30,7 +30,7 @@ public abstract class IHoldable : MonoBehaviour
 
     public virtual bool IsProcessed => true;
 
-    public abstract void Place(Vector3 placePosition, Quaternion placeRotation);
+    public abstract void Place(Transform place);
 
 
     internal void Hold(Character nearbyCharacter, object handTransform)

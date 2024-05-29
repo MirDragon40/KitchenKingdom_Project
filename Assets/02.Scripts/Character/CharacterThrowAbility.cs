@@ -40,11 +40,15 @@ public class CharacterThrowAbility : MonoBehaviour
         {
             ThrowingDirectionSprite.SetActive(false);
             PlayerThrow();
+            IsThrowable = false;
+            Throwable = null;
+            _holdAbility.HoldableItem = null;
         }
 
     }
     private void PlayerThrow()
     {
-        Throwable.ThrowObject(this.transform.forward);
+
+        Throwable.ThrowObject(transform.forward);
     }
 }
