@@ -7,10 +7,12 @@ using UnityEngine;
 public class PanObject : IHoldable
 {
     public Transform PanPlacePositon;
+    private Rigidbody _rigid;
     public override Vector3 DropOffset => new Vector3(0.3f, 0.1f, 0f);
 
     public override void Hold(Character character, Transform handTransform)
     {
+        GetComponent<Rigidbody>().isKinematic = true;
         transform.parent = handTransform;
         transform.localPosition = new Vector3(0, 0.4f, 0.8F);
         transform.localRotation = Quaternion.Euler(-90f, 180f, 0f);
@@ -18,6 +20,7 @@ public class PanObject : IHoldable
 
     public override void UnHold(Vector3 dropPosition, Quaternion dropRotation)
     {
+        GetComponent<Rigidbody>().isKinematic = false;
         // 저장한 위치와 회전으로 음식 배치
         transform.position = dropPosition;
         //transform.rotation = dropRotation;
@@ -32,8 +35,8 @@ public class PanObject : IHoldable
 
     public override void Place(Transform place)
     {
-
-            transform.position = place.position;
+        GetComponent<Rigidbody>().isKinematic = true;
+        transform.position = place.position;
             Quaternion panplaceRotation = Quaternion.Euler(-90, 0, 180);
             transform.rotation = place.rotation * panplaceRotation;
             transform.parent = place;
