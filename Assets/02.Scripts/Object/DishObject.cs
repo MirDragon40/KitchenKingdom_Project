@@ -15,6 +15,15 @@ public class DishObject : IHoldable
         transform.localRotation = Quaternion.identity;
     }
 
+    public override void Place(Transform place)
+    {
+        transform.position = place.position;
+        // transform.rotation = place.rotation;
+        //placeRotation = Quaternion.Euler(0, 0, 0);
+        transform.parent = place;
+        _holdCharacter = null;
+    }
+
     public override void UnHold(Vector3 dropPosition, Quaternion dropRotation)
     {
         // 저장한 위치와 회전으로 음식 배치

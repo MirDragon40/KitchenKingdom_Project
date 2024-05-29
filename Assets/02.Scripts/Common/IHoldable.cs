@@ -26,15 +26,12 @@ public abstract class IHoldable : MonoBehaviour
     public abstract void UnHold(Vector3 dropPosition, Quaternion dropRotation);
     public abstract Vector3 DropOffset { get; }
 
+    //public abstract Quaternion DropOffset_Rotation { get; }
+
     public virtual bool IsProcessed => true;
 
-    public void Place(Vector3 placePosition, Quaternion placeRotation)
-    {
-        transform.position = placePosition;
-        transform.rotation = placeRotation;
-        transform.parent = null;
-        _holdCharacter = null;
-    }
+    public abstract void Place(Transform place);
+
 
     internal void Hold(Character nearbyCharacter, object handTransform)
     {

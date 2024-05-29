@@ -1,13 +1,9 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class ChoppingBoard : MonoBehaviour
 {
     public Animator Animator;
-
-    public Slider ProgressSlider;
 
     private Coroutine fillSliderCoroutine;
     private float elapsedTime;
@@ -15,15 +11,18 @@ public class ChoppingBoard : MonoBehaviour
     private bool _isPossibleChopping = false;
 
     public Transform PlacePosition;
+    public CuttingAnimation cuttingAnimation; // CuttingAnimation 스크립트를 참조하는 변수 추가
+
+    public OnChoppingBoard_Collider onChoppingBoard;
 
     private void Awake()
     {
-        ProgressSlider.gameObject.SetActive(false);
+        // 슬라이더 관련 초기화 제거
     }
 
     private void Update()
     {
-        if (_isPossibleChopping )
+        if (_isPossibleChopping)
         {
             if (Input.GetKeyDown(KeyCode.LeftControl))
             {
@@ -35,22 +34,17 @@ public class ChoppingBoard : MonoBehaviour
                 }
 
                 fillSliderCoroutine = StartCoroutine(FillSliderOverTime(3.0f));
+                cuttingAnimation.StartCuttingAnimation(3.0f); // CuttingAnimation의 슬라이더 애니메이션 시작
             }
         }
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Player") && onChoppingBoard.FoodOnBoard != null )
         {
             _isPossibleChopping = true;
         }
-    }
-
-
-    private void OnTriggerStay(Collider other)
-    {
-
     }
 
     private void OnTriggerExit(Collider other)
@@ -64,27 +58,21 @@ public class ChoppingBoard : MonoBehaviour
             {
                 StopCoroutine(fillSliderCoroutine);
             }
+            cuttingAnimation.StopCuttingAnimation(); // CuttingAnimation의 슬라이더 애니메이션 중지
         }
     }
     
-
-
     private IEnumerator FillSliderOverTime(float duration)
     {
-        ProgressSlider.gameObject.SetActive(true);
+        // 슬라이더 관련 로직 제거
 
         while (elapsedTime < duration)
         {
             elapsedTime += Time.deltaTime;
-            ProgressSlider.value = Mathf.Clamp01(elapsedTime / duration);
             yield return null;
         }
 
-        ProgressSlider.value = 1f;
-        ProgressSlider.gameObject.SetActive(false); // 3초가 다 지나면 슬라이더를 비활성화
         Animator.SetBool("Chopping", false);
         elapsedTime = 0f; // 초기화
     }
-
 }
-

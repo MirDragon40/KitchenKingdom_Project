@@ -6,7 +6,9 @@ using UnityEngine;
 
 public class Makefood : MonoBehaviour
 {
+
     public FoodType foodType;
+
     public Transform spawnPoint;
 
     private Character _nearbyCharacter;
@@ -83,7 +85,7 @@ public class Makefood : MonoBehaviour
     public void SpawnFood(FoodType foodType, Transform spawnPoint)
     {
         // 음식 생성
-
+        
         GameObject foodPrefab = FoodManager.instance.GetFoodPrefab(foodType);
         Debug.Log(foodPrefab.transform.position);
         if (foodPrefab != null)

@@ -11,7 +11,7 @@ public class Coke : IHoldable
     public Material ChangeCokeMaterial;
     public GameObject CokeParticle;
 
-    public override Vector3 DropOffset => throw new System.NotImplementedException();
+    public override Vector3 DropOffset => new Vector3(-0.5f, 0f, 0f);
 
 
     private void Start()
@@ -71,6 +71,15 @@ public class Coke : IHoldable
 
         transform.parent = null;
         //각 아이템이 떼어질 때 해줄 초기화 로직
+        _holdCharacter = null;
+    }
+
+    public override void Place(Transform place)
+    {
+        transform.position = place.position;
+        transform.rotation = place.rotation;
+        //placeRotation = Quaternion.Euler(0, 0, 0);
+        transform.parent = place;
         _holdCharacter = null;
     }
 }

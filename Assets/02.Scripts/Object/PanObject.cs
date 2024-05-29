@@ -15,7 +15,6 @@ public class PanObject : IHoldable
         transform.localRotation = Quaternion.Euler(-90f, 180f, 0f);
     }
 
-
     public override void UnHold(Vector3 dropPosition, Quaternion dropRotation)
     {
         // 저장한 위치와 회전으로 음식 배치
@@ -28,6 +27,19 @@ public class PanObject : IHoldable
         transform.parent = null;
         //각 아이템이 떼어질 때 해줄 초기화 로직
         _holdCharacter = null;
+    }
+
+    public override void Place(Transform place)
+    {
+
+            transform.position = place.position;
+           // transform.rotation = place.rotation;
+            transform.parent = place;
+
+            //transform.rotation = placeRotation;
+            //Quaternion panplaceRotation = Quaternion.Euler(-90, 0, 180);
+            _holdCharacter = null;
+        
     }
 }
 
