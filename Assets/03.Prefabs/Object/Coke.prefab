@@ -75,6 +75,7 @@ MonoBehaviour:
   ThisCokeMaterial: {fileID: 2100000, guid: ae8d5923de5ea514e95ddf57c6108f10, type: 2}
   ChangeCokeMaterial: {fileID: 2100000, guid: 5294e1b9f82eb50459540445986474b4, type: 2}
   CokeParticle: {fileID: 6245819853513931166}
+  _isCokeComplete: 0
 --- !u!1 &6245819853513931166
 GameObject:
   m_ObjectHideFlags: 0
@@ -102,8 +103,8 @@ Transform:
   m_GameObject: {fileID: 6245819853513931166}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.61, z: 0}
-  m_LocalScale: {x: 0.099719964, y: 0.099719964, z: 0.099719964}
+  m_LocalPosition: {x: 0, y: 0.34, z: -0.015}
+  m_LocalScale: {x: 0.053886674, y: 0.053886674, z: 0.053886674}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 4630380822214011115}
@@ -4935,7 +4936,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 1, z: -0, w: 0}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.73310953, y: 0.73310953, z: 0.73310953}
+  m_LocalScale: {x: 0.85881275, y: 0.57722634, z: 0.85881275}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4630380822214011115}
