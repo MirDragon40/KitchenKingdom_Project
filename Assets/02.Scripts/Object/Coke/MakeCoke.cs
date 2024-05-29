@@ -10,17 +10,14 @@ public class MakeCoke : MonoBehaviour
 
     private bool _isPlayerAround;
 
-    public bool _isCokeGenerate = false;
-
     private void Update()
     {
-        if (_isPlayerAround && Input.GetKeyDown(KeyCode.LeftControl) && !_isCokeGenerate) 
+        if (_isPlayerAround && Input.GetKeyDown(KeyCode.LeftControl)) 
         {
             if(CokeSpawnPoint.childCount == 0) 
             {
                 SpawnCoke();
             }
-            
         }
     }
 
@@ -42,6 +39,5 @@ public class MakeCoke : MonoBehaviour
     private void SpawnCoke() 
     {
         Instantiate(CokePrefab, CokeSpawnPoint);
-        _isCokeGenerate = true;
     }
 }
