@@ -10,6 +10,7 @@ public enum FoodState
     Raw,
     Cut,
     Grilled,
+    burnt,
 }
 
 public class FoodObject : IHoldable, IThrowable

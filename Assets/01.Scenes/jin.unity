@@ -4566,6 +4566,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   foodType: 1
   spawnPoint: {fileID: 1538993417}
+  _placedItem: {fileID: 0}
+  animator: {fileID: 0}
 --- !u!1 &603345925
 GameObject:
   m_ObjectHideFlags: 0
@@ -22919,6 +22921,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   foodType: 0
   spawnPoint: {fileID: 1538993417}
+  _placedItem: {fileID: 0}
+  animator: {fileID: 0}
 --- !u!33 &8457906444137743312
 MeshFilter:
   m_ObjectHideFlags: 0
