@@ -35,6 +35,8 @@ public class FoodObject : IHoldable, IThrowable
 
     private BoxCollider colliderThis;
 
+    public float CuttingTime = 3f;
+
 
     public override Vector3 DropOffset => new Vector3(0.3f, 0.1f, 0f);
     //public override Quaternion DropOffset_Rotation => Quaternion.Euler(0, 0, 0);
@@ -127,7 +129,7 @@ public class FoodObject : IHoldable, IThrowable
         {
             colliderThis.enabled = false;
 
-            CookProgress += Time.deltaTime / 3f; // 3초동안 CookProgress 증가
+            CookProgress += Time.deltaTime / CuttingTime; // 3초동안 CookProgress 증가
             CookProgress = Mathf.Clamp(CookProgress, 0f, 1f);
 
             if (CookProgress >= 0.6f && FoodPrefab1.activeSelf)
