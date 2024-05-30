@@ -67,7 +67,7 @@ public class CookStand : MonoBehaviour
           
     }
 
-    protected virtual void OnTriggerEnter(Collider other)
+    protected virtual void OnTriggerStay(Collider other)
     {
         if (other.CompareTag("Player") && !IsOccupied)
         {
