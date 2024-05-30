@@ -10,6 +10,7 @@ public enum FoodState
     Raw,
     Cut,
     Grilled,
+    burnt,
 }
 
 public class FoodObject : IHoldable, IThrowable
@@ -105,13 +106,13 @@ public class FoodObject : IHoldable, IThrowable
     {
         Destroy(gameObject);
     }
-    public void ThrowObject(Vector3 direction)
+    public void ThrowObject(Vector3 direction, float throwPower)
     {
         _rigidbody.isKinematic = false;
         transform.parent = null;
         _holdCharacter = null;
         
-        _rigidbody.AddForce(direction*10f, ForceMode.Impulse);
+        _rigidbody.AddForce(direction*throwPower, ForceMode.Impulse);
     }
 
     public override void Place(Transform place)

@@ -8,6 +8,7 @@ public class CharacterThrowAbility : MonoBehaviour
     private CharacterHoldAbility _holdAbility;
     public IThrowable Throwable;
     public bool IsThrowable;
+    public float ThrowPower = 13f;
 
 
     private void Awake()
@@ -49,6 +50,6 @@ public class CharacterThrowAbility : MonoBehaviour
     private void PlayerThrow()
     {
 
-        Throwable.ThrowObject(transform.forward);
+        Throwable.ThrowObject(transform.forward, ThrowPower);
     }
 }
