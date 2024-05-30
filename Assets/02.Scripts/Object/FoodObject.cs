@@ -10,6 +10,7 @@ public enum FoodState
     Raw,
     Cut,
     Grilled,
+    burnt,
 }
 
 public class FoodObject : IHoldable, IThrowable
@@ -101,7 +102,7 @@ public class FoodObject : IHoldable, IThrowable
 
     }
 
-    public new void Destroy()
+    public void Destroy()
     {
         Destroy(gameObject);
     }
