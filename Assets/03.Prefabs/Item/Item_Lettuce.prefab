@@ -484,6 +484,7 @@ MonoBehaviour:
   IsGrillable: 0
   CookProgress: 0
   CuttingTime: 3
+  BakeTime: 3
 --- !u!65 &6614939764616523437
 BoxCollider:
   m_ObjectHideFlags: 0

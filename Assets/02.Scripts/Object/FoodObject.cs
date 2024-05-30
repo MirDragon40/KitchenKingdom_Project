@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,7 +11,7 @@ public enum FoodState
     Raw,
     Cut,
     Grilled,
-    burnt,
+    Burnt,
 }
 
 public class FoodObject : IHoldable, IThrowable
@@ -37,6 +38,7 @@ public class FoodObject : IHoldable, IThrowable
     private BoxCollider colliderThis;
 
     public float CuttingTime = 3f;
+    public float BakeTime = 3f;
 
 
     public override Vector3 DropOffset => new Vector3(0.3f, 0.1f, 0f);
@@ -53,16 +55,24 @@ public class FoodObject : IHoldable, IThrowable
         colliderThis = GetComponent<BoxCollider>();
 
         CookProgress = 0f;
+
         if (FoodType == FoodType.Lettuce)
         {
             FoodPrefab1.SetActive(true);
             FoodPrefab2.SetActive(false);
             FoodPrefab3.SetActive(false);
         }
-        if (FoodType == FoodType.Patty && State == FoodState.Raw)
+        if (FoodType == FoodType.Patty)
         {
             IsGrillable = true;
+            FoodPrefab1.SetActive(true);
+            FoodPrefab2.SetActive(false);
+            FoodPrefab3.SetActive(false);
         }
+        /*        if (FoodType == FoodType.Patty && State == FoodState.Raw)
+                {
+                    IsGrillable = true;
+                }*/
 
 
     }
@@ -71,7 +81,14 @@ public class FoodObject : IHoldable, IThrowable
     {
         if (IsCooking && cookingCoroutine == null)
         {
-            cookingCoroutine = StartCoroutine(CookLettuce_Coroutine());
+            if (FoodType == FoodType.Lettuce)
+            {
+                cookingCoroutine = StartCoroutine(CookLettuce_Coroutine());
+            }
+            else if (FoodType == FoodType.Patty)
+            {
+                cookingCoroutine = StartCoroutine(CookPatty_Coroutine());
+            }
         }
     }
 
@@ -147,10 +164,35 @@ public class FoodObject : IHoldable, IThrowable
             {
                 State = FoodState.Cut;
             }
-
             yield return null;
         }
 
+        cookingCoroutine = null;
+        colliderThis.enabled = true;
+    }
+    private IEnumerator CookPatty_Coroutine()
+    {
+        while (IsCooking && (State == FoodState.Raw || State == FoodState.Grilled || State == FoodState.Burnt))
+        {
+            colliderThis.enabled = false;
+
+            CookProgress += Time.deltaTime / BakeTime;
+            CookProgress = Mathf.Clamp(CookProgress, 0f, 2.5f);
+
+            if (State == FoodState.Raw && CookProgress >= 1f && FoodPrefab1.activeSelf)
+            {
+                FoodPrefab1.SetActive(false);
+                FoodPrefab2.SetActive(true);
+                State = FoodState.Grilled; // 수정: 상태를 Grilled로 변경
+            }
+            if (State == FoodState.Grilled && CookProgress >= 2.5f && FoodPrefab2.activeSelf)
+            {
+                FoodPrefab2.SetActive(false);
+                FoodPrefab3.SetActive(true);
+                State = FoodState.Burnt; // 수정: 상태를 Burnt로 변경
+            }
+            yield return null;
+        }
         cookingCoroutine = null;
         colliderThis.enabled = true;
     }
