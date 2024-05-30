@@ -34,6 +34,7 @@ public class FoodObject : IHoldable, IThrowable
     private Coroutine cookingCoroutine;
 
     private BoxCollider colliderThis;
+    private MeshCollider meshColliderThis;
 
 
     public override Vector3 DropOffset => new Vector3(0.3f, 0.1f, 0f);
@@ -126,6 +127,7 @@ public class FoodObject : IHoldable, IThrowable
         while (IsCooking && State == FoodState.Raw)  // 잘리지 않은 상태에서의 양배추만 썰기가 가능하도록 설정
         {
             colliderThis.enabled = false;
+            meshColliderThis.enabled = false;
 
             CookProgress += Time.deltaTime / 3f; // 3초동안 CookProgress 증가
             CookProgress = Mathf.Clamp(CookProgress, 0f, 1f);
@@ -150,6 +152,7 @@ public class FoodObject : IHoldable, IThrowable
 
         cookingCoroutine = null;
         colliderThis.enabled = true;
+        meshColliderThis.enabled = true;
     }
 
 
