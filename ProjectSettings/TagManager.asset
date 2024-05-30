@@ -9,6 +9,7 @@ TagManager:
   - Extinguisher
   - ChoppingBoard
   - Fire
+  - Powder
   layers:
   - Default
   - TransparentFX
