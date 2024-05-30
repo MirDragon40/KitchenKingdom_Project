@@ -35,7 +35,7 @@ public class ChoppingBoard : CookStand
         }
     }
 
-    private void OnTriggerEnter(Collider other)
+    protected override void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player") && onChoppingBoard.FoodOnBoard != null)
         {
@@ -53,7 +53,7 @@ public class ChoppingBoard : CookStand
         }
     }
 
-    private void OnTriggerExit(Collider other)
+    protected override void OnTriggerExit(Collider other)
     {
         if (other.CompareTag("Player") && _isPossibleChopping)
         {
