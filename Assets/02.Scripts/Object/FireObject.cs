@@ -4,7 +4,6 @@ using UnityEngine;
 public class FireObject : MonoBehaviour
 {
     public ParticleSystem fireEffect;
-    public ParticleSystem powderEffect; // 분말 파티클 추가
 
     private void Awake()
     {

@@ -10,6 +10,7 @@ TagManager:
   - ChoppingBoard
   - Fire
   - Powder
+  - Pan
   layers:
   - Default
   - TransparentFX
