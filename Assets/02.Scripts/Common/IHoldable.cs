@@ -32,6 +32,11 @@ public abstract class IHoldable : MonoBehaviour
 
     public abstract void Place(Transform place);
 
+    public void Destroy()
+    {
+        // 음식 오브젝트 삭제
+        Destroy(gameObject);
+    }
 
     internal void Hold(Character nearbyCharacter, object handTransform)
     {

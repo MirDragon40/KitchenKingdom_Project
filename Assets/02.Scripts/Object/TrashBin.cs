@@ -3,6 +3,7 @@ using UnityEngine;
 public class TrashBin : MonoBehaviour
 {
     private CharacterHoldAbility _nearbyCharacterHoldAbility;
+    public Transform panTransform;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -11,7 +12,7 @@ public class TrashBin : MonoBehaviour
             _nearbyCharacterHoldAbility = other.GetComponent<CharacterHoldAbility>();
             if (_nearbyCharacterHoldAbility != null)
             {
-                _nearbyCharacterHoldAbility.SetNearTrashBin(true);
+                _nearbyCharacterHoldAbility.SetNearTrashBin(true, panTransform);
             }
         }
     }
