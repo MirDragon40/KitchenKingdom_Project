@@ -30,6 +30,7 @@ public class FoodObject : IHoldable, IThrowable
     [HideInInspector]
     public bool IsCooking = false;
     public bool IsGrillable = false;
+    public bool IsFryable = false;
     public float CookProgress;
 
     private Coroutine cookingCoroutine;
@@ -62,6 +63,10 @@ public class FoodObject : IHoldable, IThrowable
         if (FoodType == FoodType.Patty && State == FoodState.Raw)
         {
             IsGrillable = true;
+        }
+        if(FoodType == FoodType.Potato && State == FoodState.Raw)
+        {
+            IsFryable = true;
         }
 
 
