@@ -16,7 +16,6 @@ public class Extinguisher : IHoldable
     public override void Hold(Character character, Transform handTransform)
     {
         _holdCharacter = character;
-        Debug.Log(_holdCharacter.name);
 
         // 각 아이템이 잡혔을 때 해줄 초기화 로직
         transform.parent = handTransform;
