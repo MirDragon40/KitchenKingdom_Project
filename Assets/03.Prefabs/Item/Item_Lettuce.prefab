@@ -459,7 +459,6 @@ Transform:
   - {fileID: 700114944725777250}
   - {fileID: 2316700653371920301}
   - {fileID: 6503835280782225254}
-  - {fileID: 1242731969409892316}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1254565587134667322
@@ -484,6 +483,7 @@ MonoBehaviour:
   IsGrillable: 0
   CookProgress: 0
   CuttingTime: 3
+  BakeTime: 3
 --- !u!65 &6614939764616523437
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -564,6 +564,7 @@ Transform:
   - {fileID: 8290915112141707977}
   - {fileID: 4367789262608310773}
   - {fileID: 2269115797247440965}
+  - {fileID: 1242731969409892316}
   m_Father: {fileID: 8462486936157103171}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8666315408056221811
@@ -678,7 +679,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 8462486936157103171}
+    m_TransformParent: {fileID: 6503835280782225254}
     m_Modifications:
     - target: {fileID: 2133125011530431939, guid: e015cfabe390bf548a9e44f19f5cdd74, type: 3}
       propertyPath: m_Pivot.x

@@ -15,9 +15,11 @@ public class CharacterMoveAbility : CharacterAbility
     public float DashDuration;
     private float _dirMagnitude;
 
-
     private CharacterController _characterController;
     private Animator _animator;
+
+    public ParticleSystem PowderEffect;
+    public ParticleSystem PowderEffect_Dash;
 
     private bool isDashing = false;
 
@@ -30,7 +32,6 @@ public class CharacterMoveAbility : CharacterAbility
         DashSpeed = 7f;
         RotationSpeed = 700;
         DashDuration = 0.2f;
-
     }
 
     private void Update()
@@ -44,9 +45,7 @@ public class CharacterMoveAbility : CharacterAbility
         float h = Input.GetAxis("Horizontal");
         float v = Input.GetAxis("Vertical");
 
-
-
-        Vector3 dir = new Vector3(h,0, v);
+        Vector3 dir = new Vector3(h, 0, v);
         dir.Normalize();
 
         if (_characterController.isGrounded)
@@ -66,6 +65,15 @@ public class CharacterMoveAbility : CharacterAbility
         _dirMagnitude = dir.magnitude;
         _animator.SetFloat("Move", _dirMagnitude);
 
+        // 파티클 시스템 제어
+        if (_dirMagnitude > 0 && !PowderEffect.isPlaying)
+        {
+            PowderEffect.Play();
+        }
+        else if (_dirMagnitude == 0 && PowderEffect.isPlaying)
+        {
+            PowderEffect.Stop();
+        }
 
         // 이동하는 방향을 바라보도록 회전
         if (dir != Vector3.zero)
@@ -76,11 +84,12 @@ public class CharacterMoveAbility : CharacterAbility
 
         if (Input.GetKeyDown(KeyCode.LeftAlt) && !isDashing)
         {
+            PowderEffect_Dash.Play();
             StartCoroutine(Dash());
+
         }
     }
 
-    
     // 대쉬 코루틴 함수
     private IEnumerator Dash()
     {
@@ -91,11 +100,14 @@ public class CharacterMoveAbility : CharacterAbility
         {
             Vector3 dashDirection = transform.forward;
             _characterController.Move(dashDirection * (DashSpeed * Time.deltaTime));
+
             yield return null; // 다음 프레임까지 대기
         }
 
         isDashing = false;
+        PowderEffect_Dash.Stop();
     }
+
     void SynchronizeAnimation()
     {
         // 애니메이터 파라미터 동기화

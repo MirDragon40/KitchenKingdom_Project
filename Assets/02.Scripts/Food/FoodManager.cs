@@ -6,7 +6,10 @@ public enum FoodType
 {
     Bread,
     Lettuce,
-    Patty
+    Patty,
+    Potato,
+    Tomato,
+    Cheese,
 }
 
 public class FoodManager : MonoBehaviour

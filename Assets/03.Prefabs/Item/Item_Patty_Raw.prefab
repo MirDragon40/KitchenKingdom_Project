@@ -125,12 +125,13 @@ MonoBehaviour:
   State: 0
   FoodType: 2
   FoodPrefab1: {fileID: 7949917558003115404}
-  FoodPrefab2: {fileID: 7949917558003115404}
-  FoodPrefab3: {fileID: 7949917558003115404}
+  FoodPrefab2: {fileID: 516736143311818512, guid: 1ac163b5ba1ad7b49b340886a9a2452e, type: 3}
+  FoodPrefab3: {fileID: 4533133487364359360, guid: aab5bbc2d417d974db520db824d93856, type: 3}
   IsCooking: 0
-  IsChoppable: 0
   IsGrillable: 0
   CookProgress: 0
+  CuttingTime: 3
+  BakeTime: 3
 --- !u!65 &665714806910722407
 BoxCollider:
   m_ObjectHideFlags: 0
