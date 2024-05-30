@@ -12,6 +12,7 @@ public class CharacterHoldAbility : CharacterAbility
     private Animator animator;
     private float _findfood = 1f; //음식을 찾는 범위
 
+
     public IHoldable HoldableItem;
    // private Transform _placeableSurface;
 
@@ -21,6 +22,7 @@ public class CharacterHoldAbility : CharacterAbility
     public Transform PlacePosition = null;
 
     private bool nearTrashBin = false;
+    private Transform panTransform; // 팬 오브젝트를 참조하기 위한 변수
 
     void Start()
     {
@@ -113,6 +115,18 @@ public class CharacterHoldAbility : CharacterAbility
         {
             FoodTrashDrop();
         }
+
+        // 팬 오브젝트의 자식 음식 오브젝트를 찾아서 삭제
+        if (panTransform != null)
+        {
+            foreach (Transform child in panTransform)
+            {
+                if (child.GetComponent<FoodObject>() != null)
+                {
+                    Destroy(child.gameObject);
+                }
+            }
+        }
     }
     public void FoodTrashDrop()
     {
@@ -121,6 +135,7 @@ public class CharacterHoldAbility : CharacterAbility
             food.Destroy();
             HoldableItem = null;
             animator.SetBool("Carry", false);
+
         }
     }
 
@@ -137,9 +152,10 @@ public class CharacterHoldAbility : CharacterAbility
         HoldableItem = null;
         animator.SetBool("Carry", false);
     }
-    public void SetNearTrashBin(bool value)
+    public void SetNearTrashBin(bool value, Transform pan = null)
     {
         nearTrashBin = value;
+        panTransform = pan; // 팬 오브젝트 참조 설정
     }
 
 }
