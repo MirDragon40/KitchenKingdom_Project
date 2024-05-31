@@ -7,7 +7,7 @@ using UnityEngine;
 public class Makefood : MonoBehaviour
 {
 
-    public FoodType foodType;
+    public FoodType FoodType;
 
     public Transform spawnPoint;
 
@@ -18,16 +18,16 @@ public class Makefood : MonoBehaviour
     public IHoldable _placedItem;
     public bool HavePlacedItem => _placedItem != null;
 
-    private Transform handTransform;
+    private Transform _handTransform;
 
     // 박스 열리는 애니메이션
-    public Animator animator;
+    public Animator _animator;
 
-    private float checkRange = 1f;
+    private float _checkRange = 1f;
 
     public void Start()
     {
-        animator = GetComponent<Animator>();
+        _animator = GetComponent<Animator>();
     }
 
     void Update()
@@ -49,7 +49,7 @@ public class Makefood : MonoBehaviour
                 // 음식을 생성하기 전에 근처에 들 수 있는 오브젝트가 있는지 확인합니다
                 if (!IsNearbyHoldable())
                 {
-                    SpawnFood(foodType, _nearbyCharacter.HoldAbility.handTransform);
+                    SpawnFood(FoodType, _nearbyCharacter.HoldAbility.handTransform);
 
                     // 들기 애니메이션 실행
                     _nearbyCharacter.GetComponent<Animator>().SetBool("Carry", true);
@@ -71,7 +71,7 @@ public class Makefood : MonoBehaviour
 
     private bool IsNearbyHoldable()
     {
-        Collider[] colliders = Physics.OverlapSphere(spawnPoint.position, checkRange);
+        Collider[] colliders = Physics.OverlapSphere(spawnPoint.position, _checkRange);
         foreach (Collider collider in colliders)
         {
             IHoldable holdable = collider.GetComponent<IHoldable>();
@@ -98,7 +98,7 @@ public class Makefood : MonoBehaviour
             IHoldable holdable = food.GetComponent<IHoldable>();
             if (holdable != null)
             {
-                holdable.Hold(_nearbyCharacter, handTransform);
+                holdable.Hold(_nearbyCharacter, _handTransform);
             }
         }
 

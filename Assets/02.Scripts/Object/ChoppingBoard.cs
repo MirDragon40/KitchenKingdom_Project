@@ -35,7 +35,7 @@ public class ChoppingBoard : CookStand
         }
     }
 
-    protected override void OnTriggerEnter(Collider other)
+    protected  void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player") && onChoppingBoard.FoodOnBoard != null)
         {

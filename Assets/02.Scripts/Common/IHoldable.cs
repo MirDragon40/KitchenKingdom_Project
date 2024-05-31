@@ -10,6 +10,7 @@ public enum EItemType
     Dish,
     Pan,
     Coke,
+    Basket,
 }
 public abstract class IHoldable : MonoBehaviour
 {
