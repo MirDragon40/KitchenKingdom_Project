@@ -223,7 +223,7 @@ public class FoodObject : IHoldable, IThrowable
             {
                 FoodPrefab1.SetActive(false);
                 FoodPrefab2.SetActive(true);
-                State = FoodState.Fried; // 수정: 상태를 Grilled로 변경
+                State = FoodState.Fried; // 수정: 상태를 F로 변경
             }
             if (State == FoodState.Fried && CookProgress >= 2.5f && FoodPrefab2.activeSelf)
             {
