@@ -31,6 +31,7 @@ public class FoodObject : IHoldable, IThrowable
     [HideInInspector]
     public bool IsCooking = false;
     public bool IsGrillable = false;
+    public bool IsFryable = false;
     public float CookProgress;
 
     private Coroutine cookingCoroutine;
