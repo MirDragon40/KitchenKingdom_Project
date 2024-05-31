@@ -17,6 +17,7 @@ public class CharacterHoldAbility : CharacterAbility
    // private Transform _placeableSurface;
 
     public bool IsPlaceable = false;
+    public bool IsSubmitable = false;
     public bool IsHolding => HoldableItem != null;
 
     public Transform PlacePosition = null;

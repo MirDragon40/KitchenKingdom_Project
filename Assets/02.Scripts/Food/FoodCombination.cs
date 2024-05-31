@@ -10,7 +10,6 @@ public class FoodCombination : MonoBehaviour
     public List<GameObject> AvailableIngrediants = new List<GameObject>(); // 스테이지별 가능한 재료조합 미리 list에 prefab으로 넣어놓음
     public List<Image> UI_FoodIcon = new List<Image>();
     public Dictionary<string, bool> Ingrediants = new Dictionary<string, bool>();
-    public bool IsSubmitable;
     private IHoldable _holdableObject;
 
 
