@@ -37,11 +37,11 @@ public class PanObject : IHoldable
                 if (PanPlacePositon.GetChild(0).TryGetComponent<FoodObject>(out GrillingIngrediant))
                 {
                     GrillingSlider.gameObject.SetActive(true);
-
                     GrillingIngrediant.StartCooking(); // Start cooking when placed on the stove
                     GrillingSlider.value = GrillingIngrediant.CookProgress;
                 }
             }
+
         }
         else
         {
@@ -61,6 +61,8 @@ public class PanObject : IHoldable
         transform.parent = handTransform;
         transform.localPosition = new Vector3(0, 0.4f, 0.8F);
         transform.localRotation = Quaternion.Euler(-90f, 180f, 0f);
+
+        MyStove = null;
     }
 
     public override void UnHold(Vector3 dropPosition, Quaternion dropRotation)
