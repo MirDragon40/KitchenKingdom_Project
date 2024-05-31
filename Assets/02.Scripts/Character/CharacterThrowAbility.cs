@@ -26,6 +26,14 @@ public class CharacterThrowAbility : MonoBehaviour
         if (_holdAbility.IsHolding && Throwable == null)
         {
             IsThrowable = _holdAbility.HoldableItem.TryGetComponent<IThrowable>(out Throwable);
+            if (IsThrowable)
+            {
+                bool isCoke = _holdAbility.HoldableItem.GetComponent<FoodObject>().ItemType == EItemType.Coke;
+                if (isCoke)
+                {
+                    IsThrowable = false;
+                }
+            }
         }
         else if (!_holdAbility.IsHolding)
         {
