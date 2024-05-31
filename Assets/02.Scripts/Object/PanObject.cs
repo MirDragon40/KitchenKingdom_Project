@@ -41,15 +41,15 @@ public class PanObject : IHoldable
                     GrillingSlider.value = GrillingIngrediant.CookProgress;
                 }
             }
+            else
+            {
+                GrillingIngrediant.StopCooking();
+            }
 
         }
         else
         {
-            if (GrillingIngrediant != null)
-            {
-                GrillingIngrediant.StopCooking(); // Stop cooking when removed from the stove
-                GrillingIngrediant = null;
-            }
+            GrillingIngrediant = null;
 
             GrillingSlider.gameObject.SetActive(false);
             PlusImage.SetActive(true);
