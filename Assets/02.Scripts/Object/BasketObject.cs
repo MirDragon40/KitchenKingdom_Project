@@ -100,9 +100,9 @@ public class BasketObject : IHoldable
         }
         IHoldable playerHoldingItem = other.GetComponent<CharacterHoldAbility>().HoldableItem;
 
-        if (playerHoldingItem.GetComponent<FoodObject>().IsGrillable)
+        if (playerHoldingItem.GetComponent<FoodObject>().IsFryable)
         {
-            Debug.Log("grill");
+            Debug.Log("Fry");
             other.GetComponent<CharacterHoldAbility>().PlacePosition = BasketPlacePositon;
             other.GetComponent<CharacterHoldAbility>().IsPlaceable = true;
         }
