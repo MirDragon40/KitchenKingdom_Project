@@ -27,8 +27,8 @@ public class PanObject : IHoldable
     }
     private void Update()
     {
-      
-        if(PanPlacePositon.childCount != 0)
+
+        if (PanPlacePositon.childCount != 0)
         {
             PlusImage.SetActive(false);
 
@@ -37,16 +37,20 @@ public class PanObject : IHoldable
                 if (PanPlacePositon.GetChild(0).TryGetComponent<FoodObject>(out GrillingIngrediant))
                 {
                     GrillingSlider.gameObject.SetActive(true);
-                    
 
-                    GrillingIngrediant.CookProgress += Time.deltaTime / GrillingTime;
+                    GrillingIngrediant.StartCooking(); // Start cooking when placed on the stove
                     GrillingSlider.value = GrillingIngrediant.CookProgress;
                 }
             }
         }
         else
         {
-            GrillingIngrediant = null;
+            if (GrillingIngrediant != null)
+            {
+                GrillingIngrediant.StopCooking(); // Stop cooking when removed from the stove
+                GrillingIngrediant = null;
+            }
+
             GrillingSlider.gameObject.SetActive(false);
             PlusImage.SetActive(true);
         }

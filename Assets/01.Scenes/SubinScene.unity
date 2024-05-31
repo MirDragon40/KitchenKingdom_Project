@@ -16801,7 +16801,7 @@ MonoBehaviour:
   foodPrefabs:
   - {fileID: 1786338197292552992, guid: dda961dd455a24748b6da6b042d895e0, type: 3}
   - {fileID: 7788963802100874181, guid: a5e1dd0c0356c844da14a5d32f019490, type: 3}
-  - {fileID: 7949917558003115404, guid: 64f6d7cfe785b7d4faa305652b74c403, type: 3}
+  - {fileID: 1992951515313775233, guid: 13eac972c2448494fa6f10e28c5fe2f4, type: 3}
 --- !u!4 &3529638915444581855
 Transform:
   m_ObjectHideFlags: 0
@@ -23485,8 +23485,8 @@ RectTransform:
   - {fileID: 521975115789575248}
   m_Father: {fileID: 4886769410980877104}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 200, y: 100}
   m_Pivot: {x: 0, y: 1}

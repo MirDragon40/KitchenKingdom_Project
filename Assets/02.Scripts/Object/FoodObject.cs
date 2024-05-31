@@ -240,11 +240,20 @@ public class FoodObject : IHoldable, IThrowable
 
     public void StartCooking()
     {
-        IsCooking = true;
+        if (cookingCoroutine == null)
+        {
+            IsCooking = true;
+            cookingCoroutine = StartCoroutine(CookPatty_Coroutine());
+        }
     }
 
     public void StopCooking()
     {
         IsCooking = false;
+        if (cookingCoroutine != null)
+        {
+            StopCoroutine(cookingCoroutine);
+            cookingCoroutine = null;
+        }
     }
 }
