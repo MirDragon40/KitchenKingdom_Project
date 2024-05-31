@@ -15,6 +15,7 @@ public class PanObject : IHoldable
     public BoxCollider BoxCollider;
     public Stove MyStove;
 
+    public GameObject PlusImage;
 
     private Rigidbody _rigid;
     public override Vector3 DropOffset => new Vector3(0.3f, 0.1f, 0f);
@@ -22,27 +23,36 @@ public class PanObject : IHoldable
     private void Awake()
     {
         BoxCollider = GetComponent<BoxCollider>();
+       
     }
     private void Update()
     {
-        if (MyStove != null)
-        {
-           MyStove = GetComponentInParent<Stove>();
-        }
-        if(PanPlacePositon.childCount != 0)
-        {
-            if (PanPlacePositon.GetChild(0).TryGetComponent<FoodObject>(out GrillingIngrediant))
-            {
-                GrillingSlider.gameObject.SetActive(true);
 
-                GrillingIngrediant.CookProgress += Time.deltaTime / GrillingTime;
-                GrillingSlider.value = GrillingIngrediant.CookProgress;
+        if (PanPlacePositon.childCount != 0)
+        {
+            PlusImage.SetActive(false);
+
+            if (MyStove != null)
+            {
+                if (PanPlacePositon.GetChild(0).TryGetComponent<FoodObject>(out GrillingIngrediant))
+                {
+                    GrillingSlider.gameObject.SetActive(true);
+                    GrillingIngrediant.StartCooking(); // Start cooking when placed on the stove
+                    GrillingSlider.value = GrillingIngrediant.CookProgress;
+                }
             }
+
         }
         else
         {
-            GrillingIngrediant = null;
+            if (GrillingIngrediant != null)
+            {
+                GrillingIngrediant.StopCooking(); // Stop cooking when removed from the stove
+                GrillingIngrediant = null;
+            }
+
             GrillingSlider.gameObject.SetActive(false);
+            PlusImage.SetActive(true);
         }
     }
     public override void Hold(Character character, Transform handTransform)
@@ -51,6 +61,8 @@ public class PanObject : IHoldable
         transform.parent = handTransform;
         transform.localPosition = new Vector3(0, 0.4f, 0.8F);
         transform.localRotation = Quaternion.Euler(-90f, 180f, 0f);
+
+        MyStove = null;
     }
 
     public override void UnHold(Vector3 dropPosition, Quaternion dropRotation)
@@ -76,10 +88,11 @@ public class PanObject : IHoldable
             transform.rotation = place.rotation * panplaceRotation;
             transform.parent = place;
 
-            //transform.rotation = placeRotation;
-            _holdCharacter = null;
-        
+        MyStove = place.GetComponentInParent<Stove>();
+        //transform.rotation = placeRotation;
+        _holdCharacter = null;
     }
+
     private void OnTriggerEnter(Collider other)
     {
         if (!other.CompareTag("Player"))
