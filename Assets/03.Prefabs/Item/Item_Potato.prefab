@@ -369,7 +369,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ItemType: 1
   State: 0
-  FoodType: 0
+  FoodType: 3
   FoodPrefab1: {fileID: 6204901731045512369}
   FoodPrefab2: {fileID: 6204901731045512369}
   FoodPrefab3: {fileID: 529897316006389098}
@@ -378,6 +378,7 @@ MonoBehaviour:
   IsFryable: 0
   CookProgress: 0
   CuttingTime: 3
+  BakeTime: 3
 --- !u!65 &1512291040946287616
 BoxCollider:
   m_ObjectHideFlags: 0

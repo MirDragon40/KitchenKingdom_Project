@@ -51,9 +51,9 @@ public class BasketObject : IHoldable
     {
         GetComponent<Rigidbody>().isKinematic = false;
         // 저장한 위치와 회전으로 음식 배치
-        transform.position = dropPosition;
+        transform.position = dropPosition + new Vector3(0,0.4f,0f);
         //transform.rotation = dropRotation;
-        Quaternion pandropRotation = Quaternion.Euler(0, 180f, 0f);
+        Quaternion pandropRotation = Quaternion.Euler(0, 0, 0f);
         Quaternion finalRotation = dropRotation * pandropRotation;
 
 
@@ -65,8 +65,8 @@ public class BasketObject : IHoldable
     public override void Place(Transform place)
     {
         GetComponent<Rigidbody>().isKinematic = true;
-        transform.position = place.position;
-        Quaternion panplaceRotation = Quaternion.Euler(-90, 0, 180);
+        transform.position = place.position + new Vector3(0, 0.4f, 0.7f);
+        Quaternion panplaceRotation = Quaternion.Euler(0, 180f, 0);
         transform.rotation = place.rotation * panplaceRotation;
         transform.parent = place;
 
