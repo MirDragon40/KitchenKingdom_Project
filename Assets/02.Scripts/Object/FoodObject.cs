@@ -183,6 +183,8 @@ public class FoodObject : IHoldable, IThrowable
         cookingCoroutine = null;
         colliderThis.enabled = true;
     }
+
+
     private IEnumerator CookPatty_Coroutine()
     {
         while (IsCooking && (State == FoodState.Raw || State == FoodState.Grilled || State == FoodState.Burnt))
@@ -238,7 +240,7 @@ public class FoodObject : IHoldable, IThrowable
     }
 
 
-    public void StartCooking()
+    public void StartGrilling()
     {
         if (cookingCoroutine == null)
         {
@@ -247,7 +249,8 @@ public class FoodObject : IHoldable, IThrowable
         }
     }
 
-    public void StopCooking()
+
+    public void StopGrilling()
     {
         IsCooking = false;
         if (cookingCoroutine != null)
@@ -255,5 +258,15 @@ public class FoodObject : IHoldable, IThrowable
             StopCoroutine(cookingCoroutine);
             cookingCoroutine = null;
         }
+    }
+
+    public void StartCooking()
+    {
+        IsCooking=true;
+    }
+
+    public void StopCooking()
+    {
+        IsCooking = false;
     }
 }

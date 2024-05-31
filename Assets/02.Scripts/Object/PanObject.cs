@@ -37,13 +37,13 @@ public class PanObject : IHoldable
                 if (PanPlacePositon.GetChild(0).TryGetComponent<FoodObject>(out GrillingIngrediant))
                 {
                     GrillingSlider.gameObject.SetActive(true);
-                    GrillingIngrediant.StartCooking(); // Start cooking when placed on the stove
+                    GrillingIngrediant.StartGrilling(); // Start cooking when placed on the stove
                     GrillingSlider.value = GrillingIngrediant.CookProgress;
                 }
             }
             else
             {
-                GrillingIngrediant.StopCooking();
+                GrillingIngrediant.StopGrilling();
             }
 
         }
