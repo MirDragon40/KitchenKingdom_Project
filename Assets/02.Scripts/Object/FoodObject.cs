@@ -31,6 +31,7 @@ public class FoodObject : IHoldable, IThrowable
     [HideInInspector]
     public bool IsCooking = false;
     public bool IsGrillable = false;
+    public bool IsFryable = false;
     public float CookProgress;
 
     private Coroutine cookingCoroutine;
@@ -123,13 +124,13 @@ public class FoodObject : IHoldable, IThrowable
     {
         Destroy(gameObject);
     }
-    public void ThrowObject(Vector3 direction)
+    public void ThrowObject(Vector3 direction, float throwPower)
     {
         _rigidbody.isKinematic = false;
         transform.parent = null;
         _holdCharacter = null;
         
-        _rigidbody.AddForce(direction*10f, ForceMode.Impulse);
+        _rigidbody.AddForce(direction*throwPower, ForceMode.Impulse);
     }
 
     public override void Place(Transform place)
