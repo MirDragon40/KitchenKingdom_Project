@@ -11,6 +11,7 @@ public enum FoodState
     Raw,
     Cut,
     Grilled,
+    Fried,
     Burnt,
 }
 
@@ -70,6 +71,13 @@ public class FoodObject : IHoldable, IThrowable
             FoodPrefab2.SetActive(false);
             FoodPrefab3.SetActive(false);
         }
+        if(FoodType == FoodType.Potato)
+        {
+            IsFryable = true;
+            FoodPrefab1.SetActive(true);
+            FoodPrefab2.SetActive(false);
+            FoodPrefab3.SetActive(false);
+        }
         /*        if (FoodType == FoodType.Patty && State == FoodState.Raw)
                 {
                     IsGrillable = true;
@@ -89,6 +97,10 @@ public class FoodObject : IHoldable, IThrowable
             else if (FoodType == FoodType.Patty)
             {
                 cookingCoroutine = StartCoroutine(CookPatty_Coroutine());
+            }
+            else if (FoodType == FoodType.Potato)
+            {
+                cookingCoroutine = StartCoroutine(CookPotato_Coroutine());
             }
         }
     }
@@ -187,6 +199,33 @@ public class FoodObject : IHoldable, IThrowable
                 State = FoodState.Grilled; // 수정: 상태를 Grilled로 변경
             }
             if (State == FoodState.Grilled && CookProgress >= 2.5f && FoodPrefab2.activeSelf)
+            {
+                FoodPrefab2.SetActive(false);
+                FoodPrefab3.SetActive(true);
+                State = FoodState.Burnt; // 수정: 상태를 Burnt로 변경
+            }
+            yield return null;
+        }
+        cookingCoroutine = null;
+        colliderThis.enabled = true;
+    }
+
+    private IEnumerator CookPotato_Coroutine()
+    {
+        while (IsCooking && (State == FoodState.Raw || State == FoodState.Fried || State == FoodState.Burnt))
+        {
+            colliderThis.enabled = false;
+
+            CookProgress += Time.deltaTime / BakeTime;
+            CookProgress = Mathf.Clamp(CookProgress, 0f, 2.5f);
+
+            if (State == FoodState.Raw && CookProgress >= 1f && FoodPrefab1.activeSelf)
+            {
+                FoodPrefab1.SetActive(false);
+                FoodPrefab2.SetActive(true);
+                State = FoodState.Fried; // 수정: 상태를 Grilled로 변경
+            }
+            if (State == FoodState.Fried && CookProgress >= 2.5f && FoodPrefab2.activeSelf)
             {
                 FoodPrefab2.SetActive(false);
                 FoodPrefab3.SetActive(true);

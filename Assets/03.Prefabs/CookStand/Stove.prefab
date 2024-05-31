@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 2885850682168111960}
   - component: {fileID: 157704236576427658}
   - component: {fileID: 2646201070075244070}
+  - component: {fileID: -2078152011496428701}
   m_Layer: 0
   m_Name: Stove
   m_TagString: Untagged
@@ -33,7 +34,8 @@ Transform:
   m_LocalPosition: {x: -5.517, y: 0, z: -1.796}
   m_LocalScale: {x: 1, y: 0.4434, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 7280904560597961556}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!33 &4164444616197753030
@@ -120,7 +122,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1e7c07ea50250647879eb87cc6c20b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CookType: 0
+  CookType: 1
   RendererThisMaterial: {fileID: 2751321017002781971}
   ThisMaterial: {fileID: 2100000, guid: 2a4628a3786b87e44aa969367b59f5b8, type: 2}
   ChangeMaterial: {fileID: 2100000, guid: 76a2fc3e91ab917438620a1ceed1bb8c, type: 2}
@@ -146,3 +148,50 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.64150983, y: 1.1248447, z: 1.4741822}
   m_Center: {x: -0.00080262125, y: 0.56242234, z: 0.20013535}
+--- !u!114 &-2078152011496428701
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2046235622856534948}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d8fadd84b9de3814ab6c28bbc0e6622e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PlacePosition: {fileID: 7280904560597961556}
+  PlacedItem: {fileID: 0}
+  PlusUI: {fileID: 0}
+  PlacedPan: {fileID: 0}
+--- !u!1 &6611637508460338982
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7280904560597961556}
+  m_Layer: 0
+  m_Name: PlacePosition
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7280904560597961556
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6611637508460338982}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
+  m_LocalPosition: {x: 0, y: 1.29, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7378703333766003518}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}

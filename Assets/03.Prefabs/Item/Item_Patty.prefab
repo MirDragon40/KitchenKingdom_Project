@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 665714806910722407}
   - component: {fileID: 4334421151660092739}
   m_Layer: 0
-  m_Name: Item_Patty_Raw
+  m_Name: Item_Patty
   m_TagString: Food
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
