@@ -57,7 +57,9 @@ public class CharacterThrowAbility : MonoBehaviour
     }
     private void PlayerThrow()
     {
-
-        Throwable.ThrowObject(transform.forward, ThrowPower);
+        if (Throwable != null)
+        {
+            Throwable.ThrowObject(transform.forward, ThrowPower);
+        }
     }
 }
