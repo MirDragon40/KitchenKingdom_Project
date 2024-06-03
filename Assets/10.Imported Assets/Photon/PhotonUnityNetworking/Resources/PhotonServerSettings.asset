@@ -48,6 +48,7 @@ MonoBehaviour:
   - DashPlay
   - WalkEffectPlay
   - WalkEffectStop
+  - AddTotalScore
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1
