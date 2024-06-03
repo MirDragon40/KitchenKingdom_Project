@@ -183,6 +183,8 @@ public class FoodObject : IHoldable, IThrowable
         cookingCoroutine = null;
         colliderThis.enabled = true;
     }
+
+
     private IEnumerator CookPatty_Coroutine()
     {
         while (IsCooking && (State == FoodState.Raw || State == FoodState.Grilled || State == FoodState.Burnt))
@@ -223,7 +225,7 @@ public class FoodObject : IHoldable, IThrowable
             {
                 FoodPrefab1.SetActive(false);
                 FoodPrefab2.SetActive(true);
-                State = FoodState.Fried; // 수정: 상태를 F로 변경
+                State = FoodState.Fried; // 수정: 상태를 Fried로 변경
             }
             if (State == FoodState.Fried && CookProgress >= 2.5f && FoodPrefab2.activeSelf)
             {
@@ -238,7 +240,7 @@ public class FoodObject : IHoldable, IThrowable
     }
 
 
-    public void StartCooking()
+    public void StartGrilling()
     {
         if (cookingCoroutine == null)
         {
@@ -247,7 +249,8 @@ public class FoodObject : IHoldable, IThrowable
         }
     }
 
-    public void StopCooking()
+
+    public void StopGrilling()
     {
         IsCooking = false;
         if (cookingCoroutine != null)
@@ -256,4 +259,15 @@ public class FoodObject : IHoldable, IThrowable
             cookingCoroutine = null;
         }
     }
+
+    public void StartCooking()
+    {
+        IsCooking=true;
+    }
+
+    public void StopCooking()
+    {
+        IsCooking = false;
+    }
+
 }

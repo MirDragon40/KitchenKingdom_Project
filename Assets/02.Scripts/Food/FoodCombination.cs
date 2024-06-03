@@ -32,6 +32,8 @@ public class FoodCombination : MonoBehaviour
                 Ingrediants["lettuce"] = false;
                 Ingrediants["coke"] = false;
                 Ingrediants["fry"] = false;
+                Ingrediants["burger"] = false;
+
                 break;
             case 2:
                 break;
@@ -43,7 +45,17 @@ public class FoodCombination : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space) && IsSubmitable)
         {
-            SubmitIngrediant(_holdableObject.GetComponent<FoodObject>());
+            FoodObject ingrediant = null;
+            if (_holdableObject.TryGetComponent<FoodObject>(out ingrediant))
+            {
+                SubmitIngrediant(ingrediant);
+                Debug.Log(ingrediant);
+            }
+            else
+            {
+                SubmitIngrediant(_holdableObject.GetComponent<PanObject>().GrillingIngrediant.GetComponent<FoodObject>());
+            }
+            Debug.Log(ingrediant);
         }
 
     }
@@ -76,15 +88,21 @@ public class FoodCombination : MonoBehaviour
             Destroy(submittedFood.gameObject);
             RefreshPlate();
         }
-        if (submittedFood.ItemType == EItemType.Food && submittedFood.FoodType == FoodType.Lettuce && !Ingrediants["lettuce"] && submittedFood.State == FoodState.Cut)
+        else if (submittedFood.ItemType == EItemType.Food && submittedFood.FoodType == FoodType.Lettuce && !Ingrediants["lettuce"] && submittedFood.State == FoodState.Cut)
         {
             Ingrediants["lettuce"] = true;
             Destroy(submittedFood.gameObject);
             RefreshPlate();
         }
-        if (submittedFood.ItemType == EItemType.Coke && !Ingrediants["coke"])
+        else if (submittedFood.ItemType == EItemType.Coke && !Ingrediants["coke"])
         {
             Ingrediants["coke"] = true;
+            Destroy(submittedFood.gameObject);
+            RefreshPlate();
+        }
+        else if (submittedFood.ItemType == EItemType.Food && !Ingrediants["patty"] && submittedFood.State == FoodState.Grilled)
+        {
+            Ingrediants["patty"] = true;
             Destroy(submittedFood.gameObject);
             RefreshPlate();
         }
@@ -94,9 +112,24 @@ public class FoodCombination : MonoBehaviour
     {
         switch (Stage)
         {
-            case 1:
+            case 1: // stage 1
+                if (Ingrediants["bread"] && Ingrediants["patty"] && Ingrediants["lettuce"])
+                {
+                    AvailableIngrediants[0].SetActive(true);
+                    AvailableIngrediants[1].SetActive(true);
+                    AvailableIngrediants[2].SetActive(true);
+                    AvailableIngrediants[3].SetActive(true);
+                    Ingrediants["burger"] = true;
+                    Ingrediants.Remove("bread");
+                    Ingrediants.Remove("patty");
+                    Ingrediants.Remove("lettuce");
+                    UI_FoodIcon[0].gameObject.SetActive(false);
+                    UI_FoodIcon[1].gameObject.SetActive(false);
+                    UI_FoodIcon[2].gameObject.SetActive(false);
+                }
                 if (Ingrediants["bread"] == true)
                 {
+                    AvailableIngrediants[0].SetActive(true);
                     AvailableIngrediants[3].SetActive(true);
                     UI_FoodIcon[0].gameObject.SetActive(true);
                 }
@@ -107,8 +140,8 @@ public class FoodCombination : MonoBehaviour
                 }
                 if (Ingrediants["lettuce"])
                 {
-                    UI_FoodIcon[1].gameObject.SetActive(true);
                     AvailableIngrediants[2].SetActive(true);
+                    UI_FoodIcon[1].gameObject.SetActive(true);
                 }
                 if (Ingrediants["coke"])
                 {

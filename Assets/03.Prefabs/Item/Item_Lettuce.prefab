@@ -481,6 +481,7 @@ MonoBehaviour:
   FoodPrefab3: {fileID: 8143262538006736201}
   IsCooking: 0
   IsGrillable: 0
+  IsFryable: 0
   CookProgress: 0
   CuttingTime: 3
   BakeTime: 3
@@ -765,6 +766,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: FoodUI_Canvas
       objectReference: {fileID: 0}
+    - target: {fileID: 3662443467640420777, guid: e015cfabe390bf548a9e44f19f5cdd74, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 78
+      objectReference: {fileID: 0}
     - target: {fileID: 3709050715246677698, guid: e015cfabe390bf548a9e44f19f5cdd74, type: 3}
       propertyPath: parentObject
       value: 
@@ -778,7 +783,8 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 4019119026640758937, guid: e015cfabe390bf548a9e44f19f5cdd74, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e015cfabe390bf548a9e44f19f5cdd74, type: 3}
