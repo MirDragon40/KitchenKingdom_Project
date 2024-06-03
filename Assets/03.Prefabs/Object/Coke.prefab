@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4630380822214011115}
   - component: {fileID: 7364024232130201408}
   - component: {fileID: 2828123559932534632}
-  - component: {fileID: 5273838717066081804}
+  - component: {fileID: 2599718345991850067}
   m_Layer: 0
   m_Name: Coke
   m_TagString: Food
@@ -76,14 +76,14 @@ MonoBehaviour:
   ChangeCokeMaterial: {fileID: 2100000, guid: 5294e1b9f82eb50459540445986474b4, type: 2}
   CokeParticle: {fileID: 6245819853513931166}
   CokeCollider: {fileID: 7364024232130201408}
---- !u!114 &5273838717066081804
+--- !u!114 &2599718345991850067
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1796028654022039200}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 74443335f70d7794ba419eae0c594e2a, type: 3}
   m_Name: 
@@ -96,8 +96,10 @@ MonoBehaviour:
   FoodPrefab3: {fileID: 0}
   IsCooking: 0
   IsGrillable: 0
+  IsFryable: 0
   CookProgress: 0
   CuttingTime: 3
+  BakeTime: 3
 --- !u!1 &6245819853513931166
 GameObject:
   m_ObjectHideFlags: 0

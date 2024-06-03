@@ -13,6 +13,10 @@ public class OrderManager : MonoBehaviourPun
     public float MaxOrderTimeSpan = 10f;
     private int _orderCount = 0;
     public int MaxOrderNumber = 5;
+
+    // public List<>
+
+
     public Dictionary<string, List<string>> Recipies = new Dictionary<string, List<string>>();
     private PhotonView _pv;
 

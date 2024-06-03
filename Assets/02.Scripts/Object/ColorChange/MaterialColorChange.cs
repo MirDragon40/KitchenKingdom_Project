@@ -18,7 +18,7 @@ public class MaterialColorChange: MonoBehaviour
 
     private bool _isReached = false;
 
-    public Image PlusImageUI;
+
 
     private void Start()
     {
@@ -34,11 +34,7 @@ public class MaterialColorChange: MonoBehaviour
             {
                 RendererThisMaterial.material = ThisMaterial;
 
-                // Stove 위에 플러스 이미지
-                if (CookType == CookingType.Stove) 
-                {
-                    PlusImageUI.gameObject.SetActive(false);
-                }
+              
             }
             else if(Input.GetKeyDown(KeyCode.LeftControl) && CookType == CookingType.SodaMachine) 
             {
