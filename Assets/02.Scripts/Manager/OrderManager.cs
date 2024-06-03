@@ -13,6 +13,8 @@ public class OrderManager : MonoBehaviourPun
     public float MaxOrderTimeSpan = 10f;
     private int _orderCount = 0;
     public int MaxOrderNumber = 5;
+    [Header("일반주문서 점수")]
+    public int NormalOrderPoints = 25;
 
     public List<string> GeneratedOrderList = new List<string>();
 
@@ -34,11 +36,32 @@ public class OrderManager : MonoBehaviourPun
         }
         _pv = GetComponent<PhotonView>();
         MyScrollView = GameObject.FindObjectOfType<UI_BilgeScrollView>();
+
         Recipies["burger"] = new List<string> { "bread", "lettuce", "patty" };
+        Recipies["burgerCoke"] = new List<string> { "burger", "coke" };
+        Recipies["burgerCokeFry"] = new List<string> { "burger", "coke","fry" };
+
+
     }
     void Update()
     {
-        if (!isGenerating && _orderCount < MaxOrderNumber)
+
+        if(Input.GetKeyUp(KeyCode.Alpha1))
+        {
+            string orderName = "burger";
+            _isGenerating = true;
+            UI_Bilge newBill = MyScrollView.AddItem();
+            newBill.OrderedFood = orderName;
+            newBill.IngrediantsNameList = Recipies[orderName];
+            GeneratedOrderList.Add(orderName);
+        }   
+        
+        if(Input.GetKeyDown(KeyCode.Alpha2)) 
+        {
+            SubmitOrder("burger");
+        }
+
+        if (!_isGenerating && _orderCount < MaxOrderNumber)
         {
             _orderCount++;
             if (PhotonNetwork.IsMasterClient)
@@ -48,20 +71,31 @@ public class OrderManager : MonoBehaviourPun
         }
     }
 
-    public void SubmitOrder(List<string> ingrediantsInDish)
+
+    public void SubmitOrder(string orderedFood)
     {
-        foreach (string item in ingrediantsInDish)
+        for (int i = 0; i<GeneratedOrderList.Count; i++)
         {
-            foreach (string order in GeneratedOrderList)
+            if (GeneratedOrderList[i] == orderedFood)
             {
-                if (item == order)
-                {
-                    Debug.Log("order matched!");
-                    break;
-                }
+                GeneratedOrderList.RemoveAt(i);
+                // 점수 더하기
+                AddTotalScore(NormalOrderPoints);
+                // UI 삭제
+                MyScrollView.RemoveItem(orderedFood);
+                break;
             }
         }
+
     }
+
+    [PunRPC]
+    public void AddTotalScore(int score)
+    {
+        GameManager.Instance.TotalScore += score;
+
+    }
+
 
     [PunRPC]
     void GenerateOrderRPC(string order)
@@ -69,27 +103,18 @@ public class OrderManager : MonoBehaviourPun
         StartCoroutine(GenerateOrder(order));
     }
 
-    private bool isGenerating = false;
+    private bool _isGenerating = false;
     IEnumerator GenerateOrder(string orderName)
     {
-        isGenerating = true;
-        GameObject newItem = MyScrollView.AddItem();
-        UI_Bilge newBill = newItem.GetComponent<UI_Bilge>();
+        _isGenerating = true;
+        UI_Bilge newBill = MyScrollView.AddItem();
         newBill.OrderedFood = orderName;
         newBill.IngrediantsNameList = Recipies[orderName];
         GeneratedOrderList.Add(orderName);
         float waitTime = Random.Range(MinOrderTimeSpan, MaxOrderTimeSpan);
         yield return new WaitForSeconds(waitTime);
-
-
-        isGenerating = false;
+        _isGenerating = false;
     }
 
-    string OrderToString(string dish, List<string> ingredients)
-    {
-        string result = "Dish: " + dish + ", Ingredients: ";
-        result += string.Join(", ", ingredients);
-        return result;
-    }
 
 }

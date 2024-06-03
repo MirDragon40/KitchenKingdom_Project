@@ -65,8 +65,8 @@ public class FoodCombination : MonoBehaviour
         {
             _holdableObject = other.GetComponent<CharacterHoldAbility>().HoldableItem;
             IsSubmitable = true;
-
         }
+
     }
     private void OnTriggerExit(Collider other)
     {

@@ -76,7 +76,7 @@ public class PhotonManager_test : MonoBehaviourPunCallbacks
         Debug.Log("방 join 성공!");
         Debug.Log($"RoomName: {PhotonNetwork.CurrentRoom.Name}");
         Debug.Log($"Current Players: {PhotonNetwork.CurrentRoom.PlayerCount}");
-        GatherManager.Instance.UpdatePlayerSlots();
+       // GatherManager.Instance.UpdatePlayerSlots();
 
     }
     public override void OnCreateRoomFailed(short returnCode, string message)
