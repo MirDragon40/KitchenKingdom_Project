@@ -269,4 +269,9 @@ public class FoodObject : IHoldable, IThrowable
     {
         IsCooking = false;
     }
+
+    public void ThrowObject(Vector3 direction, float throwPower)
+    {
+        throw new NotImplementedException();
+    }
 }
