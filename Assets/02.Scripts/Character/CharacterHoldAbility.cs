@@ -160,4 +160,5 @@ public class CharacterHoldAbility : CharacterAbility
         panTransform = pan; // 팬 오브젝트 참조 설정
     }
 
+
 }
