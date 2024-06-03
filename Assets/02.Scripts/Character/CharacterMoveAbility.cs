@@ -14,6 +14,7 @@ public class CharacterMoveAbility : CharacterAbility
     public float RotationSpeed;
     public float DashDuration;
     private float _dirMagnitude;
+    private PhotonView _pv;
 
     private CharacterController _characterController;
     private Animator _animator;
@@ -27,6 +28,7 @@ public class CharacterMoveAbility : CharacterAbility
     {
         _characterController = GetComponent<CharacterController>();
         _animator = GetComponent<Animator>();
+        _pv = GetComponent<PhotonView>();
 
         MoveSpeed = 5f;
         DashSpeed = 7f;
@@ -68,11 +70,11 @@ public class CharacterMoveAbility : CharacterAbility
         // 파티클 시스템 제어
         if (_dirMagnitude > 0 && !PowderEffect.isPlaying)
         {
-            PowderEffect.Play();
+            _pv.RPC("WalkEffectPlay", RpcTarget.All);
         }
         else if (_dirMagnitude == 0 && PowderEffect.isPlaying)
         {
-            PowderEffect.Stop();
+            _pv.RPC("WalkEffectStop", RpcTarget.All);
         }
 
         // 이동하는 방향을 바라보도록 회전
@@ -84,12 +86,25 @@ public class CharacterMoveAbility : CharacterAbility
 
         if (Input.GetKeyDown(KeyCode.LeftAlt) && !isDashing)
         {
-            PowderEffect_Dash.Play();
-            StartCoroutine(Dash());
-
+            _pv.RPC("DashPlay",RpcTarget.All);
         }
     }
-
+    [PunRPC]
+    private void WalkEffectPlay()
+    {
+        PowderEffect.Play();
+    }
+    [PunRPC]
+    private void WalkEffectStop()
+    {
+        PowderEffect.Stop();
+    }
+    [PunRPC]
+    private void DashPlay()
+    {
+        PowderEffect_Dash.Play();
+        StartCoroutine(Dash());
+    }
     // 대쉬 코루틴 함수
     private IEnumerator Dash()
     {

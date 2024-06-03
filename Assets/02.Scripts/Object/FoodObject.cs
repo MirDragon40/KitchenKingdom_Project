@@ -107,6 +107,10 @@ public class FoodObject : IHoldable, IThrowable
 
     public override void Hold(Character character, Transform handTransform)
     {
+        if (character.GetComponent<CharacterHoldAbility>().IsPlaceable == true)
+        {
+            return;
+        }
         _rigidbody.isKinematic = true;
         _holdCharacter = character;
 
