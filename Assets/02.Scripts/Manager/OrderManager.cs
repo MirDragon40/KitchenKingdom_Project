@@ -14,7 +14,7 @@ public class OrderManager : MonoBehaviourPun
     private int _orderCount = 0;
     public int MaxOrderNumber = 5;
 
-    // public List<>
+    public List<string> GeneratedOrderList = new List<string>();
 
 
     public Dictionary<string, List<string>> Recipies = new Dictionary<string, List<string>>();
@@ -48,6 +48,20 @@ public class OrderManager : MonoBehaviourPun
         }
     }
 
+    public void SubmitOrder(List<string> ingrediantsInDish)
+    {
+        foreach (string item in ingrediantsInDish)
+        {
+            foreach (string order in GeneratedOrderList)
+            {
+                if (item == order)
+                {
+                    Debug.Log("order matched!");
+                    break;
+                }
+            }
+        }
+    }
 
     [PunRPC]
     void GenerateOrderRPC(string order)
@@ -63,7 +77,7 @@ public class OrderManager : MonoBehaviourPun
         UI_Bilge newBill = newItem.GetComponent<UI_Bilge>();
         newBill.OrderedFood = orderName;
         newBill.IngrediantsNameList = Recipies[orderName];
-
+        GeneratedOrderList.Add(orderName);
         float waitTime = Random.Range(MinOrderTimeSpan, MaxOrderTimeSpan);
         yield return new WaitForSeconds(waitTime);
 

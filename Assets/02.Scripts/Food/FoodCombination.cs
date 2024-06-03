@@ -12,6 +12,7 @@ public class FoodCombination : MonoBehaviour
     public Dictionary<string, bool> Ingrediants = new Dictionary<string, bool>();
     public bool IsSubmitable;
     private IHoldable _holdableObject;
+    public bool IsReadyServe = false;
 
 
     private void Awake()
@@ -55,19 +56,14 @@ public class FoodCombination : MonoBehaviour
             {
                 SubmitIngrediant(_holdableObject.GetComponent<PanObject>().GrillingIngrediant.GetComponent<FoodObject>());
             }
-            Debug.Log(ingrediant);
         }
 
     }
     private void OnTriggerStay(Collider other)
     {
-        if (other.GetComponent<CharacterHoldAbility>().HoldableItem != null)
-        {
-            _holdableObject = other.GetComponent<CharacterHoldAbility>().HoldableItem;
-
-        }
         if (other.CompareTag("Player") && other.GetComponent<CharacterHoldAbility>().HoldableItem != null)
         {
+            _holdableObject = other.GetComponent<CharacterHoldAbility>().HoldableItem;
             IsSubmitable = true;
 
         }
@@ -123,22 +119,24 @@ public class FoodCombination : MonoBehaviour
                     Ingrediants.Remove("bread");
                     Ingrediants.Remove("patty");
                     Ingrediants.Remove("lettuce");
+                    IsReadyServe = true;
                     UI_FoodIcon[0].gameObject.SetActive(false);
                     UI_FoodIcon[1].gameObject.SetActive(false);
                     UI_FoodIcon[2].gameObject.SetActive(false);
+                    UI_FoodIcon[5].gameObject.SetActive(true);
                 }
-                if (Ingrediants["bread"] == true)
+                if (Ingrediants.ContainsKey("bread") && Ingrediants["bread"])
                 {
                     AvailableIngrediants[0].SetActive(true);
                     AvailableIngrediants[3].SetActive(true);
                     UI_FoodIcon[0].gameObject.SetActive(true);
                 }
-                if (Ingrediants["patty"] == true)
+                if (Ingrediants.ContainsKey("patty") && Ingrediants["patty"] == true)
                 {
                     AvailableIngrediants[1].SetActive(true);
                     UI_FoodIcon[2].gameObject.SetActive(true);
                 }
-                if (Ingrediants["lettuce"])
+                if (Ingrediants.ContainsKey("lettuce") && Ingrediants["lettuce"])
                 {
                     AvailableIngrediants[2].SetActive(true);
                     UI_FoodIcon[1].gameObject.SetActive(true);

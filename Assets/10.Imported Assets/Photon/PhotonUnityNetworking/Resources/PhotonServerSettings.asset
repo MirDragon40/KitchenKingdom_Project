@@ -45,6 +45,9 @@ MonoBehaviour:
   - UpdatePlayerSlots
   - GenerateOrderRPC
   - SetNickName
+  - DashPlay
+  - WalkEffectPlay
+  - WalkEffectStop
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1
