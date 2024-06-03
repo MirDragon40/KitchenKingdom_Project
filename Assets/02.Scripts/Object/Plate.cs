@@ -21,7 +21,6 @@ public class Plate : MonoBehaviour
         }*/
     }
 
-
     // 접시 더러워질때
     public void PlateDirty() 
     {
