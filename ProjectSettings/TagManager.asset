@@ -11,6 +11,7 @@ TagManager:
   - Fire
   - Powder
   - Pan
+  - TrashBin
   layers:
   - Default
   - TransparentFX
