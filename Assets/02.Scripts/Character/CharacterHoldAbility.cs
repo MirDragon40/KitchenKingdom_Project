@@ -153,10 +153,12 @@ public class CharacterHoldAbility : CharacterAbility
         HoldableItem = null;
         animator.SetBool("Carry", false);
     }
+
     public void SetNearTrashBin(bool value, Transform pan = null)
     {
         nearTrashBin = value;
         panTransform = pan; // 팬 오브젝트 참조 설정
     }
+
 
 }

@@ -14,10 +14,15 @@ public class FireObject : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            StartFire();
+            //StartFire();
+            MakeFire();
         }
     }
-
+    public void MakeFire()
+    {
+        fireEffect.Play();
+        Debug.Log("불이야");
+    }
     public void StartFire()
     {
         StartCoroutine(StartFireCoroutine(1f)); // 1초 후에 화재 발생
@@ -54,4 +59,6 @@ public class FireObject : MonoBehaviour
             Debug.Log("00");
         }
     }
+
+
 }
