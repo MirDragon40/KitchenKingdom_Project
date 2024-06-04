@@ -18,7 +18,7 @@ public class Sink : MonoBehaviour
     public Transform HandPosition;
     public GameObject BubbleEffect;
 
-    
+    private CharacterHoldAbility characterHoldAbility;
 
 
     private void Awake()
@@ -54,6 +54,11 @@ public class Sink : MonoBehaviour
             {
                 washingCoroutine = StartCoroutine(WashPlates());
             }
+        }
+
+        if(isPlayerInTrigger && Input.GetKeyDown(KeyCode.Space) && CleanPlateNum > 0)
+        {
+            TakeCleanPlate();
         }
     }
 
@@ -128,10 +133,13 @@ public class Sink : MonoBehaviour
         }
     }
 
+    
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
+            characterHoldAbility = other.GetComponent<CharacterHoldAbility>();
             isPlayerInTrigger = true;
         }
     }
@@ -142,5 +150,12 @@ public class Sink : MonoBehaviour
         {
             isPlayerInTrigger = false;
         }
+    }
+
+    private void TakeCleanPlate()
+    {
+        CleanPlateNum--;
+        UpdatePlates();
+        characterHoldAbility.SpawnPlateOnHand();
     }
 }

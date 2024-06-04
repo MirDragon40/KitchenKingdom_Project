@@ -16,7 +16,7 @@ public class DishObject : IHoldable
         transform.parent = handTransform;
         GetComponent<Rigidbody>().isKinematic = true;
 
-        transform.localPosition = new Vector3(0, 0.4f, 0.5F);
+        transform.localPosition = new Vector3(0, 0.4f, 0.5f);
         transform.localRotation = Quaternion.identity;
     }
 

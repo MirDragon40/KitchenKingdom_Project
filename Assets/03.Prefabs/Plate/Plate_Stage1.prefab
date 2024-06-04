@@ -752,6 +752,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ItemType: 2
+  IsDroppable: 0
 --- !u!54 &9134784722669695391
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -806,6 +807,7 @@ MonoBehaviour:
   - {fileID: 6515531490869409541}
   - {fileID: 8424799755787072411}
   IsSubmitable: 0
+  IsReadyServe: 0
 --- !u!65 &1010523499004131602
 BoxCollider:
   m_ObjectHideFlags: 0

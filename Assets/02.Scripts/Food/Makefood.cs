@@ -49,7 +49,7 @@ public class Makefood : MonoBehaviour
                 // 음식을 생성하기 전에 근처에 들 수 있는 오브젝트가 있는지 확인합니다
                 if (!IsNearbyHoldable())
                 {
-                    SpawnFood(FoodType, _nearbyCharacter.HoldAbility.handTransform);
+                    SpawnFood(FoodType, _nearbyCharacter.HoldAbility.HandTransform);
 
                     // 들기 애니메이션 실행
                     _nearbyCharacter.GetComponent<Animator>().SetBool("Carry", true);

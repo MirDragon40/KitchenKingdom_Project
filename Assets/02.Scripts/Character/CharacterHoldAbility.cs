@@ -8,7 +8,7 @@ public class CharacterHoldAbility : CharacterAbility
 {
 
 
-    public Transform handTransform;
+    public Transform HandTransform;
     private Animator animator;
     private float _findfood = 1f; //음식을 찾는 범위
 
@@ -99,9 +99,9 @@ public class CharacterHoldAbility : CharacterAbility
             return;
         }
 
-        Vector3 dropPosition = handTransform.position + transform.forward * HoldableItem.DropOffset.x + Vector3.up * HoldableItem.DropOffset.y;
+        Vector3 dropPosition = HandTransform.position + transform.forward * HoldableItem.DropOffset.x + Vector3.up * HoldableItem.DropOffset.y;
         dropPosition.y -= 0.5f;
-        Quaternion dropRotation = handTransform.rotation;
+        Quaternion dropRotation = HandTransform.rotation;
 
         HoldableItem.UnHold(dropPosition, dropRotation);
         HoldableItem = null;
@@ -161,5 +161,9 @@ public class CharacterHoldAbility : CharacterAbility
         panTransform = pan; // 팬 오브젝트 참조 설정
     }
 
+    public void SpawnPlateOnHand()
+    {
+        
+    }
 
 }
