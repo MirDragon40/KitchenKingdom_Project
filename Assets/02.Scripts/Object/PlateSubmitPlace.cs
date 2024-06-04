@@ -47,22 +47,29 @@ public class PlateSubmitPlace : MonoBehaviour
                 if (_foodCombo.IsReadyServe)
                 {
                     IsServeable = true;
+                    _holdability.IsServeable = true;
 
                 }
                 else
                 {
                     IsServeable = false;
+                    _holdability.IsServeable = true;
                 }
             }
         }
         else
         {
             IsServeable = false;
+            _holdability.IsServeable = true;
         }
     }
     private void OnTriggerExit(Collider other)
     {
         IsServeable = false;
+        if (_holdability != null)
+        {
+            _holdability.IsServeable = false;
+        }
     }
 
 }

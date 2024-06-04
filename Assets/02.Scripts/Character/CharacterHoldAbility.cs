@@ -14,10 +14,11 @@ public class CharacterHoldAbility : CharacterAbility
 
 
     public IHoldable HoldableItem;
-   // private Transform _placeableSurface;
-
+    // private Transform _placeableSurface;
+    public bool IsDroppable => !IsPlaceable && !IsSubmitable && !IsServeable;
     public bool IsPlaceable = false;
     public bool IsSubmitable = false;
+    public bool IsServeable = false;
     public bool IsHolding => HoldableItem != null;
 
     public Transform PlacePosition = null;
@@ -44,7 +45,7 @@ public class CharacterHoldAbility : CharacterAbility
                 {
                     Place();
                 }
-                else
+                else if (IsDroppable)
                 {
                     if (nearTrashBin)
                     {

@@ -116,9 +116,9 @@ public class FoodCombination : MonoBehaviour
                     AvailableIngrediants[2].SetActive(true);
                     AvailableIngrediants[3].SetActive(true);
                     Ingrediants["burger"] = true;
-                    Ingrediants.Remove("bread");
-                    Ingrediants.Remove("patty");
-                    Ingrediants.Remove("lettuce");
+                    Ingrediants["bread"] = false;
+                    Ingrediants["patty"] = false;
+                    Ingrediants["lettuce"] = false;
                     IsReadyServe = true;
                     UI_FoodIcon[0].gameObject.SetActive(false);
                     UI_FoodIcon[1].gameObject.SetActive(false);
@@ -148,6 +148,7 @@ public class FoodCombination : MonoBehaviour
                 }
                 if (Ingrediants["fry"])
                 {
+                    UI_FoodIcon[4].gameObject.SetActive(true);
                     AvailableIngrediants[5].SetActive(true);
                 }
                 break;

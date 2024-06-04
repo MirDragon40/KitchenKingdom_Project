@@ -17,7 +17,8 @@ public abstract class IHoldable : MonoBehaviour
     public EItemType ItemType;
 
     protected Character _holdCharacter;
-    
+    public bool IsDroppable = false;
+
     public bool IsHold => _holdCharacter != null;
 
     //public bool Placeable = false;
