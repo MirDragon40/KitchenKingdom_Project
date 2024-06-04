@@ -12,6 +12,7 @@ TagManager:
   - Powder
   - Pan
   - TrashBin
+  - DirtyPlates
   layers:
   - Default
   - TransparentFX

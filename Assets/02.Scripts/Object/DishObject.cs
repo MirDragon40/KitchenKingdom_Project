@@ -2,11 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum DishState
-{
-
-}
-
 public class DishObject : IHoldable
 {
     public override Vector3 DropOffset => new Vector3(0.3f, 0.1f, 0f);

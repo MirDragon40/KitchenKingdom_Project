@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,6 +12,7 @@ public class Sink : MonoBehaviour
     public Slider ProgressSlider;
     private Coroutine washingCoroutine;
     private bool isPlayerInTrigger = false;
+    public bool isDirtyPlateInTrigger = false;
 
     public List<GameObject> DirtyPlates;
     public List<GameObject> CleanPlates;
@@ -19,6 +21,7 @@ public class Sink : MonoBehaviour
     public GameObject BubbleEffect;
 
     private CharacterHoldAbility characterHoldAbility;
+    private DirtyPlate dirtyPlate;
 
 
     private void Awake()
@@ -58,7 +61,16 @@ public class Sink : MonoBehaviour
 
         if(isPlayerInTrigger && Input.GetKeyDown(KeyCode.Space) && CleanPlateNum > 0)
         {
+            
             TakeCleanPlate();
+        }
+
+        if(isPlayerInTrigger && Input.GetKeyDown(KeyCode.Space) && dirtyPlate != null)
+        {
+            UpdatePlates();
+            Debug.Log(DirtyPlateNum);
+            GetDirtyPlateNum();
+            Destroy(dirtyPlate.gameObject);
         }
     }
 
@@ -75,7 +87,7 @@ public class Sink : MonoBehaviour
                 elapsed += Time.deltaTime;
                 ProgressSlider.value = Mathf.Clamp01(elapsed / duration);
                 BubbleEffect.SetActive(true);
-                Debug.Log("버블 이펙트 재생");
+               
                 yield return null;
 
                 if (!isPlayerInTrigger)
@@ -140,6 +152,7 @@ public class Sink : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             characterHoldAbility = other.GetComponent<CharacterHoldAbility>();
+            dirtyPlate = characterHoldAbility.gameObject.GetComponentInChildren<DirtyPlate>();
             isPlayerInTrigger = true;
         }
     }
@@ -149,7 +162,9 @@ public class Sink : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             isPlayerInTrigger = false;
+            dirtyPlate = null;
         }
+      
     }
 
     private void TakeCleanPlate()
@@ -157,5 +172,15 @@ public class Sink : MonoBehaviour
         CleanPlateNum--;
         UpdatePlates();
         characterHoldAbility.SpawnPlateOnHand();
+    }
+
+    private void GetDirtyPlateNum()
+    {
+        if(dirtyPlate != null)
+        {
+            DirtyPlateNum = dirtyPlate.DirtyPlateNum;
+            UpdatePlates();
+            dirtyPlate.DirtyPlateNum = 0;
+        }
     }
 }
