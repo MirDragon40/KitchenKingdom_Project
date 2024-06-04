@@ -38,7 +38,7 @@ public class FoodObject : IHoldable, IThrowable
     private Coroutine cookingCoroutine;
 
     private BoxCollider colliderThis;
-
+    public float ThrownEffectTriggerTime = 0.5f;
     public float CuttingTime = 3f;
     public float BakeTime = 3f;
     
@@ -78,17 +78,11 @@ public class FoodObject : IHoldable, IThrowable
             FoodPrefab2.SetActive(false);
             FoodPrefab3.SetActive(false);
         }
-        /*        if (FoodType == FoodType.Patty && State == FoodState.Raw)
-                {
-                    IsGrillable = true;
-                }*/
+ 
 
 
     }
-    void Start()
-    {
 
-    }
     private void Update()
     {
         if (IsCooking && cookingCoroutine == null)
@@ -148,15 +142,29 @@ public class FoodObject : IHoldable, IThrowable
         _rigidbody.isKinematic = false;
         transform.parent = null;
         _holdCharacter = null;
-        
+        StartCoroutine(TriggerThrownItem_Coroutine(ThrownEffectTriggerTime));
+
         _rigidbody.AddForce(direction*throwPower, ForceMode.Impulse);
     }
+    private IEnumerator TriggerThrownItem_Coroutine(float triggerTime)
+    {
+        yield return new WaitForSeconds(triggerTime);
 
+        Collider[] colliders = Physics.OverlapSphere(transform.position, 0.05f);
+
+        foreach (Collider collider in colliders) 
+        {
+            CookStand cookStand = null;
+            if (collider.TryGetComponent<CookStand>(out cookStand))
+            {
+                Place(cookStand.PlacePosition);
+            }
+        }
+    }
     public override void Place(Transform place)
     {
         transform.position = place.position;
         _rigidbody.isKinematic = true;
-        //transform.rotation = placeRotation;
         transform.parent = place;
         _holdCharacter = null;
     }

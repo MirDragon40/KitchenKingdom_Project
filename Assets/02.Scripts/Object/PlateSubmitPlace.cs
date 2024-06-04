@@ -13,7 +13,7 @@ public class PlateSubmitPlace : MonoBehaviour
     private string _plateContent = string.Empty;
 
 
-    private void Update()
+    private void LateUpdate()
     {
         if (IsServeable && Input.GetKeyDown(KeyCode.Space))
         {

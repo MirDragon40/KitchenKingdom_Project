@@ -67,6 +67,15 @@ public class OrderManager : MonoBehaviourPun
             
             if (PhotonNetwork.IsMasterClient)
             {
+                int orderRandIndex = Random.Range(0, 10);
+                if (orderRandIndex <= 8)
+                {
+
+                }
+                else if (orderRandIndex == 9)
+                {
+                     
+                }
                 _pv.RPC("GenerateOrderRPC", RpcTarget.All, "burger");
             }
         }
