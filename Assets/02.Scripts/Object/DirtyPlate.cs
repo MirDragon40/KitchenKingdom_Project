@@ -7,6 +7,7 @@ public class DirtyPlate : MonoBehaviour
     public List<GameObject> DirtyPlates;
     public int DirtyPlateNum = 5;
 
+
     private void Awake()
     {
         foreach (GameObject plate in DirtyPlates)
