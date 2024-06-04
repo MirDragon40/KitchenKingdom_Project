@@ -61,11 +61,19 @@ public class FoodCombination : MonoBehaviour
     }
     private void OnTriggerStay(Collider other)
     {
-        if (other.CompareTag("Player") && other.GetComponent<CharacterHoldAbility>().HoldableItem != null)
+        if (other.CompareTag("Player"))
         {
-            _holdableObject = other.GetComponent<CharacterHoldAbility>().HoldableItem;
-            IsSubmitable = true;
+            if (other.GetComponent<CharacterHoldAbility>().HoldableItem != null)
+            {
+                _holdableObject = other.GetComponent<CharacterHoldAbility>().HoldableItem;
+                IsSubmitable = true;
+            }
         }
+        else
+        {
+            IsSubmitable = false;
+        }
+
 
     }
     private void OnTriggerExit(Collider other)
