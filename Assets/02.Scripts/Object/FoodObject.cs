@@ -179,14 +179,12 @@ public class FoodObject : IHoldable, IThrowable
                 FoodPrefab1.SetActive(false);
                 FoodPrefab2.SetActive(true);
             }
-            if (CookProgress >= 0.9f && FoodPrefab2.activeSelf)
+            if (CookProgress >= 1f && FoodPrefab2.activeSelf)
             {
                 FoodPrefab2.SetActive(false);
                 FoodPrefab3.SetActive(true);
-            }
-            if (CookProgress >= 1f)
-            {
                 State = FoodState.Cut;
+                colliderThis.enabled = true;
             }
             yield return null;
         }

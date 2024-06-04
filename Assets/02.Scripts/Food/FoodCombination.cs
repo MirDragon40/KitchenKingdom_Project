@@ -69,11 +69,10 @@ public class FoodCombination : MonoBehaviour
                 IsSubmitable = true;
             }
         }
-        else
+        else if (!GetComponent<BoxCollider>().enabled)
         {
             IsSubmitable = false;
         }
-
 
     }
     private void OnTriggerExit(Collider other)
@@ -124,27 +123,26 @@ public class FoodCombination : MonoBehaviour
                     AvailableIngrediants[2].SetActive(true);
                     AvailableIngrediants[3].SetActive(true);
                     Ingrediants["burger"] = true;
-                    Ingrediants["bread"] = false;
-                    Ingrediants["patty"] = false;
-                    Ingrediants["lettuce"] = false;
+
                     IsReadyServe = true;
                     UI_FoodIcon[0].gameObject.SetActive(false);
                     UI_FoodIcon[1].gameObject.SetActive(false);
                     UI_FoodIcon[2].gameObject.SetActive(false);
                     UI_FoodIcon[5].gameObject.SetActive(true);
+                    break;
                 }
-                if (Ingrediants.ContainsKey("bread") && Ingrediants["bread"])
+                if (Ingrediants["bread"])
                 {
                     AvailableIngrediants[0].SetActive(true);
                     AvailableIngrediants[3].SetActive(true);
                     UI_FoodIcon[0].gameObject.SetActive(true);
                 }
-                if (Ingrediants.ContainsKey("patty") && Ingrediants["patty"] == true)
+                if (Ingrediants["patty"])
                 {
                     AvailableIngrediants[1].SetActive(true);
                     UI_FoodIcon[2].gameObject.SetActive(true);
                 }
-                if (Ingrediants.ContainsKey("lettuce") && Ingrediants["lettuce"])
+                if (Ingrediants["lettuce"])
                 {
                     AvailableIngrediants[2].SetActive(true);
                     UI_FoodIcon[1].gameObject.SetActive(true);
