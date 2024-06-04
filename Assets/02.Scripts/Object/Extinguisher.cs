@@ -7,14 +7,14 @@ using UnityEngine;
 public class Extinguisher : IHoldable
 {
     private ParticleSystem _powderEffect;
+    public BoxCollider _boxCollider;
     public bool isPress = false;
 
     public override Vector3 DropOffset => new Vector3(0.3f, 0, 0);
     private void Awake()
     {
         _powderEffect = GetComponentInChildren<ParticleSystem>();
-        
-
+        _boxCollider.enabled = false; 
     }
     public override void Hold(Character character, Transform handTransform)
     {
@@ -36,12 +36,14 @@ public class Extinguisher : IHoldable
             _powderEffect.Play();
             isPress = true;
 
-
+            _boxCollider.enabled = true;
         }
         if (Input.GetKeyUp(KeyCode.LeftControl))
         {
             _powderEffect.Stop();
             isPress = false;
+
+            _boxCollider.enabled = false;
         }
 
     }

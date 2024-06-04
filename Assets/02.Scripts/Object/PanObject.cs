@@ -66,6 +66,15 @@ public class PanObject : IHoldable
                     GrillingIngrediant.StopGrilling();
                 }
             }
+
+            if (GrillingSlider.value >= 1f)
+            {
+                GrillingSlider.gameObject.SetActive(false);
+            }
+            else
+            {
+                GrillingSlider.gameObject.SetActive(true);
+            }
         }
         else
         {
@@ -135,6 +144,11 @@ public class PanObject : IHoldable
                 other.GetComponent<CharacterHoldAbility>().PlacePosition = PanPlacePositon;
                 other.GetComponent<CharacterHoldAbility>().IsPlaceable = true;
             }
+        }
+        else if (other.CompareTag("Powder"))  // 소화기 파티클에 닿았을 때
+        {
+            // 불 소화
+            fireObject.Extinguish();
         }
     }
 
