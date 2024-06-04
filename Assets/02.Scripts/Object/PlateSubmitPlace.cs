@@ -10,31 +10,20 @@ public class PlateSubmitPlace : MonoBehaviour
     public bool IsServeable = false;
     public List<string> IngrediantsInDish = new List<string>();
     private CharacterHoldAbility _holdability;
+    private string _plateContent = string.Empty;
 
 
     private void Update()
     {
         if (IsServeable && Input.GetKeyDown(KeyCode.Space))
         {
-            string plateContent = string.Empty;
-            if (_foodCombo.Ingrediants["burger"] && _foodCombo.Ingrediants["coke"] && _foodCombo.Ingrediants["fry"])
+            if (_plateContent != string.Empty)
             {
-                plateContent = "burgerCokeFry";
-            }
-            else if (_foodCombo.Ingrediants["burger"] && _foodCombo.Ingrediants["coke"])
-            {
-                plateContent = "burgerCoke";
-            }
-            else if (_foodCombo.Ingrediants["burger"])
-            {
-                plateContent = "burger";
-            }
-            if (plateContent != string.Empty)
-            {
-                Debug.Log(plateContent);
-                OrderManager.Instance.SubmitOrder(plateContent);
+                Debug.Log(_plateContent);
+                OrderManager.Instance.SubmitOrder(_plateContent);
                 Destroy(_foodCombo.gameObject);
                 _foodCombo = null;
+                _plateContent = string.Empty;
             }
 
         }
@@ -52,6 +41,18 @@ public class PlateSubmitPlace : MonoBehaviour
                 {
                     if (_foodCombo.IsReadyServe)
                     {
+                        if (_foodCombo.Ingrediants["burger"] && _foodCombo.Ingrediants["coke"] && _foodCombo.Ingrediants["fry"])
+                        {
+                            _plateContent = "burgerCokeFry";
+                        }
+                        else if (_foodCombo.Ingrediants["burger"] && _foodCombo.Ingrediants["coke"])
+                        {
+                            _plateContent = "burgerCoke";
+                        }
+                        else if (_foodCombo.Ingrediants["burger"])
+                        {
+                            _plateContent = "burger";
+                        }
                         IsServeable = true;
                         _holdability.IsServeable = true;
 
