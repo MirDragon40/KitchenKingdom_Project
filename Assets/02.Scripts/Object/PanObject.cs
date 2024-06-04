@@ -145,13 +145,27 @@ public class PanObject : IHoldable
                 other.GetComponent<CharacterHoldAbility>().IsPlaceable = true;
             }
         }
-        else if (other.CompareTag("Powder"))  // 소화기 파티클에 닿았을 때
-        {
-            // 불 소화
-            fireObject.Extinguish();
-        }
+        /*        else if (other.CompareTag("Powder"))  // 소화기 파티클에 닿았을 때
+                {
+                    // 불 소화
+                    fireObject.Extinguish();
+                }*/
     }
 
+    private void OnTriggerStay(Collider other)
+    {
+        // 불이 활성화 상태이고, 'Powder' 태그 오브젝트와 접촉 중일 때
+        if (fireObject.isFireActive && other.CompareTag("Powder"))
+        {
+            fireObject.contactTime += Time.deltaTime; // 접촉 시간을 측정
+            Debug.Log(fireObject.contactTime);
+            // 접촉 시간이 4초 이상이면 불을 끔
+            if (fireObject.contactTime >= 4f)
+            {
+                fireObject.Extinguish();
+            }
+        }
+    }
     private void OnTriggerExit(Collider other)
     {
         if (other.CompareTag("Table"))  // 표면에서 벗어났을 때
@@ -167,5 +181,12 @@ public class PanObject : IHoldable
                 holdAbility.IsPlaceable = false;
             }
         }
+        if (fireObject.isFireActive && other.CompareTag("Powder"))
+        {
+            fireObject.contactTime -= Time.deltaTime;
+            Debug.Log(fireObject.contactTime);
+            fireObject.contactTime = 0f;
+        }
+
     }
 }
