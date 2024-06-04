@@ -42,6 +42,9 @@ public class FoodObject : IHoldable, IThrowable
     public float CuttingTime = 3f;
     public float BakeTime = 3f;
 
+    public FireObject fireObject;
+    public DangerIndicator dangerIndicator;
+    
 
     public override Vector3 DropOffset => new Vector3(0.3f, 0.1f, 0f);
     //public override Quaternion DropOffset_Rotation => Quaternion.Euler(0, 0, 0);
@@ -85,7 +88,11 @@ public class FoodObject : IHoldable, IThrowable
 
 
     }
-
+    void Start()
+    {
+        fireObject = FindObjectOfType<FireObject>();
+        dangerIndicator = GetComponentInChildren<DangerIndicator>();
+    }
     private void Update()
     {
         if (IsCooking && cookingCoroutine == null)
@@ -196,7 +203,7 @@ public class FoodObject : IHoldable, IThrowable
             colliderThis.enabled = false;
 
             CookProgress += Time.deltaTime / BakeTime;
-            CookProgress = Mathf.Clamp(CookProgress, 0f, 2.5f);
+            CookProgress = Mathf.Clamp(CookProgress, 0f, 3f);
 
             if (State == FoodState.Raw && CookProgress >= 1f && FoodPrefab1.activeSelf)
             {
@@ -204,14 +211,27 @@ public class FoodObject : IHoldable, IThrowable
                 FoodPrefab2.SetActive(true);
                 State = FoodState.Grilled; // 수정: 상태를 Grilled로 변경
             }
-            if (State == FoodState.Grilled && CookProgress >= 2.5f && FoodPrefab2.activeSelf)
+/*            if (State == FoodState.Grilled && CookProgress >= 2f && CookProgress < 2.9f && FoodPrefab2.activeSelf)
+            {
+                // DangerIndicator 컴포넌트의 ShowDangerInRange 메서드를 사용하여 경고창을 표시합니다.
+                dangerIndicator.ShowDangerIndicator(dangerSprite);
+            }
+            else
+            {
+                // 그 외의 경우에는 경고창을 숨깁니다.
+                dangerIndicator.HideDangerIndicator();
+            }*/
+            if (State == FoodState.Grilled && CookProgress >= 3f && FoodPrefab2.activeSelf)
             {
                 FoodPrefab2.SetActive(false);
                 FoodPrefab3.SetActive(true);
                 State = FoodState.Burnt; // 수정: 상태를 Burnt로 변경
+
+                fireObject.MakeFire();
             }
             yield return null;
         }
+
         cookingCoroutine = null;
         colliderThis.enabled = true;
     }

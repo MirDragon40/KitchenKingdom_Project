@@ -1899,7 +1899,7 @@ GameObject:
   - component: {fileID: 445569628}
   - component: {fileID: 445569627}
   m_Layer: 5
-  m_Name: Image (2)
+  m_Name: StarSpot3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3036,7 +3036,7 @@ GameObject:
   - component: {fileID: 905087446}
   - component: {fileID: 905087445}
   m_Layer: 5
-  m_Name: Image (4)
+  m_Name: StarSpot5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4509,7 +4509,7 @@ GameObject:
   - component: {fileID: 1296412978}
   - component: {fileID: 1296412977}
   m_Layer: 5
-  m_Name: Image (3)
+  m_Name: StarSpot4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5252,7 +5252,7 @@ GameObject:
   - component: {fileID: 1570946999}
   - component: {fileID: 1570946998}
   m_Layer: 5
-  m_Name: Image (1)
+  m_Name: StarSpot2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5910,6 +5910,7 @@ MonoBehaviour:
   MinOrderTimeSpan: 3
   MaxOrderTimeSpan: 10
   MaxOrderNumber: 5
+  NormalOrderPoints: 25
   GeneratedOrderList: []
 --- !u!4 &1746525627
 Transform:
@@ -6503,6 +6504,50 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2041296824
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2041296826}
+  - component: {fileID: 2041296827}
+  m_Layer: 0
+  m_Name: PhotonManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2041296826
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2041296824}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -2.0445745, y: -2.3905892, z: -2.9988923}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2041296827
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2041296824}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f787a19c0d6140541ad72198d7ba8a22, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2043107635
 GameObject:
   m_ObjectHideFlags: 0
@@ -6717,7 +6762,7 @@ GameObject:
   - component: {fileID: 2092898757}
   - component: {fileID: 2092898756}
   m_Layer: 5
-  m_Name: Image
+  m_Name: StarSpot1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11836,6 +11881,7 @@ GameObject:
   - component: {fileID: 664138361257123935}
   - component: {fileID: 1522690521287276380}
   - component: {fileID: 2196977419828155847}
+  - component: {fileID: 2196977419828155848}
   m_Layer: 0
   m_Name: PlateSubmitPlace
   m_TagString: Untagged
@@ -11864,6 +11910,20 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1.7462455}
   m_Center: {x: -2.3127117e-15, y: 0, z: 0.37312198}
+--- !u!114 &2196977419828155848
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2196977419828155846}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e92fdb9185277a54a934ef951a19150b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  IsServeable: 0
+  IngrediantsInDish: []
 --- !u!33 &2200303888681277489
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -24743,8 +24803,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   content: {fileID: 993218864199767406}
-  itemPrefab: {fileID: 6564947366733424236, guid: 44846a7a30035674399048816200e043, type: 3}
+  itemPrefab: {fileID: 1227722012045156244, guid: 44846a7a30035674399048816200e043, type: 3}
   maxItems: 5
+  OrderBills: []
   _horizontalLayoutGroup: {fileID: 2923003181457931299}
 --- !u!222 &8014551742061780403
 CanvasRenderer:
@@ -31572,13 +31633,27 @@ GameObject:
   - component: {fileID: 753683490417315325}
   - component: {fileID: 1534692527143718146}
   - component: {fileID: 7941140196123467595}
+  - component: {fileID: 9096559574987208977}
   m_Layer: 5
-  m_Name: Star
+  m_Name: UI_ScoreStar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &9096559574987208977
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9096559574987208976}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b535bc734a3381545863203d8426c47c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ScoreText: {fileID: 6938170966521290237}
 --- !u!1 &9097085383198382572
 GameObject:
   m_ObjectHideFlags: 0
@@ -31824,3 +31899,4 @@ SceneRoots:
   - {fileID: 1788572048}
   - {fileID: 329586069}
   - {fileID: 370936452}
+  - {fileID: 2041296826}

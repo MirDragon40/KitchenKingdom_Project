@@ -7,14 +7,32 @@ using UnityEngine;
 public class PlateSubmitPlace : MonoBehaviour
 {
     private FoodCombination _foodCombo;
-    public bool IsSubmitable = false;
+    public bool IsServeable = false;
     public List<string> IngrediantsInDish = new List<string>();
+    private CharacterHoldAbility _holdability;
+
 
     private void Update()
     {
-        if (IsSubmitable)
+        if (IsServeable && Input.GetKeyDown(KeyCode.Space))
         {
-            OrderManager.Instance.SubmitOrder(_foodCombo.Ingrediants.Keys.ToList());
+            string plateContent = string.Empty;
+            if (_foodCombo.Ingrediants["burger"] && _foodCombo.Ingrediants["coke"] && _foodCombo.Ingrediants["fry"])
+            {
+                plateContent = "burgerCokeFry";
+            }
+            else if (_foodCombo.Ingrediants["burger"] && _foodCombo.Ingrediants["coke"])
+            {
+                plateContent = "burgerCoke";
+            }
+            else if (_foodCombo.Ingrediants["burger"])
+            {
+                plateContent = "burger";
+            }
+
+            OrderManager.Instance.SubmitOrder(plateContent);
+            Destroy(_foodCombo.gameObject);
+            _foodCombo = null;
         }
     }
 
@@ -22,27 +40,29 @@ public class PlateSubmitPlace : MonoBehaviour
     // 
     private void OnTriggerStay(Collider other)
     {
-        if (other.CompareTag("Player") && other.GetComponent<CharacterHoldAbility>().HoldableItem.TryGetComponent<FoodCombination>(out _foodCombo))
+        if (other.CompareTag("Player") && other.TryGetComponent<CharacterHoldAbility>(out _holdability))
         {
-            if (_foodCombo.IsReadyServe)
+            if (_holdability.HoldableItem.TryGetComponent<FoodCombination>(out _foodCombo))
             {
-                IsSubmitable = true;
-                Debug.Log("Submitable");
+                if (_foodCombo.IsReadyServe)
+                {
+                    IsServeable = true;
 
-            }
-            else
-            {
-                IsSubmitable = false;
+                }
+                else
+                {
+                    IsServeable = false;
+                }
             }
         }
         else
         {
-            IsSubmitable = false;
+            IsServeable = false;
         }
     }
     private void OnTriggerExit(Collider other)
     {
-        IsSubmitable = false;
+        IsServeable = false;
     }
 
 }
