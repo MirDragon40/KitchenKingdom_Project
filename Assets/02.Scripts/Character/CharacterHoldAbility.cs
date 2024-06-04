@@ -171,7 +171,7 @@ public class CharacterHoldAbility : CharacterAbility
 
             GameObject dish = Instantiate(dishPrefab, HandTransform.position, HandTransform.rotation);
 
-            // 음식 오브젝트를 손에 들도록 설정
+            // 접시 오브젝트를 손에 들도록 설정
             IHoldable holdable = dish.GetComponent<IHoldable>();
             if (holdable != null)
             {
@@ -180,5 +180,27 @@ public class CharacterHoldAbility : CharacterAbility
         }
 
     }
+
+    public void SpawnDirtyPlateOnHand()
+    {
+        Character character = GetComponent<Character>();
+        GameObject dishPrefab = DishSpawnManager.Instance.DirtyPlates;
+
+
+        if (dishPrefab != null)
+        {
+
+            GameObject dish = Instantiate(dishPrefab, HandTransform.position, HandTransform.rotation);
+
+            // 접시 오브젝트를 손에 들도록 설정
+            IHoldable holdable = dish.GetComponent<IHoldable>();
+            if (holdable != null)
+            {
+                holdable.Hold(character, HandTransform);
+            }
+        }
+
+    }
+
 
 }

@@ -6,7 +6,9 @@ public class DishSpawnManager : MonoBehaviour
 {
    public static DishSpawnManager Instance;
 
+    public GameObject DirtyPlates;
     public GameObject Plate_Stage1_Object;
+
 
     private void Awake()
     {

@@ -2,10 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DirtyPlate : MonoBehaviour
+public class DirtyPlateStand : MonoBehaviour
 {
+
     public List<GameObject> DirtyPlates;
     public int DirtyPlateNum = 5;
+
+    private CharacterHoldAbility characterHoldAbility;
+
 
     private void Awake()
     {
@@ -13,12 +17,6 @@ public class DirtyPlate : MonoBehaviour
         {
             plate.SetActive(false);
         }
-    }
-
-
-    private void Update()
-    {
-        UpdatePlates();
     }
 
 
@@ -39,5 +37,17 @@ public class DirtyPlate : MonoBehaviour
 
     }
 
-   
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            characterHoldAbility = other.GetComponent<CharacterHoldAbility>();
+        }
+    }
+
+    private void GiveDirtyPlates()
+    {
+        
+    }
 }
