@@ -163,7 +163,22 @@ public class CharacterHoldAbility : CharacterAbility
 
     public void SpawnPlateOnHand()
     {
-        
+        Character character = GetComponent<Character>();
+        GameObject dishPrefab = DishSpawnManager.Instance.Plate_Stage1_Object;
+
+        if (dishPrefab != null)
+        {
+
+            GameObject dish = Instantiate(dishPrefab, HandTransform.position, HandTransform.rotation);
+
+            // 음식 오브젝트를 손에 들도록 설정
+            IHoldable holdable = dish.GetComponent<IHoldable>();
+            if (holdable != null)
+            {
+                holdable.Hold(character, HandTransform);
+            }
+        }
+
     }
 
 }
