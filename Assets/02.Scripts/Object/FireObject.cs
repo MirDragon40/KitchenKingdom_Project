@@ -21,6 +21,12 @@ public class FireObject : MonoBehaviour
         Debug.Log("불이야");
     }
 
+    IEnumerator FireStop_Coroutine(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        Extinguish();
+    }
+
     public void Extinguish()
     {
         FireEffect.Stop();
@@ -32,19 +38,8 @@ public class FireObject : MonoBehaviour
     {
         if (other.CompareTag("Powder"))
         {
-            // 불 파티클을 중지시킴
-            FireEffect.Stop();
+            StartCoroutine(FireStop_Coroutine(10f));
         }
     }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("Extinguisher"))
-        {
-            Extinguish();
-            Debug.Log("00");
-        }
-    }
-
 
 }
