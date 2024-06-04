@@ -16,12 +16,15 @@ public class Sink : MonoBehaviour
     public List<GameObject> CleanPlates;
 
     public Transform HandPosition;
+    public GameObject BubbleEffect;
 
     
 
 
     private void Awake()
     {
+        BubbleEffect.SetActive(false);
+
         foreach (GameObject plate in DirtyPlates)
         {
             plate.SetActive(false);
@@ -66,12 +69,16 @@ public class Sink : MonoBehaviour
             {
                 elapsed += Time.deltaTime;
                 ProgressSlider.value = Mathf.Clamp01(elapsed / duration);
+                BubbleEffect.SetActive(true);
+                Debug.Log("버블 이펙트 재생");
                 yield return null;
 
                 if (!isPlayerInTrigger)
                 {
                     // 플레이어가 트리거를 벗어나면 진행도를 유지하고 코루틴 일시정지
                     washingCoroutine = null;
+                    BubbleEffect.SetActive(false);
+
                     yield break;
                 }
             }
@@ -88,6 +95,7 @@ public class Sink : MonoBehaviour
         // Progress가 1 이 되면 멈춰있도록
         ProgressSlider.value = 1f;
         washingCoroutine = null;
+        BubbleEffect.SetActive(false);
         ProgressSlider.gameObject.SetActive(false);
     }
 
