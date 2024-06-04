@@ -2,6 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum DishState
+{
+
+}
 
 public class DishObject : IHoldable
 {
