@@ -29,10 +29,14 @@ public class PlateSubmitPlace : MonoBehaviour
             {
                 plateContent = "burger";
             }
+            if (plateContent != string.Empty)
+            {
+                Debug.Log(plateContent);
+                OrderManager.Instance.SubmitOrder(plateContent);
+                Destroy(_foodCombo.gameObject);
+                _foodCombo = null;
+            }
 
-            OrderManager.Instance.SubmitOrder(plateContent);
-            Destroy(_foodCombo.gameObject);
-            _foodCombo = null;
         }
     }
 
@@ -42,19 +46,23 @@ public class PlateSubmitPlace : MonoBehaviour
     {
         if (other.CompareTag("Player") && other.TryGetComponent<CharacterHoldAbility>(out _holdability))
         {
-            if (_holdability.HoldableItem.TryGetComponent<FoodCombination>(out _foodCombo))
+            if (_holdability.HoldableItem != null)
             {
-                if (_foodCombo.IsReadyServe)
+                if (_holdability.HoldableItem.TryGetComponent<FoodCombination>(out _foodCombo))
                 {
-                    IsServeable = true;
-                    _holdability.IsServeable = true;
+                    if (_foodCombo.IsReadyServe)
+                    {
+                        IsServeable = true;
+                        _holdability.IsServeable = true;
 
+                    }
+                    else
+                    {
+                        IsServeable = false;
+                        _holdability.IsServeable = true;
+                    }
                 }
-                else
-                {
-                    IsServeable = false;
-                    _holdability.IsServeable = true;
-                }
+
             }
         }
         else
