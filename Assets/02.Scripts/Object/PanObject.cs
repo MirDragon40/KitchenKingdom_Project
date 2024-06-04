@@ -20,9 +20,15 @@ public class PanObject : IHoldable
 
     private bool isOnSurface = false;  // 표면 위에 있는지 여부를 추적
 
+    public FireObject fireObject;
+    public DangerIndicator dangerIndicator;
+    public Sprite dangerSprite;
+
     private void Awake()
     {
         BoxCollider = GetComponent<BoxCollider>();
+        fireObject = GetComponent<FireObject>();
+        dangerIndicator = GetComponentInChildren<DangerIndicator>();
     }
 
     private void Update()
@@ -38,6 +44,19 @@ public class PanObject : IHoldable
                     GrillingSlider.gameObject.SetActive(true);
                     GrillingIngrediant.StartGrilling(); // Start cooking when placed on the stove
                     GrillingSlider.value = GrillingIngrediant.CookProgress;
+                    if (GrillingIngrediant.CookProgress >= 2f && GrillingIngrediant.CookProgress < 2.9f)
+                    {
+                        dangerIndicator.ShowDangerIndicator(dangerSprite);
+                    }
+                    else
+                    {
+                        dangerIndicator.HideDangerIndicator();
+                    }
+
+                    if (GrillingIngrediant.CookProgress >= 3f)
+                    {
+                        fireObject.MakeFire();
+                    }
                 }
             }
             else

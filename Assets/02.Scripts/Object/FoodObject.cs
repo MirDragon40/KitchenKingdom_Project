@@ -41,9 +41,6 @@ public class FoodObject : IHoldable, IThrowable
 
     public float CuttingTime = 3f;
     public float BakeTime = 3f;
-
-    public FireObject fireObject;
-    public DangerIndicator dangerIndicator;
     
 
     public override Vector3 DropOffset => new Vector3(0.3f, 0.1f, 0f);
@@ -90,8 +87,7 @@ public class FoodObject : IHoldable, IThrowable
     }
     void Start()
     {
-        fireObject = FindObjectOfType<FireObject>();
-        dangerIndicator = GetComponentInChildren<DangerIndicator>();
+
     }
     private void Update()
     {
@@ -226,8 +222,7 @@ public class FoodObject : IHoldable, IThrowable
                 FoodPrefab2.SetActive(false);
                 FoodPrefab3.SetActive(true);
                 State = FoodState.Burnt; // 수정: 상태를 Burnt로 변경
-
-                fireObject.MakeFire();
+                
             }
             yield return null;
         }

@@ -3,41 +3,27 @@ using UnityEngine;
 
 public class FireObject : MonoBehaviour
 {
-    public ParticleSystem fireEffect;
-
+    public ParticleSystem FireEffect;
+    private bool _isonFire = false;
     private void Awake()
     {
-        fireEffect = GetComponentInChildren<ParticleSystem>();
+       FireEffect = GetComponentInChildren<ParticleSystem>();
     }
 
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            //StartFire();
-            MakeFire();
-        }
-    }
     public void MakeFire()
     {
-        fireEffect.Play();
+        if (_isonFire)
+        {
+            return;
+        }
+        FireEffect.Play();
+        _isonFire = true;
         Debug.Log("불이야");
-    }
-    public void StartFire()
-    {
-        StartCoroutine(StartFireCoroutine(1f)); // 1초 후에 화재 발생
-    }
-
-    private IEnumerator StartFireCoroutine(float delay)
-    {
-        yield return new WaitForSeconds(delay);
-        fireEffect.Play();
-        // 추가적인 화재 발생 로직을 여기에 작성
     }
 
     public void Extinguish()
     {
-        fireEffect.Stop();
+        FireEffect.Stop();
         Debug.Log("STOP");
     }
 
@@ -47,7 +33,7 @@ public class FireObject : MonoBehaviour
         if (other.CompareTag("Powder"))
         {
             // 불 파티클을 중지시킴
-            fireEffect.Stop();
+            FireEffect.Stop();
         }
     }
 
