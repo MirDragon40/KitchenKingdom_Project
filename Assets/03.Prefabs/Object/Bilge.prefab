@@ -406,6 +406,10 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 427b64257ece3bb4bb7b42d6b394ded4, type: 3}
   - {fileID: 21300000, guid: a4956eb52224f3b458ceb1debe9781c2, type: 3}
   - {fileID: 21300000, guid: 25a1210e631c543489571f4da82792d2, type: 3}
+  OrderSpriteList:
+  - {fileID: 21300000, guid: 48e29b900ee1ee948b0fe17c2dd775ef, type: 3}
+  - {fileID: 21300000, guid: d2ea9391e36d3d942871dc3b4be2756c, type: 3}
+  - {fileID: 21300000, guid: 6fc3d7d18b5d3be418a3640c3cd2b5c7, type: 3}
 --- !u!1 &7940793267844867334
 GameObject:
   m_ObjectHideFlags: 0
