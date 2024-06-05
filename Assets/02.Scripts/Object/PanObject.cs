@@ -130,6 +130,8 @@ public class PanObject : IHoldable
 
         MyStove = null;
         isOnSurface = false;  // 아이템을 들 때는 표면에 있지 않음
+
+        dangerIndicator.HideDangerIndicator();
     }
 
     public override void UnHold(Vector3 dropPosition, Quaternion dropRotation)
