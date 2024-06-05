@@ -38,12 +38,9 @@ public class FoodObject : IHoldable, IThrowable
     private Coroutine cookingCoroutine;
 
     private BoxCollider colliderThis;
-
+    public float ThrownEffectTriggerTime = 0.5f;
     public float CuttingTime = 3f;
     public float BakeTime = 3f;
-
-    public FireObject fireObject;
-    public DangerIndicator dangerIndicator;
     
 
     public override Vector3 DropOffset => new Vector3(0.3f, 0.1f, 0f);
@@ -81,18 +78,11 @@ public class FoodObject : IHoldable, IThrowable
             FoodPrefab2.SetActive(false);
             FoodPrefab3.SetActive(false);
         }
-        /*        if (FoodType == FoodType.Patty && State == FoodState.Raw)
-                {
-                    IsGrillable = true;
-                }*/
+ 
 
 
     }
-    void Start()
-    {
-        fireObject = FindObjectOfType<FireObject>();
-        dangerIndicator = GetComponentInChildren<DangerIndicator>();
-    }
+
     private void Update()
     {
         if (IsCooking && cookingCoroutine == null)
@@ -152,15 +142,29 @@ public class FoodObject : IHoldable, IThrowable
         _rigidbody.isKinematic = false;
         transform.parent = null;
         _holdCharacter = null;
-        
+        StartCoroutine(TriggerThrownItem_Coroutine(ThrownEffectTriggerTime));
+
         _rigidbody.AddForce(direction*throwPower, ForceMode.Impulse);
     }
+    private IEnumerator TriggerThrownItem_Coroutine(float triggerTime)
+    {
+        yield return new WaitForSeconds(triggerTime);
 
+        Collider[] colliders = Physics.OverlapSphere(transform.position, 0.05f);
+
+        foreach (Collider collider in colliders) 
+        {
+            CookStand cookStand = null;
+            if (collider.TryGetComponent<CookStand>(out cookStand))
+            {
+                Place(cookStand.PlacePosition);
+            }
+        }
+    }
     public override void Place(Transform place)
     {
         transform.position = place.position;
         _rigidbody.isKinematic = true;
-        //transform.rotation = placeRotation;
         transform.parent = place;
         _holdCharacter = null;
     }
@@ -179,14 +183,12 @@ public class FoodObject : IHoldable, IThrowable
                 FoodPrefab1.SetActive(false);
                 FoodPrefab2.SetActive(true);
             }
-            if (CookProgress >= 0.9f && FoodPrefab2.activeSelf)
+            if (CookProgress >= 1f && FoodPrefab2.activeSelf)
             {
                 FoodPrefab2.SetActive(false);
                 FoodPrefab3.SetActive(true);
-            }
-            if (CookProgress >= 1f)
-            {
                 State = FoodState.Cut;
+                colliderThis.enabled = true;
             }
             yield return null;
         }
@@ -226,8 +228,7 @@ public class FoodObject : IHoldable, IThrowable
                 FoodPrefab2.SetActive(false);
                 FoodPrefab3.SetActive(true);
                 State = FoodState.Burnt; // 수정: 상태를 Burnt로 변경
-
-                fireObject.MakeFire();
+                
             }
             yield return null;
         }

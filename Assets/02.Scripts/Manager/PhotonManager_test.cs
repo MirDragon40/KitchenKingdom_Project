@@ -62,7 +62,8 @@ public class PhotonManager_test : MonoBehaviourPunCallbacks
         roomOptions.MaxPlayers = 4; // 입장가능한 최대 플레이어수
         roomOptions.IsVisible = true; // 로비에서 방 목록에 노출할 것인가?
         roomOptions.IsOpen = true;
-        PhotonNetwork.JoinOrCreateRoom("PlayRoom", roomOptions, TypedLobby.Default);
+        int randomIndex = Random.Range(0, 100);
+        PhotonNetwork.JoinOrCreateRoom($"PlayRoom{randomIndex}", roomOptions, TypedLobby.Default);
 
     }
     public override void OnCreatedRoom()

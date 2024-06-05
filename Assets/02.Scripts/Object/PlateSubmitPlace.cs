@@ -10,29 +10,22 @@ public class PlateSubmitPlace : MonoBehaviour
     public bool IsServeable = false;
     public List<string> IngrediantsInDish = new List<string>();
     private CharacterHoldAbility _holdability;
+    private string _plateContent = string.Empty;
 
 
-    private void Update()
+    private void LateUpdate()
     {
         if (IsServeable && Input.GetKeyDown(KeyCode.Space))
         {
-            string plateContent = string.Empty;
-            if (_foodCombo.Ingrediants["burger"] && _foodCombo.Ingrediants["coke"] && _foodCombo.Ingrediants["fry"])
+            if (_plateContent != string.Empty)
             {
-                plateContent = "burgerCokeFry";
-            }
-            else if (_foodCombo.Ingrediants["burger"] && _foodCombo.Ingrediants["coke"])
-            {
-                plateContent = "burgerCoke";
-            }
-            else if (_foodCombo.Ingrediants["burger"])
-            {
-                plateContent = "burger";
+                Debug.Log(_plateContent);
+                OrderManager.Instance.SubmitOrder(_plateContent);
+                Destroy(_foodCombo.gameObject);
+                _foodCombo = null;
+                _plateContent = string.Empty;
             }
 
-            OrderManager.Instance.SubmitOrder(plateContent);
-            Destroy(_foodCombo.gameObject);
-            _foodCombo = null;
         }
     }
 
@@ -42,27 +35,50 @@ public class PlateSubmitPlace : MonoBehaviour
     {
         if (other.CompareTag("Player") && other.TryGetComponent<CharacterHoldAbility>(out _holdability))
         {
-            if (_holdability.HoldableItem.TryGetComponent<FoodCombination>(out _foodCombo))
+            if (_holdability.HoldableItem != null)
             {
-                if (_foodCombo.IsReadyServe)
+                if (_holdability.HoldableItem.TryGetComponent<FoodCombination>(out _foodCombo))
                 {
-                    IsServeable = true;
+                    if (_foodCombo.IsReadyServe)
+                    {
+                        if (_foodCombo.Ingrediants["burger"] && _foodCombo.Ingrediants["coke"] && _foodCombo.Ingrediants["fry"])
+                        {
+                            _plateContent = "burgerCokeFry";
+                        }
+                        else if (_foodCombo.Ingrediants["burger"] && _foodCombo.Ingrediants["coke"])
+                        {
+                            _plateContent = "burgerCoke";
+                        }
+                        else if (_foodCombo.Ingrediants["burger"])
+                        {
+                            _plateContent = "burger";
+                        }
+                        IsServeable = true;
+                        _holdability.IsServeable = true;
 
+                    }
+                    else
+                    {
+                        IsServeable = false;
+                        _holdability.IsServeable = true;
+                    }
                 }
-                else
-                {
-                    IsServeable = false;
-                }
+
             }
         }
         else
         {
             IsServeable = false;
+            _holdability.IsServeable = true;
         }
     }
     private void OnTriggerExit(Collider other)
     {
         IsServeable = false;
+        if (_holdability != null)
+        {
+            _holdability.IsServeable = false;
+        }
     }
 
 }

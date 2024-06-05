@@ -54,7 +54,7 @@ public class OrderManager : MonoBehaviourPun
             newBill.OrderedFood = orderName;
             newBill.IngrediantsNameList = Recipies[orderName];
             GeneratedOrderList.Add(orderName);
-        }   
+        }
         
         if(Input.GetKeyDown(KeyCode.Alpha2)) 
         {
@@ -64,25 +64,35 @@ public class OrderManager : MonoBehaviourPun
         if (!_isGenerating && _orderCount < MaxOrderNumber)
         {
             _orderCount++;
+            
             if (PhotonNetwork.IsMasterClient)
             {
+                int orderRandIndex = Random.Range(0, 10);
+                if (orderRandIndex <= 8)
+                {
+
+                }
+                else if (orderRandIndex == 9)
+                {
+                     
+                }
                 _pv.RPC("GenerateOrderRPC", RpcTarget.All, "burger");
             }
         }
     }
 
 
-    public void SubmitOrder(string orderedFood)
+    public void SubmitOrder(string submittedFood)
     {
         for (int i = 0; i<GeneratedOrderList.Count; i++)
         {
-            if (GeneratedOrderList[i] == orderedFood)
+            if (GeneratedOrderList[i] == submittedFood)
             {
                 GeneratedOrderList.RemoveAt(i);
                 // 점수 더하기
                 AddTotalScore(NormalOrderPoints);
                 // UI 삭제
-                MyScrollView.RemoveItem(orderedFood);
+                MyScrollView.RemoveItem(submittedFood);
                 break;
             }
         }

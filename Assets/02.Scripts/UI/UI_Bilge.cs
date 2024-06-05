@@ -18,7 +18,11 @@ public class UI_Bilge : MonoBehaviour
     public Image[] IngrediantImageSpace = new Image[3];
 
     public Dictionary<string,Sprite> IngrediantSprites = new Dictionary<string, Sprite>();
+    public Dictionary<string,Sprite> OrderSprites = new Dictionary<string, Sprite>();
+
     public List<Sprite> IngrediantSpriteList;
+    public List<Sprite> OrderSpriteList;
+
     private void Awake()
     {
         IngrediantSprites["bread"] = IngrediantSpriteList[0];
@@ -26,6 +30,12 @@ public class UI_Bilge : MonoBehaviour
         IngrediantSprites["lettuce"] = IngrediantSpriteList[2];
         IngrediantSprites["patty"] = IngrediantSpriteList[3];
         IngrediantSprites["tomato"] = IngrediantSpriteList[4];
+
+        OrderSprites["burger"] = OrderSpriteList[0];
+        OrderSprites["burgerCoke"] = OrderSpriteList[1];
+        OrderSprites["burgerCokeFry"] = OrderSpriteList[2];
+
+        
     }
 
     private void Update()
@@ -36,7 +46,17 @@ public class UI_Bilge : MonoBehaviour
             {
                 case "burger":
                 {
-                    OrderFoodImage.sprite = IngrediantSprites["burger"];
+                    OrderFoodImage.sprite = OrderSprites["burger"];
+                    break;
+                }
+                case "burgerCoke":
+                {
+                    OrderFoodImage.sprite = OrderSprites["burgerCoke"];
+                    break;
+                }
+                case "burgerCokeFry":
+                {
+                    OrderFoodImage.sprite = OrderSprites["burgerCokeFry"];
                     break;
                 }
                 default:

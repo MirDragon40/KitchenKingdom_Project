@@ -6310,10 +6310,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e981d37f532d686478a19d9965731fec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  handTransform: {fileID: 4916286978862688042}
+  HandTransform: {fileID: 4916286978862688042}
   HoldableItem: {fileID: 0}
   IsPlaceable: 0
   IsSubmitable: 0
+  IsServeable: 0
   PlacePosition: {fileID: 0}
 --- !u!114 &1160536625089652237
 MonoBehaviour:

@@ -8,16 +8,17 @@ public class CharacterHoldAbility : CharacterAbility
 {
 
 
-    public Transform handTransform;
+    public Transform HandTransform;
     private Animator animator;
     private float _findfood = 1f; //음식을 찾는 범위
 
 
     public IHoldable HoldableItem;
-   // private Transform _placeableSurface;
-
+    // private Transform _placeableSurface;
+    public bool IsDroppable => !IsPlaceable && !IsSubmitable && !IsServeable;
     public bool IsPlaceable = false;
     public bool IsSubmitable = false;
+    public bool IsServeable = false;
     public bool IsHolding => HoldableItem != null;
 
     public Transform PlacePosition = null;
@@ -44,7 +45,7 @@ public class CharacterHoldAbility : CharacterAbility
                 {
                     Place();
                 }
-                else
+                else if (IsDroppable)
                 {
                     if (nearTrashBin)
                     {
@@ -98,9 +99,9 @@ public class CharacterHoldAbility : CharacterAbility
             return;
         }
 
-        Vector3 dropPosition = handTransform.position + transform.forward * HoldableItem.DropOffset.x + Vector3.up * HoldableItem.DropOffset.y;
+        Vector3 dropPosition = HandTransform.position + transform.forward * HoldableItem.DropOffset.x + Vector3.up * HoldableItem.DropOffset.y;
         dropPosition.y -= 0.5f;
-        Quaternion dropRotation = handTransform.rotation;
+        Quaternion dropRotation = HandTransform.rotation;
 
         HoldableItem.UnHold(dropPosition, dropRotation);
         HoldableItem = null;
@@ -158,6 +159,49 @@ public class CharacterHoldAbility : CharacterAbility
     {
         nearTrashBin = value;
         panTransform = pan; // 팬 오브젝트 참조 설정
+    }
+
+    public void SpawnPlateOnHand()
+    {
+        Character character = GetComponent<Character>();
+        GameObject dishPrefab = DishSpawnManager.Instance.Plate_Stage1_Object;
+
+        if (dishPrefab != null)
+        {
+
+            GameObject dish = Instantiate(dishPrefab, HandTransform.position, HandTransform.rotation);
+
+            // 접시 오브젝트를 손에 들도록 설정
+            IHoldable holdable = dish.GetComponent<IHoldable>();
+            if (holdable != null)
+            {
+                holdable.Hold(character, HandTransform);
+            }
+        }
+
+    }
+
+    public void SpawnDirtyPlateOnHand()
+    {
+        Character character = GetComponent<Character>();
+        GameObject dishPrefab = DishSpawnManager.Instance.DirtyPlates;
+
+        if (dishPrefab != null)
+        {
+
+            GameObject dish = Instantiate(dishPrefab, HandTransform.position, HandTransform.rotation);
+
+            // 접시 오브젝트를 손에 들도록 설정
+            IHoldable holdable = dish.GetComponent<IHoldable>();
+            Debug.Log("접시들기");
+            if (holdable != null)
+            {
+                HoldableItem = holdable;
+                holdable.Hold(character, HandTransform);
+               
+            }
+        }
+
     }
 
 

@@ -61,10 +61,17 @@ public class FoodCombination : MonoBehaviour
     }
     private void OnTriggerStay(Collider other)
     {
-        if (other.CompareTag("Player") && other.GetComponent<CharacterHoldAbility>().HoldableItem != null)
+        if (other.CompareTag("Player"))
         {
-            _holdableObject = other.GetComponent<CharacterHoldAbility>().HoldableItem;
-            IsSubmitable = true;
+            if (other.GetComponent<CharacterHoldAbility>().HoldableItem != null)
+            {
+                _holdableObject = other.GetComponent<CharacterHoldAbility>().HoldableItem;
+                IsSubmitable = true;
+            }
+        }
+        else if (!GetComponent<BoxCollider>().enabled)
+        {
+            IsSubmitable = false;
         }
 
     }
@@ -116,27 +123,26 @@ public class FoodCombination : MonoBehaviour
                     AvailableIngrediants[2].SetActive(true);
                     AvailableIngrediants[3].SetActive(true);
                     Ingrediants["burger"] = true;
-                    Ingrediants.Remove("bread");
-                    Ingrediants.Remove("patty");
-                    Ingrediants.Remove("lettuce");
+
                     IsReadyServe = true;
                     UI_FoodIcon[0].gameObject.SetActive(false);
                     UI_FoodIcon[1].gameObject.SetActive(false);
                     UI_FoodIcon[2].gameObject.SetActive(false);
                     UI_FoodIcon[5].gameObject.SetActive(true);
+                    break;
                 }
-                if (Ingrediants.ContainsKey("bread") && Ingrediants["bread"])
+                if (Ingrediants["bread"])
                 {
                     AvailableIngrediants[0].SetActive(true);
                     AvailableIngrediants[3].SetActive(true);
                     UI_FoodIcon[0].gameObject.SetActive(true);
                 }
-                if (Ingrediants.ContainsKey("patty") && Ingrediants["patty"] == true)
+                if (Ingrediants["patty"])
                 {
                     AvailableIngrediants[1].SetActive(true);
                     UI_FoodIcon[2].gameObject.SetActive(true);
                 }
-                if (Ingrediants.ContainsKey("lettuce") && Ingrediants["lettuce"])
+                if (Ingrediants["lettuce"])
                 {
                     AvailableIngrediants[2].SetActive(true);
                     UI_FoodIcon[1].gameObject.SetActive(true);
@@ -148,6 +154,7 @@ public class FoodCombination : MonoBehaviour
                 }
                 if (Ingrediants["fry"])
                 {
+                    UI_FoodIcon[4].gameObject.SetActive(true);
                     AvailableIngrediants[5].SetActive(true);
                 }
                 break;

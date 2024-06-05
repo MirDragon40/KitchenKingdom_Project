@@ -3,62 +3,41 @@ using UnityEngine;
 
 public class FireObject : MonoBehaviour
 {
-    public ParticleSystem fireEffect;
-
+    public ParticleSystem FireEffect;
+    public bool _isOnFire = false;
+    public float contactTime = 0f; // 'Powder'와의 접촉 시간을 측정
+    public bool isFireActive = true; // 불이 활성화 상태인지 나타냄
     private void Awake()
     {
-        fireEffect = GetComponentInChildren<ParticleSystem>();
+       FireEffect = GetComponentInChildren<ParticleSystem>();
     }
 
-    void Update()
+    private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            //StartFire();
-            MakeFire();
-        }
+        // 불이 이미 꺼졌다면 추가적인 처리를 하지 않음
+        if (!isFireActive) return;
     }
+
     public void MakeFire()
     {
-        fireEffect.Play();
+        if (_isOnFire)
+        {
+            return;
+        }
+        FireEffect.Play();
+        _isOnFire = true;
         Debug.Log("불이야");
-    }
-    public void StartFire()
-    {
-        StartCoroutine(StartFireCoroutine(1f)); // 1초 후에 화재 발생
-    }
-
-    private IEnumerator StartFireCoroutine(float delay)
-    {
-        yield return new WaitForSeconds(delay);
-        fireEffect.Play();
-        // 추가적인 화재 발생 로직을 여기에 작성
     }
 
     public void Extinguish()
     {
-        fireEffect.Stop();
-        Debug.Log("STOP");
-    }
-
-    // 분말 파티클과 불이 닿았을 때 처리
-    void OnParticleCollision(GameObject other)
-    {
-        if (other.CompareTag("Powder"))
+        // 불을 끄는 로직 구현
+        isFireActive = false; // 불이 꺼졌다고 상태 변경
+        if (FireEffect != null)
         {
-            // 불 파티클을 중지시킴
-            fireEffect.Stop();
+            FireEffect.Stop(); // 불 효과를 비활성화
         }
+        Debug.Log("불이 꺼졌습니다.");
     }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("Extinguisher"))
-        {
-            Extinguish();
-            Debug.Log("00");
-        }
-    }
-
 
 }
