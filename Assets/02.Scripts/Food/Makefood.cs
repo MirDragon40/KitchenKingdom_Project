@@ -88,6 +88,8 @@ public class Makefood : MonoBehaviour
         // 음식 생성
         
         GameObject foodPrefab = FoodManager.instance.GetFoodPrefab(foodType);
+        Rigidbody rb = foodPrefab.GetComponent<Rigidbody>();
+        rb.isKinematic = true;
         Debug.Log(foodPrefab.transform.position);
         if (foodPrefab != null)
         {

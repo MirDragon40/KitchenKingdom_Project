@@ -56,27 +56,26 @@ public class OrderManager : MonoBehaviourPun
             GeneratedOrderList.Add(orderName);
         }
         
-        if(Input.GetKeyDown(KeyCode.Alpha2)) 
+/*        if(Input.GetKeyDown(KeyCode.Alpha2)) 
         {
             SubmitOrder("burger");
-        }
+        }*/
 
         if (!_isGenerating && _orderCount < MaxOrderNumber)
         {
             _orderCount++;
             
-            if (PhotonNetwork.IsMasterClient)
+            if (PhotonNetwork.IsMasterClient || !PhotonNetwork.IsConnected)
             {
                 int orderRandIndex = Random.Range(0, 10);
                 if (orderRandIndex <= 8)
                 {
-
+                    _pv.RPC("GenerateOrderRPC", RpcTarget.All, "burger");
                 }
                 else if (orderRandIndex == 9)
                 {
-                     
+                    _pv.RPC("GenerateOrderRPC", RpcTarget.All, "burgerCoke");
                 }
-                _pv.RPC("GenerateOrderRPC", RpcTarget.All, "burger");
             }
         }
     }
@@ -116,6 +115,7 @@ public class OrderManager : MonoBehaviourPun
     private bool _isGenerating = false;
     IEnumerator GenerateOrder(string orderName)
     {
+        yield return new WaitForSeconds(MinOrderTimeSpan);
         _isGenerating = true;
         UI_Bilge newBill = MyScrollView.AddItem();
         newBill.OrderedFood = orderName;
