@@ -29,7 +29,7 @@ public class PanObject : IHoldable
     private bool isPowderTouching = false; // 파우더와 닿는지 확인
 
     public Table[] nearbyTables;
-
+    internal bool isOnFire;
 
     private void Awake()
     {
@@ -218,25 +218,4 @@ public class PanObject : IHoldable
         }
     }
 
-    private void StartFireOnNearbyTables()
-    {
-        foreach (var table in nearbyTables)
-        {
-            if (table != null && !table.isOnFire)
-            {
-                table.Ignite();
-            }
-        }
-    }
-
-    public void StartFire()
-    {
-        // 불이 이미 붙어 있는지 확인
-        if (!fireObject.isFireActive)
-        {
-            fireObject.MakeFire();
-
-            StartFireOnNearbyTables();
-        }
-    }
 }
