@@ -10,11 +10,13 @@ public class DirtyPlate : MonoBehaviour
 
     private void Awake()
     {
+        DirtyPlateNum = 0;
         foreach (GameObject plate in DirtyPlates)
         {
             plate.SetActive(false);
         }
     }
+
 
 
     private void Update()

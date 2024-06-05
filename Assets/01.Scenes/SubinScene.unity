@@ -36840,6 +36840,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2609837869300703588, guid: c32b7e03142c285419df39e12c4782b6, type: 3}
+      propertyPath: DirtyPlateNum
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 4900252953042953332, guid: c32b7e03142c285419df39e12c4782b6, type: 3}
       propertyPath: m_LocalPosition.x
       value: 11.497

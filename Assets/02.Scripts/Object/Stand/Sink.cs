@@ -12,12 +12,10 @@ public class Sink : MonoBehaviour
     public Slider ProgressSlider;
     private Coroutine washingCoroutine;
     private bool isPlayerInTrigger = false;
-    public bool isDirtyPlateInTrigger = false;
 
     public List<GameObject> DirtyPlates;
     public List<GameObject> CleanPlates;
 
-    public Transform HandPosition;
     public GameObject BubbleEffect;
 
     private CharacterHoldAbility characterHoldAbility;
@@ -59,15 +57,14 @@ public class Sink : MonoBehaviour
             }
         }
 
-        if(isPlayerInTrigger && Input.GetKeyDown(KeyCode.Space) && CleanPlateNum > 0)
+        if (isPlayerInTrigger && Input.GetKeyDown(KeyCode.Space) && CleanPlateNum > 0)
         {
-            
+
             TakeCleanPlate();
         }
 
-        if(isPlayerInTrigger && Input.GetKeyDown(KeyCode.Space) && dirtyPlate != null)
+        if (isPlayerInTrigger && Input.GetKeyDown(KeyCode.Space) && dirtyPlate != null)
         {
-            UpdatePlates();
             Debug.Log(DirtyPlateNum);
             GetDirtyPlateNum();
             Destroy(dirtyPlate.gameObject);
@@ -87,7 +84,7 @@ public class Sink : MonoBehaviour
                 elapsed += Time.deltaTime;
                 ProgressSlider.value = Mathf.Clamp01(elapsed / duration);
                 BubbleEffect.SetActive(true);
-               
+
                 yield return null;
 
                 if (!isPlayerInTrigger)
@@ -145,7 +142,7 @@ public class Sink : MonoBehaviour
         }
     }
 
-    
+
 
     private void OnTriggerEnter(Collider other)
     {
@@ -164,7 +161,7 @@ public class Sink : MonoBehaviour
             isPlayerInTrigger = false;
             dirtyPlate = null;
         }
-      
+
     }
 
     private void TakeCleanPlate()
@@ -176,11 +173,10 @@ public class Sink : MonoBehaviour
 
     private void GetDirtyPlateNum()
     {
-        if(dirtyPlate != null)
-        {
-            DirtyPlateNum = dirtyPlate.DirtyPlateNum;
-            UpdatePlates();
-            dirtyPlate.DirtyPlateNum = 0;
-        }
+
+        DirtyPlateNum = dirtyPlate.DirtyPlateNum;
+        UpdatePlates();
+        dirtyPlate.DirtyPlateNum = 0;
+
     }
 }

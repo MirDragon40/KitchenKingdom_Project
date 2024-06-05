@@ -186,7 +186,6 @@ public class CharacterHoldAbility : CharacterAbility
         Character character = GetComponent<Character>();
         GameObject dishPrefab = DishSpawnManager.Instance.DirtyPlates;
 
-
         if (dishPrefab != null)
         {
 
@@ -197,6 +196,7 @@ public class CharacterHoldAbility : CharacterAbility
             if (holdable != null)
             {
                 holdable.Hold(character, HandTransform);
+               
             }
         }
 
