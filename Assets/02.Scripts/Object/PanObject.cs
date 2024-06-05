@@ -16,6 +16,8 @@ public class PanObject : IHoldable
     public GameObject PlusImage;
 
     private Rigidbody _rigid;
+
+    public Slider FireSlider;
     public override Vector3 DropOffset => new Vector3(0.3f, 0.1f, 0f);
 
     private bool isOnSurface = false;  // 표면 위에 있는지 여부를 추적
@@ -31,6 +33,7 @@ public class PanObject : IHoldable
         BoxCollider = GetComponent<BoxCollider>();
         fireObject = GetComponent<FireObject>();
         dangerIndicator = GetComponentInChildren<DangerIndicator>();
+        FireSlider.gameObject.SetActive(false);
     }
 
     private void Update()
@@ -58,6 +61,7 @@ public class PanObject : IHoldable
                     if (GrillingIngrediant.CookProgress >= 3f)
                     {
                         fireObject.MakeFire();
+                        FireSlider.gameObject.SetActive(true);
                     }
                 }
             }
@@ -103,6 +107,15 @@ public class PanObject : IHoldable
         }
 
         isPowderTouching = false;  // 매 프레임마다 false로 초기화
+
+        if (fireObject.isFireActive && FireSlider != null)
+        {
+            FireSlider.value = fireObject.contactTime / 2f;
+        }
+        else if (!fireObject.isFireActive && FireSlider.gameObject.activeSelf)
+        {
+            FireSlider.gameObject.SetActive(false);
+        }
     }
 
     public override void Hold(Character character, Transform handTransform)
@@ -160,11 +173,6 @@ public class PanObject : IHoldable
                 other.GetComponent<CharacterHoldAbility>().IsPlaceable = true;
             }
         }
-        /*        else if (other.CompareTag("Powder"))  // 소화기 파티클에 닿았을 때
-                {
-                    // 불 소화
-                    fireObject.Extinguish();
-                }*/
     }
 
     private void OnTriggerStay(Collider other)
@@ -175,13 +183,15 @@ public class PanObject : IHoldable
             isPowderTouching = true;
             fireObject.contactTime += Time.deltaTime; // 접촉 시간을 측정
             Debug.Log(fireObject.contactTime);
-            // 접촉 시간이 4초 이상이면 불을 끔
-            if (fireObject.contactTime >= 4f)
+            // 접촉 시간이 2초 이상이면 불을 끔
+            if (fireObject.contactTime >= 2f)
             {
                 fireObject.Extinguish();
+                FireSlider.gameObject.SetActive(false);
             }
         }
     }
+
     private void OnTriggerExit(Collider other)
     {
         if (other.CompareTag("Table"))  // 표면에서 벗어났을 때
@@ -202,5 +212,4 @@ public class PanObject : IHoldable
             isPowderTouching = false;  // 파우더에 더 이상 닿지 않음을 표시
         }
     }
-
 }
