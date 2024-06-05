@@ -27440,6 +27440,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: DirtyPlates
       objectReference: {fileID: 0}
+    - target: {fileID: 7435229658286963103, guid: 28cbbb98799a37947bcca3e11beed3ac, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8200376081165679798, guid: 28cbbb98799a37947bcca3e11beed3ac, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.549
