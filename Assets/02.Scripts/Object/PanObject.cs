@@ -28,6 +28,9 @@ public class PanObject : IHoldable
 
     private bool isPowderTouching = false; // 파우더와 닿는지 확인
 
+    public Table[] nearbyTables;
+
+
     private void Awake()
     {
         BoxCollider = GetComponent<BoxCollider>();
@@ -209,7 +212,29 @@ public class PanObject : IHoldable
         }
         if (fireObject.isFireActive && other.CompareTag("Powder"))
         {
-            isPowderTouching = false;  // 파우더에 더 이상 닿지 않음을 표시
+            isPowderTouching = false; 
+        }
+    }
+
+    private void StartFireOnNearbyTables()
+    {
+        foreach (var table in nearbyTables)
+        {
+            if (table != null && !table.isOnFire)
+            {
+                table.Ignite();
+            }
+        }
+    }
+
+    public void StartFire()
+    {
+        // 불이 이미 붙어 있는지 확인
+        if (!fireObject.isFireActive)
+        {
+            fireObject.MakeFire();
+
+            StartFireOnNearbyTables();
         }
     }
 }

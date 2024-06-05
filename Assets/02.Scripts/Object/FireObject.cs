@@ -4,7 +4,7 @@ using UnityEngine;
 public class FireObject : MonoBehaviour
 {
     public ParticleSystem FireEffect;
-    public bool _isonFire = false;
+    public bool _isOnFire = false;
     public float contactTime = 0f; // 'Powder'와의 접촉 시간을 측정
     public bool isFireActive = true; // 불이 활성화 상태인지 나타냄
     private void Awake()
@@ -20,12 +20,12 @@ public class FireObject : MonoBehaviour
 
     public void MakeFire()
     {
-        if (_isonFire)
+        if (_isOnFire)
         {
             return;
         }
         FireEffect.Play();
-        _isonFire = true;
+        _isOnFire = true;
         Debug.Log("불이야");
     }
 
