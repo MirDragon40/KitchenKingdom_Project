@@ -122,9 +122,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ItemType: 1
-  Placeable: 0
+  IsDroppable: 0
   State: 0
   FoodType: 0
+  FoodPrefab1: {fileID: 0}
+  FoodPrefab2: {fileID: 0}
+  FoodPrefab3: {fileID: 0}
+  IsCooking: 0
+  IsGrillable: 0
+  IsFryable: 0
+  CookProgress: 0
+  ThrownEffectTriggerTime: 1
+  CuttingTime: 3
+  BakeTime: 3
 --- !u!65 &4888542727501278136
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -169,7 +179,7 @@ Rigidbody:
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 1
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0

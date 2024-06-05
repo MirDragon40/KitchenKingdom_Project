@@ -8,7 +8,7 @@ public class CharacterThrowAbility : MonoBehaviour
     private CharacterHoldAbility _holdAbility;
     public IThrowable Throwable;
     public bool IsThrowable;
-    public float ThrowPower = 10f;
+    public float ThrowPower = 8f;
 
 
     private void Awake()
@@ -20,7 +20,7 @@ public class CharacterThrowAbility : MonoBehaviour
     {
         ThrowingDirectionSprite.SetActive(false);
     }
-
+    private Rigidbody _rigid;
     void Update()
     {
         if (_holdAbility.IsHolding && Throwable == null)
@@ -59,7 +59,7 @@ public class CharacterThrowAbility : MonoBehaviour
     {
         if (Throwable != null)
         {
-            Throwable.ThrowObject(transform.forward + new Vector3(0,0.3f, 0), ThrowPower);
+            Throwable.ThrowObject(transform.forward + new Vector3(0,0.4f, 0), ThrowPower);
         }
     }
 }

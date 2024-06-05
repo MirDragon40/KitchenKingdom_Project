@@ -104,10 +104,7 @@ public class FoodObject : IHoldable, IThrowable
 
     public override void Hold(Character character, Transform handTransform)
     {
-        if (character.GetComponent<CharacterHoldAbility>().IsPlaceable == true)
-        {
-            return;
-        }
+
         _rigidbody.isKinematic = true;
         _holdCharacter = character;
 
@@ -121,6 +118,10 @@ public class FoodObject : IHoldable, IThrowable
 
     public override void UnHold(Vector3 dropPosition, Quaternion dropRotation)
     {
+        if (_holdCharacter.GetComponent<CharacterHoldAbility>().IsPlaceable == true)
+        {
+            return;
+        }
         _rigidbody.isKinematic = false;
         // 저장한 위치와 회전으로 음식 배치
 /*        transform.position = dropPosition;
@@ -142,23 +143,43 @@ public class FoodObject : IHoldable, IThrowable
         _rigidbody.isKinematic = false;
         transform.parent = null;
         _holdCharacter = null;
-        StartCoroutine(TriggerThrownItem_Coroutine(ThrownEffectTriggerTime));
-
         _rigidbody.AddForce(direction*throwPower, ForceMode.Impulse);
+        StartCoroutine(TriggerThrownItem_Coroutine());
     }
-    private IEnumerator TriggerThrownItem_Coroutine(float triggerTime)
+    private IEnumerator TriggerThrownItem_Coroutine()
     {
-        yield return new WaitForSeconds(triggerTime);
-
-        Collider[] colliders = Physics.OverlapSphere(transform.position, 0.05f);
-
-        foreach (Collider collider in colliders) 
+        Collider[] colliders = new Collider[4];
+        yield return new WaitForSeconds(0.1f);
+        while (true)
         {
-            CookStand cookStand = null;
-            if (collider.TryGetComponent<CookStand>(out cookStand))
+            Vector3 speed = _rigidbody.velocity;
+            speed.y = 0;
+
+            if (speed.magnitude < 0.5f)
             {
-                Place(cookStand.PlacePosition);
+
+                int colliderNum = Physics.OverlapSphereNonAlloc(transform.position, 0.3f,colliders);
+                Debug.Log(colliderNum);
+                foreach (Collider collider in colliders)
+                {
+                    CookStand cookStand = null;
+                    if (collider.TryGetComponent<CookStand>(out cookStand))
+                    {
+                        transform.rotation = Quaternion.identity;
+                        if (!cookStand.IsOccupied)
+                        {
+                            Place(cookStand.PlacePosition);
+                        }
+                        colliders = null;
+                        break;
+                    }
+                }
             }
+            else if (speed.magnitude < 0.1f)
+            {
+                break;
+            }    
+            yield return null;
         }
     }
     public override void Place(Transform place)
