@@ -28,7 +28,6 @@ public class PanObject : IHoldable
 
     private bool isPowderTouching = false; // 파우더와 닿는지 확인
 
-    public Table[] nearbyTables;
     internal bool isOnFire;
 
     private void Awake()
