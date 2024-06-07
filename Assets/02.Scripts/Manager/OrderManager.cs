@@ -7,6 +7,7 @@ using UnityEngine;
 public class OrderManager : MonoBehaviourPun
 {
     public static OrderManager Instance { get; private set; }
+    private int _stage => GameManager.Instance.Stage;
     [HideInInspector]
     public UI_BilgeScrollView MyScrollView;
     public float MinOrderTimeSpan = 3.0f;
@@ -15,6 +16,7 @@ public class OrderManager : MonoBehaviourPun
     public int MaxOrderNumber = 5;
     [Header("일반주문서 점수")]
     public int NormalOrderPoints = 25;
+   
 
     public List<string> GeneratedOrderList = new List<string>();
 
@@ -37,16 +39,16 @@ public class OrderManager : MonoBehaviourPun
         _pv = GetComponent<PhotonView>();
         MyScrollView = GameObject.FindObjectOfType<UI_BilgeScrollView>();
 
-        Recipies["burger"] = new List<string> { "bread", "lettuce", "patty" };
-        Recipies["burgerCoke"] = new List<string> { "burger", "coke" };
-        Recipies["burgerCokeFry"] = new List<string> { "burger", "coke","fry" };
+        Recipies["burger"] = new List<string> { "bread", "patty", "lettuce" };
+        Recipies["burgerCoke"] = new List<string> { "bread", "patty", "lettuce", "coke" };
+        Recipies["burgerCokeFry"] = new List<string> { "bread", "patty", "lettuce", "coke","fry" };
 
 
     }
     void Update()
     {
-
-        if(Input.GetKeyUp(KeyCode.Alpha1))
+        
+        if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             string orderName = "burger";
             _isGenerating = true;
@@ -55,28 +57,39 @@ public class OrderManager : MonoBehaviourPun
             newBill.IngrediantsNameList = Recipies[orderName];
             GeneratedOrderList.Add(orderName);
         }
-        
-/*        if(Input.GetKeyDown(KeyCode.Alpha2)) 
-        {
-            SubmitOrder("burger");
-        }*/
 
-        if (!_isGenerating && _orderCount < MaxOrderNumber)
+                if(Input.GetKeyDown(KeyCode.Alpha2)) 
+                {
+                    SubmitOrder("burger");
+                }
+
+        if (_stage == 1 && !_isGenerating && _orderCount < MaxOrderNumber)
         {
             _orderCount++;
-            
-            if (PhotonNetwork.IsMasterClient || !PhotonNetwork.IsConnected)
+            int orderRandIndex = Random.Range(0, 10);
+            if (orderRandIndex <= 5)
             {
-                int orderRandIndex = Random.Range(0, 10);
-                if (orderRandIndex <= 8)
-                {
-                    _pv.RPC("GenerateOrderRPC", RpcTarget.All, "burger");
-                }
-                else if (orderRandIndex == 9)
-                {
-                    _pv.RPC("GenerateOrderRPC", RpcTarget.All, "burgerCoke");
-                }
+                StartCoroutine(GenerateOrder("burgerCokeFry"));
             }
+            else if (orderRandIndex > 5)
+            {
+                StartCoroutine(GenerateOrder("coke"));
+                //   _pv.RPC("GenerateOrderRPC", RpcTarget.All, "burgerCoke");
+            }
+
+            /*            if (PhotonNetwork.IsMasterClient || !PhotonNetwork.IsConnected)
+                        {
+                            int orderRandIndex = Random.Range(0, 10);
+                            if (orderRandIndex <= 8)
+                            {
+                                _pv.RPC("GenerateOrderRPC", RpcTarget.All, "burger");
+                            }
+                            else if (orderRandIndex == 9)
+                            {
+                                _pv.RPC("GenerateOrderRPC", RpcTarget.All, "burgerCoke");
+                            }
+
+                    }*/
         }
     }
 
@@ -106,17 +119,12 @@ public class OrderManager : MonoBehaviourPun
     }
 
 
-    [PunRPC]
-    void GenerateOrderRPC(string order)
-    {
-        StartCoroutine(GenerateOrder(order));
-    }
-
     private bool _isGenerating = false;
     IEnumerator GenerateOrder(string orderName)
     {
-        yield return new WaitForSeconds(MinOrderTimeSpan);
         _isGenerating = true;
+        yield return new WaitForSeconds(MinOrderTimeSpan);
+
         UI_Bilge newBill = MyScrollView.AddItem(Recipies[orderName].Count);
         newBill.OrderedFood = orderName;
         newBill.IngrediantsNameList = Recipies[orderName];

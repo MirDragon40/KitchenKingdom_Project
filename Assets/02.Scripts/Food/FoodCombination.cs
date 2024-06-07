@@ -14,9 +14,12 @@ public class FoodCombination : MonoBehaviour
     private IHoldable _holdableObject;
     public bool IsReadyServe = false;
 
-
-    private void Awake()
+    public void Awake()
     {
+    }
+    private void Start()
+    {
+        Stage = GameManager.Instance.Stage;
         foreach (GameObject ingrediant in AvailableIngrediants)
         {
             ingrediant.SetActive(false);
@@ -42,6 +45,7 @@ public class FoodCombination : MonoBehaviour
                 break;
         }
     }
+
     private void LateUpdate()
     {
         if (Input.GetKeyDown(KeyCode.Space) && IsSubmitable)
@@ -129,24 +133,27 @@ public class FoodCombination : MonoBehaviour
                     UI_FoodIcon[1].gameObject.SetActive(false);
                     UI_FoodIcon[2].gameObject.SetActive(false);
                     UI_FoodIcon[5].gameObject.SetActive(true);
-                    break;
                 }
-                if (Ingrediants["bread"])
+                if (!Ingrediants["burger"])
                 {
-                    AvailableIngrediants[0].SetActive(true);
-                    AvailableIngrediants[3].SetActive(true);
-                    UI_FoodIcon[0].gameObject.SetActive(true);
+                    if (Ingrediants["bread"])
+                    {
+                        AvailableIngrediants[0].SetActive(true);
+                        AvailableIngrediants[3].SetActive(true);
+                        UI_FoodIcon[0].gameObject.SetActive(true);
+                    }
+                    if (Ingrediants["patty"])
+                    {
+                        AvailableIngrediants[1].SetActive(true);
+                        UI_FoodIcon[2].gameObject.SetActive(true);
+                    }
+                    if (Ingrediants["lettuce"])
+                    {
+                        AvailableIngrediants[2].SetActive(true);
+                        UI_FoodIcon[1].gameObject.SetActive(true);
+                    }
                 }
-                if (Ingrediants["patty"])
-                {
-                    AvailableIngrediants[1].SetActive(true);
-                    UI_FoodIcon[2].gameObject.SetActive(true);
-                }
-                if (Ingrediants["lettuce"])
-                {
-                    AvailableIngrediants[2].SetActive(true);
-                    UI_FoodIcon[1].gameObject.SetActive(true);
-                }
+
                 if (Ingrediants["coke"])
                 {
                     UI_FoodIcon[3].gameObject.SetActive(true);

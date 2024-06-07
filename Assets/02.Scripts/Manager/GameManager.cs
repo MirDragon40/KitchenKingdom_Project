@@ -18,6 +18,7 @@ public class GameManager : MonoBehaviour
     public GameState State = GameState.Go; // 게임 상태, TimeScale관리
     public Transform[] SpawnPoints= new Transform[4];
     public int TotalScore = 0;
+    public int Stage { get; private set; }
     private void Awake()
     {
         if (Instance == null)
@@ -28,6 +29,8 @@ public class GameManager : MonoBehaviour
         {
             Destroy(this.gameObject);
         }
+        Stage = 1;
+
         DontDestroyOnLoad(gameObject);
     }
 
