@@ -50,33 +50,32 @@ public class OrderManager : MonoBehaviourPun
         {
             string orderName = "burger";
             _isGenerating = true;
-            UI_Bilge newBill = MyScrollView.AddItem();
+            UI_Bilge newBill = MyScrollView.AddItem(3);
             newBill.OrderedFood = orderName;
             newBill.IngrediantsNameList = Recipies[orderName];
             GeneratedOrderList.Add(orderName);
         }
         
-        if(Input.GetKeyDown(KeyCode.Alpha2)) 
+/*        if(Input.GetKeyDown(KeyCode.Alpha2)) 
         {
             SubmitOrder("burger");
-        }
+        }*/
 
         if (!_isGenerating && _orderCount < MaxOrderNumber)
         {
             _orderCount++;
             
-            if (PhotonNetwork.IsMasterClient)
+            if (PhotonNetwork.IsMasterClient || !PhotonNetwork.IsConnected)
             {
                 int orderRandIndex = Random.Range(0, 10);
                 if (orderRandIndex <= 8)
                 {
-
+                    _pv.RPC("GenerateOrderRPC", RpcTarget.All, "burger");
                 }
                 else if (orderRandIndex == 9)
                 {
-                     
+                    _pv.RPC("GenerateOrderRPC", RpcTarget.All, "burgerCoke");
                 }
-                _pv.RPC("GenerateOrderRPC", RpcTarget.All, "burger");
             }
         }
     }
@@ -103,7 +102,7 @@ public class OrderManager : MonoBehaviourPun
     public void AddTotalScore(int score)
     {
         GameManager.Instance.TotalScore += score;
-
+        
     }
 
 
@@ -116,8 +115,9 @@ public class OrderManager : MonoBehaviourPun
     private bool _isGenerating = false;
     IEnumerator GenerateOrder(string orderName)
     {
+        yield return new WaitForSeconds(MinOrderTimeSpan);
         _isGenerating = true;
-        UI_Bilge newBill = MyScrollView.AddItem();
+        UI_Bilge newBill = MyScrollView.AddItem(Recipies[orderName].Count);
         newBill.OrderedFood = orderName;
         newBill.IngrediantsNameList = Recipies[orderName];
         GeneratedOrderList.Add(orderName);
