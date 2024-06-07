@@ -1,6 +1,8 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -11,23 +13,44 @@ public class PlateSubmitPlace : MonoBehaviour
     public List<string> IngrediantsInDish = new List<string>();
     private CharacterHoldAbility _holdability;
     private string _plateContent = string.Empty;
+    public TMP_Text ScoreUI;
 
-
+    private void Awake()
+    {
+        ScoreUI.text = string.Empty;
+    }
     private void LateUpdate()
     {
         if (IsServeable && Input.GetKeyDown(KeyCode.Space))
         {
-
-                Debug.Log(_plateContent);
-                OrderManager.Instance.SubmitOrder(_plateContent);
-                Destroy(_foodCombo.gameObject);
-                _foodCombo = null;
-                _plateContent = string.Empty;
-            
+            SubmitPlate();
 
         }
+        if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            ShowScoreUI(25);
+        }
     }
+    private void ShowScoreUI(int score)
+    {
+        ScoreUI.text = $"+{score}pts";
+        ScoreUI.alpha = 1.0f;
+        ScoreUI.color = new Color(0, 0.2f, 0);
+        RectTransform scoreRectTransform = ScoreUI.GetComponent<RectTransform>();
+        scoreRectTransform.anchoredPosition = new Vector2(0, 0);
+        scoreRectTransform.DOAnchorPosY(50, 2f).SetEase(Ease.OutBounce);
+        ScoreUI.DOColor(Color.green, 2f);
+        ScoreUI.DOFade(0, 2.5f);
+    }
+    private void SubmitPlate()
+    {
+        OrderManager.Instance.SubmitOrder(_plateContent);
+        ShowScoreUI(OrderManager.Instance.NormalOrderPoints);
+        Destroy(_foodCombo.gameObject);
+        _foodCombo = null;
+        _plateContent = string.Empty;
 
+    }
     // todo : 손에 들고있는 plate에 맞는 음식을 제출했을때 ordermanager의 내용과 비교하여 gamemanager의 totalscore 25점 더하기
     // 
     private void OnTriggerEnter(Collider other)

@@ -5,11 +5,13 @@ using UnityEngine;
 
 public class Character : MonoBehaviour
 {
-    public static Character Instance { get; private set; }
 
     public PhotonView PhotonView { get; private set; }
     public CharacterHoldAbility HoldAbility;
-
+    private void Awake()
+    {
+        HoldAbility = GetComponent<CharacterHoldAbility>();
+    }
 
     private void Start()
     {
