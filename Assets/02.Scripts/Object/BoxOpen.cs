@@ -8,7 +8,7 @@ public class BoxOpen : MonoBehaviour
 
     private bool _isPlayerBox = false;
 
-    private void Update()
+    private void LateUpdate()
     {
         if (_isPlayerBox) 
         {

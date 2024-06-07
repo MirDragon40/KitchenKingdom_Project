@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class UI_BilgeScrollView : MonoBehaviour
 {
     public GameObject content; // Scroll View의 Content 오브젝트
-    public UI_Bilge itemPrefab; // 추가할 아이템의 프리팹
+    public List<UI_Bilge> BillPrefabs = new List<UI_Bilge>(); // 추가할 아이템의 프리팹
     public int maxItems = 5; // 최대 아이템 개수 제한
     public List<UI_Bilge> OrderBills = new List<UI_Bilge>();
 
@@ -41,9 +41,23 @@ public class UI_BilgeScrollView : MonoBehaviour
     }
 
     // 아이템을 추가하는 함수
-    public UI_Bilge AddItem()
+    public UI_Bilge AddItem(int itemCount)
     {
-        UI_Bilge newItem = Instantiate< UI_Bilge>(itemPrefab, content.transform);
+        UI_Bilge newItem = null;
+
+        if (itemCount <= 2)
+        {
+            newItem = Instantiate<UI_Bilge>(BillPrefabs[0], content.transform);
+        }
+        else if (itemCount == 3) 
+        {
+            newItem = Instantiate<UI_Bilge>(BillPrefabs[1], content.transform);
+        }
+        else if (itemCount > 3)
+        {
+            newItem = Instantiate<UI_Bilge>(BillPrefabs[2], content.transform);
+        }
+
         OrderBills.Add(newItem);
 
         AnimateItem(newItem);
@@ -52,14 +66,14 @@ public class UI_BilgeScrollView : MonoBehaviour
 
 
     // 프리팹을 일정 시간 간격으로 추가하는 Coroutine
-    private IEnumerator AddItemPrefab()
+/*    private IEnumerator AddItemPrefab()
     {
         while (true)
         {
             yield return new WaitForSeconds(5); // 5초 대기
             AddItem(); // 아이템 추가
         }
-    }
+    }*/
 
     // 아이템 추가 시 애니메이션 적용
     private void AnimateItem(UI_Bilge item)
@@ -82,9 +96,9 @@ public class UI_BilgeScrollView : MonoBehaviour
         _horizontalLayoutGroup.enabled = true;
     }
 
-    private IEnumerator StartAddItem() 
+/*    private IEnumerator StartAddItem() 
     {
         yield return new WaitForSeconds(0.5f);
         AddItem();
-    }
+    }*/
 }

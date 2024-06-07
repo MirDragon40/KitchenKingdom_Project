@@ -28,6 +28,9 @@ public class PanObject : IHoldable
 
     private bool isPowderTouching = false; // 파우더와 닿는지 확인
 
+    public Table[] nearbyTables;
+    internal bool isOnFire;
+
     private void Awake()
     {
         BoxCollider = GetComponent<BoxCollider>();
@@ -127,6 +130,8 @@ public class PanObject : IHoldable
 
         MyStove = null;
         isOnSurface = false;  // 아이템을 들 때는 표면에 있지 않음
+
+        dangerIndicator.HideDangerIndicator();
     }
 
     public override void UnHold(Vector3 dropPosition, Quaternion dropRotation)
@@ -209,7 +214,8 @@ public class PanObject : IHoldable
         }
         if (fireObject.isFireActive && other.CompareTag("Powder"))
         {
-            isPowderTouching = false;  // 파우더에 더 이상 닿지 않음을 표시
+            isPowderTouching = false; 
         }
     }
+
 }

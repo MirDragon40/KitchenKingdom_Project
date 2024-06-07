@@ -15,21 +15,27 @@ public class UI_Bilge : MonoBehaviour
     private bool HasSpriteUpdated = false;
 
     public Image OrderFoodImage;
-    public Image[] IngrediantImageSpace = new Image[3];
+    public Image[] IngrediantImageSpace;
+    public Image[] CookingMethodImageSpace;
 
     public Dictionary<string,Sprite> IngrediantSprites = new Dictionary<string, Sprite>();
     public Dictionary<string,Sprite> OrderSprites = new Dictionary<string, Sprite>();
+    public Dictionary<string,Sprite> CookMethodSprites = new Dictionary<string, Sprite>();
 
     public List<Sprite> IngrediantSpriteList;
     public List<Sprite> OrderSpriteList;
+    public List<Sprite> MethodSpriteList;
 
     private void Awake()
     {
         IngrediantSprites["bread"] = IngrediantSpriteList[0];
-        IngrediantSprites["burger"] = IngrediantSpriteList[1];
+        IngrediantSprites["patty"] = IngrediantSpriteList[1];
         IngrediantSprites["lettuce"] = IngrediantSpriteList[2];
-        IngrediantSprites["patty"] = IngrediantSpriteList[3];
-        IngrediantSprites["tomato"] = IngrediantSpriteList[4];
+        IngrediantSprites["coke"] = IngrediantSpriteList[3];
+        IngrediantSprites["fry"] = IngrediantSpriteList[4];
+
+        CookMethodSprites["grill"] = MethodSpriteList[0];
+        CookMethodSprites["fry"] = MethodSpriteList[1];
 
         OrderSprites["burger"] = OrderSpriteList[0];
         OrderSprites["burgerCoke"] = OrderSpriteList[1];
