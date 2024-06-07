@@ -376,6 +376,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2436eae4429806947a16ae5569b8d04b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  panObject: {fileID: 0}
   FireEffect: {fileID: 0}
   _isOnFire: 0
   contactTime: 0
