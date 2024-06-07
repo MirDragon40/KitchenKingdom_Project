@@ -174,7 +174,7 @@ public class Sink : MonoBehaviour
     private void GetDirtyPlateNum()
     {
 
-        DirtyPlateNum = dirtyPlate.DirtyPlateNum;
+        DirtyPlateNum = DirtyPlateNum + dirtyPlate.DirtyPlateNum;
         UpdatePlates();
         dirtyPlate.DirtyPlateNum = 0;
 
