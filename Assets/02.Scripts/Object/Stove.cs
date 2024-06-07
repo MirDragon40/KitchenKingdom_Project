@@ -105,35 +105,21 @@ public class Stove : CookStand
         if (fireTriggered && other.CompareTag("Powder"))
         {
             isPowderTouching = true;
+            Extinguish();
         }
     }
-
-    private void OnTriggerStay(Collider other)
-    {
-        if (fireTriggered && other.CompareTag("Powder"))
-        {
-            isPowderTouching = true;
-            contactTime += Time.deltaTime;
-            if (contactTime >= 2f)
-            {
-                Extinguish();
-            }
-        }
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.CompareTag("Powder"))
-        {
-            isPowderTouching = false;
-        }
-    }
-
     public void Extinguish()
     {
         FireParticle.Stop();
         fireTriggered = false;
         contactTime = 0;
         StopCoroutine(SpreadFireToNearbyTables());
+        foreach (var table in NearbyTables)
+        {
+            if (table != null)
+            {
+                table.UpdateStoveFireStatus(false);
+            }
+        }
     }
 }

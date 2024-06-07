@@ -26,7 +26,7 @@ public class PanObject : IHoldable
     public DangerIndicator dangerIndicator;
     public Sprite dangerSprite;
 
-    private bool isPowderTouching = false; // 파우더와 닿는지 확인
+    private bool isPowderTouching = false;
 
     internal bool isOnFire;
 
@@ -191,6 +191,7 @@ public class PanObject : IHoldable
             if (fireObject.contactTime >= 2f)
             {
                 fireObject.Extinguish();
+                FireSlider.value = 0;
                 FireSlider.gameObject.SetActive(false);
             }
         }
@@ -216,5 +217,6 @@ public class PanObject : IHoldable
             isPowderTouching = false; 
         }
     }
+
 
 }

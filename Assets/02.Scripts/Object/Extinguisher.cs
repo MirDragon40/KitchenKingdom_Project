@@ -89,7 +89,7 @@ public class Extinguisher : IHoldable
 
     }
 
-    public void A(Collider other)
+/*    public void A(Collider other)
     {
         if (!isPress)
             return;
@@ -103,5 +103,5 @@ public class Extinguisher : IHoldable
                 fireEffect.Stop();
             }
         }
-    }
+    }*/
 }

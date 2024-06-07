@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class FireObject : MonoBehaviour
 {
+    public PanObject panObject;
+
     public ParticleSystem FireEffect;
     public bool _isOnFire = false;
     public float contactTime = 0f; // 'Powder'와의 접촉 시간을 측정
@@ -31,13 +33,13 @@ public class FireObject : MonoBehaviour
 
     public void Extinguish()
     {
-        // 불을 끄는 로직 구현
         isFireActive = false; // 불이 꺼졌다고 상태 변경
-        if (FireEffect != null)
-        {
-            FireEffect.Stop(); // 불 효과를 비활성화
-        }
-        Debug.Log("불이 꺼졌습니다.");
+        contactTime = 0f;
+
+        FireEffect.Stop(); // 불 효과를 비활성화
+
+        isFireActive = true;
+
     }
 
 }

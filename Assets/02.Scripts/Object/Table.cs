@@ -6,6 +6,8 @@ public class Table : MonoBehaviour
     public ParticleSystem FireParticle;
     public Table[] NearbyTables;
 
+    private bool isStoveFireActive = false;
+
     public void Start()
     {
         FireParticle = GetComponentInChildren<ParticleSystem>();
@@ -37,5 +39,10 @@ public class Table : MonoBehaviour
             FireParticle.Play();
         }
 
+    }
+
+    public void UpdateStoveFireStatus(bool isFireActive)
+    {
+        isStoveFireActive = isFireActive;
     }
 }
