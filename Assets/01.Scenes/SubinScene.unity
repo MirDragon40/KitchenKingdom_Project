@@ -27436,13 +27436,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -2101629620323778454, guid: 28cbbb98799a37947bcca3e11beed3ac, type: 3}
+      propertyPath: DirtyPlateNum
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 7435229658286963103, guid: 28cbbb98799a37947bcca3e11beed3ac, type: 3}
       propertyPath: m_Name
       value: DirtyPlates
       objectReference: {fileID: 0}
     - target: {fileID: 7435229658286963103, guid: 28cbbb98799a37947bcca3e11beed3ac, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8200376081165679798, guid: 28cbbb98799a37947bcca3e11beed3ac, type: 3}
       propertyPath: m_LocalPosition.x

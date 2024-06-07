@@ -193,15 +193,13 @@ public class CharacterHoldAbility : CharacterAbility
 
             // 접시 오브젝트를 손에 들도록 설정
             IHoldable holdable = dish.GetComponent<IHoldable>();
-            Debug.Log("접시들기");
+
             if (holdable != null)
             {
-                HoldableItem = holdable;
                 holdable.Hold(character, HandTransform);
                
             }
         }
-
     }
 
 

@@ -2,11 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum DishState
+{
+    Dirty,
+    Clean
+}
+
 public class DishObject : IHoldable
 {
     public override Vector3 DropOffset => new Vector3(0.3f, 0.1f, 0f);
 
-
+    public DishState State;
 
 
 
@@ -21,26 +27,34 @@ public class DishObject : IHoldable
 
     public override void Place(Transform place)
     {
-        transform.position = place.position;
-        GetComponent<Rigidbody>().isKinematic = true;
-        GetComponent<BoxCollider>().enabled = true;
-        transform.rotation = place.rotation;
-        //placeRotation = Quaternion.Euler(0, 0, 0);
-        transform.parent = place;
-        _holdCharacter = null;
+         if (State != DishState.Dirty)
+        {
+            transform.position = place.position;
+            GetComponent<Rigidbody>().isKinematic = true;
+            GetComponent<BoxCollider>().enabled = true;
+            transform.rotation = place.rotation;
+            //placeRotation = Quaternion.Euler(0, 0, 0);
+            transform.parent = place;
+            _holdCharacter = null;
+
+        }
     }
 
     public override void UnHold(Vector3 dropPosition, Quaternion dropRotation)
     {
-        GetComponent<Rigidbody>().isKinematic = false;
-        GetComponent<BoxCollider>().enabled = false;
-        // 저장한 위치와 회전으로 음식 배치
-        transform.position = dropPosition;
-        transform.rotation = dropRotation;
+        if (State != DishState.Dirty)
+        {
+            GetComponent<Rigidbody>().isKinematic = false;
+            GetComponent<BoxCollider>().enabled = false;
+            // 저장한 위치와 회전으로 음식 배치
+            transform.position = dropPosition;
+            transform.rotation = dropRotation;
 
 
-        transform.parent = null;
-        //각 아이템이 떼어질 때 해줄 초기화 로직
-        _holdCharacter = null;
+            transform.parent = null;
+            //각 아이템이 떼어질 때 해줄 초기화 로직
+            _holdCharacter = null;
+
+        }
     }
 }

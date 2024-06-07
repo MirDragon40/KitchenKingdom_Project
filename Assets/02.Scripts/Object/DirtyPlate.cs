@@ -5,12 +5,13 @@ using UnityEngine;
 public class DirtyPlate : MonoBehaviour
 {
     public List<GameObject> DirtyPlates;
-    public int DirtyPlateNum = 5;
+    public int DirtyPlateNum = 0;
 
 
     private void Awake()
     {
-        DirtyPlateNum = 0;
+        //DirtyPlateNum = 0;
+
         foreach (GameObject plate in DirtyPlates)
         {
             plate.SetActive(false);

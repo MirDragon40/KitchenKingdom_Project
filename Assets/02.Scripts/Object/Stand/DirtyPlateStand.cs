@@ -85,18 +85,25 @@ public class DirtyPlateStand : MonoBehaviour
     {
         if (DirtyPlateNum > 0 && characterHoldAbility != null)
         {
-            characterHoldAbility.SpawnDirtyPlateOnHand();
-
-            // Ensure dirtyPlate is updated after spawning a new plate
             UpdateDirtyPlateStatus();
 
-            // 다시 dirtyPlate를 확인하고 업데이트합니다.
-            dirtyPlate = characterHoldAbility.gameObject.GetComponentInChildren<DirtyPlate>();
-            if (dirtyPlate != null)
+            if (isPlayerHoldingDirtyPlate)
             {
+                // 플레이어가 이미 더러운 접시를 가지고 있는 경우
                 dirtyPlate.DirtyPlateNum += DirtyPlateNum;
             }
+            else
+            {
+                // 플레이어가 더러운 접시를 가지고 있지 않은 경우 새로운 접시 생성
+                characterHoldAbility.SpawnDirtyPlateOnHand();
 
+                // 다시 dirtyPlate를 확인하고 업데이트
+                dirtyPlate = characterHoldAbility.gameObject.GetComponentInChildren<DirtyPlate>();
+                if (dirtyPlate != null)
+                {
+                    dirtyPlate.DirtyPlateNum = DirtyPlateNum;
+                }
+            }
             DirtyPlateNum = 0;
             UpdatePlates();
         }
