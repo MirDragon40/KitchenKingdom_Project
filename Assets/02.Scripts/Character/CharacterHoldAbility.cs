@@ -43,7 +43,9 @@ public class CharacterHoldAbility : CharacterAbility
             {
                 if (IsPlaceable)
                 {
-                    Place();
+
+                        Place();
+                   
                 }
                 else if (IsDroppable)
                 {
@@ -53,7 +55,9 @@ public class CharacterHoldAbility : CharacterAbility
                     }
                     else
                     {
-                        Drop();
+
+                            Drop();
+
                     }
                 }
             }
@@ -198,6 +202,7 @@ public class CharacterHoldAbility : CharacterAbility
             {
                 holdable.Hold(character, HandTransform);
                
+
             }
         }
     }

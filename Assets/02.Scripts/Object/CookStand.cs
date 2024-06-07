@@ -64,7 +64,6 @@ public class CookStand : MonoBehaviour
              }
          }
         */
-          
     }
 
     protected virtual void OnTriggerStay(Collider other)

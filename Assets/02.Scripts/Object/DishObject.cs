@@ -27,8 +27,7 @@ public class DishObject : IHoldable
 
     public override void Place(Transform place)
     {
-         if (State != DishState.Dirty)
-        {
+       
             transform.position = place.position;
             GetComponent<Rigidbody>().isKinematic = true;
             GetComponent<BoxCollider>().enabled = true;
@@ -37,13 +36,12 @@ public class DishObject : IHoldable
             transform.parent = place;
             _holdCharacter = null;
 
-        }
+        
     }
 
     public override void UnHold(Vector3 dropPosition, Quaternion dropRotation)
     {
-        if (State != DishState.Dirty)
-        {
+        
             GetComponent<Rigidbody>().isKinematic = false;
             GetComponent<BoxCollider>().enabled = false;
             // 저장한 위치와 회전으로 음식 배치
@@ -55,6 +53,6 @@ public class DishObject : IHoldable
             //각 아이템이 떼어질 때 해줄 초기화 로직
             _holdCharacter = null;
 
-        }
+        
     }
 }

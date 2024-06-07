@@ -1867,6 +1867,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Pan
       objectReference: {fileID: 0}
+    - target: {fileID: 2970973210916963625, guid: f1dfd9727d7247b4bb99cac0ec8a435b, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3832726226408391153, guid: f1dfd9727d7247b4bb99cac0ec8a435b, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -28839,6 +28843,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  CookingMethodImageSpace: []
   IngrediantSpriteList:
   - {fileID: 21300000, guid: ac4ef74f2ae61b241b32b26a55cd616a, type: 3}
   - {fileID: 21300000, guid: d09d262076e2c9c48af067bed49c549f, type: 3}
@@ -28846,6 +28851,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: a4956eb52224f3b458ceb1debe9781c2, type: 3}
   - {fileID: 21300000, guid: 25a1210e631c543489571f4da82792d2, type: 3}
   OrderSpriteList: []
+  MethodSpriteList: []
 --- !u!114 &4551284020954962206
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -32991,8 +32997,8 @@ RectTransform:
   - {fileID: 521975115789575248}
   m_Father: {fileID: 4886769410980877104}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 200, y: 100}
   m_Pivot: {x: 0, y: 1}
@@ -35286,6 +35292,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  CookingMethodImageSpace: []
   IngrediantSpriteList:
   - {fileID: 21300000, guid: ac4ef74f2ae61b241b32b26a55cd616a, type: 3}
   - {fileID: 21300000, guid: d09d262076e2c9c48af067bed49c549f, type: 3}
@@ -35293,6 +35300,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: a4956eb52224f3b458ceb1debe9781c2, type: 3}
   - {fileID: 21300000, guid: 25a1210e631c543489571f4da82792d2, type: 3}
   OrderSpriteList: []
+  MethodSpriteList: []
 --- !u!4 &7516219852905369984
 Transform:
   m_ObjectHideFlags: 0
@@ -36665,7 +36673,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   content: {fileID: 993218864199767406}
-  itemPrefab: {fileID: 6564947366733424236, guid: 44846a7a30035674399048816200e043, type: 3}
+  BillPrefabs: []
   maxItems: 5
   OrderBills: []
   _horizontalLayoutGroup: {fileID: 2923003181457931299}
