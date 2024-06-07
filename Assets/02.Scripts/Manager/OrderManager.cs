@@ -50,7 +50,7 @@ public class OrderManager : MonoBehaviourPun
         {
             string orderName = "burger";
             _isGenerating = true;
-            UI_Bilge newBill = MyScrollView.AddItem();
+            UI_Bilge newBill = MyScrollView.AddItem(3);
             newBill.OrderedFood = orderName;
             newBill.IngrediantsNameList = Recipies[orderName];
             GeneratedOrderList.Add(orderName);
@@ -102,7 +102,7 @@ public class OrderManager : MonoBehaviourPun
     public void AddTotalScore(int score)
     {
         GameManager.Instance.TotalScore += score;
-
+        
     }
 
 
@@ -117,7 +117,7 @@ public class OrderManager : MonoBehaviourPun
     {
         yield return new WaitForSeconds(MinOrderTimeSpan);
         _isGenerating = true;
-        UI_Bilge newBill = MyScrollView.AddItem();
+        UI_Bilge newBill = MyScrollView.AddItem(Recipies[orderName].Count);
         newBill.OrderedFood = orderName;
         newBill.IngrediantsNameList = Recipies[orderName];
         GeneratedOrderList.Add(orderName);
