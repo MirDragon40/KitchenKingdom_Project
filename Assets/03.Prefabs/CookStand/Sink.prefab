@@ -20382,7 +20382,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e5bd34d1fddd3345877aefc8e739708, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DirtyPlateNum: 4
+  DirtyPlateNum: 0
   CleanPlateNum: 0
   ProgressSlider: {fileID: 7435149174534383195}
   DirtyPlates:
