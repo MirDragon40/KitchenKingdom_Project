@@ -534,10 +534,6 @@ PrefabInstance:
     m_TransformParent: {fileID: 292883106}
     m_Modifications:
     - target: {fileID: 5329096209907429438, guid: 61a5605c41609634bac5baf8ef0820f1, type: 3}
-      propertyPath: NearbyTables.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5329096209907429438, guid: 61a5605c41609634bac5baf8ef0820f1, type: 3}
       propertyPath: NearbyTables.Array.data[0]
       value: 
       objectReference: {fileID: 1123495548}
@@ -1127,10 +1123,6 @@ PrefabInstance:
     m_TransformParent: {fileID: 1337426934}
     m_Modifications:
     - target: {fileID: -2078152011496428701, guid: 55073aa0f5aa99d4a9c9d86c44518107, type: 3}
-      propertyPath: NearbyTables.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: -2078152011496428701, guid: 55073aa0f5aa99d4a9c9d86c44518107, type: 3}
       propertyPath: NearbyTables.Array.data[0]
       value: 
       objectReference: {fileID: 1500750752}
@@ -1138,22 +1130,14 @@ PrefabInstance:
       propertyPath: NearbyTables.Array.data[1]
       value: 
       objectReference: {fileID: 1418802472}
-    - target: {fileID: 157704236576427658, guid: 55073aa0f5aa99d4a9c9d86c44518107, type: 3}
-      propertyPath: CookType
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 157704236576427658, guid: 55073aa0f5aa99d4a9c9d86c44518107, type: 3}
-      propertyPath: PlusImageUI
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 2046235622856534948, guid: 55073aa0f5aa99d4a9c9d86c44518107, type: 3}
       propertyPath: m_Name
       value: Stove (1)
       objectReference: {fileID: 0}
-    - target: {fileID: 4055074115837330318, guid: 55073aa0f5aa99d4a9c9d86c44518107, type: 3}
-      propertyPath: m_IsTrigger
-      value: 1
-      objectReference: {fileID: 0}
+    - target: {fileID: 7039993099648873508, guid: 55073aa0f5aa99d4a9c9d86c44518107, type: 3}
+      propertyPath: NearbyTables.Array.data[0]
+      value: 
+      objectReference: {fileID: 1500750752}
     - target: {fileID: 7378703333766003518, guid: 55073aa0f5aa99d4a9c9d86c44518107, type: 3}
       propertyPath: m_LocalPosition.x
       value: -5.517
@@ -1194,17 +1178,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 6683501288066159462, guid: 55073aa0f5aa99d4a9c9d86c44518107, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 2046235622856534948, guid: 55073aa0f5aa99d4a9c9d86c44518107, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 380611520}
-    - targetCorrespondingSourceObject: {fileID: 2046235622856534948, guid: 55073aa0f5aa99d4a9c9d86c44518107, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 380611522}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 55073aa0f5aa99d4a9c9d86c44518107, type: 3}
 --- !u!4 &237137766 stripped
 Transform:
@@ -1752,6 +1729,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5833a6ce4022064388df801d2dee1e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pantransform: {fileID: 0}
 --- !u!1 &315932708
 GameObject:
   m_ObjectHideFlags: 0
@@ -2000,43 +1978,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4916286978862688042, guid: e46866d054e053c47bebd257df76a198, type: 3}
   m_PrefabInstance: {fileID: 1507499017}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &380611513 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2046235622856534948, guid: 55073aa0f5aa99d4a9c9d86c44518107, type: 3}
+--- !u!114 &380611520 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7039993099648873508, guid: 55073aa0f5aa99d4a9c9d86c44518107, type: 3}
   m_PrefabInstance: {fileID: 237137765}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &380611520
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 380611513}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 363aef87f6ff8a347b101ad47fb838f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  FireParticle: {fileID: 0}
-  NearbyTables:
-  - {fileID: 1500750752}
---- !u!114 &380611522
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 380611513}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2436eae4429806947a16ae5569b8d04b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  panObject: {fileID: 0}
-  FireEffect: {fileID: 0}
-  _isOnFire: 0
-  contactTime: 0
-  isFireActive: 1
 --- !u!1 &381893863
 GameObject:
   m_ObjectHideFlags: 0
@@ -3276,12 +3228,12 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5329096209907429438, guid: 61a5605c41609634bac5baf8ef0820f1, type: 3}
       propertyPath: NearbyTables.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5329096209907429438, guid: 61a5605c41609634bac5baf8ef0820f1, type: 3}
       propertyPath: NearbyTables.Array.data[0]
       value: 
-      objectReference: {fileID: 5031290744820418098}
+      objectReference: {fileID: 5031290744820418099}
     - target: {fileID: 5329096209907429438, guid: 61a5605c41609634bac5baf8ef0820f1, type: 3}
       propertyPath: NearbyTables.Array.data[1]
       value: 
@@ -3331,8 +3283,7 @@ PrefabInstance:
       value: CookStand (21)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects:
-    - {fileID: 8367246663829321705, guid: 61a5605c41609634bac5baf8ef0820f1, type: 3}
+    m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 61a5605c41609634bac5baf8ef0820f1, type: 3}
@@ -5503,10 +5454,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 292883106}
     m_Modifications:
-    - target: {fileID: 5329096209907429438, guid: 61a5605c41609634bac5baf8ef0820f1, type: 3}
-      propertyPath: NearbyTables.Array.size
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 5329096209907429438, guid: 61a5605c41609634bac5baf8ef0820f1, type: 3}
       propertyPath: NearbyTables.Array.data[0]
       value: 
@@ -7862,6 +7809,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5833a6ce4022064388df801d2dee1e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pantransform: {fileID: 0}
 --- !u!1001 &1681171728
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -19005,10 +18953,6 @@ PrefabInstance:
     m_TransformParent: {fileID: 1337426934}
     m_Modifications:
     - target: {fileID: -2078152011496428701, guid: 55073aa0f5aa99d4a9c9d86c44518107, type: 3}
-      propertyPath: FireSlider
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: -2078152011496428701, guid: 55073aa0f5aa99d4a9c9d86c44518107, type: 3}
       propertyPath: NearbyTables.Array.data[0]
       value: 
       objectReference: {fileID: 1443600199}
@@ -19020,11 +18964,7 @@ PrefabInstance:
       propertyPath: m_Name
       value: Stove
       objectReference: {fileID: 0}
-    - target: {fileID: 4055074115837330318, guid: 55073aa0f5aa99d4a9c9d86c44518107, type: 3}
-      propertyPath: m_IsTrigger
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6683501288066159462, guid: 55073aa0f5aa99d4a9c9d86c44518107, type: 3}
+    - target: {fileID: 7039993099648873508, guid: 55073aa0f5aa99d4a9c9d86c44518107, type: 3}
       propertyPath: NearbyTables.Array.data[0]
       value: 
       objectReference: {fileID: 1443600199}
@@ -20846,9 +20786,9 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7378703333766003518, guid: 55073aa0f5aa99d4a9c9d86c44518107, type: 3}
   m_PrefabInstance: {fileID: 4336722535700195436}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &5031290744820418098 stripped
+--- !u!114 &5031290744820418099 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6683501288066159462, guid: 55073aa0f5aa99d4a9c9d86c44518107, type: 3}
+  m_CorrespondingSourceObject: {fileID: 7039993099648873508, guid: 55073aa0f5aa99d4a9c9d86c44518107, type: 3}
   m_PrefabInstance: {fileID: 4336722535700195436}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
@@ -23348,6 +23288,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1053155172243632331, guid: 13eac972c2448494fa6f10e28c5fe2f4, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
     - target: {fileID: 1992951515313775233, guid: 13eac972c2448494fa6f10e28c5fe2f4, type: 3}
       propertyPath: m_Name
       value: Item_Patty_1
@@ -23407,6 +23351,14 @@ PrefabInstance:
     - target: {fileID: 5692405757421316192, guid: 13eac972c2448494fa6f10e28c5fe2f4, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5885740718741481365, guid: 13eac972c2448494fa6f10e28c5fe2f4, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
+    - target: {fileID: 8769421262871732046, guid: 13eac972c2448494fa6f10e28c5fe2f4, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -34773,6 +34725,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5833a6ce4022064388df801d2dee1e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pantransform: {fileID: 0}
 --- !u!33 &9128154117132268433
 MeshFilter:
   m_ObjectHideFlags: 0
