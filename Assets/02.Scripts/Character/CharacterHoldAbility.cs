@@ -44,8 +44,8 @@ public class CharacterHoldAbility : CharacterAbility
                 if (IsPlaceable)
                 {
 
-                        Place();
-                   
+                    Place();
+
                 }
                 else if (IsDroppable)
                 {
@@ -56,7 +56,7 @@ public class CharacterHoldAbility : CharacterAbility
                     else
                     {
 
-                            Drop();
+                        Drop();
 
                     }
                 }
@@ -72,7 +72,7 @@ public class CharacterHoldAbility : CharacterAbility
         {
             return;
         }
-       
+
 
         // 주변에 있는 잡을 수 있는 아이템을 찾음
         Collider[] colliders = Physics.OverlapSphere(transform.position, _findfood);
@@ -80,7 +80,7 @@ public class CharacterHoldAbility : CharacterAbility
         foreach (Collider collider in colliders)
         {
             IHoldable holdable = collider.GetComponent<IHoldable>();
-            if(holdable != null)
+            if (holdable != null)
             {
 
                 HoldableItem = holdable;
@@ -148,7 +148,7 @@ public class CharacterHoldAbility : CharacterAbility
 
     void Place()
     {
-        if (!IsHolding )
+        if (!IsHolding)
         {
             return;
         }
@@ -201,7 +201,7 @@ public class CharacterHoldAbility : CharacterAbility
             if (holdable != null)
             {
                 holdable.Hold(character, HandTransform);
-               
+
 
             }
         }
