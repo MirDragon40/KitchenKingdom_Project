@@ -15,7 +15,8 @@ GameObject:
   - component: {fileID: 157704236576427658}
   - component: {fileID: 2646201070075244070}
   - component: {fileID: -2078152011496428701}
-  - component: {fileID: 6683501288066159462}
+  - component: {fileID: 7039993099648873508}
+  - component: {fileID: 6399313835028673102}
   m_Layer: 0
   m_Name: Stove
   m_TagString: Table
@@ -169,7 +170,7 @@ MonoBehaviour:
   NearbyTables:
   - {fileID: 0}
   - {fileID: 0}
---- !u!114 &6683501288066159462
+--- !u!114 &7039993099648873508
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -184,6 +185,23 @@ MonoBehaviour:
   FireParticle: {fileID: 0}
   NearbyTables:
   - {fileID: 0}
+--- !u!114 &6399313835028673102
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2046235622856534948}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2436eae4429806947a16ae5569b8d04b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  panObject: {fileID: 0}
+  FireEffect: {fileID: 0}
+  _isOnFire: 0
+  contactTime: 0
+  isFireActive: 1
 --- !u!1 &6611637508460338982
 GameObject:
   m_ObjectHideFlags: 0
@@ -289,6 +307,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 7378703333766003518}
     m_Modifications:
+    - target: {fileID: 577655769306796988, guid: ead2b4147322b9a4296dcf976d72215a, type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4411280997662687504, guid: ead2b4147322b9a4296dcf976d72215a, type: 3}
       propertyPath: m_Name
       value: FireOffCol

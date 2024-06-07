@@ -178,7 +178,6 @@ MonoBehaviour:
   FireParticle: {fileID: 0}
   NearbyTables:
   - {fileID: 0}
-  - {fileID: 0}
 --- !u!1 &8931734911812680101
 GameObject:
   m_ObjectHideFlags: 0
