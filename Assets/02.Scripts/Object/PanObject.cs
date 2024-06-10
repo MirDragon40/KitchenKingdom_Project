@@ -95,9 +95,10 @@ public class PanObject : IHoldable
 
             GrillingSlider.gameObject.SetActive(false);
             PlusImage.SetActive(true);
+
         }
 
-        // 파우더에 닿지 않았을 때 contactTime을 서서히 감소시킴
+        // 파우더와 닿지 않으면 서서히 감소시킴
         if (!isPowderTouching && fireObject.contactTime > 0)
         {
             fireObject.contactTime -= Time.deltaTime;
@@ -160,6 +161,14 @@ public class PanObject : IHoldable
         isOnSurface = true;  // 아이템을 놓을 때 표면 위에 있음
     }
 
+    private void ExtinguishFire()
+    {
+        fireObject.Extinguish();
+        FireSlider.value = 0;
+        FireSlider.gameObject.SetActive(false);
+        Debug.Log("Fire extinguished");
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Table"))  // 표면에 닿았을 때
@@ -191,8 +200,6 @@ public class PanObject : IHoldable
             if (fireObject.contactTime >= 2f)
             {
                 fireObject.Extinguish();
-                FireSlider.value = 0;
-                FireSlider.gameObject.SetActive(false);
             }
         }
     }
