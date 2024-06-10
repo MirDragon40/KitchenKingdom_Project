@@ -134,7 +134,7 @@ public class FoodObject : IHoldable, IThrowable
 
     }
 
-    public void Destroy()
+    public new void Destroy()
     {
         Destroy(gameObject);
     }
@@ -155,14 +155,15 @@ public class FoodObject : IHoldable, IThrowable
             Vector3 speed = _rigidbody.velocity;
             speed.y = 0;
 
-            if (speed.magnitude < 0.5f)
+            if (speed.magnitude < 0.7f)
             {
 
-                int colliderNum = Physics.OverlapSphereNonAlloc(transform.position, 0.3f,colliders);
+                int colliderNum = Physics.OverlapSphereNonAlloc(transform.position, 0.4f,colliders);
                 Debug.Log(colliderNum);
-                foreach (Collider collider in colliders)
+                foreach (Collider collider in colliders) 
                 {
                     CookStand cookStand = null;
+                    PanObject panObject = null;
                     if (collider.TryGetComponent<CookStand>(out cookStand))
                     {
                         transform.rotation = Quaternion.identity;
@@ -173,13 +174,23 @@ public class FoodObject : IHoldable, IThrowable
                         colliders = null;
                         break;
                     }
+                    else if (collider.TryGetComponent<PanObject>(out panObject))
+                    {
+                        transform.rotation = Quaternion.identity;
+                        if (panObject.GrillingIngrediant == null)
+                        {
+                            Place(panObject.PanPlacePositon);
+                        }
+                        colliders = null;
+                        break;
+                    }
                 }
             }
             else if (speed.magnitude < 0.1f)
             {
                 break;
             }    
-            yield return null;
+            yield return new WaitForFixedUpdate();
         }
     }
     public override void Place(Transform place)
