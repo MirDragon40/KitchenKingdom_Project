@@ -58,10 +58,16 @@ public class OrderManager : MonoBehaviourPun
             GeneratedOrderList.Add(orderName);
         }
 
-                if(Input.GetKeyDown(KeyCode.Alpha2)) 
-                {
-                    SubmitOrder("burger");
-                }
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            SubmitOrder("burger");
+        }
+
+        if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            MyScrollView.OnSubmitIncorrectPlateEffect();
+        }
+
 
         if (_stage == 1 && !_isGenerating && _orderCount < MaxOrderNumber)
         {
@@ -69,11 +75,11 @@ public class OrderManager : MonoBehaviourPun
             int orderRandIndex = Random.Range(0, 10);
             if (orderRandIndex <= 5)
             {
-                StartCoroutine(GenerateOrder("burgerCokeFry"));
+                StartCoroutine(GenerateOrder("burger"));
             }
             else if (orderRandIndex > 5)
             {
-                StartCoroutine(GenerateOrder("coke"));
+                StartCoroutine(GenerateOrder("burgerCoke"));
                 //   _pv.RPC("GenerateOrderRPC", RpcTarget.All, "burgerCoke");
             }
 
@@ -96,10 +102,12 @@ public class OrderManager : MonoBehaviourPun
 
     public void SubmitOrder(string submittedFood)
     {
+        bool HasFoundMatchedItem = false;
         for (int i = 0; i<GeneratedOrderList.Count; i++)
         {
             if (GeneratedOrderList[i] == submittedFood)
             {
+                HasFoundMatchedItem = true;
                 GeneratedOrderList.RemoveAt(i);
                 // 점수 더하기
                 AddTotalScore(NormalOrderPoints);
@@ -108,7 +116,10 @@ public class OrderManager : MonoBehaviourPun
                 break;
             }
         }
-
+        if (!HasFoundMatchedItem)
+        {
+            MyScrollView.OnSubmitIncorrectPlateEffect();
+        }
     }
 
     [PunRPC]

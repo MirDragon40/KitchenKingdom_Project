@@ -19,6 +19,10 @@ public class FoodCombination : MonoBehaviour
     }
     private void Start()
     {
+        Init();
+    }
+    public void Init()
+    {
         Stage = GameManager.Instance.Stage;
         foreach (GameObject ingrediant in AvailableIngrediants)
         {
@@ -45,7 +49,6 @@ public class FoodCombination : MonoBehaviour
                 break;
         }
     }
-
     private void LateUpdate()
     {
         if (Input.GetKeyDown(KeyCode.Space) && IsSubmitable)

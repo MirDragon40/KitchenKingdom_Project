@@ -2,6 +2,7 @@ using Photon.Pun;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class Makefood : MonoBehaviour
@@ -13,7 +14,7 @@ public class Makefood : MonoBehaviour
 
     private Character _nearbyCharacter;
     private bool isPlayerNearby => _nearbyCharacter != null;
-
+    private PhotonView _pv;
 
     public IHoldable _placedItem;
     public bool HavePlacedItem => _placedItem != null;
@@ -28,6 +29,7 @@ public class Makefood : MonoBehaviour
     public void Start()
     {
         _animator = GetComponent<Animator>();
+        _pv = GetComponent<PhotonView>();
     }
 
     void Update()
@@ -42,10 +44,11 @@ public class Makefood : MonoBehaviour
             return;
         }
 
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) && _nearbyCharacter.PhotonView.IsMine)
         {
             if (!HavePlacedItem)
             {
+                spawnPoint = _nearbyCharacter.HoldAbility.HandTransform;
                 // 음식을 생성하기 전에 근처에 들 수 있는 오브젝트가 있는지 확인합니다
                 if (!IsNearbyHoldable())
                 {
@@ -71,6 +74,10 @@ public class Makefood : MonoBehaviour
 
     private bool IsNearbyHoldable()
     {
+        if (!_nearbyCharacter.PhotonView.IsMine)
+        {
+            return false;
+        }
         Collider[] colliders = Physics.OverlapSphere(spawnPoint.position, _checkRange);
         foreach (Collider collider in colliders)
         {
