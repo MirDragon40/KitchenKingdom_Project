@@ -33,7 +33,7 @@ public class CharacterHoldAbility : CharacterAbility
 
     private void LateUpdate()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) && _owner.PhotonView.IsMine)
         {
             if (!IsHolding)
             {
@@ -137,12 +137,17 @@ public class CharacterHoldAbility : CharacterAbility
 
     public void FoodTrashDrop()
     {
+        FoodCombination foodcombo = null;
         if (HoldableItem is FoodObject food)
         {
             food.Destroy();
             HoldableItem = null;
             animator.SetBool("Carry", false);
 
+        }
+        if (HoldableItem.TryGetComponent<FoodCombination>(out foodcombo))
+        {
+            HoldableItem.GetComponent<FoodCombination>().Init();
         }
     }
 

@@ -23,6 +23,7 @@ public class PlateSubmitPlace : MonoBehaviour
     {
         if (IsServeable && Input.GetKeyDown(KeyCode.Space))
         {
+            Debug.Log(_plateContent);
             SubmitPlate();
 
         }

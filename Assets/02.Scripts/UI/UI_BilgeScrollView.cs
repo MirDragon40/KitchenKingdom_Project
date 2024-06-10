@@ -31,7 +31,7 @@ public class UI_BilgeScrollView : MonoBehaviour
     }
     private IEnumerator DelayDestory_Coroutine(GameObject gameObject)
     {
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(1f);
         Destroy(gameObject);        
     }    
     // 아이템을 추가하는 함수
@@ -57,7 +57,17 @@ public class UI_BilgeScrollView : MonoBehaviour
         AnimateItem(newItem, true);
         return newItem;
     }
+    public void OnSubmitIncorrectPlateEffect()
+    {
+        Image firstBilge = OrderBills[0].GetComponent<Image>();
+        Color originalColor = firstBilge.color;
 
+        // 1초 동안 초록색으로 변경한 후 원래 색상으로 되돌리기
+        firstBilge.DOColor(Color.red, 0.5f).OnComplete(() =>
+        {
+            firstBilge.DOColor(originalColor, 0.5f);
+        });
+    }
 
     // 프리팹을 일정 시간 간격으로 추가하는 Coroutine
 /*    private IEnumerator AddItemPrefab()
@@ -75,6 +85,7 @@ public class UI_BilgeScrollView : MonoBehaviour
         _horizontalLayoutGroup.enabled = false;
 
         RectTransform rectTransform = item.GetComponent<RectTransform>();
+        Image bilgeImage = item.GetComponent<Image>();
         if (positiveDirection)
         {
             rectTransform.anchoredPosition = new Vector2(0, 100); // 시작 위치 (원하는 시작 위치로 설정)
@@ -82,7 +93,14 @@ public class UI_BilgeScrollView : MonoBehaviour
         }
         else
         {
-            rectTransform.DOAnchorPosY(300, 0.5f).SetEase(Ease.OutBounce);
+            rectTransform.DOAnchorPosY(200, 1f).SetEase(Ease.InElastic);
+            Color originalColor = bilgeImage.color;
+
+            // 1초 동안 초록색으로 변경한 후 원래 색상으로 되돌리기
+            bilgeImage.DOColor(Color.green, 0.5f).OnComplete(() =>
+            {
+                bilgeImage.DOColor(originalColor, 0.5f);
+            });
         }
 
         CanvasGroup canvasGroup = null;
@@ -96,7 +114,7 @@ public class UI_BilgeScrollView : MonoBehaviour
         else
         {
             canvasGroup = item.gameObject.GetComponent<CanvasGroup>();
-            canvasGroup.DOFade(0, 0.5f); // 0.5초 동안 투명도 애니메이션
+            canvasGroup.DOFade(0, 1.5f); // 0.5초 동안 투명도 애니메이션
         }
         StartCoroutine(HorizontalLayoutGroupON());
     }
