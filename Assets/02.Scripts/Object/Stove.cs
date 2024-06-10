@@ -100,7 +100,7 @@ public class Stove : CookStand
         }
     }
 
-    private void OnTriggerEnter(Collider other)
+   protected void OnTriggerEnter(Collider other)
     {
         if (fireTriggered && other.CompareTag("Powder"))
         {
@@ -108,8 +108,9 @@ public class Stove : CookStand
         }
     }
 
-    private void OnTriggerStay(Collider other)
+    protected override void OnTriggerStay(Collider other)
     {
+        base.OnTriggerStay(other);
         if (fireTriggered && other.CompareTag("Powder"))
         {
             isPowderTouching = true;
@@ -121,8 +122,9 @@ public class Stove : CookStand
         }
     }
 
-    private void OnTriggerExit(Collider other)
+    protected override void OnTriggerExit(Collider other)
     {
+        base.OnTriggerExit(other);
         if (other.CompareTag("Powder"))
         {
             isPowderTouching = false;

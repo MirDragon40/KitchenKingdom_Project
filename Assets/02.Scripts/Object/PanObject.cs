@@ -30,7 +30,9 @@ public class PanObject : IHoldable
 
     internal bool isOnFire;
     private bool isNearTrashBin = false;
-    private TrashBin nearbyTrashBin; 
+    private TrashBin nearbyTrashBin;
+
+    public Transform PanStartPosition; // 팬 초기위치
 
     private void Awake()
     {
@@ -39,7 +41,14 @@ public class PanObject : IHoldable
         dangerIndicator = GetComponentInChildren<DangerIndicator>();
         FireSlider.gameObject.SetActive(false);
     }
-
+    private void Start()
+    {
+        // 게임 시작 시 팬을 초기 배치 위치로 이동시킴
+        if (PanStartPosition != null)
+        {
+            Place(PanStartPosition);
+        }
+    }
     private void Update()
     {
         if (PanPlacePositon.childCount != 0)
@@ -165,6 +174,11 @@ public class PanObject : IHoldable
         MyStove = place.GetComponentInParent<Stove>();
         _holdCharacter = null;
         isOnSurface = true;  // 아이템을 놓을 때 표면 위에 있음
+
+        if (MyStove != null)
+        {
+            MyStove.PlacedPan = this;
+        }
     }
 
     private void OnTriggerEnter(Collider other)
