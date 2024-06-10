@@ -18,6 +18,8 @@ public class DishObject : IHoldable
 
     public override void Hold(Character character, Transform handTransform)
     {
+
+        Debug.Log("플레이어가 접시를 들고있다.");
         transform.parent = handTransform;
         GetComponent<Rigidbody>().isKinematic = true;
         GetComponent<BoxCollider>().enabled = false;

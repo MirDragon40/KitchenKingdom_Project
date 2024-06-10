@@ -12,6 +12,7 @@ public class UI_Bilge : MonoBehaviour
     [HideInInspector]
     public List<string> IngrediantsNameList = new List<string>();
     private bool _hasSpriteUpdated = false;
+    [HideInInspector]
     public int ItemCount;
 
     public Image OrderFoodImage;
