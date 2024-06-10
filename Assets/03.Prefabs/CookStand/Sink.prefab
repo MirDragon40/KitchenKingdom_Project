@@ -149,7 +149,6 @@ GameObject:
   - component: {fileID: 1840288338163429407}
   - component: {fileID: 839896799849497319}
   - component: {fileID: 5360426005810481366}
-  - component: {fileID: 416315975943939081}
   m_Layer: 0
   m_Name: Plate (1)
   m_TagString: Untagged
@@ -244,34 +243,6 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 3736213754101489272, guid: 6fad3eabaf237af4890c0800801dd73a, type: 3}
---- !u!114 &416315975943939081
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1844105040416664298}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d025974f2287712488a4d5d0f12d469b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Stage: 1
-  AvailableIngrediants:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  UI_FoodIcon:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  IsSubmitable: 0
-  IsReadyServe: 0
 --- !u!1 &2011603934353449236
 GameObject:
   m_ObjectHideFlags: 0
@@ -5126,7 +5097,6 @@ GameObject:
   - component: {fileID: 1259934845147595646}
   - component: {fileID: 6514898414319806691}
   - component: {fileID: 6180593363126184479}
-  - component: {fileID: 8085714404044212796}
   m_Layer: 0
   m_Name: Plate (3)
   m_TagString: Untagged
@@ -5221,34 +5191,6 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 3736213754101489272, guid: 6fad3eabaf237af4890c0800801dd73a, type: 3}
---- !u!114 &8085714404044212796
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2727121699110408592}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d025974f2287712488a4d5d0f12d469b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Stage: 1
-  AvailableIngrediants:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  UI_FoodIcon:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  IsSubmitable: 0
-  IsReadyServe: 0
 --- !u!1 &3246853851324219455
 GameObject:
   m_ObjectHideFlags: 0
@@ -10105,7 +10047,6 @@ GameObject:
   - component: {fileID: 7171749008573782661}
   - component: {fileID: 6964344842905565214}
   - component: {fileID: 4374558271541997683}
-  - component: {fileID: 4818978515579717223}
   m_Layer: 0
   m_Name: Plate
   m_TagString: Untagged
@@ -10200,34 +10141,6 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 3736213754101489272, guid: 6fad3eabaf237af4890c0800801dd73a, type: 3}
---- !u!114 &4818978515579717223
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3527836701480720195}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d025974f2287712488a4d5d0f12d469b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Stage: 1
-  AvailableIngrediants:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  UI_FoodIcon:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  IsSubmitable: 0
-  IsReadyServe: 0
 --- !u!1 &3593815041833677610
 GameObject:
   m_ObjectHideFlags: 0
@@ -10381,7 +10294,6 @@ GameObject:
   - component: {fileID: 6332896391116197860}
   - component: {fileID: 8429375005805273346}
   - component: {fileID: 8289859734100665515}
-  - component: {fileID: 2129025289685516282}
   m_Layer: 0
   m_Name: Plate (2)
   m_TagString: Untagged
@@ -10476,34 +10388,6 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 3736213754101489272, guid: 6fad3eabaf237af4890c0800801dd73a, type: 3}
---- !u!114 &2129025289685516282
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5621349873289885123}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d025974f2287712488a4d5d0f12d469b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Stage: 1
-  AvailableIngrediants:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  UI_FoodIcon:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  IsSubmitable: 0
-  IsReadyServe: 0
 --- !u!1 &5875303981733873712
 GameObject:
   m_ObjectHideFlags: 0
