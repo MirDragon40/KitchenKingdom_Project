@@ -29,6 +29,8 @@ public class PanObject : IHoldable
     private bool isPowderTouching = false;
 
     internal bool isOnFire;
+    private bool isNearTrashBin = false;
+    private TrashBin nearbyTrashBin; 
 
     private void Awake()
     {
@@ -119,6 +121,10 @@ public class PanObject : IHoldable
         {
             FireSlider.gameObject.SetActive(false);
         }
+        if (isNearTrashBin && Input.GetKeyDown(KeyCode.Space))
+        {
+            DropFoodInTrash();
+        }
     }
 
     public override void Hold(Character character, Transform handTransform)
@@ -159,14 +165,6 @@ public class PanObject : IHoldable
         MyStove = place.GetComponentInParent<Stove>();
         _holdCharacter = null;
         isOnSurface = true;  // 아이템을 놓을 때 표면 위에 있음
-    }
-
-    private void ExtinguishFire()
-    {
-        fireObject.Extinguish();
-        FireSlider.value = 0;
-        FireSlider.gameObject.SetActive(false);
-        Debug.Log("Fire extinguished");
     }
 
     private void OnTriggerEnter(Collider other)
@@ -226,4 +224,25 @@ public class PanObject : IHoldable
     }
 
 
+    public void SetNearTrashBin(bool isNear, TrashBin trashBin = null)
+    {
+        isNearTrashBin = isNear;
+        nearbyTrashBin = trashBin;
+    }
+
+    private void DropFoodInTrash()
+    {
+        if (PanPlacePositon.childCount > 0)
+        {
+            for (int i = PanPlacePositon.childCount - 1; i >= 0; i--)
+            {
+                Transform child = PanPlacePositon.GetChild(i);
+                FoodObject childFoodObject = child.GetComponent<FoodObject>();
+                if (childFoodObject != null)
+                {
+                    Destroy(child.gameObject);
+                }
+            }
+        }
+    }
 }
