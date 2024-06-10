@@ -7,20 +7,16 @@ public class Stove : CookStand
 {
     public PanObject PlacedPan = null;
     private Transform _originalPlacePosition;
+    public FireObject fireObject;
     public bool IsPanPlaced => PlacedPan != null;
-
-    public ParticleSystem FireParticle;
-
-    private bool fireTriggered = false;
-    private bool isPowderTouching = false;
-    private float contactTime = 0f;
 
     public Table[] NearbyTables;
 
     private void Start()
     {
         _originalPlacePosition = base.PlacePosition;
-        FireParticle = GetComponentInChildren<ParticleSystem>();
+        fireObject = GetComponent<FireObject>();
+
     }
 
     protected override void Update()
@@ -29,113 +25,25 @@ public class Stove : CookStand
         if (base.PlacedItem != null)
         {
             base.PlacedItem.TryGetComponent<PanObject>(out PlacedPan);
-        }
-        else
-        {
-            PlacedPan = null;
-        }
-
-        if (PlacedPan != null && PlacedPan.GrillingIngrediant != null)
-        {
-            ManageGrillingProgress();
-        }
-        else
-        {
-            fireTriggered = false;
-        }
-
-        if (!isPowderTouching && contactTime > 0)
-        {
-            contactTime -= Time.deltaTime;
-            if (contactTime < 0)
+            if (PlacedPan != null && PlacedPan.fireObject != null && PlacedPan.fireObject._isOnFire)
             {
-                contactTime = 0;
+                // 팬이 불에 노출되고 불이 켜져 있으면 스토브의 불도 켭니다.
+                if (!fireObject._isOnFire)
+                {
+                    fireObject.MakeFire();
+                }
             }
-        }
-
-        isPowderTouching = false;
-    }
-
-    private void ManageGrillingProgress()
-    {
-        var grillingIngredient = PlacedPan.GrillingIngrediant;
-        PlacedPan.GrillingSlider.gameObject.SetActive(true);
-        grillingIngredient.StartGrilling();
-        PlacedPan.GrillingSlider.value = grillingIngredient.CookProgress;
-
-        if (grillingIngredient.CookProgress >= 2f && grillingIngredient.CookProgress < 2.9f)
-        {
-            PlacedPan.dangerIndicator.ShowDangerIndicator(PlacedPan.dangerSprite);
-        }
-        else
-        {
-            PlacedPan.dangerIndicator.HideDangerIndicator();
-        }
-
-        if (grillingIngredient.CookProgress >= 3f && !fireTriggered)
-        {
-            PlacedPan.fireObject.MakeFire();
-            PlacedPan.FireSlider.gameObject.SetActive(true);
-            Ignite();
-            fireTriggered = true;
-        }
-    }
-
-    public void Ignite()
-    {
-        FireParticle.Play();
-        StartCoroutine(SpreadFireToNearbyTables());
-    }
-
-    private IEnumerator SpreadFireToNearbyTables()
-    {
-        yield return new WaitForSeconds(5f);
-
-        foreach (var table in NearbyTables)
-        {
-            if (table != null)
+            else
             {
-                table.Ignite();
+                // 팬이 불에 노출되지 않거나 불이 꺼져 있으면 스토브의 불도 끕니다.
+                if (fireObject._isOnFire)
+                {
+                    fireObject.Extinguish();
+                }
             }
-        }
-    }
 
-   protected void OnTriggerEnter(Collider other)
-    {
-        if (fireTriggered && other.CompareTag("Powder"))
-        {
-            isPowderTouching = true;
         }
-    }
 
-    protected override void OnTriggerStay(Collider other)
-    {
-        base.OnTriggerStay(other);
-        if (fireTriggered && other.CompareTag("Powder"))
-        {
-            isPowderTouching = true;
-            contactTime += Time.deltaTime;
-            if (contactTime >= 2f)
-            {
-                Extinguish();
-            }
-        }
-    }
 
-    protected override void OnTriggerExit(Collider other)
-    {
-        base.OnTriggerExit(other);
-        if (other.CompareTag("Powder"))
-        {
-            isPowderTouching = false;
-        }
-    }
-
-    public void Extinguish()
-    {
-        FireParticle.Stop();
-        fireTriggered = false;
-        contactTime = 0;
-        StopCoroutine(SpreadFireToNearbyTables());
     }
 }

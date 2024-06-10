@@ -71,10 +71,15 @@ public class PanObject : IHoldable
                         dangerIndicator.HideDangerIndicator();
                     }
 
-                    if (GrillingIngrediant.CookProgress >= 3f)
+                    if (GrillingIngrediant.CookProgress >= 3f && !fireObject._isOnFire)
                     {
                         fireObject.MakeFire();
                         FireSlider.gameObject.SetActive(true);
+                    }
+                    else if (GrillingIngrediant.CookProgress < 3f && fireObject._isOnFire)
+                    {
+                        fireObject.Extinguish();
+                        FireSlider.gameObject.SetActive(false);
                     }
                 }
             }
@@ -122,11 +127,11 @@ public class PanObject : IHoldable
 
         isPowderTouching = false;  // 매 프레임마다 false로 초기화
 
-        if (fireObject.isFireActive && FireSlider != null)
+        if (fireObject._isOnFire && FireSlider != null)
         {
             FireSlider.value = fireObject.contactTime / 2f;
         }
-        else if (!fireObject.isFireActive && FireSlider.gameObject.activeSelf)
+        else if (!fireObject._isOnFire && FireSlider.gameObject.activeSelf)
         {
             FireSlider.gameObject.SetActive(false);
         }
@@ -203,7 +208,7 @@ public class PanObject : IHoldable
     private void OnTriggerStay(Collider other)
     {
         // 불이 활성화 상태이고, 'Powder' 태그 오브젝트와 접촉 중일 때
-        if (fireObject.isFireActive && other.CompareTag("Powder"))
+        if (fireObject._isOnFire && other.CompareTag("Powder"))
         {
             isPowderTouching = true;
             fireObject.contactTime += Time.deltaTime; // 접촉 시간을 측정
@@ -231,7 +236,7 @@ public class PanObject : IHoldable
                 holdAbility.IsPlaceable = false;
             }
         }
-        if (fireObject.isFireActive && other.CompareTag("Powder"))
+        if (fireObject._isOnFire && other.CompareTag("Powder"))
         {
             isPowderTouching = false; 
         }
