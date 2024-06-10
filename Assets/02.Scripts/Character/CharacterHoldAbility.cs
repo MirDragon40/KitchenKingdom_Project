@@ -200,6 +200,7 @@ public class CharacterHoldAbility : CharacterAbility
             if (holdable != null)
             {
                 holdable.Hold(character, HandTransform);
+                Debug.Log(holdable);
             }
         }
     }
