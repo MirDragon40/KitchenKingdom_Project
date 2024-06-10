@@ -596,6 +596,7 @@ GameObject:
   - component: {fileID: 362354460424016812}
   - component: {fileID: 7651826479773079508}
   - component: {fileID: -2101629620323778454}
+  - component: {fileID: -8449686282262255424}
   m_Layer: 0
   m_Name: DirtyPlates
   m_TagString: Untagged
@@ -640,6 +641,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ItemType: 2
   IsDroppable: 0
+  State: 0
 --- !u!65 &362354460424016812
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -709,6 +711,28 @@ MonoBehaviour:
   - {fileID: 8588535264286269589}
   - {fileID: 1335041104003961128}
   DirtyPlateNum: 5
+--- !u!64 &-8449686282262255424
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7435229658286963103}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 1
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 3736213754101489272, guid: 6fad3eabaf237af4890c0800801dd73a, type: 3}
 --- !u!1 &7975805583750159484
 GameObject:
   m_ObjectHideFlags: 0

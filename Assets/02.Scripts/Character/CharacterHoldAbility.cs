@@ -37,7 +37,9 @@ public class CharacterHoldAbility : CharacterAbility
         {
             if (!IsHolding)
             {
+
                 PickUp();
+
             }
             else
             {
@@ -46,7 +48,9 @@ public class CharacterHoldAbility : CharacterAbility
 
                     Place();
 
+                   
                 }
+              
                 else if (IsDroppable)
                 {
                     if (nearTrashBin)
@@ -80,9 +84,10 @@ public class CharacterHoldAbility : CharacterAbility
         foreach (Collider collider in colliders)
         {
             IHoldable holdable = collider.GetComponent<IHoldable>();
+            Debug.Log(holdable);
+
             if (holdable != null)
             {
-
                 HoldableItem = holdable;
                 holdable.Hold(_owner, transform);
                 animator.SetBool("Carry", true);
@@ -146,7 +151,6 @@ public class CharacterHoldAbility : CharacterAbility
         }
     }
 
-
     void Place()
     {
         if (!IsHolding)
@@ -199,9 +203,15 @@ public class CharacterHoldAbility : CharacterAbility
 
             if (holdable != null)
             {
+                
                 holdable.Hold(character, HandTransform);
-                Debug.Log(holdable);
             }
         }
+    }
+
+    private IEnumerator PickUp_Coroutine()
+    {
+        yield return new WaitForSeconds(0.2f);
+        PickUp();
     }
 }
