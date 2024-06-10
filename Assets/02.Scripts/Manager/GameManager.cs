@@ -18,6 +18,9 @@ public class GameManager : MonoBehaviour
     public GameState State = GameState.Go; // 게임 상태, TimeScale관리
     public Transform[] SpawnPoints= new Transform[4];
     public int TotalScore = 0;
+
+    public GameObject OptionUl;
+    private bool _optionUlOpen = false;
     public int Stage { get; private set; }
     private void Awake()
     {
@@ -32,6 +35,27 @@ public class GameManager : MonoBehaviour
         Stage = 1;
 
         DontDestroyOnLoad(gameObject);
+
+        OptionUl.gameObject.SetActive(false);
+    }
+
+    private void Update()
+    {
+        // 옵션창 켜고 끄기
+        if(Input.GetKeyUp(KeyCode.Escape)) 
+        {
+            if (_optionUlOpen)
+            {
+                OptionUl.gameObject.SetActive(false);
+                _optionUlOpen = false;
+            }
+            else 
+            {
+                OptionUl.gameObject.SetActive(true);
+                _optionUlOpen = true;
+            }
+            
+        }
     }
 
     private void Start()
