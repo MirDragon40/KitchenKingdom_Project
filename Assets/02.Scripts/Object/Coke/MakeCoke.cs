@@ -1,3 +1,4 @@
+using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -23,14 +24,14 @@ public class MakeCoke : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player")) 
+        if (other.CompareTag("Player") && other.GetComponent<Character>().PhotonView.IsMine) 
         {
             _isPlayerAround = true;
         }
     }
     private void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("Player")) 
+        if (other.CompareTag("Player") && other.GetComponent<Character>().PhotonView.IsMine) 
         {
             _isPlayerAround = false;
         }
@@ -38,6 +39,6 @@ public class MakeCoke : MonoBehaviour
 
     private void SpawnCoke() 
     {
-        Instantiate(CokePrefab, CokeSpawnPoint);
+        PhotonNetwork.Instantiate("Coke", CokeSpawnPoint.position, Quaternion.identity);
     }
 }

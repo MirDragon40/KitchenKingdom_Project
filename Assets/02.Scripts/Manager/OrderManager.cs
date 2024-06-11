@@ -69,38 +69,28 @@ public class OrderManager : MonoBehaviourPun
         }
 
 
-        if (_stage == 1 && !_isGenerating && _orderCount < MaxOrderNumber)
+        if (_stage == 1 && !_isGenerating && _orderCount < MaxOrderNumber && PhotonNetwork.IsMasterClient)
         {
             _orderCount++;
             int orderRandIndex = Random.Range(0, 10);
             if (orderRandIndex <= 5)
             {
-                StartCoroutine(GenerateOrder("burger"));
+                _pv.RPC("GenerateOrderRPC", RpcTarget.All, "burger");
             }
             else if (orderRandIndex > 5)
             {
-                StartCoroutine(GenerateOrder("burgerCoke"));
-                //   _pv.RPC("GenerateOrderRPC", RpcTarget.All, "burgerCoke");
+                _pv.RPC("GenerateOrderRPC", RpcTarget.All, "burgerCoke");
             }
 
-            /*            if (PhotonNetwork.IsMasterClient || !PhotonNetwork.IsConnected)
-                        {
-                            int orderRandIndex = Random.Range(0, 10);
-                            if (orderRandIndex <= 8)
-                            {
-                                _pv.RPC("GenerateOrderRPC", RpcTarget.All, "burger");
-                            }
-                            else if (orderRandIndex == 9)
-                            {
-                                _pv.RPC("GenerateOrderRPC", RpcTarget.All, "burgerCoke");
-                            }
-
-                    }*/
         }
     }
+    [PunRPC]
+    private void GenerateOrderRPC(string orderName)
+    {
+        StartCoroutine(GenerateOrder(orderName));
+    }
 
-
-    public void SubmitOrder(string submittedFood)
+    public bool SubmitOrder(string submittedFood)
     {
         bool HasFoundMatchedItem = false;
         for (int i = 0; i<GeneratedOrderList.Count; i++)
@@ -120,6 +110,7 @@ public class OrderManager : MonoBehaviourPun
         {
             MyScrollView.OnSubmitIncorrectPlateEffect();
         }
+        return HasFoundMatchedItem;
     }
 
     [PunRPC]

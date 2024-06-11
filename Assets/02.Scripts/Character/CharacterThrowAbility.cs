@@ -65,6 +65,7 @@ public class CharacterThrowAbility : CharacterAbility
         if (Throwable != null)
         {
             Throwable.ThrowObject(transform.forward + new Vector3(0,0.4f, 0), ThrowPower);
+            _owner.Animator.SetBool("Carry",false);
         }
     }
 }

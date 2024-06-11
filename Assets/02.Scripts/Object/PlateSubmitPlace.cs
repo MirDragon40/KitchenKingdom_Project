@@ -45,11 +45,14 @@ public class PlateSubmitPlace : MonoBehaviour
     }
     private void SubmitPlate()
     {
-        OrderManager.Instance.SubmitOrder(_plateContent);
-        ShowScoreUI(OrderManager.Instance.NormalOrderPoints);
-        Destroy(_foodCombo.gameObject);
-        _foodCombo = null;
-        _plateContent = string.Empty;
+        bool isMatchingOrder = OrderManager.Instance.SubmitOrder(_plateContent);
+        if (isMatchingOrder)
+        {
+            ShowScoreUI(OrderManager.Instance.NormalOrderPoints);
+            Destroy(_foodCombo.gameObject);
+            _foodCombo = null;
+            _plateContent = string.Empty;
+        }
 
     }
     // todo : 손에 들고있는 plate에 맞는 음식을 제출했을때 ordermanager의 내용과 비교하여 gamemanager의 totalscore 25점 더하기
@@ -76,6 +79,10 @@ public class PlateSubmitPlace : MonoBehaviour
                         {
                             _plateContent = "burger";
                         }
+                        else
+                        {
+                            _plateContent = string.Empty;
+                        }
                         IsServeable = true;
                         _holdability.IsServeable = true;
 
@@ -93,11 +100,13 @@ public class PlateSubmitPlace : MonoBehaviour
         {
             IsServeable = false;
             _holdability.IsServeable = true;
+            _plateContent = string.Empty;
         }
     }
     private void OnTriggerExit(Collider other)
     {
         IsServeable = false;
+        _plateContent = string.Empty;
         if (_holdability != null)
         {
             _holdability.IsServeable = false;
