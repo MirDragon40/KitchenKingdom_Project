@@ -1,15 +1,12 @@
 using Photon.Pun;
 using System;
 using System.Collections;
-using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
 
-public class Makefood : MonoBehaviour
+[RequireComponent(typeof(PhotonView))]
+public class Makefood : MonoBehaviourPun
 {
-
     public FoodType FoodType;
-
     public Transform spawnPoint;
 
     private Character _nearbyCharacter;
@@ -26,13 +23,13 @@ public class Makefood : MonoBehaviour
 
     private float _checkRange = 1f;
 
-    public void Start()
+    private void Start()
     {
         _animator = GetComponent<Animator>();
         _pv = GetComponent<PhotonView>();
     }
 
-    void Update()
+    private void Update()
     {
         if (!isPlayerNearby)
         {
@@ -49,17 +46,10 @@ public class Makefood : MonoBehaviour
             if (!HavePlacedItem)
             {
                 spawnPoint = _nearbyCharacter.HoldAbility.HandTransform;
-                // 음식을 생성하기 전에 근처에 들 수 있는 오브젝트가 있는지 확인합니다
                 if (!IsNearbyHoldable())
                 {
-                    SpawnFood(FoodType, _nearbyCharacter.HoldAbility.HandTransform);
-
-                    // 들기 애니메이션 실행
+                    _pv.RPC(nameof(SpawnFood), RpcTarget.AllBuffered, FoodType.ToString(), spawnPoint.position, spawnPoint.rotation);
                     _nearbyCharacter.GetComponent<Animator>().SetBool("Carry", true);
-
-                    // 상자 애니메이션 실행
-                    // Animator.SetBool("PlayerBoxOpen", true);
-
                     StartCoroutine(BoxOpenAnimation());
                 }
             }
@@ -69,7 +59,6 @@ public class Makefood : MonoBehaviour
         {
             _nearbyCharacter = null;
         }
-
     }
 
     private bool IsNearbyHoldable()
@@ -84,24 +73,21 @@ public class Makefood : MonoBehaviour
             IHoldable holdable = collider.GetComponent<IHoldable>();
             if (holdable != null)
             {
-                return true; // 근처에 들 수 있는 오브젝트가 있음
+                return true;
             }
         }
-        return false; // 근처에 들 수 있는 오브젝트가 없음
+        return false;
     }
 
-    public void SpawnFood(FoodType foodType, Transform spawnPoint)
+    [PunRPC]
+    public void SpawnFood(string foodName, Vector3 position, Quaternion rotation)
     {
         // 음식 생성
-        
-        GameObject foodPrefab = FoodManager.instance.GetFoodPrefab(foodType);
-        Rigidbody rb = foodPrefab.GetComponent<Rigidbody>();
-        rb.isKinematic = true;
-        Debug.Log(foodPrefab.transform.position);
+        GameObject foodPrefab = Resources.Load<GameObject>(foodName);
+
         if (foodPrefab != null)
         {
-            Debug.Log("음식 생성");
-            GameObject food = Instantiate(foodPrefab, spawnPoint.position, spawnPoint.rotation);
+            GameObject food = PhotonNetwork.InstantiateRoomObject(foodPrefab.name, position, rotation);
 
             // 음식 오브젝트를 손에 들도록 설정
             IHoldable holdable = food.GetComponent<IHoldable>();
@@ -110,9 +96,7 @@ public class Makefood : MonoBehaviour
                 holdable.Hold(_nearbyCharacter, _handTransform);
             }
         }
-
     }
-
 
     private void OnTriggerEnter(Collider other)
     {
@@ -121,8 +105,6 @@ public class Makefood : MonoBehaviour
             return;
         }
 
-
-        // 플레이어가 상자에 가까이 왔을 때
         if (other.CompareTag("Player"))
         {
             _nearbyCharacter = other.GetComponent<Character>();
@@ -131,7 +113,6 @@ public class Makefood : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        // 플레이어가 상자에서 멀어졌을 때
         if (other.CompareTag("Player"))
         {
             var a = other.GetComponent<Character>();
@@ -145,6 +126,5 @@ public class Makefood : MonoBehaviour
     private IEnumerator BoxOpenAnimation()
     {
         yield return new WaitForSeconds(1f);
-        //Animator.SetBool("PlayerBoxOpen", false);
     }
 }

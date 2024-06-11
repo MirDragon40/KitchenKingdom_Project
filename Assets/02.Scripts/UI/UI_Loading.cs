@@ -17,7 +17,7 @@ public class UI_Loading : MonoBehaviour
     {
         while (true) 
         {
-            string text = "일하러 가는 중 ...";
+            string text = "일 하러 가는 중 ...";
             yield return TypeText(LoadingText, text);
         }
     }
