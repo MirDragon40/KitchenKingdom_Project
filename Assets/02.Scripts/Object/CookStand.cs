@@ -77,6 +77,7 @@ public class CookStand : MonoBehaviour
                 characterHoldAbility.PlacePosition = PlacePosition;
             }
         }
+
     }
 
     protected virtual void OnTriggerExit(Collider other)
@@ -91,4 +92,6 @@ public class CookStand : MonoBehaviour
             }
         }
     }
+
+
 }

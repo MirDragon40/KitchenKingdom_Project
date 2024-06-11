@@ -1,3 +1,4 @@
+using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -15,7 +16,7 @@ public class MaterialColorChange: MonoBehaviour
     public MeshRenderer RendererThisMaterial;
     public Material ThisMaterial;
     public Material ChangeMaterial;
-
+    private PhotonView _pv;
     private bool _isReached = false;
 
 
@@ -46,7 +47,11 @@ public class MaterialColorChange: MonoBehaviour
     
     private void OnTriggerStay(Collider other)
     {
-        if (other.CompareTag("Player")) 
+        if (_pv == null)
+        {
+            _pv = other.GetComponent<PhotonView>();
+        }
+        if (other.CompareTag("Player") && _pv.IsMine) 
         {
             if(!_isReached) 
             {
@@ -61,12 +66,16 @@ public class MaterialColorChange: MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("Player"))
+
+        if (other.CompareTag("Player") && _pv.IsMine)
         {
             RendererThisMaterial.material = ThisMaterial;
         }
 
-        
+        if (_pv != null)
+        {
+            _pv = null;
+        }
         _isReached = false;
 
         

@@ -11,6 +11,7 @@ public class Character : MonoBehaviour
     private void Awake()
     {
         HoldAbility = GetComponent<CharacterHoldAbility>();
+        PhotonView = GetComponent<PhotonView>();
     }
 
     private void Start()
@@ -19,6 +20,6 @@ public class Character : MonoBehaviour
         {
             Instance = this;
         }*/
-        PhotonView = GetComponent<PhotonView>();
+
     }
 }

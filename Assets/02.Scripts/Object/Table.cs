@@ -3,19 +3,13 @@ using UnityEngine;
 
 public class Table : MonoBehaviour
 {
-    public ParticleSystem FireParticle;
     public Table[] NearbyTables;
 
     private bool isStoveFireActive = false;
 
-    public void Start()
-    {
-        FireParticle = GetComponentInChildren<ParticleSystem>();
-    }
 
     public void Ignite()
     {
-        FireParticle.Play();
         StartCoroutine(SpreadFireToNearbyTables());
     }
 
@@ -36,7 +30,7 @@ public class Table : MonoBehaviour
         Debug.Log(other);
         if (other.CompareTag("Table"))
         {
-            FireParticle.Play();
+
         }
 
     }

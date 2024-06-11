@@ -164,7 +164,18 @@ public class FoodObject : IHoldable, IThrowable
                 {
                     CookStand cookStand = null;
                     PanObject panObject = null;
-                    if (collider.TryGetComponent<CookStand>(out cookStand))
+                    if (collider.TryGetComponent<PanObject>(out panObject))
+                    {
+                        Debug.Log("Pan Found");
+                        transform.rotation = Quaternion.identity;
+                        if (panObject.GrillingIngrediant == null)
+                        {
+                            Place(panObject.PanPlacePositon);
+                        }
+                        colliders = null;
+                        break;
+                    }
+                    else if (collider.TryGetComponent<CookStand>(out cookStand))
                     {
                         transform.rotation = Quaternion.identity;
                         if (!cookStand.IsOccupied)
@@ -174,19 +185,10 @@ public class FoodObject : IHoldable, IThrowable
                         colliders = null;
                         break;
                     }
-                    else if (collider.TryGetComponent<PanObject>(out panObject))
-                    {
-                        transform.rotation = Quaternion.identity;
-                        if (panObject.GrillingIngrediant == null)
-                        {
-                            Place(panObject.PanPlacePositon);
-                        }
-                        colliders = null;
-                        break;
-                    }
+
                 }
             }
-            else if (speed.magnitude < 0.1f)
+            if (speed.magnitude < 0.1f)
             {
                 break;
             }    

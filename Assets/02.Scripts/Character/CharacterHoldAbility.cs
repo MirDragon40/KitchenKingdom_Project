@@ -33,11 +33,13 @@ public class CharacterHoldAbility : CharacterAbility
 
     private void LateUpdate()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) && _owner.PhotonView.IsMine)
         {
             if (!IsHolding)
             {
+
                 PickUp();
+
             }
             else
             {
@@ -46,7 +48,9 @@ public class CharacterHoldAbility : CharacterAbility
 
                     Place();
 
+                   
                 }
+              
                 else if (IsDroppable)
                 {
                     if (nearTrashBin)
@@ -80,9 +84,10 @@ public class CharacterHoldAbility : CharacterAbility
         foreach (Collider collider in colliders)
         {
             IHoldable holdable = collider.GetComponent<IHoldable>();
+            Debug.Log(holdable);
+
             if (holdable != null)
             {
-
                 HoldableItem = holdable;
                 holdable.Hold(_owner, transform);
                 animator.SetBool("Carry", true);
@@ -134,8 +139,10 @@ public class CharacterHoldAbility : CharacterAbility
             }
         }
     }
+
     public void FoodTrashDrop()
     {
+        FoodCombination foodcombo = null;
         if (HoldableItem is FoodObject food)
         {
             food.Destroy();
@@ -143,8 +150,11 @@ public class CharacterHoldAbility : CharacterAbility
             animator.SetBool("Carry", false);
 
         }
+        if (HoldableItem.TryGetComponent<FoodCombination>(out foodcombo))
+        {
+            HoldableItem.GetComponent<FoodCombination>().Init();
+        }
     }
-
 
     void Place()
     {
@@ -172,17 +182,16 @@ public class CharacterHoldAbility : CharacterAbility
 
         if (dishPrefab != null)
         {
-
             GameObject dish = Instantiate(dishPrefab, HandTransform.position, HandTransform.rotation);
 
             // 접시 오브젝트를 손에 들도록 설정
             IHoldable holdable = dish.GetComponent<IHoldable>();
+
             if (holdable != null)
             {
                 holdable.Hold(character, HandTransform);
             }
         }
-
     }
 
     public void SpawnDirtyPlateOnHand()
@@ -192,7 +201,6 @@ public class CharacterHoldAbility : CharacterAbility
 
         if (dishPrefab != null)
         {
-
             GameObject dish = Instantiate(dishPrefab, HandTransform.position, HandTransform.rotation);
 
             // 접시 오브젝트를 손에 들도록 설정
@@ -200,12 +208,15 @@ public class CharacterHoldAbility : CharacterAbility
 
             if (holdable != null)
             {
+                
                 holdable.Hold(character, HandTransform);
-
-
             }
         }
     }
 
-
+    private IEnumerator PickUp_Coroutine()
+    {
+        yield return new WaitForSeconds(0.2f);
+        PickUp();
+    }
 }
