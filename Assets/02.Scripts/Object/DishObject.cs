@@ -13,9 +13,16 @@ public class DishObject : IHoldable
     public override Vector3 DropOffset => new Vector3(0.3f, 0.1f, 0f);
 
     public DishState State;
+    public Transform StartPosition;
 
 
-
+    private void Start()
+    {
+        if (StartPosition != null)
+        {
+            Place(StartPosition);
+        }
+    }
     public override void Hold(Character character, Transform handTransform)
     {
 
@@ -23,7 +30,7 @@ public class DishObject : IHoldable
         transform.parent = handTransform;
         GetComponent<Rigidbody>().isKinematic = true;
         GetComponent<BoxCollider>().enabled = false;
-        transform.localPosition = new Vector3(0, 0.4f, 0.5F);
+        transform.localPosition = Vector3.zero;
         transform.localRotation = Quaternion.identity;
     }
 

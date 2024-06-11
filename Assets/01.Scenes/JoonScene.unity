@@ -8954,13 +8954,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Character1
       objectReference: {fileID: 0}
+    - target: {fileID: 4049929143956203011, guid: e46866d054e053c47bebd257df76a198, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 3236868563524652713, guid: e46866d054e053c47bebd257df76a198, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 0}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e46866d054e053c47bebd257df76a198, type: 3}
 --- !u!1 &2092898754
 GameObject:

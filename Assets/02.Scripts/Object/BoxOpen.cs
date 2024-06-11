@@ -23,8 +23,9 @@ public class BoxOpen : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player")) 
+        if (other.CompareTag("Player")  && !other.GetComponent<CharacterHoldAbility>().IsHolding) 
         {
+            
             _isPlayerBox = true;
         }
     }

@@ -89,7 +89,7 @@ public class CharacterHoldAbility : CharacterAbility
             if (holdable != null)
             {
                 HoldableItem = holdable;
-                holdable.Hold(_owner, transform);
+                holdable.Hold(_owner, HandTransform);
                 animator.SetBool("Carry", true);
 
                 break;
@@ -103,7 +103,7 @@ public class CharacterHoldAbility : CharacterAbility
     void Drop()
     {
         // 들고 있는 음식이 없으면 아무 작업도 수행하지 않음
-        if (!IsHolding)
+        if (!IsHolding || HoldableItem is PanObject)
         {
             return;
         }

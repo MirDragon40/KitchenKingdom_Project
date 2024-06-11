@@ -22,12 +22,11 @@ public class Stove : CookStand
     protected override void Update()
     {
         base.Update();
-        if (base.PlacedItem != null)
+        if (PlacedPan != null)
         {
-            base.PlacedItem.TryGetComponent<PanObject>(out PlacedPan);
-            if (PlacedPan != null && PlacedPan.fireObject != null && PlacedPan.fireObject._isOnFire)
+            // 팬의 불 상태를 확인하여 스토브의 불 상태를 업데이트
+            if (PlacedPan.fireObject._isOnFire)
             {
-                // 팬이 불에 노출되고 불이 켜져 있으면 스토브의 불도 켭니다.
                 if (!fireObject._isOnFire)
                 {
                     fireObject.MakeFire();
@@ -35,13 +34,11 @@ public class Stove : CookStand
             }
             else
             {
-                // 팬이 불에 노출되지 않거나 불이 꺼져 있으면 스토브의 불도 끕니다.
                 if (fireObject._isOnFire)
                 {
                     fireObject.Extinguish();
                 }
             }
-
         }
 
 
