@@ -49,8 +49,12 @@ MonoBehaviour:
   - WalkEffectPlay
   - WalkEffectStop
   - AddTotalScore
-  - ShowTimer
-  - AnimationPlay
+  - HideSlider
+  - StartChoppingAnimation
+  - StopChoppingAnimation
+  - UpdateSliderValue
+  - ShowSlider
+  - SpawnFood
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

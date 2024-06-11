@@ -1,9 +1,10 @@
+using Photon.Pun;
 using Photon.Realtime;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CookStand : MonoBehaviour
+public class CookStand : MonoBehaviourPun
 {
 
     // 플레이어가 들고있는 음식을 PlacePosition위에 올려놓음
