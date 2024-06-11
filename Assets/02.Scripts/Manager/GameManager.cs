@@ -42,7 +42,7 @@ public class GameManager : MonoBehaviour
     private void Update()
     {
         // 옵션창 켜고 끄기
-        if(Input.GetKeyUp(KeyCode.Escape)) 
+        if(Input.GetKeyDown(KeyCode.Escape)) 
         {
             if (_optionUlOpen)
             {
