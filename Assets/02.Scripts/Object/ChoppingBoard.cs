@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
+using Photon.Pun;
 
 public class ChoppingBoard : CookStand
 {
@@ -35,7 +36,7 @@ public class ChoppingBoard : CookStand
         }
     }
 
-    protected  void OnTriggerEnter(Collider other)
+    protected void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player") && onChoppingBoard.FoodOnBoard != null)
         {
@@ -67,7 +68,7 @@ public class ChoppingBoard : CookStand
             if (onChoppingBoard.FoodObject != null)
             {
                 onChoppingBoard.FoodObject.StopCooking();
-                
+
             }
 
             Animator.SetBool("Chopping", false); // 슬라이더가 진행되지 않을 때 애니메이션을 중지
@@ -121,3 +122,4 @@ public class ChoppingBoard : CookStand
         ChoppingProgressSlider.gameObject.SetActive(false);
     }
 }
+

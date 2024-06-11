@@ -330,8 +330,10 @@ GameObject:
   - component: {fileID: -3739761216308817004}
   - component: {fileID: 1512291040946287616}
   - component: {fileID: 2476491508299222051}
+  - component: {fileID: 2242183178634907943}
+  - component: {fileID: 6380058794730998311}
   m_Layer: 0
-  m_Name: Item_Potato
+  m_Name: Potato
   m_TagString: Food
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -368,6 +370,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ItemType: 1
+  IsDroppable: 0
   State: 0
   FoodType: 3
   FoodPrefab1: {fileID: 6204901731045512369}
@@ -377,6 +380,7 @@ MonoBehaviour:
   IsGrillable: 0
   IsFryable: 0
   CookProgress: 0
+  ThrownEffectTriggerTime: 0.5
   CuttingTime: 3
   BakeTime: 3
 --- !u!65 &1512291040946287616
@@ -427,3 +431,42 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &2242183178634907943
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8461660307441943745}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents:
+  - {fileID: 6380058794730998311}
+  sceneViewId: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
+--- !u!114 &6380058794730998311
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8461660307441943745}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SynchronizePosition: 1
+  m_SynchronizeRotation: 1
+  m_SynchronizeScale: 0
+  m_UseLocal: 1

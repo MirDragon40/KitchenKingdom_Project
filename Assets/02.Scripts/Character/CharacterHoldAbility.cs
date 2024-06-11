@@ -169,6 +169,7 @@ public class CharacterHoldAbility : CharacterAbility
         animator.SetBool("Carry", false);
     }
 
+
     public void SetNearTrashBin(bool value, Transform pan = null)
     {
         nearTrashBin = value;
