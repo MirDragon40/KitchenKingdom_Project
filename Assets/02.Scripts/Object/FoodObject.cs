@@ -94,6 +94,7 @@ public class FoodObject : IHoldable, IThrowable
             else if (FoodType == FoodType.Patty)
             {
                 cookingCoroutine = StartCoroutine(CookPatty_Coroutine());
+                Debug.Log("Grill coroutine called");
             }
             else if (FoodType == FoodType.Potato)
             {
@@ -234,6 +235,7 @@ public class FoodObject : IHoldable, IThrowable
 
     private IEnumerator CookPatty_Coroutine()
     {
+        Debug.Log("cook Patty coroutine called");
         while (IsCooking && (State == FoodState.Raw || State == FoodState.Grilled || State == FoodState.Burnt))
         {
             colliderThis.enabled = false;
