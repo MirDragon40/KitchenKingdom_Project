@@ -8,11 +8,7 @@ public class UI_Timer : MonoBehaviourPunCallbacks
 {
     public TextMeshProUGUI TimerTextUI;
 
-    private float _totalTime = 0f;
-
-    private float _currentTime;
-
-    private bool timerStarted = false;
+    private int _totalTime = 0;
 
     public GameObject SpeedUpFireUI;
 
@@ -23,42 +19,24 @@ public class UI_Timer : MonoBehaviourPunCallbacks
 
     private void Start()
     {
+        PV = GetComponent<PhotonView>();
+
         SpeedUpFireUI.gameObject.SetActive(false);
+        StartCoroutine(AAA());
+    }
+    
+    private IEnumerator AAA() 
+    {
+        yield return new WaitForSeconds(2f);
         if (PhotonNetwork.IsMasterClient)
         {
-            _totalTime = 60f;
+            Debug.Log("aaa");
+            _totalTime = 60;
 
             StartCoroutine(Timer_Coroution());
 
         }
-    }
-    private void Update()
-    {
-        /*if (timerStarted)
-        {
-            // 시간 업데이트
-            _currentTime -= Time.deltaTime;
 
-            // UI에 시간 표시
-            DisplayTime(_currentTime);
-
-            // 30초가 남으면 불 애니메이션 나옴
-            if (_currentTime <= 175f) // 테스트 위해 5초뒤로.. 30초로 변경하기
-            {
-                SpeedUpFireUI.gameObject.SetActive(true);
-
-                TimerAnimator.SetTrigger("SpeedUp");
-                FireAnimator.SetTrigger("SpeedUp");
-            }
-
-            // 타이머가 종료되었을 때 처리
-            if (_currentTime <= 0f)
-            {
-                TimerEnded();
-            }
-        }*/
-
-        //Debug.Log(_totalTime);
     }
     private IEnumerator Timer_Coroution()
     {
@@ -90,6 +68,8 @@ public class UI_Timer : MonoBehaviourPunCallbacks
     [PunRPC]
     void ShowTimer(int number) 
     {
+        Debug.Log("aaa");
+
         TimerTextUI.text = number.ToString();
     }
     [PunRPC]
