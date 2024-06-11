@@ -182,7 +182,7 @@ public class FoodObject : IHoldable, IThrowable
                         {
                             Place(cookStand.PlacePosition);
                         }
-                        colliders = null;
+                        colliders = null;              
                         break;
                     }
 

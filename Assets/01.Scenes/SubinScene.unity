@@ -24109,6 +24109,7 @@ MonoBehaviour:
   SpeedUpFireUI: {fileID: 2014254991206864388}
   TimerAnimator: {fileID: 20844018}
   FireAnimator: {fileID: 3264322695334518198}
+  PV: {fileID: 0}
 --- !u!222 &555945006734907934
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -26538,10 +26539,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0255209d42be99345896e41f6bbdea70, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  foodPrefabs:
-  - {fileID: 1786338197292552992, guid: dda961dd455a24748b6da6b042d895e0, type: 3}
-  - {fileID: 7788963802100874181, guid: a5e1dd0c0356c844da14a5d32f019490, type: 3}
-  - {fileID: 1992951515313775233, guid: 13eac972c2448494fa6f10e28c5fe2f4, type: 3}
+  type: 0
 --- !u!23 &3531808836543253650
 MeshRenderer:
   m_ObjectHideFlags: 0
