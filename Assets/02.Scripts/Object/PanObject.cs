@@ -165,6 +165,11 @@ public class PanObject : IHoldable
 
     public override void Hold(Character character, Transform handTransform)
     {
+        if (fireObject._isOnFire)
+        {
+            Debug.Log("불 나서 못 듬");
+            return;
+        }
         GetComponent<Rigidbody>().isKinematic = true;
         transform.parent = handTransform;
         transform.localPosition = new Vector3(0, 0.4f, 0.8F);
