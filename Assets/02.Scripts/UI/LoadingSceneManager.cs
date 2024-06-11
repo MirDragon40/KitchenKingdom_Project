@@ -14,10 +14,9 @@ public class LoadingSceneManager : MonoBehaviour
 {
     public SceneNames NextScene;
     public Slider LoadingSliderUI;
-    public TextMeshProUGUI LoadingText;
 
-    private float _minLoadingTime = 2f;  // 최소 로딩 시간
-    private float _loadingSpeed = 2f;    // 로딩 속도
+    private float _minLoadingTime = 3f;  // 최소 로딩 시간
+    private float _loadingSpeed = 1.5f;    // 로딩 속도
     private float targetProgress = 0.9f; // 로딩 목표 진행률
 
     private void Start()
