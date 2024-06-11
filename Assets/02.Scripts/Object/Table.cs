@@ -4,10 +4,8 @@ using UnityEngine;
 public class Table : MonoBehaviour
 {
     public Table[] NearbyTables;
-
-    private bool isStoveFireActive = false;
-
-
+    public ParticleSystem FireParticle;
+ 
     public void Ignite()
     {
         StartCoroutine(SpreadFireToNearbyTables());
@@ -21,22 +19,10 @@ public class Table : MonoBehaviour
         {
             if (table != null)
             {
+                Debug.Log("ㅇㅇㅇ");
+                table.FireParticle.Play();
                 table.Ignite();
             }
         }
-    }
-    private void OnTriggerEnter(Collider other)
-    {
-        Debug.Log(other);
-        if (other.CompareTag("Table"))
-        {
-
-        }
-
-    }
-
-    public void UpdateStoveFireStatus(bool isFireActive)
-    {
-        isStoveFireActive = isFireActive;
     }
 }
