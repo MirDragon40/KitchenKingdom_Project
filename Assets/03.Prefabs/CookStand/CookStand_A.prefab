@@ -175,9 +175,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 363aef87f6ff8a347b101ad47fb838f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  FireParticle: {fileID: 0}
   NearbyTables:
   - {fileID: 0}
+  FireParticle: {fileID: 2775814904139036679}
 --- !u!1 &8931734911812680101
 GameObject:
   m_ObjectHideFlags: 0
@@ -266,6 +266,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 09c82e14ad342694ea7e2efd0dd36f17, type: 3}
+--- !u!198 &2775814904139036679 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 7153630342599445014, guid: 09c82e14ad342694ea7e2efd0dd36f17, type: 3}
+  m_PrefabInstance: {fileID: 5026967264908915217}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &5385987729533454352 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1116258676682652161, guid: 09c82e14ad342694ea7e2efd0dd36f17, type: 3}
