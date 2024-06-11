@@ -110,6 +110,10 @@ public class BasketObject : IHoldable
     }
     private void OnTriggerExit(Collider other)
     {
+        if (!other.CompareTag("Player"))
+        {
+            return;
+        }
         other.GetComponent<CharacterHoldAbility>().PlacePosition = null;
         other.GetComponent<CharacterHoldAbility>().IsPlaceable = false;
     }
