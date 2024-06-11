@@ -10,23 +10,16 @@ public class UI_Loading : MonoBehaviour
 
     private void Start()
     {
-        StartCoroutine(LoadingTextRepeat_Coroutine());
+        StartCoroutine(LoadingTextRepeat());
     }
 
-    private IEnumerator LoadingTextRepeat_Coroutine() 
+    private IEnumerator LoadingTextRepeat() 
     {
         while (true) 
         {
-            yield return StartCoroutine(Text_Coroutine());
+            string text = "일하러 가는 중 ...";
+            yield return TypeText(LoadingText, text);
         }
-        
-    }
-
-    private IEnumerator Text_Coroutine() 
-    {
-        yield return new WaitForSeconds(0.5f);
-        string text = "일하러 가는 중 ...";
-        yield return TypeText(LoadingText, text);
     }
 
     private IEnumerator TypeText(TextMeshProUGUI textUI, string text)
