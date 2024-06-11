@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CharacterThrowAbility : MonoBehaviour
+public class CharacterThrowAbility : CharacterAbility
 {
     public GameObject ThrowingDirectionSprite;
     private CharacterHoldAbility _holdAbility;
@@ -11,9 +11,10 @@ public class CharacterThrowAbility : MonoBehaviour
     public float ThrowPower = 8f;
 
 
-    private void Awake()
+    protected override void Awake()
     {
-        _holdAbility = GetComponent<CharacterHoldAbility>();
+        base.Awake();
+        _holdAbility = _owner.HoldAbility;
 
     }
     void Start()
@@ -23,6 +24,10 @@ public class CharacterThrowAbility : MonoBehaviour
     private Rigidbody _rigid;
     void Update()
     {
+        if (!_owner.PhotonView.IsMine)
+        {
+            return;
+        }
         if (_holdAbility.IsHolding && Throwable == null)
         {
             IsThrowable = _holdAbility.HoldableItem.TryGetComponent<IThrowable>(out Throwable);

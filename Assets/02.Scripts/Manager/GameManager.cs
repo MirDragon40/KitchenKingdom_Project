@@ -60,12 +60,12 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        if (PhotonNetwork.IsConnectedAndReady)
+/*        if (PhotonNetwork.IsConnectedAndReady)
         {
             SpawnPlayer();
-        }
+        }*/
     }
-    private void SpawnPlayer()
+    public void SpawnPlayer()
     {
         int actorNumber = PhotonNetwork.LocalPlayer.ActorNumber;
         int spawnIndex = actorNumber % SpawnPoints.Length; // 각각 플레이어가 다른 곳에 spawn

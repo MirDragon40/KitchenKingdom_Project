@@ -63,7 +63,7 @@ public class PhotonManager_test : MonoBehaviourPunCallbacks
         roomOptions.IsVisible = true; // 로비에서 방 목록에 노출할 것인가?
         roomOptions.IsOpen = true;
         int randomIndex = Random.Range(0, 100);
-        PhotonNetwork.JoinOrCreateRoom($"PlayRoom{randomIndex}", roomOptions, TypedLobby.Default);
+        PhotonNetwork.JoinOrCreateRoom($"PlayRoom543", roomOptions, TypedLobby.Default);
 
     }
     public override void OnCreatedRoom()
@@ -77,7 +77,8 @@ public class PhotonManager_test : MonoBehaviourPunCallbacks
         Debug.Log("방 join 성공!");
         Debug.Log($"RoomName: {PhotonNetwork.CurrentRoom.Name}");
         Debug.Log($"Current Players: {PhotonNetwork.CurrentRoom.PlayerCount}");
-       // GatherManager.Instance.UpdatePlayerSlots();
+        // GatherManager.Instance.UpdatePlayerSlots();
+        GameManager.Instance.SpawnPlayer();
 
     }
     public override void OnCreateRoomFailed(short returnCode, string message)

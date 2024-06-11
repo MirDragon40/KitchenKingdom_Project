@@ -34,6 +34,7 @@ public class PanObject : IHoldable
 
     public Transform PanStartPosition; // 팬 초기위치
 
+    private bool hasCaughtFireOnce = false;
     private void Awake()
     {
         BoxCollider = GetComponent<BoxCollider>();
@@ -57,11 +58,18 @@ public class PanObject : IHoldable
 
             if (MyStove != null)
             {
-                if (PanPlacePositon.GetChild(0).TryGetComponent<FoodObject>(out GrillingIngrediant))
+                if (PanPlacePositon.GetChild(0).TryGetComponent<FoodObject>(out FoodObject newGrillingIngredient))
                 {
+                    if (GrillingIngrediant != newGrillingIngredient)
+                    {
+                        GrillingIngrediant = newGrillingIngredient;
+                        hasCaughtFireOnce = false;
+                        GrillingIngrediant.StartGrilling();
+                    }
+
                     GrillingSlider.gameObject.SetActive(true);
-                    GrillingIngrediant.StartGrilling(); // Start cooking when placed on the stove
                     GrillingSlider.value = GrillingIngrediant.CookProgress;
+
                     if (GrillingIngrediant.CookProgress >= 2f && GrillingIngrediant.CookProgress < 2.9f)
                     {
                         dangerIndicator.ShowDangerIndicator(dangerSprite);
@@ -71,15 +79,29 @@ public class PanObject : IHoldable
                         dangerIndicator.HideDangerIndicator();
                     }
 
-                    if (GrillingIngrediant.CookProgress >= 3f && !fireObject._isOnFire)
+                    if (GrillingIngrediant.CookProgress >= 3f && !fireObject._isOnFire && !hasCaughtFireOnce)
                     {
                         fireObject.MakeFire();
                         FireSlider.gameObject.SetActive(true);
+                        hasCaughtFireOnce = true;
+
                     }
                     else if (GrillingIngrediant.CookProgress < 3f && fireObject._isOnFire)
                     {
                         fireObject.Extinguish();
                         FireSlider.gameObject.SetActive(false);
+                    }
+                }
+
+                if (MyStove != null)
+                {
+                    if (fireObject._isOnFire && !MyStove.fireObject._isOnFire)
+                    {
+                        MyStove.fireObject.MakeFire();
+                    }
+                    else if (!fireObject._isOnFire && MyStove.fireObject._isOnFire)
+                    {
+                        MyStove.fireObject.Extinguish();
                     }
                 }
             }
@@ -143,9 +165,14 @@ public class PanObject : IHoldable
 
     public override void Hold(Character character, Transform handTransform)
     {
+        if (fireObject._isOnFire)
+        {
+            Debug.Log("불 나서 못 듬");
+            return;
+        }
         GetComponent<Rigidbody>().isKinematic = true;
         transform.parent = handTransform;
-        transform.localPosition = new Vector3(0, 0.4f, 0.8F);
+        transform.localPosition = new Vector3(0, 0, 0.3f);
         transform.localRotation = Quaternion.Euler(-90f, 180f, 0f);
 
         MyStove = null;
@@ -183,6 +210,15 @@ public class PanObject : IHoldable
         if (MyStove != null)
         {
             MyStove.PlacedPan = this;
+
+            if (fireObject._isOnFire)
+            {
+                MyStove.fireObject.MakeFire();
+            }
+            else
+            {
+                MyStove.fireObject.Extinguish();
+            }
         }
     }
 
@@ -238,7 +274,7 @@ public class PanObject : IHoldable
         }
         if (fireObject._isOnFire && other.CompareTag("Powder"))
         {
-            isPowderTouching = false; 
+            isPowderTouching = false;
         }
     }
 

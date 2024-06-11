@@ -111,7 +111,7 @@ public class FoodObject : IHoldable, IThrowable
         // 각 아이템이 잡혔을 때 해줄 초기화 로직
         // 찾은 음식을 플레이어의 손 위치로 이동시킴
         transform.parent = handTransform;
-        transform.localPosition = new Vector3(0, 0.4F, 0.5F);
+        transform.localPosition = Vector3.zero;
         transform.localRotation = Quaternion.identity;
     }
 
@@ -155,7 +155,7 @@ public class FoodObject : IHoldable, IThrowable
             Vector3 speed = _rigidbody.velocity;
             speed.y = 0;
 
-            if (speed.magnitude < 0.7f)
+            if (speed.magnitude < 0.9f)
             {
 
                 int colliderNum = Physics.OverlapSphereNonAlloc(transform.position, 0.4f,colliders);
