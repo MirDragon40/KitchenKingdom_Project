@@ -1,3 +1,4 @@
+using Photon.Pun;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -12,7 +13,7 @@ public enum EItemType
     Coke,
     Basket,
 }
-public abstract class IHoldable : MonoBehaviour
+public abstract class IHoldable : MonoBehaviourPunCallbacks
 {
     public EItemType ItemType;
 
