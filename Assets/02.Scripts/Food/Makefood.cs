@@ -44,7 +44,7 @@ public class Makefood : MonoBehaviour
             return;
         }
 
-        if (Input.GetKeyDown(KeyCode.Space) && _nearbyCharacter.PhotonView.IsMine)
+        if (Input.GetKeyDown(KeyCode.Space) && _nearbyCharacter.PhotonView.IsMine && !_nearbyCharacter.HoldAbility.IsHolding)
         {
             if (!HavePlacedItem)
             {
