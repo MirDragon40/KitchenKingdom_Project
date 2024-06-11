@@ -40,7 +40,7 @@ public class CharacterMoveAbility : CharacterAbility
     {
         if (!_owner.PhotonView.IsMine && PhotonNetwork.IsConnected)
         {
-            SynchronizeAnimation();
+           // SynchronizeAnimation();
             return;
         }
         // 사용자 키보드 입력
@@ -123,7 +123,7 @@ public class CharacterMoveAbility : CharacterAbility
         PowderEffect_Dash.Stop();
     }
 
-    void SynchronizeAnimation()
+/*    void SynchronizeAnimation()
     {
         // 애니메이터 파라미터 동기화
         foreach (var param in _animator.parameters)
@@ -137,5 +137,5 @@ public class CharacterMoveAbility : CharacterAbility
                 _animator.SetBool(param.name, _animator.GetBool(param.name));
             }
         }
-    }
+    }*/
 }
