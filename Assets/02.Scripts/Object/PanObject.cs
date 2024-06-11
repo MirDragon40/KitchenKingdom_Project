@@ -172,7 +172,7 @@ public class PanObject : IHoldable
         }
         GetComponent<Rigidbody>().isKinematic = true;
         transform.parent = handTransform;
-        transform.localPosition = new Vector3(0, 0.4f, 0.8F);
+        transform.localPosition = new Vector3(0, 0, 0.3f);
         transform.localRotation = Quaternion.Euler(-90f, 180f, 0f);
 
         MyStove = null;
