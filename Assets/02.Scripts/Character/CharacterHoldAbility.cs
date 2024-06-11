@@ -15,7 +15,7 @@ public class CharacterHoldAbility : CharacterAbility
 
     public IHoldable HoldableItem;
     // private Transform _placeableSurface;
-    public bool IsDroppable => !IsPlaceable && !IsSubmitable && !IsServeable;
+    public bool IsDroppable => !IsPlaceable && !IsSubmitable && !IsServeable && PlacePosition == null;
     public bool IsPlaceable = false;
     public bool IsSubmitable = false;
     public bool IsServeable = false;
@@ -68,7 +68,7 @@ public class CharacterHoldAbility : CharacterAbility
         }
     }
 
-
+    
     public void PickUp()
     {
         // 들고 있는 음식이 있으면 아무 작업도 수행하지 않음

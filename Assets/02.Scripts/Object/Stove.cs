@@ -12,6 +12,8 @@ public class Stove : CookStand
 
     public Table[] NearbyTables;
 
+    private bool _isTableNotified = false;
+
     private void Start()
     {
         _originalPlacePosition = base.PlacePosition;
@@ -30,17 +32,28 @@ public class Stove : CookStand
                 if (!fireObject._isOnFire)
                 {
                     fireObject.MakeFire();
+                    GetComponent<Table>().Ignite();
+                    NotifyTables();
                 }
-            }
-            else
-            {
-                if (fireObject._isOnFire)
-                {
-                    fireObject.Extinguish();
-                }
+
             }
         }
 
-
+    }
+    private void NotifyTables()
+    {
+        if (!_isTableNotified)
+        {
+            foreach (Table table in NearbyTables)
+            {
+                StartCoroutine(DelayedFire(table));
+            }
+            _isTableNotified = true;
+        }
+    }
+    private IEnumerator DelayedFire(Table table)
+    {
+        yield return new WaitForSeconds(5f);
+        table.Ignite();
     }
 }
