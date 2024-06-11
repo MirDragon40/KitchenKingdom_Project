@@ -58,7 +58,7 @@ public class UI_Timer : MonoBehaviourPunCallbacks
             }
         }*/
 
-        Debug.Log(_totalTime);
+        //Debug.Log(_totalTime);
     }
     private IEnumerator Timer_Coroution()
     {
