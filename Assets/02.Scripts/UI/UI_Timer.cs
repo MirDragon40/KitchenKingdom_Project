@@ -2,12 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-
-public class UI_Timer : MonoBehaviour
+using Photon.Realtime;
+using Photon.Pun;
+public class UI_Timer : MonoBehaviourPunCallbacks
 {
     public TextMeshProUGUI TimerTextUI;
 
-    private float _totalTime = 180f;
+    private float _totalTime = 0f;
 
     private float _currentTime;
 
@@ -18,14 +19,22 @@ public class UI_Timer : MonoBehaviour
     public Animator TimerAnimator;
     public Animator FireAnimator;
 
+    public PhotonView PV;
+
     private void Start()
     {
         SpeedUpFireUI.gameObject.SetActive(false);
-        StartTimer();
+        if (PhotonNetwork.IsMasterClient)
+        {
+            _totalTime = 60f;
+
+            StartCoroutine(Timer_Coroution());
+
+        }
     }
     private void Update()
     {
-        if (timerStarted)
+        /*if (timerStarted)
         {
             // 시간 업데이트
             _currentTime -= Time.deltaTime;
@@ -47,10 +56,52 @@ public class UI_Timer : MonoBehaviour
             {
                 TimerEnded();
             }
+        }*/
+
+        //Debug.Log(_totalTime);
+    }
+    private IEnumerator Timer_Coroution()
+    {
+
+        var wait = new WaitForSeconds(1f);
+
+        while (true)
+        {
+            yield return wait;
+            if (_totalTime == 10)
+            {
+                PV.RPC("AnimationPlay", RpcTarget.All);
+            }
+            if (_totalTime > 0)
+            {
+                PV.RPC("ShowTimer", RpcTarget.All, _totalTime); //1초 마다 방 모두에게 전달
+                _totalTime -= 1;
+
+            }
+            if (_totalTime <= 0)
+            {
+                PV.RPC("ShowTimer", RpcTarget.All, _totalTime); //1초 마다 방 모두에게 전달
+
+                break;
+            }
         }
     }
 
-    void StartTimer()
+    [PunRPC]
+    void ShowTimer(int number) 
+    {
+        TimerTextUI.text = number.ToString();
+    }
+    [PunRPC]
+    void AnimationPlay() 
+    {
+        SpeedUpFireUI.gameObject.SetActive(true);
+
+        TimerAnimator.SetTrigger("SpeedUp");
+        FireAnimator.SetTrigger("SpeedUp");
+    }
+
+    /*void StartTimer()
     {
         _currentTime = _totalTime;
         timerStarted = true;
@@ -68,5 +119,5 @@ public class UI_Timer : MonoBehaviour
     {
         // 타이머 종료 시
         // 종료 시 씬 이동
-    }
+    }*/
 }

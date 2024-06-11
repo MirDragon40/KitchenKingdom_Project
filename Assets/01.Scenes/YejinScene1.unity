@@ -15156,6 +15156,7 @@ MonoBehaviour:
   SpeedUpFireUI: {fileID: 2014254991206864388}
   TimerAnimator: {fileID: 20844018}
   FireAnimator: {fileID: 3264322695334518198}
+  PV: {fileID: 0}
 --- !u!1 &507799676960800384
 GameObject:
   m_ObjectHideFlags: 0
