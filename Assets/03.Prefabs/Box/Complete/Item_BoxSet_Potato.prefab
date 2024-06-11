@@ -304,10 +304,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6b5a626e31e3de42825369e43bed056, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  foodType: 0
+  FoodType: 3
   spawnPoint: {fileID: 0}
   _placedItem: {fileID: 0}
-  animator: {fileID: 0}
+  _animator: {fileID: 0}
 --- !u!114 &3985642710712518770
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -388,6 +388,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PlacePosition: {fileID: 537306374056034532}
+  PlacedItem: {fileID: 0}
 --- !u!1 &5494845189098860780
 GameObject:
   m_ObjectHideFlags: 0
