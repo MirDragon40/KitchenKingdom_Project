@@ -68,15 +68,21 @@ public class CookStand : MonoBehaviour
 
     protected virtual void OnTriggerStay(Collider other)
     {
-        if (other.CompareTag("Player") && !IsOccupied)
+        if (other.CompareTag("Player"))
         {
             CharacterHoldAbility characterHoldAbility = other.GetComponent<CharacterHoldAbility>();
-            if (characterHoldAbility != null)
+            if (!IsOccupied)
             {
-                characterHoldAbility.IsPlaceable = true;
-                characterHoldAbility.PlacePosition = PlacePosition;
+                characterHoldAbility = other.GetComponent<CharacterHoldAbility>();
+                if (characterHoldAbility != null)
+                {
+                    characterHoldAbility.IsPlaceable = true;
+                    characterHoldAbility.PlacePosition = PlacePosition;
+                }
             }
+
         }
+        
 
     }
 
