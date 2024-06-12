@@ -30,6 +30,7 @@ public class CharacterHoldAbility : CharacterAbility
     private bool nearTrashBin = false;
     private Transform panTransform; // 팬 오브젝트를 참조하기 위한 변수
 
+    public FireObject fireObject;
     void Start()
     {
         animator = GetComponent<Animator>();
@@ -89,7 +90,10 @@ public class CharacterHoldAbility : CharacterAbility
         foreach (Collider collider in colliders)
         {
             IHoldable holdable = collider.GetComponent<IHoldable>();
-            Debug.Log(holdable);
+            if (holdable is PanObject pan && pan.fireObject._isOnFire)
+            {
+                continue;
+            }
 
             if (holdable != null)
             {
@@ -107,6 +111,7 @@ public class CharacterHoldAbility : CharacterAbility
     [PunRPC]
     void Drop()
     {
+
         // 들고 있는 음식이 없으면 아무 작업도 수행하지 않음
         if (!IsHolding || HoldableItem is PanObject)
         {
@@ -218,11 +223,5 @@ public class CharacterHoldAbility : CharacterAbility
                 holdable.Hold(character, HandTransform);
             }
         }
-    }
-
-    private IEnumerator PickUp_Coroutine()
-    {
-        yield return new WaitForSeconds(0.2f);
-        PickUp();
     }
 }
