@@ -166,7 +166,7 @@ public class CharacterHoldAbility : CharacterAbility
         }
     }
     [PunRPC]
-    void Place()
+    public void Place()
     {
         if (!IsHolding)
         {
@@ -193,7 +193,7 @@ public class CharacterHoldAbility : CharacterAbility
 
         if (dishPrefab != null)
         {
-            GameObject dish = Instantiate(dishPrefab, HandTransform.position, HandTransform.rotation);
+            GameObject dish = PhotonNetwork.InstantiateRoomObject("Plate_Stage1", HandTransform.position, HandTransform.rotation);
 
             // 접시 오브젝트를 손에 들도록 설정
             IHoldable holdable = dish.GetComponent<IHoldable>();
@@ -212,7 +212,7 @@ public class CharacterHoldAbility : CharacterAbility
 
         if (dishPrefab != null)
         {
-            GameObject dish = Instantiate(dishPrefab, HandTransform.position, HandTransform.rotation);
+            GameObject dish = PhotonNetwork.InstantiateRoomObject("DirtyPlates", HandTransform.position, HandTransform.rotation);
 
             // 접시 오브젝트를 손에 들도록 설정
             IHoldable holdable = dish.GetComponent<IHoldable>();

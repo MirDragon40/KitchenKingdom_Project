@@ -36,7 +36,7 @@ public class DishObject : IHoldable
 
     public override void Place(Transform place)
     {
-
+        Debug.Log("접시 내려놓기");
         transform.position = place.position;
         GetComponent<Rigidbody>().isKinematic = true;
         GetComponent<BoxCollider>().enabled = true;

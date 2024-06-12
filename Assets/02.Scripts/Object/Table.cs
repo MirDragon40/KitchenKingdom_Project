@@ -7,6 +7,7 @@ public class Table : MonoBehaviour
     public ParticleSystem fireEffect;
 
     public Table[] NearbyTables;
+    public Stove[] NearbyStoves;
     private bool isPowderTouching = false;
     private float powderContactTime = 0;
 
@@ -23,6 +24,7 @@ public class Table : MonoBehaviour
         Debug.Log("이그나이트");
 
         StartCoroutine(IgniteNearbyTables());
+        StartCoroutine(IgniteNearbyStoves());
     }
 
     public void Extinguish()
@@ -40,6 +42,20 @@ public class Table : MonoBehaviour
             if (!table._isOnFire)
             {
                 table.Ignite();
+            }
+        }
+    }
+
+    IEnumerator IgniteNearbyStoves()
+    {
+        yield return new WaitForSeconds(5f);
+
+        foreach (var stove in NearbyStoves)
+        {
+            if (!stove.fireObject._isOnFire)
+            {
+                stove.fireObject.MakeFire();
+                stove.StartCoroutine(stove.IgniteNearbyTables());
             }
         }
     }
