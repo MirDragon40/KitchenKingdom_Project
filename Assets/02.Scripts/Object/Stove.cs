@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class Stove : CookStand
 {
     public PanObject PlacedPan = null;
-    private Transform _originalPlacePosition;
+    public Transform _originalPlacePosition;
     public FireObject fireObject;
     public bool IsPanPlaced => PlacedPan != null;
 
@@ -32,28 +32,14 @@ public class Stove : CookStand
                 if (!fireObject._isOnFire)
                 {
                     fireObject.MakeFire();
-                    GetComponent<Table>().Ignite();
-                    NotifyTables();
                 }
 
             }
+            else
+            {
+                fireObject.Extinguish();
+            }
         }
 
-    }
-    private void NotifyTables()
-    {
-        if (!_isTableNotified)
-        {
-            foreach (Table table in NearbyTables)
-            {
-                StartCoroutine(DelayedFire(table));
-            }
-            _isTableNotified = true;
-        }
-    }
-    private IEnumerator DelayedFire(Table table)
-    {
-        yield return new WaitForSeconds(5f);
-        table.Ignite();
     }
 }
