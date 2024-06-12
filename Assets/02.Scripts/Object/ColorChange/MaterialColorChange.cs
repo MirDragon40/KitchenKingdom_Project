@@ -72,10 +72,10 @@ public class MaterialColorChange: MonoBehaviour
             RendererThisMaterial.material = ThisMaterial;
         }
 
-        if (_pv != null)
+/*        if (_pv != null)
         {
             _pv = null;
-        }
+        }*/
         _isReached = false;
 
         

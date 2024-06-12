@@ -231,12 +231,17 @@ public class PanObject : IHoldable
         else if (other.CompareTag("Player"))
         {
             IHoldable playerHoldingItem = other.GetComponent<CharacterHoldAbility>().HoldableItem;
-
-            if (playerHoldingItem != null && playerHoldingItem.GetComponent<FoodObject>().IsGrillable)
+            FoodObject food = null;
+            if (playerHoldingItem != null)
             {
-                Debug.Log("grill");
-                other.GetComponent<CharacterHoldAbility>().PlacePosition = PanPlacePositon;
-                other.GetComponent<CharacterHoldAbility>().IsPlaceable = true;
+                if (playerHoldingItem.TryGetComponent<FoodObject>(out food))
+                {
+                    if (food.IsGrillable)
+                    {
+                        other.GetComponent<CharacterHoldAbility>().PlacePosition = PanPlacePositon;
+                        other.GetComponent<CharacterHoldAbility>().IsPlaceable = true;
+                    }
+                }
             }
         }
     }
