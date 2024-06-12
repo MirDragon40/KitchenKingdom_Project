@@ -633,6 +633,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1760815874069909120}
+  - component: {fileID: 8144929180035405631}
   - component: {fileID: 3722399461594868742}
   - component: {fileID: 8149457288134941396}
   m_Layer: 0
@@ -657,6 +658,28 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1308245062857885035}
   m_LocalEulerAnglesHint: {x: -33.686, y: 180, z: 0}
+--- !u!114 &8144929180035405631
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2125663087848133689}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 1
+  ObservedComponents: []
+  sceneViewId: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!198 &3722399461594868742
 ParticleSystem:
   m_ObjectHideFlags: 0
@@ -6364,6 +6387,7 @@ MonoBehaviour:
   ObservedComponents:
   - {fileID: 8039135382696427013}
   - {fileID: 5104239316380346779}
+  - {fileID: -5072184111655391946}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
@@ -7510,6 +7534,7 @@ GameObject:
   - component: {fileID: 2346590614228257631}
   - component: {fileID: 227133561062748886}
   - component: {fileID: 1233250177845878351}
+  - component: {fileID: 2869662906397474536}
   m_Layer: 0
   m_Name: PowderEffect_Dash
   m_TagString: Untagged
@@ -12359,3 +12384,25 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
+--- !u!114 &2869662906397474536
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8893571874933849665}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
