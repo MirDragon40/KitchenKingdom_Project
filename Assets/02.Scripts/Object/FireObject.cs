@@ -27,10 +27,11 @@ public class FireObject : MonoBehaviour
 
     public void Extinguish()
     {
+        FireEffect.Stop(); 
         contactTime = 0f;
         _isOnFire = false;
+        Debug.Log("불꺼짐");
 
-        FireEffect.Stop(); // 불 효과를 비활성화
     }
 
 }

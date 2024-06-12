@@ -3,26 +3,76 @@ using UnityEngine;
 
 public class Table : MonoBehaviour
 {
+    public bool _isOnFire = false;
+    public ParticleSystem fireEffect;
+
     public Table[] NearbyTables;
-    public ParticleSystem FireParticle;
- 
-    public void Ignite()
+    private bool isTouchingPowder = false;
+    private float powderContactTime = 0f;
+
+
+    private void Start()
     {
-        StartCoroutine(SpreadFireToNearbyTables());
+        fireEffect = GetComponentInChildren<ParticleSystem>();
     }
 
-    private IEnumerator SpreadFireToNearbyTables()
+    public void Ignite()
+    {
+        _isOnFire = true;
+        fireEffect.Play();
+        Debug.Log("이그나이트");
+
+        StartCoroutine(IgniteNearbyTables());
+    }
+
+    public void Extinguish()
+    {
+        _isOnFire = false;
+        fireEffect.Stop();
+    }
+
+    IEnumerator IgniteNearbyTables()
     {
         yield return new WaitForSeconds(5f);
 
         foreach (var table in NearbyTables)
         {
-            if (table != null)
+            if (!table._isOnFire)
             {
-                Debug.Log("ㅇㅇㅇ");
-                table.FireParticle.Play();
                 table.Ignite();
             }
         }
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Powder"))
+        {
+            isTouchingPowder = true;
+            powderContactTime = Time.deltaTime;
+        }
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.CompareTag("Powder"))
+        {
+            if (isTouchingPowder && Time.deltaTime - powderContactTime >= 2f && _isOnFire)
+            {
+                Debug.Log("dd");
+                Extinguish();
+            }
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Powder"))
+        {
+            isTouchingPowder = false;
+            powderContactTime = 0f;
+
+        }
+    }
+
 }

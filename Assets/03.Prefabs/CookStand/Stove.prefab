@@ -15,7 +15,6 @@ GameObject:
   - component: {fileID: 157704236576427658}
   - component: {fileID: 2646201070075244070}
   - component: {fileID: -2078152011496428701}
-  - component: {fileID: 7039993099648873508}
   - component: {fileID: 6399313835028673102}
   m_Layer: 0
   m_Name: Stove
@@ -166,24 +165,10 @@ MonoBehaviour:
   PlacePosition: {fileID: 7280904560597961556}
   PlacedItem: {fileID: 0}
   PlacedPan: {fileID: 0}
-  FireParticle: {fileID: 0}
+  _originalPlacePosition: {fileID: 0}
+  fireObject: {fileID: 0}
   NearbyTables:
   - {fileID: 0}
-  - {fileID: 0}
---- !u!114 &7039993099648873508
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2046235622856534948}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 363aef87f6ff8a347b101ad47fb838f0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  FireParticle: {fileID: 0}
-  NearbyTables:
   - {fileID: 0}
 --- !u!114 &6399313835028673102
 MonoBehaviour:
@@ -201,7 +186,6 @@ MonoBehaviour:
   FireEffect: {fileID: 0}
   _isOnFire: 0
   contactTime: 0
-  isFireActive: 1
 --- !u!1 &6611637508460338982
 GameObject:
   m_ObjectHideFlags: 0

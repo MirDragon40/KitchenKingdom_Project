@@ -6,14 +6,13 @@ using UnityEngine.UI;
 public class Stove : CookStand
 {
     public PanObject PlacedPan = null;
-    private Transform _originalPlacePosition;
+    public Transform _originalPlacePosition;
     public FireObject fireObject;
     public bool IsPanPlaced => PlacedPan != null;
-
+   
     public Table[] NearbyTables;
-
-    private bool _isTableNotified = false;
-
+    private Coroutine igniteCoroutine;
+    private bool isFireExtinguished = true;
     private void Start()
     {
         _originalPlacePosition = base.PlacePosition;
@@ -26,34 +25,43 @@ public class Stove : CookStand
         base.Update();
         if (PlacedPan != null)
         {
-            // 팬의 불 상태를 확인하여 스토브의 불 상태를 업데이트
             if (PlacedPan.fireObject._isOnFire)
             {
                 if (!fireObject._isOnFire)
                 {
                     fireObject.MakeFire();
-                    GetComponent<Table>().Ignite();
-                    NotifyTables();
+
                 }
-
+                else if (isFireExtinguished)
+                {
+                    igniteCoroutine = StartCoroutine(IgniteNearbyTables());
+                }
             }
-        }
-
-    }
-    private void NotifyTables()
-    {
-        if (!_isTableNotified)
-        {
-            foreach (Table table in NearbyTables)
+            else
             {
-                StartCoroutine(DelayedFire(table));
+                if (igniteCoroutine != null)
+                {
+                    StopCoroutine(igniteCoroutine); 
+                    igniteCoroutine = null;
+                    isFireExtinguished = true;
+                }
             }
-            _isTableNotified = true;
+        }
+
+    }
+
+    IEnumerator IgniteNearbyTables()
+    {
+        isFireExtinguished = false;
+        yield return new WaitForSeconds(5f);
+        
+        foreach (var table in NearbyTables)
+        {
+            if (!table._isOnFire)
+            {
+                table.Ignite();
+            }
         }
     }
-    private IEnumerator DelayedFire(Table table)
-    {
-        yield return new WaitForSeconds(5f);
-        table.Ignite();
-    }
+
 }

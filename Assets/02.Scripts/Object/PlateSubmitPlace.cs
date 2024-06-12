@@ -99,7 +99,6 @@ public class PlateSubmitPlace : MonoBehaviour
         else
         {
             IsServeable = false;
-            _holdability.IsServeable = true;
             _plateContent = string.Empty;
         }
     }
