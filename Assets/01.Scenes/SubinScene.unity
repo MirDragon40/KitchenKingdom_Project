@@ -27293,6 +27293,7 @@ GameObject:
   - component: {fileID: 349936092861493253}
   - component: {fileID: 23173124344300301}
   - component: {fileID: 498057914186859506}
+  - component: {fileID: 4610112084819048466}
   m_Layer: 5
   m_Name: Timer
   m_TagString: Untagged
@@ -27300,6 +27301,28 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &4610112084819048466
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4610112084819048465}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 5
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!222 &4697351113897371212
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -28409,7 +28432,7 @@ MonoBehaviour:
   m_Content: {fileID: 4886769410980877104}
   m_Horizontal: 1
   m_Vertical: 1
-  m_MovementType: 1
+  m_MovementType: 2
   m_Elasticity: 0.1
   m_Inertia: 1
   m_DecelerationRate: 0.135
