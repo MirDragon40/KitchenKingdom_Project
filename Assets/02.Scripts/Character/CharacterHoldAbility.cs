@@ -166,7 +166,7 @@ public class CharacterHoldAbility : CharacterAbility
         }
     }
     [PunRPC]
-    void Place()
+    public void Place()
     {
         if (!IsHolding)
         {
