@@ -243,13 +243,11 @@ public class PanObject : IHoldable
 
     private void OnTriggerStay(Collider other)
     {
-        // 불이 활성화 상태이고, 'Powder' 태그 오브젝트와 접촉 중일 때
         if (fireObject._isOnFire && other.CompareTag("Powder"))
         {
             isPowderTouching = true;
-            fireObject.contactTime += Time.deltaTime; // 접촉 시간을 측정
+            fireObject.contactTime += Time.deltaTime;
             Debug.Log(fireObject.contactTime);
-            // 접촉 시간이 2초 이상이면 불을 끔
             if (fireObject.contactTime >= 2f)
             {
                 fireObject.Extinguish();
