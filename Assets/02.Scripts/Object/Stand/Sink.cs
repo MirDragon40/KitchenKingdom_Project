@@ -1,10 +1,11 @@
+using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Sink : MonoBehaviour
+public class Sink : MonoBehaviourPun
 {
     public Transform PlacePosition;
 
@@ -88,6 +89,7 @@ public class Sink : MonoBehaviour
             {
                 elapsed += Time.deltaTime;
                 ProgressSlider.value = Mathf.Clamp01(elapsed / duration);
+
                 BubbleEffect.SetActive(true);
 
                 yield return null;
@@ -96,6 +98,7 @@ public class Sink : MonoBehaviour
                 {
                     // 플레이어가 트리거를 벗어나면 진행도를 유지하고 코루틴 일시정지
                     washingCoroutine = null;
+
                     BubbleEffect.SetActive(false);
 
                     yield break;
