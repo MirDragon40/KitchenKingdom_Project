@@ -4643,6 +4643,10 @@ PrefabInstance:
       propertyPath: sceneViewId
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 2869662906397474536, guid: e46866d054e053c47bebd257df76a198, type: 3}
+      propertyPath: sceneViewId
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 3538229499963417002, guid: e46866d054e053c47bebd257df76a198, type: 3}
       propertyPath: ThrowPower
       value: 7
@@ -4654,6 +4658,10 @@ PrefabInstance:
     - target: {fileID: 4049929143956203011, guid: e46866d054e053c47bebd257df76a198, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8144929180035405631, guid: e46866d054e053c47bebd257df76a198, type: 3}
+      propertyPath: sceneViewId
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -12281,6 +12289,10 @@ PrefabInstance:
     - target: {fileID: 4180009654068414167, guid: 596fe3a83e79c75418b0b120934e8209, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7980621926739948508, guid: 596fe3a83e79c75418b0b120934e8209, type: 3}
+      propertyPath: sceneViewId
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 8299606279882721637, guid: 596fe3a83e79c75418b0b120934e8209, type: 3}
       propertyPath: sceneViewId
@@ -22761,6 +22773,10 @@ PrefabInstance:
     - target: {fileID: 4180009654068414167, guid: 596fe3a83e79c75418b0b120934e8209, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7980621926739948508, guid: 596fe3a83e79c75418b0b120934e8209, type: 3}
+      propertyPath: sceneViewId
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 8299606279882721637, guid: 596fe3a83e79c75418b0b120934e8209, type: 3}
       propertyPath: sceneViewId
