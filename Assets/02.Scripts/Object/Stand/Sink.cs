@@ -172,7 +172,6 @@ public class Sink : MonoBehaviourPun
             dirtyPlate = null;
             dishObject = null;
         }
-
     }
 
     private void TakeCleanPlate()

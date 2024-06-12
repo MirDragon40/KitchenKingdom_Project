@@ -17923,6 +17923,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7375009279586383005, guid: c32b7e03142c285419df39e12c4782b6, type: 3}
+      propertyPath: sceneViewId
+      value: 12
+      objectReference: {fileID: 0}
     - target: {fileID: 8630482961449243796, guid: c32b7e03142c285419df39e12c4782b6, type: 3}
       propertyPath: m_Name
       value: DirtyPlateStand
@@ -18638,9 +18642,21 @@ PrefabInstance:
       propertyPath: m_LocalPosition.x
       value: 8.848
       objectReference: {fileID: 0}
+    - target: {fileID: 2062174245917581515, guid: eee80e52217699746a613424e0e196d4, type: 3}
+      propertyPath: playOnAwake
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3661128671904604518, guid: eee80e52217699746a613424e0e196d4, type: 3}
+      propertyPath: playOnAwake
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4491494479667145128, guid: eee80e52217699746a613424e0e196d4, type: 3}
       propertyPath: m_LocalPosition.z
       value: -0.053
+      objectReference: {fileID: 0}
+    - target: {fileID: 5262967070615665228, guid: eee80e52217699746a613424e0e196d4, type: 3}
+      propertyPath: playOnAwake
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6973045291539551814, guid: eee80e52217699746a613424e0e196d4, type: 3}
       propertyPath: sceneViewId
@@ -18701,6 +18717,10 @@ PrefabInstance:
     - target: {fileID: 7826259585301576642, guid: eee80e52217699746a613424e0e196d4, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8448397622109422719, guid: eee80e52217699746a613424e0e196d4, type: 3}
+      propertyPath: playOnAwake
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9175608870313655970, guid: eee80e52217699746a613424e0e196d4, type: 3}
       propertyPath: m_AnchorMax.y
