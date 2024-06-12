@@ -41,7 +41,7 @@ public class FoodObject : IHoldable, IThrowable
     public float ThrownEffectTriggerTime = 0.5f;
     public float CuttingTime = 3f;
     public float BakeTime = 3f;
-    
+
 
     public override Vector3 DropOffset => new Vector3(0.3f, 0.1f, 0f);
     //public override Quaternion DropOffset_Rotation => Quaternion.Euler(0, 0, 0);
@@ -71,14 +71,14 @@ public class FoodObject : IHoldable, IThrowable
             FoodPrefab2.SetActive(false);
             FoodPrefab3.SetActive(false);
         }
-        if(FoodType == FoodType.Potato)
+        if (FoodType == FoodType.Potato)
         {
             IsFryable = true;
             FoodPrefab1.SetActive(true);
             FoodPrefab2.SetActive(false);
             FoodPrefab3.SetActive(false);
         }
- 
+
 
 
     }
@@ -124,8 +124,8 @@ public class FoodObject : IHoldable, IThrowable
         }
         _rigidbody.isKinematic = false;
         // 저장한 위치와 회전으로 음식 배치
-/*        transform.position = dropPosition;
-        transform.rotation = dropRotation;*/
+        /*        transform.position = dropPosition;
+                transform.rotation = dropRotation;*/
 
 
         transform.parent = null;
@@ -143,7 +143,7 @@ public class FoodObject : IHoldable, IThrowable
         _rigidbody.isKinematic = false;
         transform.parent = null;
         _holdCharacter = null;
-        _rigidbody.AddForce(direction*throwPower, ForceMode.Impulse);
+        _rigidbody.AddForce(direction * throwPower, ForceMode.Impulse);
         StartCoroutine(TriggerThrownItem_Coroutine());
     }
     private IEnumerator TriggerThrownItem_Coroutine()
@@ -158,9 +158,9 @@ public class FoodObject : IHoldable, IThrowable
             if (speed.magnitude < 0.9f)
             {
 
-                int colliderNum = Physics.OverlapSphereNonAlloc(transform.position, 0.4f,colliders);
+                int colliderNum = Physics.OverlapSphereNonAlloc(transform.position, 0.4f, colliders);
                 Debug.Log(colliderNum);
-                foreach (Collider collider in colliders) 
+                foreach (Collider collider in colliders)
                 {
                     CookStand cookStand = null;
                     PanObject panObject = null;
@@ -182,7 +182,7 @@ public class FoodObject : IHoldable, IThrowable
                         {
                             Place(cookStand.PlacePosition);
                         }
-                        colliders = null;              
+                        colliders = null;
                         break;
                     }
 
@@ -191,7 +191,7 @@ public class FoodObject : IHoldable, IThrowable
             if (speed.magnitude < 0.1f)
             {
                 break;
-            }    
+            }
             yield return new WaitForFixedUpdate();
         }
     }
@@ -247,22 +247,22 @@ public class FoodObject : IHoldable, IThrowable
                 FoodPrefab2.SetActive(true);
                 State = FoodState.Grilled; // 수정: 상태를 Grilled로 변경
             }
-/*            if (State == FoodState.Grilled && CookProgress >= 2f && CookProgress < 2.9f && FoodPrefab2.activeSelf)
-            {
-                // DangerIndicator 컴포넌트의 ShowDangerInRange 메서드를 사용하여 경고창을 표시합니다.
-                dangerIndicator.ShowDangerIndicator(dangerSprite);
-            }
-            else
-            {
-                // 그 외의 경우에는 경고창을 숨깁니다.
-                dangerIndicator.HideDangerIndicator();
-            }*/
+            /*            if (State == FoodState.Grilled && CookProgress >= 2f && CookProgress < 2.9f && FoodPrefab2.activeSelf)
+                        {
+                            // DangerIndicator 컴포넌트의 ShowDangerInRange 메서드를 사용하여 경고창을 표시합니다.
+                            dangerIndicator.ShowDangerIndicator(dangerSprite);
+                        }
+                        else
+                        {
+                            // 그 외의 경우에는 경고창을 숨깁니다.
+                            dangerIndicator.HideDangerIndicator();
+                        }*/
             if (State == FoodState.Grilled && CookProgress >= 3f && FoodPrefab2.activeSelf)
             {
                 FoodPrefab2.SetActive(false);
                 FoodPrefab3.SetActive(true);
                 State = FoodState.Burnt; // 수정: 상태를 Burnt로 변경
-                
+
             }
             yield return null;
         }
@@ -321,7 +321,7 @@ public class FoodObject : IHoldable, IThrowable
 
     public void StartCooking()
     {
-        IsCooking=true;
+        IsCooking = true;
     }
 
     public void StopCooking()
