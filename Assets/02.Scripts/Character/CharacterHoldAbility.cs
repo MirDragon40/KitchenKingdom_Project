@@ -1,8 +1,12 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics.Contracts;
 using Unity.VisualScripting;
 using UnityEngine;
+using Photon.Pun;
+
+
 
 public class CharacterHoldAbility : CharacterAbility
 {
@@ -20,15 +24,17 @@ public class CharacterHoldAbility : CharacterAbility
     public bool IsSubmitable = false;
     public bool IsServeable = false;
     public bool IsHolding => HoldableItem != null;
-
+    private PhotonView _pv;
     public Transform PlacePosition = null;
 
     private bool nearTrashBin = false;
     private Transform panTransform; // 팬 오브젝트를 참조하기 위한 변수
 
+    public FireObject fireObject;
     void Start()
     {
         animator = GetComponent<Animator>();
+        _pv = _owner.PhotonView;
     }
 
     private void LateUpdate()
@@ -38,7 +44,7 @@ public class CharacterHoldAbility : CharacterAbility
             if (!IsHolding)
             {
 
-                PickUp();
+                _pv.RPC("PickUp",RpcTarget.All);
 
             }
             else
@@ -46,7 +52,7 @@ public class CharacterHoldAbility : CharacterAbility
                 if (IsPlaceable)
                 {
 
-                    Place();
+                    _pv.RPC("Place", RpcTarget.All);
 
                    
                 }
@@ -55,12 +61,12 @@ public class CharacterHoldAbility : CharacterAbility
                 {
                     if (nearTrashBin)
                     {
-                        DropFood();
+                        _pv.RPC("DropFood", RpcTarget.All);
                     }
                     else
                     {
 
-                        Drop();
+                        _pv.RPC("Drop",RpcTarget.All);
 
                     }
                 }
@@ -68,7 +74,7 @@ public class CharacterHoldAbility : CharacterAbility
         }
     }
 
-    
+    [PunRPC]
     public void PickUp()
     {
         // 들고 있는 음식이 있으면 아무 작업도 수행하지 않음
@@ -84,7 +90,10 @@ public class CharacterHoldAbility : CharacterAbility
         foreach (Collider collider in colliders)
         {
             IHoldable holdable = collider.GetComponent<IHoldable>();
-            Debug.Log(holdable);
+            if (holdable is PanObject pan && pan.fireObject._isOnFire)
+            {
+                continue;
+            }
 
             if (holdable != null)
             {
@@ -99,9 +108,10 @@ public class CharacterHoldAbility : CharacterAbility
 
 
     }
-
+    [PunRPC]
     void Drop()
     {
+
         // 들고 있는 음식이 없으면 아무 작업도 수행하지 않음
         if (!IsHolding || HoldableItem is PanObject)
         {
@@ -119,7 +129,7 @@ public class CharacterHoldAbility : CharacterAbility
 
     }
     // 음식 버린후 초기화
-
+    [PunRPC]
     private void DropFood()
     {
         if (HoldableItem is FoodObject)
@@ -155,7 +165,7 @@ public class CharacterHoldAbility : CharacterAbility
             HoldableItem.GetComponent<FoodCombination>().Init();
         }
     }
-
+    [PunRPC]
     void Place()
     {
         if (!IsHolding)
@@ -213,11 +223,5 @@ public class CharacterHoldAbility : CharacterAbility
                 holdable.Hold(character, HandTransform);
             }
         }
-    }
-
-    private IEnumerator PickUp_Coroutine()
-    {
-        yield return new WaitForSeconds(0.2f);
-        PickUp();
     }
 }

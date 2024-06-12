@@ -57,7 +57,13 @@ MonoBehaviour:
   - SpawnFood
   - AnimationPlay
   - ShowTimer
-  - ChangeState
+  - Drop
+  - DropFood
+  - PickUp
+  - Place
+  - PlayerThrow
+  - StartChoppingRPC
+  - StopChoppingRPC
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

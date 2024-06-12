@@ -70,10 +70,12 @@ public class CharacterMoveAbility : CharacterAbility
         // 파티클 시스템 제어
         if (_dirMagnitude > 0 && !PowderEffect.isPlaying)
         {
+          //  WalkEffectPlay();
             _pv.RPC("WalkEffectPlay", RpcTarget.All);
         }
         else if (_dirMagnitude == 0 && PowderEffect.isPlaying)
         {
+           // WalkEffectStop();
             _pv.RPC("WalkEffectStop", RpcTarget.All);
         }
 
@@ -86,7 +88,7 @@ public class CharacterMoveAbility : CharacterAbility
 
         if (Input.GetKeyDown(KeyCode.LeftAlt) && !isDashing)
         {
-            _pv.RPC("DashPlay",RpcTarget.All);
+            DashPlay();
         }
     }
     [PunRPC]
@@ -99,7 +101,6 @@ public class CharacterMoveAbility : CharacterAbility
     {
         PowderEffect.Stop();
     }
-    [PunRPC]
     private void DashPlay()
     {
         PowderEffect_Dash.Play();

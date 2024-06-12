@@ -7,8 +7,8 @@ public class Table : MonoBehaviour
     public ParticleSystem fireEffect;
 
     public Table[] NearbyTables;
-    private bool isTouchingPowder = false;
-    private float powderContactTime = 0f;
+    private bool isPowderTouching = false;
+    private float powderContactTime = 0;
 
 
     private void Start()
@@ -44,22 +44,15 @@ public class Table : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("Powder"))
-        {
-            isTouchingPowder = true;
-            powderContactTime = Time.deltaTime;
-        }
-    }
-
     private void OnTriggerStay(Collider other)
     {
-        if (other.CompareTag("Powder"))
+        if (_isOnFire && other.CompareTag("Powder"))
         {
-            if (isTouchingPowder && Time.deltaTime - powderContactTime >= 2f && _isOnFire)
+            isPowderTouching = true;
+            powderContactTime += Time.deltaTime;
+            Debug.Log(powderContactTime);
+            if (powderContactTime >= 2f)
             {
-                Debug.Log("dd");
                 Extinguish();
             }
         }
@@ -67,11 +60,10 @@ public class Table : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("Powder"))
+        if (_isOnFire && other.CompareTag("Powder"))
         {
-            isTouchingPowder = false;
+            isPowderTouching = false;
             powderContactTime = 0f;
-
         }
     }
 

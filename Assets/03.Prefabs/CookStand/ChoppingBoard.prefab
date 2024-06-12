@@ -15,6 +15,8 @@ GameObject:
   - component: {fileID: 923625881847771681}
   - component: {fileID: 1562647603641186976}
   - component: {fileID: 8793971931414919264}
+  - component: {fileID: 7980621926739948508}
+  - component: {fileID: 3565921778568974858}
   m_Layer: 0
   m_Name: ChoppingBoard
   m_TagString: Untagged
@@ -148,7 +150,6 @@ MonoBehaviour:
   RendererThisMaterial: {fileID: 3915931578567336585}
   ThisMaterial: {fileID: 2100000, guid: 2a4628a3786b87e44aa969367b59f5b8, type: 2}
   ChangeMaterial: {fileID: 2100000, guid: 76a2fc3e91ab917438620a1ceed1bb8c, type: 2}
-  PlusImageUI: {fileID: 0}
 --- !u!114 &8793971931414919264
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -166,6 +167,45 @@ MonoBehaviour:
   ChoppingProgressSlider: {fileID: 2484539774823390766}
   Animator: {fileID: 286258069410163707}
   onChoppingBoard: {fileID: 7934171919170835107}
+--- !u!114 &7980621926739948508
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2983876176531163984}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents:
+  - {fileID: 3565921778568974858}
+  sceneViewId: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
+--- !u!114 &3565921778568974858
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2983876176531163984}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SynchronizePosition: 1
+  m_SynchronizeRotation: 1
+  m_SynchronizeScale: 0
+  m_UseLocal: 1
 --- !u!1 &3386784769351644402
 GameObject:
   m_ObjectHideFlags: 0
@@ -351,6 +391,7 @@ GameObject:
   - component: {fileID: 393378107564502734}
   - component: {fileID: 5941738642444098011}
   - component: {fileID: 286258069410163707}
+  - component: {fileID: 7732910286143238893}
   m_Layer: 0
   m_Name: Knife
   m_TagString: Untagged
@@ -440,7 +481,7 @@ MeshCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 5
   m_Convex: 0
   m_CookingOptions: 30
@@ -466,6 +507,30 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &7732910286143238893
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6800548613374425122}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b8c4a61274f60b4ea5fb4299cfdbf14, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShowLayerWeightsInspector: 1
+  ShowParameterInspector: 1
+  m_SynchronizeParameters:
+  - Type: 9
+    SynchronizeType: 0
+    Name: StopChopping
+  - Type: 4
+    SynchronizeType: 2
+    Name: Chopping
+  m_SynchronizeLayers:
+  - SynchronizeType: 0
+    LayerIndex: 0
 --- !u!1 &7709604284564134043
 GameObject:
   m_ObjectHideFlags: 0
