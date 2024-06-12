@@ -50,7 +50,7 @@ public class Stove : CookStand
 
     }
 
-    IEnumerator IgniteNearbyTables()
+    public IEnumerator IgniteNearbyTables()
     {
         isFireExtinguished = false;
         yield return new WaitForSeconds(5f);
