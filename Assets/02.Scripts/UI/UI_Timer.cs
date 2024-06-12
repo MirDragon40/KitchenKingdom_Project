@@ -22,16 +22,16 @@ public class UI_Timer : MonoBehaviourPunCallbacks
         PV = GetComponent<PhotonView>();
 
         SpeedUpFireUI.gameObject.SetActive(false);
-        StartCoroutine(AAA());
+        StartCoroutine(TimerStart_Coroutine());
     }
     
-    private IEnumerator AAA() 
+    private IEnumerator TimerStart_Coroutine() 
     {
         yield return new WaitForSeconds(2f);
         if (PhotonNetwork.IsMasterClient)
         {
             Debug.Log("aaa");
-            _totalTime = 60;
+            _totalTime = 180;
 
             StartCoroutine(Timer_Coroution());
 
@@ -70,8 +70,13 @@ public class UI_Timer : MonoBehaviourPunCallbacks
     {
         Debug.Log("aaa");
 
-        TimerTextUI.text = number.ToString();
+        int minutes = number / 60;
+        int seconds = number % 60;
+
+        //TimerTextUI.text = number.ToString();
+        TimerTextUI.text = string.Format("{0:00} : {1:00}", minutes, seconds);
     }
+
     [PunRPC]
     void AnimationPlay() 
     {
