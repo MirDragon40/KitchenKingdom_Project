@@ -243,7 +243,6 @@ public class PanObject : IHoldable
 
     private void OnTriggerStay(Collider other)
     {
-        // 불이 활성화 상태이고, 'Powder' 태그 오브젝트와 접촉 중일 때
         if (fireObject._isOnFire && other.CompareTag("Powder"))
         {
             isPowderTouching = true;

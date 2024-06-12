@@ -438,6 +438,7 @@ GameObject:
   - component: {fileID: 8774262675901293282}
   - component: {fileID: 5131074517677934456}
   - component: {fileID: -4230451837290151419}
+  - component: {fileID: 9211162882280487015}
   m_Layer: 0
   m_Name: Lettuce
   m_TagString: Food
@@ -557,7 +558,6 @@ MonoBehaviour:
   observableSearch: 2
   ObservedComponents:
   - {fileID: -4230451837290151419}
-  - {fileID: 0}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
@@ -577,6 +577,22 @@ MonoBehaviour:
   m_SynchronizeRotation: 1
   m_SynchronizeScale: 0
   m_UseLocal: 0
+--- !u!114 &9211162882280487015
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7788963802100874181}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64179f3720bbfe947b7724caa67b7c1d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SynchronizeVelocity: 1
+  m_SynchronizeAngularVelocity: 0
+  m_TeleportEnabled: 0
+  m_TeleportIfDistanceGreaterThan: 3
 --- !u!1 &8143262538006736201
 GameObject:
   m_ObjectHideFlags: 0
