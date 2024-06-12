@@ -63,7 +63,7 @@ public class PhotonManager_test : MonoBehaviourPunCallbacks
         roomOptions.IsVisible = true; // 로비에서 방 목록에 노출할 것인가?
         roomOptions.IsOpen = true;
         int randomIndex = Random.Range(0, 100);
-        PhotonNetwork.JoinOrCreateRoom($"PlayRoom333", roomOptions, TypedLobby.Default);
+        PhotonNetwork.JoinOrCreateRoom($"PlayRoom444", roomOptions, TypedLobby.Default);
 
     }
     public override void OnCreatedRoom()

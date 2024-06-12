@@ -10,9 +10,11 @@ public class ChoppingBoard : CookStand
     private Coroutine fillSliderCoroutine;
     private bool _isPossibleChopping = false;
     public OnChoppingBoard_Collider onChoppingBoard;
+    private PhotonView photonView;
 
     private void Awake()
     {
+        photonView = GetComponent<PhotonView>();
         ChoppingProgressSlider.value = 0f; // 슬라이더 초기화
         ChoppingProgressSlider.gameObject.SetActive(false);
     }
@@ -31,9 +33,19 @@ public class ChoppingBoard : CookStand
                 }
                 onChoppingBoard.FoodObject.StartCooking();
                 ChoppingProgressSlider.gameObject.SetActive(true);
-                fillSliderCoroutine = StartCoroutine(FillSliderOverTime(3.0f));
+                photonView.RPC("StartChoppingRPC", RpcTarget.All, 3.0f);
             }
         }
+    }
+
+    [PunRPC]
+    private void StartChoppingRPC(float duration)
+    {
+        if (fillSliderCoroutine != null)
+        {
+            StopCoroutine(fillSliderCoroutine);
+        }
+        fillSliderCoroutine = StartCoroutine(FillSliderOverTime(duration));
     }
 
     protected void OnTriggerEnter(Collider other)
@@ -68,10 +80,10 @@ public class ChoppingBoard : CookStand
             if (onChoppingBoard.FoodObject != null)
             {
                 onChoppingBoard.FoodObject.StopCooking();
-
             }
 
             Animator.SetBool("Chopping", false); // 슬라이더가 진행되지 않을 때 애니메이션을 중지
+            photonView.RPC("StopChoppingRPC", RpcTarget.All);
         }
 
         if (other.CompareTag("Player"))
@@ -83,6 +95,13 @@ public class ChoppingBoard : CookStand
                 characterHoldAbility.PlacePosition = null;
             }
         }
+    }
+
+    [PunRPC]
+    private void StopChoppingRPC()
+    {
+        Animator.SetBool("Chopping", false); // 슬라이더가 완료되면 애니메이션을 중지
+        ChoppingProgressSlider.gameObject.SetActive(false);
     }
 
     private IEnumerator FillSliderOverTime(float duration)
@@ -122,4 +141,3 @@ public class ChoppingBoard : CookStand
         ChoppingProgressSlider.gameObject.SetActive(false);
     }
 }
-
