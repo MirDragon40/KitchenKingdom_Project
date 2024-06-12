@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
+  m_IndirectSpecularColor: {r: 0.4459079, g: 0.4956478, b: 0.5743885, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -8955,6 +8955,10 @@ PrefabInstance:
       propertyPath: sceneViewId
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 1574069279889201107, guid: e46866d054e053c47bebd257df76a198, type: 3}
+      propertyPath: ObservedComponents.Array.size
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 3538229499963417002, guid: e46866d054e053c47bebd257df76a198, type: 3}
       propertyPath: ThrowPower
       value: 8
@@ -10001,7 +10005,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4610112084819048465}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cee0f8a70ca0c0e49accc2094106442a, type: 3}
   m_Name: 
@@ -10010,6 +10014,7 @@ MonoBehaviour:
   SpeedUpFireUI: {fileID: 2014254991206864388}
   TimerAnimator: {fileID: 20844018}
   FireAnimator: {fileID: 3264322695334518198}
+  PV: {fileID: 0}
 --- !u!1 &507799676960800384
 GameObject:
   m_ObjectHideFlags: 0
@@ -13590,6 +13595,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1780653220}
     m_Modifications:
+    - target: {fileID: 1153494284830845860, guid: 1ea534a27c4bfef4eb8886f3a108fb36, type: 3}
+      propertyPath: sceneViewId
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 1874536752686217158, guid: 1ea534a27c4bfef4eb8886f3a108fb36, type: 3}
       propertyPath: spawnPoint
       value: 
@@ -14079,6 +14088,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1780653220}
     m_Modifications:
+    - target: {fileID: 969971270666643124, guid: 196b12e6ac7ca1c46bc7e9a822b59327, type: 3}
+      propertyPath: sceneViewId
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 1752332358173243179, guid: 196b12e6ac7ca1c46bc7e9a822b59327, type: 3}
       propertyPath: m_Name
       value: Item_BoxSet_Patty
@@ -16542,10 +16555,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0255209d42be99345896e41f6bbdea70, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  foodPrefabs:
-  - {fileID: 1786338197292552992, guid: dda961dd455a24748b6da6b042d895e0, type: 3}
-  - {fileID: 7788963802100874181, guid: a5e1dd0c0356c844da14a5d32f019490, type: 3}
-  - {fileID: 1992951515313775233, guid: 13eac972c2448494fa6f10e28c5fe2f4, type: 3}
+  type: 0
 --- !u!4 &3529638915444581855
 Transform:
   m_ObjectHideFlags: 0
@@ -19061,7 +19071,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!33 &4643000246055162447
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -24277,6 +24287,10 @@ PrefabInstance:
     - target: {fileID: 6151070076342067190, guid: 3d66be16aa5aab845b5bca28c700603a, type: 3}
       propertyPath: m_Name
       value: Item_BoxSet_Lettuce
+      objectReference: {fileID: 0}
+    - target: {fileID: 8845194356242136109, guid: 3d66be16aa5aab845b5bca28c700603a, type: 3}
+      propertyPath: sceneViewId
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
