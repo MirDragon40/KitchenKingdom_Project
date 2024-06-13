@@ -68,7 +68,9 @@ public class Makefood : MonoBehaviourPun
         {
             return false;
         }
+
         Collider[] colliders = Physics.OverlapSphere(spawnPoint.position, _checkRange);
+
         foreach (Collider collider in colliders)
         {
             IHoldable holdable = collider.GetComponent<IHoldable>();
