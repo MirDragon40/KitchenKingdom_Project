@@ -5,7 +5,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UI_News : MonoBehaviour
+public class UI_Story : MonoBehaviour
 {
     // UI_News
     public GameObject NewsUI;
