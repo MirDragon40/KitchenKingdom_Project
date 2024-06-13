@@ -75,11 +75,11 @@ public class OrderManager : MonoBehaviourPun
             int orderRandIndex = Random.Range(0, 10);
             if (orderRandIndex <= 5)
             {
-                _pv.RPC("GenerateOrderRPC", RpcTarget.All, "burger");
+                _pv.RPC("GenerateOrderRPC", RpcTarget.AllBuffered, "burger");
             }
             else if (orderRandIndex > 5)
             {
-                _pv.RPC("GenerateOrderRPC", RpcTarget.All, "burgerCoke");
+                _pv.RPC("GenerateOrderRPC", RpcTarget.AllBuffered, "burgerCoke");
             }
 
         }

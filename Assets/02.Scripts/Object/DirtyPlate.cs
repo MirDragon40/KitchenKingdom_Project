@@ -40,8 +40,5 @@ public class DirtyPlate : MonoBehaviour
                 DirtyPlates[i].SetActive(false);
             }
         }
-
     }
-
-   
 }

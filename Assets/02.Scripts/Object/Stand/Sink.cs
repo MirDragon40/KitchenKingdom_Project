@@ -1,11 +1,14 @@
+using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Sink : MonoBehaviour
+public class Sink : MonoBehaviourPun
 {
+    public Transform PlacePosition;
+
     public int DirtyPlateNum;
     public int CleanPlateNum;
 
@@ -20,6 +23,7 @@ public class Sink : MonoBehaviour
 
     private CharacterHoldAbility characterHoldAbility;
     private DirtyPlate dirtyPlate;
+    private DishObject dishObject;
 
 
     private void Awake()
@@ -67,6 +71,8 @@ public class Sink : MonoBehaviour
         {
             Debug.Log(DirtyPlateNum);
             GetDirtyPlateNum();
+            dishObject.Place(PlacePosition);
+            characterHoldAbility.Place();
             Destroy(dirtyPlate.gameObject);
         }
     }
@@ -83,6 +89,7 @@ public class Sink : MonoBehaviour
             {
                 elapsed += Time.deltaTime;
                 ProgressSlider.value = Mathf.Clamp01(elapsed / duration);
+
                 BubbleEffect.SetActive(true);
 
                 yield return null;
@@ -91,6 +98,7 @@ public class Sink : MonoBehaviour
                 {
                     // 플레이어가 트리거를 벗어나면 진행도를 유지하고 코루틴 일시정지
                     washingCoroutine = null;
+
                     BubbleEffect.SetActive(false);
 
                     yield break;
@@ -150,6 +158,8 @@ public class Sink : MonoBehaviour
         {
             characterHoldAbility = other.GetComponent<CharacterHoldAbility>();
             dirtyPlate = characterHoldAbility.gameObject.GetComponentInChildren<DirtyPlate>();
+            dishObject = characterHoldAbility.gameObject.GetComponentInChildren<DishObject>();
+
             isPlayerInTrigger = true;
         }
     }
@@ -160,8 +170,8 @@ public class Sink : MonoBehaviour
         {
             isPlayerInTrigger = false;
             dirtyPlate = null;
+            dishObject = null;
         }
-
     }
 
     private void TakeCleanPlate()
