@@ -12,6 +12,14 @@ public class TrashBin : MonoBehaviour
                 panObject.SetNearTrashBin(true, this); 
             }
         }
+        if (other.CompareTag("Player"))
+        {
+            CharacterHoldAbility holdAbility = other.GetComponent<CharacterHoldAbility>();
+            if (holdAbility != null)
+            {
+                holdAbility.SetNearTrashBin(true, this.transform);
+            }
+        }
     }
 
     private void OnTriggerExit(Collider other)
@@ -22,6 +30,14 @@ public class TrashBin : MonoBehaviour
             if (panObject != null)
             {
                 panObject.SetNearTrashBin(false);
+            }
+        }
+        if (other.CompareTag("Player"))
+        {
+            CharacterHoldAbility holdAbility = other.GetComponent<CharacterHoldAbility>();
+            if (holdAbility != null)
+            {
+                holdAbility.SetNearTrashBin(false);
             }
         }
     }

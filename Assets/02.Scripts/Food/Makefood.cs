@@ -48,8 +48,8 @@ public class Makefood : MonoBehaviourPun
                 spawnPoint = _nearbyCharacter.HoldAbility.HandTransform;
                 if (!IsNearbyHoldable())
                 {
-                    SpawnFood(FoodType.ToString(), spawnPoint.position, spawnPoint.rotation);
-                   //_pv.RPC(nameof(SpawnFood), RpcTarget.All, FoodType.ToString(), spawnPoint.position, spawnPoint.rotation);
+                    //SpawnFood(FoodType.ToString(), spawnPoint.position, spawnPoint.rotation);
+                   _pv.RPC(nameof(SpawnFood), RpcTarget.All, FoodType.ToString(), spawnPoint.position, spawnPoint.rotation);
                     _nearbyCharacter.GetComponent<Animator>().SetBool("Carry", true);
                     StartCoroutine(BoxOpenAnimation());
                 }
@@ -68,7 +68,9 @@ public class Makefood : MonoBehaviourPun
         {
             return false;
         }
+
         Collider[] colliders = Physics.OverlapSphere(spawnPoint.position, _checkRange);
+
         foreach (Collider collider in colliders)
         {
             IHoldable holdable = collider.GetComponent<IHoldable>();
@@ -88,7 +90,7 @@ public class Makefood : MonoBehaviourPun
 
         if (foodPrefab != null)
         {
-            GameObject food = PhotonNetwork.Instantiate(foodPrefab.name, position, rotation);
+            GameObject food = PhotonNetwork.InstantiateRoomObject(foodPrefab.name, position, rotation);
 
             // 음식 오브젝트를 손에 들도록 설정
             IHoldable holdable = food.GetComponent<IHoldable>();

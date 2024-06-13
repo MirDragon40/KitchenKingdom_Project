@@ -26,6 +26,10 @@ public class Sink : MonoBehaviourPun
     private DishObject dishObject;
 
 
+    private Character _nearbyCharacter;
+    private bool isPlayerNearby => _nearbyCharacter != null;
+
+
     private void Awake()
     {
         BubbleEffect.SetActive(false);
@@ -51,7 +55,12 @@ public class Sink : MonoBehaviourPun
 
     private void Update()
     {
-        if (isPlayerInTrigger && Input.GetKeyDown(KeyCode.LeftControl))
+        if (!isPlayerNearby)
+        {
+            return;
+        }
+
+        if (isPlayerInTrigger && Input.GetKeyDown(KeyCode.LeftControl) && _nearbyCharacter.PhotonView.IsMine)
         {
             ProgressSlider.gameObject.SetActive(true);
 
@@ -61,13 +70,12 @@ public class Sink : MonoBehaviourPun
             }
         }
 
-        if (isPlayerInTrigger && Input.GetKeyDown(KeyCode.Space) && CleanPlateNum > 0)
+        if (isPlayerInTrigger && Input.GetKeyDown(KeyCode.Space) && CleanPlateNum > 0 && _nearbyCharacter.PhotonView.IsMine)
         {
-
             TakeCleanPlate();
         }
 
-        if (isPlayerInTrigger && Input.GetKeyDown(KeyCode.Space) && dirtyPlate != null)
+        if (isPlayerInTrigger && Input.GetKeyDown(KeyCode.Space) && dirtyPlate != null && _nearbyCharacter.PhotonView.IsMine)
         {
             Debug.Log(DirtyPlateNum);
             GetDirtyPlateNum();
@@ -154,9 +162,15 @@ public class Sink : MonoBehaviourPun
 
     private void OnTriggerEnter(Collider other)
     {
+        if (isPlayerNearby)
+        {
+            return;
+        }
+
         if (other.CompareTag("Player"))
         {
             characterHoldAbility = other.GetComponent<CharacterHoldAbility>();
+            _nearbyCharacter = other.GetComponent<Character>();
             dirtyPlate = characterHoldAbility.gameObject.GetComponentInChildren<DirtyPlate>();
             dishObject = characterHoldAbility.gameObject.GetComponentInChildren<DishObject>();
 
@@ -169,6 +183,9 @@ public class Sink : MonoBehaviourPun
         if (other.CompareTag("Player"))
         {
             isPlayerInTrigger = false;
+            characterHoldAbility = null;
+            _nearbyCharacter = null;
+
             dirtyPlate = null;
             dishObject = null;
         }

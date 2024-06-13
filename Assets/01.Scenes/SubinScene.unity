@@ -10941,6 +10941,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Plate_Stage1 (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 2842866395247592431, guid: b9ef09793d1751d4385da8e2b378132a, type: 3}
+      propertyPath: sceneViewId
+      value: 15
+      objectReference: {fileID: 0}
     - target: {fileID: 5158839792378426884, guid: b9ef09793d1751d4385da8e2b378132a, type: 3}
       propertyPath: m_LocalScale.z
       value: 1.2924998
@@ -14934,52 +14938,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5158839792378426884, guid: b9ef09793d1751d4385da8e2b378132a, type: 3}
   m_PrefabInstance: {fileID: 978277024}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1343925964
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1343925966}
-  - component: {fileID: 1343925965}
-  m_Layer: 0
-  m_Name: DishSpawnManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1343925965
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1343925964}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb8f4d9b5d3dd44c877201f67aadc94, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  DirtyPlates: {fileID: 7435229658286963103, guid: 28cbbb98799a37947bcca3e11beed3ac, type: 3}
-  Plate_Stage1_Object: {fileID: 2637595923753635810, guid: b9ef09793d1751d4385da8e2b378132a, type: 3}
---- !u!4 &1343925966
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1343925964}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1344452837
 GameObject:
   m_ObjectHideFlags: 0
@@ -15100,6 +15058,10 @@ PrefabInstance:
     - target: {fileID: 2637595923753635810, guid: b9ef09793d1751d4385da8e2b378132a, type: 3}
       propertyPath: m_Name
       value: Plate_Stage1 (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2842866395247592431, guid: b9ef09793d1751d4385da8e2b378132a, type: 3}
+      propertyPath: sceneViewId
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 5158839792378426884, guid: b9ef09793d1751d4385da8e2b378132a, type: 3}
       propertyPath: m_LocalScale.y
@@ -24028,6 +23990,10 @@ PrefabInstance:
     - target: {fileID: 2637595923753635810, guid: b9ef09793d1751d4385da8e2b378132a, type: 3}
       propertyPath: m_Name
       value: Plate_Stage1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2842866395247592431, guid: b9ef09793d1751d4385da8e2b378132a, type: 3}
+      propertyPath: sceneViewId
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 5158839792378426884, guid: b9ef09793d1751d4385da8e2b378132a, type: 3}
       propertyPath: m_LocalScale.z
@@ -35728,4 +35694,3 @@ SceneRoots:
   - {fileID: 1692970391}
   - {fileID: 117779469}
   - {fileID: 1591324214}
-  - {fileID: 1343925966}

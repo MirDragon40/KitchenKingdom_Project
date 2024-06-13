@@ -11,7 +11,6 @@ public class Table : MonoBehaviour
     private bool isPowderTouching = false;
     private float powderContactTime = 0;
 
-
     private void Start()
     {
         fireEffect = GetComponentInChildren<ParticleSystem>();

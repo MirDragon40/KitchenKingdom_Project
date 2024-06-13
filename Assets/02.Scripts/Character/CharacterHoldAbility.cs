@@ -90,9 +90,14 @@ public class CharacterHoldAbility : CharacterAbility
         foreach (Collider collider in colliders)
         {
             IHoldable holdable = collider.GetComponent<IHoldable>();
-            if (holdable is PanObject pan && pan.fireObject._isOnFire)
+            if (holdable is PanObject pan)
             {
-                continue;
+                // 스토브가 불이 났다면 팬을 잡을 수 없도록 함
+                Stove stove = pan.GetComponentInParent<Stove>();
+                if (stove != null && stove.IsOnFire)
+                {
+                    continue;
+                }
             }
 
             if (holdable != null)
@@ -103,12 +108,9 @@ public class CharacterHoldAbility : CharacterAbility
 
                 break;
             }
-
         }
-
-
     }
-    [PunRPC]
+        [PunRPC]
     void Drop()
     {
 
@@ -137,17 +139,6 @@ public class CharacterHoldAbility : CharacterAbility
             FoodTrashDrop();
         }
 
-        // 팬 오브젝트의 자식 음식 오브젝트를 찾아서 삭제
-        if (panTransform != null)
-        {
-            foreach (Transform child in panTransform)
-            {
-                if (child.GetComponent<FoodObject>() != null)
-                {
-                    Destroy(child.gameObject);
-                }
-            }
-        }
     }
 
     public void FoodTrashDrop()
@@ -189,13 +180,12 @@ public class CharacterHoldAbility : CharacterAbility
     public void SpawnPlateOnHand()
     {
         Character character = GetComponent<Character>();
-        GameObject dishPrefab = DishSpawnManager.Instance.Plate_Stage1_Object;
+        GameObject dishPrefab = Resources.Load<GameObject>("Plate_Stage1");
 
         if (dishPrefab != null)
         {
             GameObject dish = PhotonNetwork.InstantiateRoomObject("Plate_Stage1", HandTransform.position, HandTransform.rotation);
 
-            // 접시 오브젝트를 손에 들도록 설정
             IHoldable holdable = dish.GetComponent<IHoldable>();
 
             if (holdable != null)
@@ -208,18 +198,16 @@ public class CharacterHoldAbility : CharacterAbility
     public void SpawnDirtyPlateOnHand()
     {
         Character character = GetComponent<Character>();
-        GameObject dishPrefab = DishSpawnManager.Instance.DirtyPlates;
+        GameObject dishPrefab = Resources.Load<GameObject>("DirtyPlates");
 
         if (dishPrefab != null)
         {
             GameObject dish = PhotonNetwork.InstantiateRoomObject("DirtyPlates", HandTransform.position, HandTransform.rotation);
 
-            // 접시 오브젝트를 손에 들도록 설정
             IHoldable holdable = dish.GetComponent<IHoldable>();
 
             if (holdable != null)
-            {
-                
+            {                
                 holdable.Hold(character, HandTransform);
             }
         }
