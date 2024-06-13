@@ -1,3 +1,4 @@
+using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -13,6 +14,8 @@ public class FoodCombination : MonoBehaviour
     public bool IsSubmitable;
     private IHoldable _holdableObject;
     public bool IsReadyServe = false;
+    private PhotonView _pv;
+    private Character _nearbyCharacter;
 
     public void Awake()
     {
@@ -20,6 +23,7 @@ public class FoodCombination : MonoBehaviour
     private void Start()
     {
         Init();
+        _pv = GetComponent<PhotonView>();
     }
     public void Init()
     {
@@ -68,10 +72,11 @@ public class FoodCombination : MonoBehaviour
     }
     private void OnTriggerStay(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Player") && other.GetComponent<PhotonView>().IsMine)
         {
             if (other.GetComponent<CharacterHoldAbility>().HoldableItem != null)
             {
+                _nearbyCharacter = other.GetComponent<Character>();
                 _holdableObject = other.GetComponent<CharacterHoldAbility>().HoldableItem;
                 IsSubmitable = true;
             }
@@ -84,36 +89,45 @@ public class FoodCombination : MonoBehaviour
     }
     private void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Player") && other.GetComponent<PhotonView>().IsMine)
         {
+            _nearbyCharacter = other.GetComponent<Character>();
             IsSubmitable = false;
         }
     }
-
+    [PunRPC]
+    private void SetActiveIngrediant(string key)
+    {
+        Ingrediants[key] = true;
+    }
     private void SubmitIngrediant(FoodObject submittedFood)
     {
         if (submittedFood.ItemType == EItemType.Food && submittedFood.FoodType == FoodType.Bread && !Ingrediants["bread"])
         {
-            Ingrediants["bread"] = true;
-            Destroy(submittedFood.gameObject);
+            //Ingrediants["bread"] = true;
+            _pv.RPC("SetActiveIngrediant", RpcTarget.All, "bread");
+            PhotonNetwork.Destroy(submittedFood.gameObject);
             RefreshPlate();
         }
         else if (submittedFood.ItemType == EItemType.Food && submittedFood.FoodType == FoodType.Lettuce && !Ingrediants["lettuce"] && submittedFood.State == FoodState.Cut)
         {
-            Ingrediants["lettuce"] = true;
-            Destroy(submittedFood.gameObject);
+            _pv.RPC("SetActiveIngrediant", RpcTarget.All, "lettuce");
+            //Ingrediants["lettuce"] = true;
+            PhotonNetwork.Destroy(submittedFood.gameObject);
             RefreshPlate();
         }
         else if (submittedFood.ItemType == EItemType.Coke && !Ingrediants["coke"])
         {
-            Ingrediants["coke"] = true;
-            Destroy(submittedFood.gameObject);
+            _pv.RPC("SetActiveIngrediant", RpcTarget.All, "coke");
+            //Ingrediants["coke"] = true;
+            PhotonNetwork.Destroy(submittedFood.gameObject);
             RefreshPlate();
         }
         else if (submittedFood.ItemType == EItemType.Food && !Ingrediants["patty"] && submittedFood.State == FoodState.Grilled)
         {
-            Ingrediants["patty"] = true;
-            Destroy(submittedFood.gameObject);
+            _pv.RPC("SetActiveIngrediant", RpcTarget.All, "patty");
+            // Ingrediants["patty"] = true;
+            PhotonNetwork.Destroy(submittedFood.gameObject);
             RefreshPlate();
         }
 

@@ -64,10 +64,7 @@ MonoBehaviour:
   - PlayerThrow
   - StartChoppingRPC
   - StopChoppingRPC
-  - UpdatePlates
-  - FinishWashingPlate
-  - PlaceDirtyPlate
-  - TakeCleanPlate
+  - SetActiveIngrediant
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1
