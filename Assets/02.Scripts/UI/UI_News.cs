@@ -1,42 +1,71 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class UI_News : MonoBehaviour
 {
-    public TextMeshProUGUI Text;
-    public TextMeshProUGUI Text2;
-    public Image Image;
-    public Image Image2;
+    // UI_News
+    public GameObject NewsUI;
+
+    public TextMeshProUGUI StoryText;
+    public TextMeshProUGUI StoryText2;
+
+    public Image SpeechBubbleImage_A;
+    public Image SpeechBubbleImage_B;
+
+    // UI_Man
+    public GameObject ManUI;
+    public TextMeshProUGUI StoryText3;
 
     private void Start()
     {
-        Text.text = null;
-        Text2.text = null;
-        Image.gameObject.SetActive(false);
-        Image2.gameObject.SetActive(false);
+        StoryText.text = null;
+        StoryText2.text = null;
+        StoryText3.text = null;
 
-        StartCoroutine(TextTime());
-        StartCoroutine(TextTime2());
+        SpeechBubbleImage_A.gameObject.SetActive(false);
+        SpeechBubbleImage_B.gameObject.SetActive(false);
+
+        ManUI.gameObject.SetActive(false);
+        
+        StartCoroutine(Main_Coroutine());
     }
-
-    private IEnumerator TextTime() 
+    
+    private IEnumerator Main_Coroutine() 
     {
+        yield return new WaitForSeconds(1f);
+        First_Text();
         yield return new WaitForSeconds(2f);
-        Image.gameObject.SetActive(true);
-        string text = "수비닝~~~ \n 바부~~~~~ \n  메롱~~~~~~";
-        StartCoroutine(TypeText(Text, text));
+        Second_Text();
+        yield return new WaitForSeconds(5f);
+        NewsUI.SetActive(false);
+        ManUI.gameObject.SetActive(true);
+        Third_Text();
     }
 
-    private IEnumerator TextTime2() 
+    private void First_Text() 
     {
-        yield return new WaitForSeconds(7f);
-        Image2.gameObject.SetActive(true);
-        string text = "흐어어엉ㅇ어 ㅠㅠㅠㅠ\n집가고싶엉으으어ㅠㅠㅠ";
-        StartCoroutine(TypeText(Text2, text));
+        SpeechBubbleImage_A.gameObject.SetActive(true);
+        string text = "최고의 레스토랑을\n뽑는 대회!";
+        StartCoroutine(TypeText(StoryText, text));
     }
+   
+    private void Second_Text()
+    {
+        SpeechBubbleImage_B.gameObject.SetActive(true);
+        string text = "7일 동안 진행하는 대회!\n우승하고 트로피를 차지하세요!";
+        StartCoroutine(TypeText(StoryText2, text));
+    }
+
+    private void Third_Text() 
+    {
+        string text = "우아아아아아아아아아아ㅏ아아아아!!!";
+        StartCoroutine(TypeText(StoryText3, text));
+    }
+
 
     private IEnumerator TypeText(TextMeshProUGUI textUI, string text)
     {
