@@ -2519,24 +2519,28 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5329096209907429438, guid: 61a5605c41609634bac5baf8ef0820f1, type: 3}
       propertyPath: NearbyStoves.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5329096209907429438, guid: 61a5605c41609634bac5baf8ef0820f1, type: 3}
       propertyPath: NearbyTables.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5329096209907429438, guid: 61a5605c41609634bac5baf8ef0820f1, type: 3}
       propertyPath: NearbyStoves.Array.data[0]
       value: 
       objectReference: {fileID: 1572176153}
     - target: {fileID: 5329096209907429438, guid: 61a5605c41609634bac5baf8ef0820f1, type: 3}
+      propertyPath: NearbyStoves.Array.data[1]
+      value: 
+      objectReference: {fileID: 1939085104}
+    - target: {fileID: 5329096209907429438, guid: 61a5605c41609634bac5baf8ef0820f1, type: 3}
       propertyPath: NearbyTables.Array.data[0]
       value: 
-      objectReference: {fileID: 1939085094}
+      objectReference: {fileID: 1572176151}
     - target: {fileID: 5329096209907429438, guid: 61a5605c41609634bac5baf8ef0820f1, type: 3}
       propertyPath: NearbyTables.Array.data[1]
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1939085094}
     - target: {fileID: 5498556674941739244, guid: 61a5605c41609634bac5baf8ef0820f1, type: 3}
       propertyPath: m_LocalPosition.x
       value: -5.499
@@ -7197,6 +7201,17 @@ MonoBehaviour:
   sceneViewId: 40
   InstantiationId: 0
   isRuntimeInstantiated: 0
+--- !u!114 &1939085104 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: -2078152011496428701, guid: 55073aa0f5aa99d4a9c9d86c44518107, type: 3}
+  m_PrefabInstance: {fileID: 1094757179}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1939085092}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d8fadd84b9de3814ab6c28bbc0e6622e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1982346316
 PrefabInstance:
   m_ObjectHideFlags: 0
