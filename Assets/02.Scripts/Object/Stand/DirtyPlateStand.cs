@@ -8,10 +8,13 @@ public class DirtyPlateStand : MonoBehaviour
     public int DirtyPlateNum = 5;
 
     private CharacterHoldAbility characterHoldAbility;
+    private Character _nearbyCharacter;
+
     private DirtyPlate dirtyPlate;
 
     private bool isPlayerInTrigger = false;
     private bool isPlayerHoldingDirtyPlate = false;
+    private bool isPlayerNearby => _nearbyCharacter != null;
 
     private void Awake()
     {
@@ -28,7 +31,12 @@ public class DirtyPlateStand : MonoBehaviour
 
     private void Update()
     {
-        if (isPlayerInTrigger && Input.GetKeyDown(KeyCode.Space))
+        if (!isPlayerNearby)
+        {
+            return;
+        }
+
+        if (isPlayerInTrigger && Input.GetKeyDown(KeyCode.Space) && _nearbyCharacter.PhotonView.IsMine)
         {
             Debug.Log(DirtyPlateNum);
             GiveDirtyPlates();
@@ -52,9 +60,15 @@ public class DirtyPlateStand : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        if (isPlayerNearby)
+        {
+            return;
+        }
+
         if (other.CompareTag("Player"))
         {
             characterHoldAbility = other.GetComponent<CharacterHoldAbility>();
+            _nearbyCharacter = other.GetComponent<Character>();
             isPlayerInTrigger = true;
 
             UpdateDirtyPlateStatus();
@@ -78,6 +92,7 @@ public class DirtyPlateStand : MonoBehaviour
 
             dirtyPlate = null;
             characterHoldAbility = null;
+            _nearbyCharacter = null;
         }
     }
 
