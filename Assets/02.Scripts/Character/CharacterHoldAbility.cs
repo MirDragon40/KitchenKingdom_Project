@@ -137,17 +137,6 @@ public class CharacterHoldAbility : CharacterAbility
             FoodTrashDrop();
         }
 
-        // 팬 오브젝트의 자식 음식 오브젝트를 찾아서 삭제
-        if (panTransform != null)
-        {
-            foreach (Transform child in panTransform)
-            {
-                if (child.GetComponent<FoodObject>() != null)
-                {
-                    Destroy(child.gameObject);
-                }
-            }
-        }
     }
 
     public void FoodTrashDrop()
@@ -195,7 +184,6 @@ public class CharacterHoldAbility : CharacterAbility
         {
             GameObject dish = PhotonNetwork.InstantiateRoomObject("Plate_Stage1", HandTransform.position, HandTransform.rotation);
 
-            // 접시 오브젝트를 손에 들도록 설정
             IHoldable holdable = dish.GetComponent<IHoldable>();
 
             if (holdable != null)
@@ -214,12 +202,10 @@ public class CharacterHoldAbility : CharacterAbility
         {
             GameObject dish = PhotonNetwork.InstantiateRoomObject("DirtyPlates", HandTransform.position, HandTransform.rotation);
 
-            // 접시 오브젝트를 손에 들도록 설정
             IHoldable holdable = dish.GetComponent<IHoldable>();
 
             if (holdable != null)
-            {
-                
+            {                
                 holdable.Hold(character, HandTransform);
             }
         }
