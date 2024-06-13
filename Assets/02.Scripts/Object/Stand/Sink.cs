@@ -22,6 +22,7 @@ public class Sink : MonoBehaviourPun
     public GameObject BubbleEffect;
 
     private CharacterHoldAbility characterHoldAbility;
+    private Character _nearOfCharacter;
     private DirtyPlate dirtyPlate;
     private DishObject dishObject;
 
@@ -51,7 +52,7 @@ public class Sink : MonoBehaviourPun
 
     private void Update()
     {
-        if (isPlayerInTrigger && Input.GetKeyDown(KeyCode.LeftControl))
+        if (isPlayerInTrigger && Input.GetKeyDown(KeyCode.LeftControl) )
         {
             ProgressSlider.gameObject.SetActive(true);
 
@@ -63,7 +64,6 @@ public class Sink : MonoBehaviourPun
 
         if (isPlayerInTrigger && Input.GetKeyDown(KeyCode.Space) && CleanPlateNum > 0)
         {
-
             TakeCleanPlate();
         }
 
