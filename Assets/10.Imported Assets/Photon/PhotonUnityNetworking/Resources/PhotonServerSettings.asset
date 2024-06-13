@@ -65,6 +65,8 @@ MonoBehaviour:
   - StartChoppingRPC
   - StopChoppingRPC
   - SetActiveIngrediant
+  - RPC_Extinguish
+  - RPC_MakeFire
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

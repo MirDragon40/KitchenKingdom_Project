@@ -90,9 +90,14 @@ public class CharacterHoldAbility : CharacterAbility
         foreach (Collider collider in colliders)
         {
             IHoldable holdable = collider.GetComponent<IHoldable>();
-            if (holdable is PanObject pan && pan.fireObject._isOnFire)
+            if (holdable is PanObject pan)
             {
-                continue;
+                // 스토브가 불이 났다면 팬을 잡을 수 없도록 함
+                Stove stove = pan.GetComponentInParent<Stove>();
+                if (stove != null && stove.IsOnFire)
+                {
+                    continue;
+                }
             }
 
             if (holdable != null)
@@ -103,12 +108,9 @@ public class CharacterHoldAbility : CharacterAbility
 
                 break;
             }
-
         }
-
-
     }
-    [PunRPC]
+        [PunRPC]
     void Drop()
     {
 

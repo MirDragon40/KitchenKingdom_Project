@@ -13,6 +13,8 @@ public class Stove : CookStand
     public Table[] NearbyTables;
     private Coroutine igniteCoroutine;
     private bool isFireExtinguished = true;
+
+    public bool IsOnFire => fireObject != null && fireObject._isOnFire;
     private void Start()
     {
         _originalPlacePosition = base.PlacePosition;
@@ -47,6 +49,8 @@ public class Stove : CookStand
                 }
             }
         }
+
+
 
     }
 
