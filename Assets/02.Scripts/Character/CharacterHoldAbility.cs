@@ -178,7 +178,7 @@ public class CharacterHoldAbility : CharacterAbility
     public void SpawnPlateOnHand()
     {
         Character character = GetComponent<Character>();
-        GameObject dishPrefab = DishSpawnManager.Instance.Plate_Stage1_Object;
+        GameObject dishPrefab = Resources.Load<GameObject>("Plate_Stage1");
 
         if (dishPrefab != null)
         {
@@ -196,7 +196,7 @@ public class CharacterHoldAbility : CharacterAbility
     public void SpawnDirtyPlateOnHand()
     {
         Character character = GetComponent<Character>();
-        GameObject dishPrefab = DishSpawnManager.Instance.DirtyPlates;
+        GameObject dishPrefab = Resources.Load<GameObject>("DirtyPlates");
 
         if (dishPrefab != null)
         {
