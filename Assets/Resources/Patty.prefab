@@ -13,9 +13,9 @@ GameObject:
   - component: {fileID: 6645169568448003596}
   - component: {fileID: 3757478980130211427}
   - component: {fileID: -8342433054677339084}
-  - component: {fileID: 7854497539492092200}
-  - component: {fileID: -6246027572878380551}
-  m_Layer: 0
+  - component: {fileID: -7492036033876983784}
+  - component: {fileID: 7251022453392405714}
+  m_Layer: 6
   m_Name: Patty
   m_TagString: Food
   m_Icon: {fileID: 0}
@@ -66,6 +66,7 @@ MonoBehaviour:
   ThrownEffectTriggerTime: 1
   CuttingTime: 3
   BakeTime: 3
+  DAMPING: 1
 --- !u!65 &6645169568448003596
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -110,7 +111,7 @@ Rigidbody:
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 1
-  m_IsKinematic: 1
+  m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
@@ -130,15 +131,31 @@ MonoBehaviour:
   Group: 0
   prefixField: -1
   Synchronization: 3
-  OwnershipTransfer: 0
+  OwnershipTransfer: 2
   observableSearch: 2
   ObservedComponents:
-  - {fileID: 7854497539492092200}
-  - {fileID: -6246027572878380551}
+  - {fileID: -7492036033876983784}
+  - {fileID: 7251022453392405714}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
---- !u!114 &7854497539492092200
+--- !u!114 &-7492036033876983784
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1992951515313775233}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64179f3720bbfe947b7724caa67b7c1d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SynchronizeVelocity: 1
+  m_SynchronizeAngularVelocity: 0
+  m_TeleportEnabled: 1
+  m_TeleportIfDistanceGreaterThan: 0.1
+--- !u!114 &7251022453392405714
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -154,22 +171,6 @@ MonoBehaviour:
   m_SynchronizeRotation: 1
   m_SynchronizeScale: 0
   m_UseLocal: 0
---- !u!114 &-6246027572878380551
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1992951515313775233}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 64179f3720bbfe947b7724caa67b7c1d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_SynchronizeVelocity: 1
-  m_SynchronizeAngularVelocity: 0
-  m_TeleportEnabled: 0
-  m_TeleportIfDistanceGreaterThan: 3
 --- !u!1001 &2121469566277964529
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -181,6 +182,10 @@ PrefabInstance:
     - target: {fileID: -7728949616766995575, guid: d63f2ae8d379d7047873abd698a17d82, type: 3}
       propertyPath: m_Convex
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -7728949616766995575, guid: d63f2ae8d379d7047873abd698a17d82, type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5158152127580729310, guid: d63f2ae8d379d7047873abd698a17d82, type: 3}
       propertyPath: m_LocalPosition.x
@@ -226,6 +231,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Patty_A
       objectReference: {fileID: 0}
+    - target: {fileID: 5539041250015950180, guid: d63f2ae8d379d7047873abd698a17d82, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -252,6 +261,10 @@ PrefabInstance:
     - target: {fileID: 2603929382660074410, guid: aab5bbc2d417d974db520db824d93856, type: 3}
       propertyPath: m_Convex
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2603929382660074410, guid: aab5bbc2d417d974db520db824d93856, type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3864999216211795578, guid: aab5bbc2d417d974db520db824d93856, type: 3}
       propertyPath: m_LocalPosition.x
@@ -298,6 +311,10 @@ PrefabInstance:
       value: Patty_C
       objectReference: {fileID: 0}
     - target: {fileID: 4533133487364359360, guid: aab5bbc2d417d974db520db824d93856, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4533133487364359360, guid: aab5bbc2d417d974db520db824d93856, type: 3}
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
@@ -327,6 +344,10 @@ PrefabInstance:
     - target: {fileID: 2889969199178217359, guid: bf8df449f450a5e40832e7bbf94a52b2, type: 3}
       propertyPath: m_Convex
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2889969199178217359, guid: bf8df449f450a5e40832e7bbf94a52b2, type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6934294983742132237, guid: bf8df449f450a5e40832e7bbf94a52b2, type: 3}
       propertyPath: m_LocalPosition.x
@@ -371,6 +392,10 @@ PrefabInstance:
     - target: {fileID: 7741758268905179831, guid: bf8df449f450a5e40832e7bbf94a52b2, type: 3}
       propertyPath: m_Name
       value: Patty_B
+      objectReference: {fileID: 0}
+    - target: {fileID: 7741758268905179831, guid: bf8df449f450a5e40832e7bbf94a52b2, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 7741758268905179831, guid: bf8df449f450a5e40832e7bbf94a52b2, type: 3}
       propertyPath: m_IsActive
