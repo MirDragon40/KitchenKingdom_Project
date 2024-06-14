@@ -7,31 +7,52 @@ using UnityEngine.UI;
 
 public class UI_Story : MonoBehaviour
 {
-    // UI_News
+    // 1
     public GameObject NewsUI;
-
     public TextMeshProUGUI StoryText;
     public TextMeshProUGUI StoryText2;
-
     public Image SpeechBubbleImage_A;
     public Image SpeechBubbleImage_B;
 
-    // UI_Man
-    public GameObject ManUI;
+    // 2
+    public Image ManImage;
+    public Image ManImageBackgroundImage;
+    public Image ManDownImage;
     public TextMeshProUGUI StoryText3;
+
+    // FadeOut
+    public Image FadeImage;
+    public float FadeSpeed = 1.0f;
 
     private void Start()
     {
+        Text_false();
+        Image_false(); 
+        StartCoroutine(Main_Coroutine());
+    }
+
+    private void Text_false() 
+    {
+        // 1
         StoryText.text = null;
         StoryText2.text = null;
+         
+        // 2
         StoryText3.text = null;
-
+    }
+    private void Image_false() 
+    {
+        // 1
         SpeechBubbleImage_A.gameObject.SetActive(false);
         SpeechBubbleImage_B.gameObject.SetActive(false);
 
-        ManUI.gameObject.SetActive(false);
-        
-        StartCoroutine(Main_Coroutine());
+        // 2
+        ManImage.gameObject.SetActive(false);
+        ManImageBackgroundImage.gameObject.SetActive(false);
+        ManDownImage.gameObject.SetActive(false);
+
+        // FadeOut
+        FadeImage.gameObject.SetActive(false);
     }
     
     private IEnumerator Main_Coroutine() 
@@ -41,11 +62,15 @@ public class UI_Story : MonoBehaviour
         yield return new WaitForSeconds(2f);
         Second_Text();
         yield return new WaitForSeconds(5f);
+        FadeImage.gameObject.SetActive(true);
+        StartCoroutine(FadeOut());
+        yield return new WaitForSeconds(2f);
+        FadeImage.gameObject.SetActive(false);
         NewsUI.SetActive(false);
-        ManUI.gameObject.SetActive(true);
         Third_Text();
     }
 
+    // 1
     private void First_Text() 
     {
         SpeechBubbleImage_A.gameObject.SetActive(true);
@@ -53,6 +78,7 @@ public class UI_Story : MonoBehaviour
         StartCoroutine(TypeText(StoryText, text));
     }
    
+    // 1
     private void Second_Text()
     {
         SpeechBubbleImage_B.gameObject.SetActive(true);
@@ -60,12 +86,41 @@ public class UI_Story : MonoBehaviour
         StartCoroutine(TypeText(StoryText2, text));
     }
 
+    // 2
     private void Third_Text() 
     {
+        ManImageBackgroundImage.gameObject.SetActive(true);
+        StartCoroutine(FadeOut_ManImage());
         string text = "우아아아아아아아아아아ㅏ아아아아!!!";
         StartCoroutine(TypeText(StoryText3, text));
     }
 
+    // 1~2 중간
+    private IEnumerator FadeOut()
+    {
+        float alpha = 0.0f;
+        while (alpha < 1)
+        {
+            alpha += Time.deltaTime * FadeSpeed;
+            FadeImage.color = new Color(0, 0, 0, alpha);
+            yield return null;
+        }
+    }
+
+    // 이미지 투명도 조절
+    private IEnumerator FadeOut_ManImage()
+    {
+        ManImage.gameObject.SetActive(true);
+        ManDownImage.gameObject.SetActive(true);
+
+        float alpha = 0.0f;
+        while (alpha < 1)
+        {
+            alpha += Time.deltaTime * FadeSpeed;
+            ManImage.color = new Color(ManImage.color.r, ManImage.color.g, ManImage.color.b, alpha);
+            yield return null;
+        }
+    }
 
     private IEnumerator TypeText(TextMeshProUGUI textUI, string text)
     {
