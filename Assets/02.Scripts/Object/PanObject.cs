@@ -124,6 +124,10 @@ public class PanObject : IHoldable
         }
         else
         {
+            if (fireObject._isOnFire)
+            {
+                fireObject.Extinguish();
+            }
             if (GrillingIngrediant != null)
             {
                 GrillingIngrediant.StopGrilling();
