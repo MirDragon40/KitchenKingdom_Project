@@ -49,9 +49,13 @@ public class Stove : CookStand
                 }
             }
         }
-
-
-
+        else
+        {
+            if (fireObject._isOnFire)
+            {
+                fireObject.Extinguish();
+            }
+        }
     }
 
     public IEnumerator IgniteNearbyTables()
