@@ -133,7 +133,6 @@ public class Makefood : MonoBehaviourPun
             return;
         }
 
-
         IHoldable holdable  = foodPV.GetComponent<IHoldable>();
         Character character = characterPV.GetComponent<Character>();
 
