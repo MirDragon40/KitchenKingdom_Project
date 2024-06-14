@@ -49,6 +49,10 @@ public class PanObject : IHoldable
         {
             Place(PanStartPosition);
         }
+        if (FireSlider != null)
+        {
+            FireSlider.gameObject.SetActive(false);
+        }
     }
     private void Update()
     {
@@ -196,6 +200,10 @@ public class PanObject : IHoldable
 
     public override void Place(Transform place)
     {
+        if (place == null)
+        {
+            return;
+        }
         GetComponent<Rigidbody>().isKinematic = true;
         transform.position = place.position;
         Quaternion panplaceRotation = Quaternion.Euler(-90, 0, 180);
