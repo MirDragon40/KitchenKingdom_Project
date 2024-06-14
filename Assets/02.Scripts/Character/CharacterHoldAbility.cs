@@ -24,6 +24,7 @@ public class CharacterHoldAbility : CharacterAbility
     public bool IsSubmitable = false;
     public bool IsServeable = false;
     public bool IsHolding => HoldableItem != null;
+    public bool JustHold = false;
     private PhotonView _pv;
     public Transform PlacePosition = null;
 
@@ -39,22 +40,31 @@ public class CharacterHoldAbility : CharacterAbility
 
     private void LateUpdate()
     {
+        if (JustHold)
+        {
+            JustHold = false;
+            return;
+        }
+
         if (Input.GetKeyDown(KeyCode.Space) && _owner.PhotonView.IsMine)
         {
+
+
             if (!IsHolding)
             {
 
-                _pv.RPC("PickUp",RpcTarget.All);
+                _pv.RPC("PickUp", RpcTarget.All);
 
             }
             else
             {
+               
+
                 if (IsPlaceable)
                 {
 
                     _pv.RPC("Place", RpcTarget.All);
 
-                   
                 }
               
                 else if (IsDroppable)
@@ -83,6 +93,7 @@ public class CharacterHoldAbility : CharacterAbility
             return;
         }
 
+        Debug.Log("PickUp");
 
         // 주변에 있는 잡을 수 있는 아이템을 찾음
         Collider[] colliders = Physics.OverlapSphere(transform.position, _findfood);
@@ -102,6 +113,8 @@ public class CharacterHoldAbility : CharacterAbility
 
             if (holdable != null)
             {
+                Debug.Log("PickUp_Complete");
+
                 HoldableItem = holdable;
                 holdable.Hold(_owner, HandTransform);
                 animator.SetBool("Carry", true);

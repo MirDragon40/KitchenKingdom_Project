@@ -1,6 +1,8 @@
+using Photon.Pun;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 using UnityEngine.TextCore.Text;
 using UnityEngine.UIElements;
@@ -27,6 +29,9 @@ public class FoodObject : IHoldable, IThrowable
     public GameObject FoodPrefab2;
     public GameObject FoodPrefab3;
 
+
+    private PhotonView _photonView;
+
     private Rigidbody _rigidbody;
 
     [HideInInspector]
@@ -43,6 +48,8 @@ public class FoodObject : IHoldable, IThrowable
     public float BakeTime = 3f;
 
 
+
+
     public override Vector3 DropOffset => new Vector3(0.3f, 0.1f, 0f);
     //public override Quaternion DropOffset_Rotation => Quaternion.Euler(0, 0, 0);
 
@@ -52,6 +59,7 @@ public class FoodObject : IHoldable, IThrowable
     private void Awake()
     {
 
+        _photonView = GetComponent<PhotonView>();
         State = FoodState.Raw;
         _rigidbody = GetComponent<Rigidbody>();
         colliderThis = GetComponent<BoxCollider>();
@@ -83,8 +91,12 @@ public class FoodObject : IHoldable, IThrowable
 
     }
 
+    public float DAMPING = 1f;
+
     private void Update()
     {
+       
+
         if (IsCooking && cookingCoroutine == null)
         {
             if (FoodType == FoodType.Lettuce)
@@ -92,7 +104,7 @@ public class FoodObject : IHoldable, IThrowable
                 cookingCoroutine = StartCoroutine(CookLettuce_Coroutine());
             }
             else if (FoodType == FoodType.Patty)
-            {
+            { 
                 cookingCoroutine = StartCoroutine(CookPatty_Coroutine());
             }
             else if (FoodType == FoodType.Potato)
@@ -104,15 +116,23 @@ public class FoodObject : IHoldable, IThrowable
 
     public override void Hold(Character character, Transform handTransform)
     {
+        if(PhotonNetwork.IsMasterClient)
+        {
+            _photonView.TransferOwnership(character.PhotonView.OwnerActorNr);
+        }
 
         _rigidbody.isKinematic = true;
         _holdCharacter = character;
+        _holdCharacter.HoldAbility.HoldableItem = this;
+        _holdCharacter.HoldAbility.JustHold = true;
 
         // 각 아이템이 잡혔을 때 해줄 초기화 로직
         // 찾은 음식을 플레이어의 손 위치로 이동시킴
         transform.parent = handTransform;
         transform.localPosition = Vector3.zero;
         transform.localRotation = Quaternion.identity;
+
+        Debug.Log("Hold!");
     }
 
 
@@ -131,6 +151,7 @@ public class FoodObject : IHoldable, IThrowable
         transform.parent = null;
         //각 아이템이 떼어질 때 해줄 초기화 로직
         _holdCharacter = null;
+
 
     }
 
@@ -329,4 +350,5 @@ public class FoodObject : IHoldable, IThrowable
         IsCooking = false;
     }
 
+ 
 }
