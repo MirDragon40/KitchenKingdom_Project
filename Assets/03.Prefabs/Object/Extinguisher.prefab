@@ -116,6 +116,7 @@ GameObject:
   - component: {fileID: 5592269904853668084}
   - component: {fileID: 96775701312640860}
   - component: {fileID: 6654251320375364341}
+  - component: {fileID: 8205988261458577940}
   m_Layer: 0
   m_Name: Extinguisher
   m_TagString: Extinguisher
@@ -176,6 +177,28 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.1907314, y: 0.45082155, z: 0.29043466}
   m_Center: {x: -0.013950348, y: 0.2745888, z: 0}
+--- !u!114 &8205988261458577940
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1816714927406644451}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!1 &2001614944026462850
 GameObject:
   m_ObjectHideFlags: 0
@@ -911,8 +934,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.349793, y: 0.8257227, z: 0.56808203}
-  m_Center: {x: 0.0033645995, y: -0.28798813, z: 0.29896685}
+  m_Size: {x: 0.349793, y: 1.0651474, z: 0.56808203}
+  m_Center: {x: 0.0033645995, y: -0.40770325, z: 0.29896685}
 --- !u!1 &6962281019954083695
 GameObject:
   m_ObjectHideFlags: 0
@@ -1424,10 +1447,40 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 4529282608138346, guid: 2d375605610a4e84d8e1d80a70c9340a, type: 3}
       insertIndex: -1
       addedObject: {fileID: 5863815333948769972}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1110045544307624, guid: 2d375605610a4e84d8e1d80a70c9340a, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2029509002001760405}
   m_SourcePrefab: {fileID: 100100000, guid: 2d375605610a4e84d8e1d80a70c9340a, type: 3}
 --- !u!4 &3738908403537369989 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4529282608138346, guid: 2d375605610a4e84d8e1d80a70c9340a, type: 3}
   m_PrefabInstance: {fileID: 3743426123806233583}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &3742671255887218759 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1110045544307624, guid: 2d375605610a4e84d8e1d80a70c9340a, type: 3}
+  m_PrefabInstance: {fileID: 3743426123806233583}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2029509002001760405
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3742671255887218759}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
