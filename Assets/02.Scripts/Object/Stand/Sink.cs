@@ -1,7 +1,6 @@
 using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -25,13 +24,17 @@ public class Sink : MonoBehaviourPun
     private DirtyPlate dirtyPlate;
     private DishObject dishObject;
 
+    private PhotonView _pv;
 
     private Character _nearbyCharacter;
     private bool isPlayerNearby => _nearbyCharacter != null;
 
+    private bool isWashing = false;
 
     private void Awake()
     {
+        _pv = GetComponent<PhotonView>();
+
         BubbleEffect.SetActive(false);
 
         foreach (GameObject plate in DirtyPlates)
@@ -77,88 +80,109 @@ public class Sink : MonoBehaviourPun
 
         if (isPlayerInTrigger && Input.GetKeyDown(KeyCode.Space) && dirtyPlate != null && _nearbyCharacter.PhotonView.IsMine)
         {
-            Debug.Log(DirtyPlateNum);
-            GetDirtyPlateNum();
-            dishObject.Place(PlacePosition);
-            characterHoldAbility.Place();
-            Destroy(dirtyPlate.gameObject);
+            PlaceDirtyPlateInSink();
+        }
+    }
+
+    private void PlaceDirtyPlateInSink()
+    {
+        _pv.RPC(nameof(UpdateDirtyPlateNum), RpcTarget.AllBuffered, DirtyPlateNum + dirtyPlate.DirtyPlateNum);
+        dishObject.Place(PlacePosition);
+        characterHoldAbility.Place();
+        _pv.RPC(nameof(RemoveDirtyPlate), RpcTarget.AllBuffered, dirtyPlate.PhotonView.ViewID);
+    }
+
+    [PunRPC]
+    private void RemoveDirtyPlate(int dirtyPlateID)
+    {
+        PhotonView dirtyPlateView = PhotonView.Find(dirtyPlateID);
+        if (dirtyPlateView != null)
+        {
+            DirtyPlate plate = dirtyPlateView.GetComponent<DirtyPlate>();
+            if (plate != null)
+            {
+                plate.RemoveDirtyPlate();
+            }
         }
     }
 
     private IEnumerator WashPlates()
     {
+        _pv.RPC(nameof(UpdateWashingState), RpcTarget.AllBuffered, true);
+
         while (DirtyPlateNum > 0)
         {
-            // 슬라이더 값을 4초 동안 증가
             float duration = 4f;
-            float elapsed = ProgressSlider.value * duration; // 이전 진행도에서 시작
+            float elapsed = ProgressSlider.value * duration;
 
             while (elapsed < duration)
             {
                 elapsed += Time.deltaTime;
                 ProgressSlider.value = Mathf.Clamp01(elapsed / duration);
 
-                BubbleEffect.SetActive(true);
+                _pv.RPC(nameof(UpdateSliderAndEffect), RpcTarget.AllBuffered, ProgressSlider.value, true);
 
                 yield return null;
 
                 if (!isPlayerInTrigger)
                 {
-                    // 플레이어가 트리거를 벗어나면 진행도를 유지하고 코루틴 일시정지
                     washingCoroutine = null;
 
-                    BubbleEffect.SetActive(false);
+                    _pv.RPC(nameof(UpdateSliderAndEffect), RpcTarget.AllBuffered, ProgressSlider.value, false);
 
                     yield break;
                 }
             }
 
-            // PlateNum 감소
             DirtyPlateNum--;
             CleanPlateNum++;
-            UpdatePlates();
+            _pv.RPC(nameof(UpdatePlateNums), RpcTarget.AllBuffered, DirtyPlateNum, CleanPlateNum);
 
-            // 진행도 리셋
             ProgressSlider.value = 0f;
         }
 
-        // Progress가 1 이 되면 멈춰있도록
+        _pv.RPC(nameof(UpdateWashingState), RpcTarget.AllBuffered, false);
+
         ProgressSlider.value = 1f;
         washingCoroutine = null;
-        BubbleEffect.SetActive(false);
+        _pv.RPC(nameof(UpdateSliderAndEffect), RpcTarget.AllBuffered, 1f, false);
         ProgressSlider.gameObject.SetActive(false);
+    }
+
+    [PunRPC]
+    private void UpdatePlateNums(int newDirtyPlateNum, int newCleanPlateNum)
+    {
+        DirtyPlateNum = newDirtyPlateNum;
+        CleanPlateNum = newCleanPlateNum;
+        UpdatePlates();
+    }
+
+    [PunRPC]
+    private void UpdateSliderAndEffect(float sliderValue, bool isEffectActive)
+    {
+        ProgressSlider.value = sliderValue;
+        BubbleEffect.SetActive(isEffectActive);
+    }
+
+    [PunRPC]
+    private void UpdateWashingState(bool newIsWashing)
+    {
+        isWashing = newIsWashing;
+        ProgressSlider.gameObject.SetActive(isWashing);
     }
 
     private void UpdatePlates()
     {
-        // DirtyPlates 업데이트
         for (int i = 0; i < DirtyPlates.Count; i++)
         {
-            if (i < DirtyPlateNum)
-            {
-                DirtyPlates[i].SetActive(true);
-            }
-            else
-            {
-                DirtyPlates[i].SetActive(false);
-            }
+            DirtyPlates[i].SetActive(i < DirtyPlateNum);
         }
 
-        // CleanPlates 업데이트
         for (int i = 0; i < CleanPlates.Count; i++)
         {
-            if (i < CleanPlateNum)
-            {
-                CleanPlates[i].SetActive(true);
-            }
-            else
-            {
-                CleanPlates[i].SetActive(false);
-            }
+            CleanPlates[i].SetActive(i < CleanPlateNum);
         }
     }
-
-
 
     private void OnTriggerEnter(Collider other)
     {
@@ -193,17 +217,18 @@ public class Sink : MonoBehaviourPun
 
     private void TakeCleanPlate()
     {
-        CleanPlateNum--;
-        UpdatePlates();
-        characterHoldAbility.SpawnPlateOnHand();
+        _pv.RPC(nameof(UpdatePlateNums), RpcTarget.AllBuffered, DirtyPlateNum, CleanPlateNum - 1);
+
+        if (_nearbyCharacter != null)
+        {
+            _nearbyCharacter.PhotonView.RPC("RequestSpawnPlateOnHand", RpcTarget.MasterClient);
+        }
     }
 
-    private void GetDirtyPlateNum()
+    [PunRPC]
+    private void UpdateDirtyPlateNum(int newDirtyPlateNum)
     {
-
-        DirtyPlateNum = DirtyPlateNum + dirtyPlate.DirtyPlateNum;
+        DirtyPlateNum = newDirtyPlateNum;
         UpdatePlates();
-        dirtyPlate.DirtyPlateNum = 0;
-
     }
 }

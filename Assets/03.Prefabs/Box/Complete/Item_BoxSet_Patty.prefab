@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 8017632737696590889}
   - component: {fileID: 6770868100746283926}
   - component: {fileID: 4543173554636092083}
+  - component: {fileID: 969971270666643124}
   m_Layer: 0
   m_Name: Box_cap
   m_TagString: Untagged
@@ -166,10 +167,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6b5a626e31e3de42825369e43bed056, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  foodType: 2
+  FoodType: 0
   spawnPoint: {fileID: 0}
   _placedItem: {fileID: 0}
-  animator: {fileID: 0}
+  _animator: {fileID: 0}
 --- !u!114 &6770868100746283926
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -202,6 +203,28 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Animator: {fileID: 2029777054488270824}
+--- !u!114 &969971270666643124
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 884589941740172595}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!1 &1227241372778167392
 GameObject:
   m_ObjectHideFlags: 0
@@ -493,6 +516,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PlacePosition: {fileID: 1737988185406310475}
+  PlacedItem: {fileID: 0}
 --- !u!1 &1933714877031312625
 GameObject:
   m_ObjectHideFlags: 0

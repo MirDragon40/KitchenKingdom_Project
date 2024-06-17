@@ -1,16 +1,19 @@
+using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DirtyPlate : MonoBehaviour
+public class DirtyPlate : MonoBehaviourPun
 {
     public List<GameObject> DirtyPlates;
     public int DirtyPlateNum = 0;
 
+    [HideInInspector]
+    public PhotonView PhotonView;
 
     private void Awake()
     {
-        //DirtyPlateNum = 0;
+        PhotonView = GetComponent<PhotonView>();
 
         foreach (GameObject plate in DirtyPlates)
         {
@@ -18,17 +21,13 @@ public class DirtyPlate : MonoBehaviour
         }
     }
 
-
-
     private void Update()
     {
         UpdatePlates();
     }
 
-
     private void UpdatePlates()
     {
-        // DirtyPlates 업데이트
         for (int i = 0; i < DirtyPlates.Count; i++)
         {
             if (i < DirtyPlateNum)
@@ -40,5 +39,23 @@ public class DirtyPlate : MonoBehaviour
                 DirtyPlates[i].SetActive(false);
             }
         }
+    }
+
+    [PunRPC]
+    public void SyncDirtyPlateState(int newDirtyPlateNum)
+    {
+        DirtyPlateNum = newDirtyPlateNum;
+        UpdatePlates();
+    }
+
+    public void AddDirtyPlates(int amount)
+    {
+        DirtyPlateNum += amount;
+        PhotonView.RPC(nameof(SyncDirtyPlateState), RpcTarget.AllBuffered, DirtyPlateNum);
+    }
+
+    public void RemoveDirtyPlate()
+    {
+        PhotonNetwork.Destroy(gameObject);
     }
 }

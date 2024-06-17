@@ -5,6 +5,7 @@ using System.Diagnostics.Contracts;
 using Unity.VisualScripting;
 using UnityEngine;
 using Photon.Pun;
+using UnityEngine.UIElements;
 
 
 
@@ -25,7 +26,9 @@ public class CharacterHoldAbility : CharacterAbility
     public bool IsServeable = false;
     public bool IsHolding => HoldableItem != null;
     public bool JustHold = false;
-    private PhotonView _pv;
+    
+
+    public PhotonView _pv;
     public Transform PlacePosition = null;
 
     private bool nearTrashBin = false;
@@ -142,8 +145,8 @@ public class CharacterHoldAbility : CharacterAbility
         HoldableItem = null;
 
         animator.SetBool("Carry", false);
-
     }
+
     // 음식 버린후 초기화
     [PunRPC]
     private void DropFood()
@@ -174,6 +177,7 @@ public class CharacterHoldAbility : CharacterAbility
             HoldableItem.GetComponent<FoodCombination>().Init();
         }
     }
+
     [PunRPC]
     public void Place()
     {
@@ -213,6 +217,34 @@ public class CharacterHoldAbility : CharacterAbility
         }
     }
 
+
+    [PunRPC]
+    public void RequestSpawnPlateOnHand()
+    {
+        Character nearbyCharacter = GetComponent<Character>();
+
+        if (PhotonNetwork.IsMasterClient == false)
+        {
+            Debug.Log("방장이 아닌데 RequestSpawnPlateOnHand를 호출하려고 한다..");
+            return;
+        }
+
+        GameObject dishPrefab = Resources.Load<GameObject>("Plate_Stage1");
+
+        if (dishPrefab != null)
+        {
+            GameObject dish = PhotonNetwork.InstantiateRoomObject("Plate_Stage1", HandTransform.position, HandTransform.rotation);
+
+
+            IHoldable holdable = dish.GetComponent<IHoldable>();
+            if (holdable != null)
+            {
+                _pv.RPC(nameof(ResponseHold), RpcTarget.AllBuffered, dish.GetComponent<PhotonView>().ViewID, nearbyCharacter.PhotonView.ViewID);
+            }
+        }
+    }
+
+
     public void SpawnDirtyPlateOnHand()
     {
         Character character = GetComponent<Character>();
@@ -229,5 +261,49 @@ public class CharacterHoldAbility : CharacterAbility
                 holdable.Hold(character, HandTransform);
             }
         }
+    }
+
+    [PunRPC]
+    public void RequestSpawnDirtyPlateOnHand()
+    {
+        Character nearbyCharacter = GetComponent<Character>();
+
+        if (PhotonNetwork.IsMasterClient == false)
+        {
+            Debug.Log("방장이 아닌데 RequestSpawnDirtyPlateOnHand를 호출하려고 한다..");
+            return;
+        }
+
+        GameObject dishPrefab = Resources.Load<GameObject>("DirtyPlates");
+
+        if (dishPrefab != null)
+        {
+            GameObject dish = PhotonNetwork.InstantiateRoomObject("DirtyPlates", HandTransform.position, HandTransform.rotation);
+
+
+            IHoldable holdable = dish.GetComponent<IHoldable>();
+            if (holdable != null)
+            {
+                _pv.RPC(nameof(ResponseHold), RpcTarget.AllBuffered, dish.GetComponent<PhotonView>().ViewID, nearbyCharacter.PhotonView.ViewID);
+            }
+        }
+    }
+
+    [PunRPC]
+    public void ResponseHold(int platePhotonViewID, int characterPhtonViewID)
+    {
+        PhotonView platePV = PhotonView.Find(platePhotonViewID);
+        PhotonView characterPV = PhotonView.Find(characterPhtonViewID);
+
+        if (platePV == null || characterPV == null)
+        {
+
+            return;
+        }
+
+        IHoldable holdable = platePV.GetComponent<IHoldable>();
+        Character character = characterPV.GetComponent<Character>();
+
+        holdable.Hold(character, character.HoldAbility.HandTransform);
     }
 }
