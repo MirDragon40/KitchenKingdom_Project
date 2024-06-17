@@ -97,16 +97,13 @@ public class PanObject : IHoldable
                     }
                 }
 
-                if (MyStove != null)
+                if (fireObject._isOnFire && !MyStove.fireObject._isOnFire)
                 {
-                    if (fireObject._isOnFire && !MyStove.fireObject._isOnFire)
-                    {
-                        MyStove.fireObject.MakeFire();
-                    }
-                    else if (!fireObject._isOnFire && MyStove.fireObject._isOnFire)
-                    {
-                        MyStove.fireObject.Extinguish();
-                    }
+                    MyStove.fireObject.MakeFire();
+                }
+                else if (!fireObject._isOnFire && MyStove.fireObject._isOnFire)
+                {
+                    MyStove.fireObject.Extinguish();
                 }
             }
             else
@@ -211,7 +208,11 @@ public class PanObject : IHoldable
         transform.parent = place;
 
         MyStove = place.GetComponentInParent<Stove>();
-        _holdCharacter = null;
+        if (_holdCharacter != null)
+        {
+            _holdCharacter = null;
+        }
+      
         isOnSurface = true;  // 아이템을 놓을 때 표면 위에 있음
 
         if (MyStove != null)
