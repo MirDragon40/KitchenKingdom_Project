@@ -47,7 +47,7 @@ public class PanObject : IHoldable
         // 게임 시작 시 팬을 초기 배치 위치로 이동시킴
         if (PanStartPosition != null)
         {
-            Place(PanStartPosition);
+            this.Place(PanStartPosition);
         }
         if (FireSlider != null)
         {
@@ -56,24 +56,28 @@ public class PanObject : IHoldable
     }
     private void Update()
     {
+        // 팬이 스토브에 놓인 경우
         if (PanPlacePositon.childCount != 0)
         {
             PlusImage.SetActive(false);
 
+            // 스토브가 할당되어 있을 경우
             if (MyStove != null)
             {
+                // 팬에 음식이 있을 때만 그릴링과 불 동작
                 if (PanPlacePositon.GetChild(0).TryGetComponent<FoodObject>(out FoodObject newGrillingIngredient))
                 {
                     if (GrillingIngrediant != newGrillingIngredient)
                     {
                         GrillingIngrediant = newGrillingIngredient;
                         hasCaughtFireOnce = false;
-
                     }
+
                     GrillingIngrediant.StartGrilling();
                     GrillingSlider.gameObject.SetActive(true);
                     GrillingSlider.value = GrillingIngrediant.CookProgress;
 
+                    // 위험 표시기 표시
                     if (GrillingIngrediant.CookProgress >= 2f && GrillingIngrediant.CookProgress < 2.9f)
                     {
                         dangerIndicator.ShowDangerIndicator(dangerSprite);
@@ -83,12 +87,12 @@ public class PanObject : IHoldable
                         dangerIndicator.HideDangerIndicator();
                     }
 
+                    // 불이 켜지는 시점
                     if (GrillingIngrediant.CookProgress >= 3f && !fireObject._isOnFire && !hasCaughtFireOnce)
                     {
                         fireObject.MakeFire();
                         FireSlider.gameObject.SetActive(true);
                         hasCaughtFireOnce = true;
-
                     }
                     else if (GrillingIngrediant.CookProgress < 3f && fireObject._isOnFire)
                     {
@@ -97,6 +101,7 @@ public class PanObject : IHoldable
                     }
                 }
 
+                // 스토브의 불 상태 확인 및 조작
                 if (fireObject._isOnFire && !MyStove.fireObject._isOnFire)
                 {
                     MyStove.fireObject.MakeFire();
@@ -108,52 +113,49 @@ public class PanObject : IHoldable
             }
             else
             {
+                // 할당된 스토브가 없으면 그릴링 중단
                 if (GrillingIngrediant != null)
                 {
                     GrillingIngrediant.StopGrilling();
                 }
             }
 
-            if (GrillingSlider.value >= 1f)
-            {
-                GrillingSlider.gameObject.SetActive(false);
-            }
-            else
-            {
-                GrillingSlider.gameObject.SetActive(true);
-            }
+            // 그릴링 슬라이더 표시 관리
+            GrillingSlider.gameObject.SetActive(GrillingSlider.value < 1f);
         }
-        else
+        else // 팬이 스토브에 놓이지 않은 경우
         {
+            PlusImage.SetActive(true);
+
+            // 팬이 불타고 있으면 불 끄기
             if (fireObject._isOnFire)
             {
                 fireObject.Extinguish();
             }
+
+            // 음식 그릴링 중단
             if (GrillingIngrediant != null)
             {
                 GrillingIngrediant.StopGrilling();
             }
 
             GrillingIngrediant = null;
-
             GrillingSlider.gameObject.SetActive(false);
-            PlusImage.SetActive(true);
-
         }
 
-        // 파우더와 닿지 않으면 서서히 감소시킴
+        // 분말과의 불 접촉 시간 관리
         if (!isPowderTouching && fireObject.contactTime > 0)
         {
             fireObject.contactTime -= Time.deltaTime;
-            Debug.Log(fireObject.contactTime);
             if (fireObject.contactTime < 0)
             {
                 fireObject.contactTime = 0;
             }
         }
 
-        isPowderTouching = false;  // 매 프레임마다 false로 초기화
+        isPowderTouching = false; // 매 프레임마다 false로 초기화
 
+        // 불 슬라이더 표시 관리
         if (fireObject._isOnFire && FireSlider != null)
         {
             FireSlider.value = fireObject.contactTime / 2f;
@@ -162,6 +164,8 @@ public class PanObject : IHoldable
         {
             FireSlider.gameObject.SetActive(false);
         }
+
+        // 쓰레기통 근처에서 스페이스바 눌렀을 때 음식 버리기
         if (isNearTrashBin && Input.GetKeyDown(KeyCode.Space))
         {
             DropFoodInTrash();
@@ -206,11 +210,11 @@ public class PanObject : IHoldable
         Quaternion panplaceRotation = Quaternion.Euler(-90, 0, 180);
         transform.rotation = place.rotation * panplaceRotation;
         transform.parent = place;
-        Stove stoveInParent = place.GetComponentInParent<Stove>();
+/*        Stove stoveInParent = place.GetComponentInParent<Stove>();
         if (stoveInParent != null)
         {
             MyStove = stoveInParent;
-        }
+        }*/
         if (_holdCharacter != null)
         {
             _holdCharacter = null;

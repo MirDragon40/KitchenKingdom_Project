@@ -1,3 +1,5 @@
+using ExitGames.Client.Photon;
+using Photon.Pun;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -9,12 +11,14 @@ public class Extinguisher : IHoldable
     private ParticleSystem _powderEffect;
     public BoxCollider _boxCollider;
     public bool isPress = false;
+    private PhotonView _pv;
 
     public override Vector3 DropOffset => new Vector3(0.3f, 0, 0);
     private void Awake()
     {
         _powderEffect = GetComponentInChildren<ParticleSystem>();
-        _boxCollider.enabled = false; 
+        _boxCollider.enabled = false;
+        _pv = GetComponent<PhotonView>();
     }
     public override void Hold(Character character, Transform handTransform)
     {
@@ -27,36 +31,37 @@ public class Extinguisher : IHoldable
 
     }
 
-    public void Shot()
+    [PunRPC]
+    public void Shot(bool state)
     {
+        isPress = state;
 
-        if (Input.GetKeyDown(KeyCode.LeftControl))
+        if (state)
         {
-            Debug.Log("Shot");
             _powderEffect.Play();
-            isPress = true;
-
             _boxCollider.enabled = true;
         }
-        if (Input.GetKeyUp(KeyCode.LeftControl))
+        else
         {
             _powderEffect.Stop();
-            isPress = false;
-
             _boxCollider.enabled = false;
         }
-
     }
 
 
     private void Update()
     {
-
         if (IsHold)
         {
-            Shot();
+            if (Input.GetKeyDown(KeyCode.LeftControl))
+            {
+                photonView.RPC("Shot", RpcTarget.All, true); // true를 전달하여 Shot RPC 메서드 호출
+            }
+            if (Input.GetKeyUp(KeyCode.LeftControl))
+            {
+                photonView.RPC("Shot", RpcTarget.All, false); // false를 전달하여 Shot RPC 메서드 호출
+            }
         }
-
     }
 
     public override void UnHold(Vector3 dropPosition, Quaternion dropRotation)
@@ -89,19 +94,19 @@ public class Extinguisher : IHoldable
 
     }
 
-/*    public void A(Collider other)
-    {
-        if (!isPress)
-            return;
-
-        if (other.CompareTag("Fire"))
+    /*    public void A(Collider other)
         {
-            Debug.Log(other.gameObject.name);
-            var fireEffect = other.GetComponent<ParticleSystem>();
-            if (fireEffect != null)
+            if (!isPress)
+                return;
+
+            if (other.CompareTag("Fire"))
             {
-                fireEffect.Stop();
+                Debug.Log(other.gameObject.name);
+                var fireEffect = other.GetComponent<ParticleSystem>();
+                if (fireEffect != null)
+                {
+                    fireEffect.Stop();
+                }
             }
-        }
-    }*/
+        }*/
 }

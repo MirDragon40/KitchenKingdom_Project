@@ -24,8 +24,23 @@ public class Stove : CookStand
     protected override void Update()
     {
         base.Update();
+        if (PlacedItem != null)
+        {
+            if (PlacedItem.TryGetComponent<PanObject>(out PlacedPan))
+            {
+                if (PlacedPan.MyStove == null)
+                {
+                    PlacedPan.MyStove = this;
+                }
+            }
+            else
+            {
+                PlacedPan = null;
+            }
+        }
         if (PlacedPan != null)
         {
+
             if (PlacedPan.fireObject._isOnFire)
             {
                 if (!fireObject._isOnFire)
@@ -50,11 +65,14 @@ public class Stove : CookStand
         }
         else
         {
+      
             if (fireObject._isOnFire)
             {
                 fireObject.Extinguish();
             }
         }
+
+   
     }
 
     public IEnumerator IgniteNearbyTables()
