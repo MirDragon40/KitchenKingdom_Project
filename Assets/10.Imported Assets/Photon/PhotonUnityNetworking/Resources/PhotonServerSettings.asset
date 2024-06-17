@@ -73,6 +73,14 @@ MonoBehaviour:
   - SetPressState
   - RequestSpawnDirtyPlateOnHand
   - RequestSpawnPlateOnHand
+  - UpdatePlateCounts
+  - UpdatePlateNum
+  - UpdateDirtyPlateNum
+  - UpdatePlateNums
+  - UpdateSliderAndEffect
+  - UpdateWashingState
+  - RemoveDirtyPlate
+  - SyncDirtyPlateState
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

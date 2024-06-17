@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DirtyPlateStand : MonoBehaviour
+public class DirtyPlateStand : MonoBehaviourPun
 {
     public List<GameObject> DirtyPlates;
     public int DirtyPlateNum = 5;
@@ -17,12 +17,16 @@ public class DirtyPlateStand : MonoBehaviour
     private bool isPlayerHoldingDirtyPlate = false;
     private bool isPlayerNearby => _nearbyCharacter != null;
 
+    private PhotonView _pv;
+
     private void Awake()
     {
         foreach (GameObject plate in DirtyPlates)
         {
             plate.SetActive(false);
         }
+
+        _pv = GetComponent<PhotonView>();
     }
 
     private void Start()
@@ -39,7 +43,6 @@ public class DirtyPlateStand : MonoBehaviour
 
         if (isPlayerInTrigger && Input.GetKeyDown(KeyCode.Space) && _nearbyCharacter.PhotonView.IsMine)
         {
-            Debug.Log(DirtyPlateNum);
             GiveDirtyPlates();
         }
     }
@@ -48,14 +51,7 @@ public class DirtyPlateStand : MonoBehaviour
     {
         for (int i = 0; i < DirtyPlates.Count; i++)
         {
-            if (i < DirtyPlateNum)
-            {
-                DirtyPlates[i].SetActive(true);
-            }
-            else
-            {
-                DirtyPlates[i].SetActive(false);
-            }
+            DirtyPlates[i].SetActive(i < DirtyPlateNum);
         }
     }
 
@@ -105,24 +101,29 @@ public class DirtyPlateStand : MonoBehaviour
 
             if (isPlayerHoldingDirtyPlate)
             {
-                // 플레이어가 이미 더러운 접시를 가지고 있는 경우
                 dirtyPlate.DirtyPlateNum += DirtyPlateNum;
             }
             else
             {
-                // 플레이어가 더러운 접시를 가지고 있지 않은 경우 새로운 접시 생성
                 _nearbyCharacter.PhotonView.RPC("RequestSpawnDirtyPlateOnHand", RpcTarget.MasterClient);
-
-                // 다시 dirtyPlate를 확인하고 업데이트
                 dirtyPlate = characterHoldAbility.gameObject.GetComponentInChildren<DirtyPlate>();
+
                 if (dirtyPlate != null)
                 {
                     dirtyPlate.DirtyPlateNum = DirtyPlateNum;
                 }
             }
-            DirtyPlateNum = 0;
+
+            _pv.RPC(nameof(UpdatePlateNum), RpcTarget.AllBuffered, 0);
             UpdatePlates();
         }
+    }
+
+    [PunRPC]
+    private void UpdatePlateNum(int newPlateNum)
+    {
+        DirtyPlateNum = newPlateNum;
+        UpdatePlates();
     }
 
     private void UpdateDirtyPlateStatus()
