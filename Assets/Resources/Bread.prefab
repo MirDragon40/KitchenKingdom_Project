@@ -138,6 +138,7 @@ MonoBehaviour:
   ThrownEffectTriggerTime: 1
   CuttingTime: 3
   BakeTime: 3
+  DAMPING: 1
 --- !u!65 &4888542727501278136
 BoxCollider:
   m_ObjectHideFlags: 0

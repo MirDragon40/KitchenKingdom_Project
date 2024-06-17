@@ -49,6 +49,10 @@ public class PanObject : IHoldable
         {
             Place(PanStartPosition);
         }
+        if (FireSlider != null)
+        {
+            FireSlider.gameObject.SetActive(false);
+        }
     }
     private void Update()
     {
@@ -93,16 +97,13 @@ public class PanObject : IHoldable
                     }
                 }
 
-                if (MyStove != null)
+                if (fireObject._isOnFire && !MyStove.fireObject._isOnFire)
                 {
-                    if (fireObject._isOnFire && !MyStove.fireObject._isOnFire)
-                    {
-                        MyStove.fireObject.MakeFire();
-                    }
-                    else if (!fireObject._isOnFire && MyStove.fireObject._isOnFire)
-                    {
-                        MyStove.fireObject.Extinguish();
-                    }
+                    MyStove.fireObject.MakeFire();
+                }
+                else if (!fireObject._isOnFire && MyStove.fireObject._isOnFire)
+                {
+                    MyStove.fireObject.Extinguish();
                 }
             }
             else
@@ -124,6 +125,10 @@ public class PanObject : IHoldable
         }
         else
         {
+            if (fireObject._isOnFire)
+            {
+                fireObject.Extinguish();
+            }
             if (GrillingIngrediant != null)
             {
                 GrillingIngrediant.StopGrilling();
@@ -192,6 +197,10 @@ public class PanObject : IHoldable
 
     public override void Place(Transform place)
     {
+        if (place == null)
+        {
+            return;
+        }
         GetComponent<Rigidbody>().isKinematic = true;
         transform.position = place.position;
         Quaternion panplaceRotation = Quaternion.Euler(-90, 0, 180);
@@ -199,7 +208,11 @@ public class PanObject : IHoldable
         transform.parent = place;
 
         MyStove = place.GetComponentInParent<Stove>();
-        _holdCharacter = null;
+        if (_holdCharacter != null)
+        {
+            _holdCharacter = null;
+        }
+      
         isOnSurface = true;  // 아이템을 놓을 때 표면 위에 있음
 
         if (MyStove != null)
