@@ -170,7 +170,7 @@ public class FoodObject : IHoldable, IThrowable
     private IEnumerator TriggerThrownItem_Coroutine()
     {
         Collider[] colliders = new Collider[4];
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(0.2f);
         while (true)
         {
             Vector3 speed = _rigidbody.velocity;
