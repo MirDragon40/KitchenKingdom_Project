@@ -1,0 +1,9 @@
+diff a/Assets/02.Scripts/Object/Stove.cs b/Assets/02.Scripts/Object/Stove.cs	(rejected hunks)
+@@ -50,6 +50,7 @@
+             }
+         }
+         else
++        {
+             if (fireObject._isOnFire)
+             {
+                 fireObject.Extinguish();

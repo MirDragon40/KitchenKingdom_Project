@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class PanObject : IHoldable
 {
-    public Transform PanPlacePositon;
+    public Transform PanPlacePosition;
     public FoodObject GrillingIngrediant;
     public float GrillingTime = 5.0f;
     public Slider GrillingSlider;
@@ -57,7 +57,7 @@ public class PanObject : IHoldable
     private void Update()
     {
         // 팬이 스토브에 놓인 경우
-        if (PanPlacePositon.childCount != 0)
+        if (PanPlacePosition.childCount != 0)
         {
             PlusImage.SetActive(false);
 
@@ -65,7 +65,7 @@ public class PanObject : IHoldable
             if (MyStove != null)
             {
                 // 팬에 음식이 있을 때만 그릴링과 불 동작
-                if (PanPlacePositon.GetChild(0).TryGetComponent<FoodObject>(out FoodObject newGrillingIngredient))
+                if (PanPlacePosition.GetChild(0).TryGetComponent<FoodObject>(out FoodObject newGrillingIngredient))
                 {
                     if (GrillingIngrediant != newGrillingIngredient)
                     {
@@ -253,7 +253,7 @@ public class PanObject : IHoldable
                 {
                     if (food.IsGrillable)
                     {
-                        other.GetComponent<CharacterHoldAbility>().PlacePosition = PanPlacePositon;
+                        other.GetComponent<CharacterHoldAbility>().PlacePosition = PanPlacePosition;
                         other.GetComponent<CharacterHoldAbility>().IsPlaceable = true;
                     }
                 }
@@ -305,11 +305,11 @@ public class PanObject : IHoldable
 
     private void DropFoodInTrash()
     {
-        if (PanPlacePositon.childCount > 0)
+        if (PanPlacePosition.childCount > 0)
         {
-            for (int i = PanPlacePositon.childCount - 1; i >= 0; i--)
+            for (int i = PanPlacePosition.childCount - 1; i >= 0; i--)
             {
-                Transform child = PanPlacePositon.GetChild(i);
+                Transform child = PanPlacePosition.GetChild(i);
                 FoodObject childFoodObject = child.GetComponent<FoodObject>();
                 if (childFoodObject != null)
                 {
