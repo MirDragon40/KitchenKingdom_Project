@@ -47,13 +47,11 @@ public class FoodObject : IHoldable, IThrowable
     public float CuttingTime = 3f;
     public float BakeTime = 3f;
 
-
-
-
     public override Vector3 DropOffset => new Vector3(0.3f, 0.1f, 0f);
     //public override Quaternion DropOffset_Rotation => Quaternion.Euler(0, 0, 0);
 
     public override bool IsProcessed => false;
+
 
 
     private void Awake()
@@ -86,16 +84,14 @@ public class FoodObject : IHoldable, IThrowable
             FoodPrefab2.SetActive(false);
             FoodPrefab3.SetActive(false);
         }
-
-
-
+        
     }
 
     public float DAMPING = 1f;
 
     private void Update()
     {
-       
+        
 
         if (IsCooking && cookingCoroutine == null)
         {
@@ -159,6 +155,7 @@ public class FoodObject : IHoldable, IThrowable
     {
         Destroy(gameObject);
     }
+
     public void ThrowObject(Vector3 direction, float throwPower)
     {
         _rigidbody.isKinematic = false;
@@ -171,6 +168,10 @@ public class FoodObject : IHoldable, IThrowable
     {
         Collider[] colliders = new Collider[4];
         yield return new WaitForSeconds(0.2f);
+
+        CookStand cookStand = null;
+        PanObject panObject = null;
+
         while (true)
         {
             Vector3 speed = _rigidbody.velocity;
@@ -180,11 +181,9 @@ public class FoodObject : IHoldable, IThrowable
             {
 
                 int colliderNum = Physics.OverlapSphereNonAlloc(transform.position, 0.4f, colliders);
-                Debug.Log(colliderNum);
+               // Debug.Log(colliderNum);
                 foreach (Collider collider in colliders)
                 {
-                    CookStand cookStand = null;
-                    PanObject panObject = null;
                     if (collider.TryGetComponent<PanObject>(out panObject))
                     {
                         Debug.Log("Pan Found");
@@ -213,8 +212,14 @@ public class FoodObject : IHoldable, IThrowable
             {
                 break;
             }
+
             yield return new WaitForFixedUpdate();
+            if (panObject != null || cookStand != null)
+            {
+                break;
+            }
         }
+
     }
     public override void Place(Transform place)
     {
@@ -350,5 +355,4 @@ public class FoodObject : IHoldable, IThrowable
         IsCooking = false;
     }
 
- 
 }

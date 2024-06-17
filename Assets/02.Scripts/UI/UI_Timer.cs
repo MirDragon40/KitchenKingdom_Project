@@ -31,7 +31,7 @@ public class UI_Timer : MonoBehaviourPunCallbacks
         yield return new WaitForSeconds(2f);
         if (PhotonNetwork.IsMasterClient)
         {
-            Debug.Log("aaa");
+           // Debug.Log("aaa");
             _totalTime = 180;
 
             StartCoroutine(Timer_Coroution());
@@ -69,7 +69,7 @@ public class UI_Timer : MonoBehaviourPunCallbacks
     [PunRPC]
     void ShowTimer(int number) 
     {
-        Debug.Log("aaa");
+        //Debug.Log("aaa");
 
         int minutes = number / 60;
         int seconds = number % 60;
