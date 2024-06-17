@@ -206,8 +206,11 @@ public class PanObject : IHoldable
         Quaternion panplaceRotation = Quaternion.Euler(-90, 0, 180);
         transform.rotation = place.rotation * panplaceRotation;
         transform.parent = place;
-
-        MyStove = place.GetComponentInParent<Stove>();
+        Stove stoveInParent = place.GetComponentInParent<Stove>();
+        if (stoveInParent != null)
+        {
+            MyStove = stoveInParent;
+        }
         if (_holdCharacter != null)
         {
             _holdCharacter = null;
