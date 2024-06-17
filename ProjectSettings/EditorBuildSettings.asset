@@ -14,7 +14,7 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/01.Scenes/SubinScene.unity
     guid: bba65f59282b4164abaa782ad7f1289a
-  - enabled: 1
+  - enabled: 0
     path: Assets/01.Scenes/MinSungScene.unity
     guid: 8f8d02a55c905af479b4a2af70dbaf5f
   - enabled: 0

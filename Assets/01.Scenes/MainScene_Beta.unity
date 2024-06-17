@@ -2129,7 +2129,7 @@ MonoBehaviour:
   - {fileID: 1577349093}
   - {fileID: 1852115681}
   TotalScore: 0
-  OptionUl: {fileID: 0}
+  OptionUl: {fileID: 1474762658}
 --- !u!4 &362806178
 Transform:
   m_ObjectHideFlags: 0
@@ -6980,8 +6980,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ceb8f4d9b5d3dd44c877201f67aadc94, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DirtyPlates: {fileID: 7435229658286963103, guid: 28cbbb98799a37947bcca3e11beed3ac, type: 3}
-  Plate_Stage1_Object: {fileID: 2637595923753635810, guid: b9ef09793d1751d4385da8e2b378132a, type: 3}
 --- !u!4 &1343925966
 Transform:
   m_ObjectHideFlags: 0
@@ -7611,7 +7609,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1474762659
 RectTransform:
   m_ObjectHideFlags: 0
@@ -19745,6 +19743,7 @@ GameObject:
   - component: {fileID: 349936092861493253}
   - component: {fileID: 23173124344300301}
   - component: {fileID: 498057914186859506}
+  - component: {fileID: 4610112084819048466}
   m_Layer: 5
   m_Name: Timer
   m_TagString: Untagged
@@ -19752,6 +19751,28 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &4610112084819048466
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4610112084819048465}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 46
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!33 &4643000246055162447
 MeshFilter:
   m_ObjectHideFlags: 0
