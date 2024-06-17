@@ -47,7 +47,7 @@ public class PanObject : IHoldable
         // 게임 시작 시 팬을 초기 배치 위치로 이동시킴
         if (PanStartPosition != null)
         {
-            Place(PanStartPosition);
+            this.Place(PanStartPosition);
         }
         if (FireSlider != null)
         {
@@ -210,11 +210,11 @@ public class PanObject : IHoldable
         Quaternion panplaceRotation = Quaternion.Euler(-90, 0, 180);
         transform.rotation = place.rotation * panplaceRotation;
         transform.parent = place;
-        Stove stoveInParent = place.GetComponentInParent<Stove>();
+/*        Stove stoveInParent = place.GetComponentInParent<Stove>();
         if (stoveInParent != null)
         {
             MyStove = stoveInParent;
-        }
+        }*/
         if (_holdCharacter != null)
         {
             _holdCharacter = null;

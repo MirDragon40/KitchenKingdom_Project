@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class UI_Story : MonoBehaviour
@@ -17,7 +18,6 @@ public class UI_Story : MonoBehaviour
     // 2
     public Image ManImage;
     public Image ManImageBackgroundImage;
-    public Image ManDownImage;
     public TextMeshProUGUI StoryText3;
 
     // FadeOut
@@ -38,7 +38,7 @@ public class UI_Story : MonoBehaviour
         StoryText2.text = null;
          
         // 2
-        StoryText3.text = null;
+        //StoryText3.text = null;
     }
     private void Image_false() 
     {
@@ -47,9 +47,8 @@ public class UI_Story : MonoBehaviour
         SpeechBubbleImage_B.gameObject.SetActive(false);
 
         // 2
-        ManImage.gameObject.SetActive(false);
-        ManImageBackgroundImage.gameObject.SetActive(false);
-        ManDownImage.gameObject.SetActive(false);
+        //ManImage.gameObject.SetActive(false);
+        //ManImageBackgroundImage.gameObject.SetActive(false);
 
         // FadeOut
         FadeImage.gameObject.SetActive(false);
@@ -67,7 +66,8 @@ public class UI_Story : MonoBehaviour
         yield return new WaitForSeconds(2f);
         FadeImage.gameObject.SetActive(false);
         NewsUI.SetActive(false);
-        Third_Text();
+        //Third_Text();
+        SceneManager.LoadScene("YejinScene2");
     }
 
     // 1
@@ -91,7 +91,7 @@ public class UI_Story : MonoBehaviour
     {
         ManImageBackgroundImage.gameObject.SetActive(true);
         StartCoroutine(FadeOut_ManImage());
-        string text = "우아아아아아아아아아아ㅏ아아아아!!!";
+        string text = "오 대박";
         StartCoroutine(TypeText(StoryText3, text));
     }
 
@@ -111,7 +111,6 @@ public class UI_Story : MonoBehaviour
     private IEnumerator FadeOut_ManImage()
     {
         ManImage.gameObject.SetActive(true);
-        ManDownImage.gameObject.SetActive(true);
 
         float alpha = 0.0f;
         while (alpha < 1)
