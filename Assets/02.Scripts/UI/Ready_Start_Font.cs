@@ -17,5 +17,7 @@ public class Ready_Start_Font : MonoBehaviour
         yield return new WaitForSeconds(1.5f);
         ReadyFont.gameObject.SetActive(false);
         StartFont.gameObject.SetActive(true);
+        yield return new WaitForSeconds(1.5f);
+        StartFont.gameObject.SetActive(false);
     }
 }
