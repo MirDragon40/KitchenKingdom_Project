@@ -55,17 +55,20 @@ public class FoodCombination : MonoBehaviour
     }
     private void LateUpdate()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && IsSubmitable)
+        if (Input.GetKeyDown(KeyCode.Space) && IsSubmitable && _holdableObject != null)
         {
             FoodObject ingrediant = null;
+            PanObject panObject = null;
             if (_holdableObject.TryGetComponent<FoodObject>(out ingrediant))
             {
                 SubmitIngrediant(ingrediant);
-                Debug.Log(ingrediant);
             }
-            else
+            else if (_holdableObject.TryGetComponent<PanObject>(out panObject))
             {
-                SubmitIngrediant(_holdableObject.GetComponent<PanObject>().GrillingIngrediant.GetComponent<FoodObject>());
+                if (panObject.GrillingIngrediant != null)
+                {
+                    SubmitIngrediant(panObject.GrillingIngrediant.GetComponent<FoodObject>());
+                }
             }
         }
 

@@ -160,6 +160,10 @@ public class CharacterHoldAbility : CharacterAbility
 
     public void FoodTrashDrop()
     {
+        if (HoldableItem == null)
+        {
+            return;
+        }
         FoodCombination foodcombo = null;
         if (HoldableItem is FoodObject food)
         {

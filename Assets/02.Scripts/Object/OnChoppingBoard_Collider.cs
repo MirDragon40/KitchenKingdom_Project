@@ -31,11 +31,14 @@ public class OnChoppingBoard_Collider : MonoBehaviour
         if (other.CompareTag("Food"))
         {
             FoodObject foodObject = other.GetComponent<FoodObject>();
-            if (foodObject != null && foodObject == FoodOnBoard.GetComponent<FoodObject>())
+            if (foodObject != null && FoodOnBoard != null)
             {
-                IsCuttable = false;
-                FoodOnBoard = null;
-                FoodObject = null; // FoodObject 해제
+                if (foodObject == FoodOnBoard.GetComponent<FoodObject>())
+                {
+                    IsCuttable = false;
+                    FoodOnBoard = null;
+                    FoodObject = null; // FoodObject 해제
+                }
             }
         }
     }

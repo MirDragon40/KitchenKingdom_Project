@@ -84,9 +84,7 @@ public class FoodObject : IHoldable, IThrowable
             FoodPrefab2.SetActive(false);
             FoodPrefab3.SetActive(false);
         }
-
-
-
+        
     }
 
     public float DAMPING = 1f;
@@ -170,6 +168,10 @@ public class FoodObject : IHoldable, IThrowable
     {
         Collider[] colliders = new Collider[4];
         yield return new WaitForSeconds(0.2f);
+
+        CookStand cookStand = null;
+        PanObject panObject = null;
+
         while (true)
         {
             Vector3 speed = _rigidbody.velocity;
@@ -179,11 +181,9 @@ public class FoodObject : IHoldable, IThrowable
             {
 
                 int colliderNum = Physics.OverlapSphereNonAlloc(transform.position, 0.4f, colliders);
-                Debug.Log(colliderNum);
+               // Debug.Log(colliderNum);
                 foreach (Collider collider in colliders)
                 {
-                    CookStand cookStand = null;
-                    PanObject panObject = null;
                     if (collider.TryGetComponent<PanObject>(out panObject))
                     {
                         Debug.Log("Pan Found");
@@ -212,8 +212,14 @@ public class FoodObject : IHoldable, IThrowable
             {
                 break;
             }
+
             yield return new WaitForFixedUpdate();
+            if (panObject != null || cookStand != null)
+            {
+                break;
+            }
         }
+
     }
     public override void Place(Transform place)
     {
