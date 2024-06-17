@@ -191,7 +191,7 @@ public class FoodObject : IHoldable, IThrowable
                         transform.rotation = Quaternion.identity;
                         if (panObject.GrillingIngrediant == null)
                         {
-                            Place(panObject.PanPlacePositon);
+                            Place(panObject.PanPlacePosition);
                         }
                         colliders = null;
                         break;
