@@ -148,7 +148,7 @@ public class CharacterHoldAbility : CharacterAbility
     [PunRPC]
     private void DropFood()
     {
-        if (HoldableItem is FoodObject)
+        if (HoldableItem is FoodObject || HoldableItem is DishObject)
         {
             FoodTrashDrop();
         }
@@ -177,7 +177,7 @@ public class CharacterHoldAbility : CharacterAbility
     [PunRPC]
     public void Place()
     {
-        if (!IsHolding)
+        if (!IsHolding || HoldableItem == null)
         {
             return;
         }

@@ -71,6 +71,8 @@ MonoBehaviour:
   - ResponseHold
   - Shot
   - SetPressState
+  - SubmitPlate
+  - SubmitIngrediant
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

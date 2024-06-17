@@ -4993,6 +4993,11 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1115502093}
   m_Mesh: {fileID: -9195390934930376359, guid: e02978ccf9628c04da50a3e73c8f2929, type: 3}
+--- !u!1 &1123864628 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 739465786896664657, guid: d434d44a5c9926b4d847888df2c12fdb, type: 3}
+  m_PrefabInstance: {fileID: 2462750736360516060}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1140134953
 GameObject:
   m_ObjectHideFlags: 0
@@ -10320,6 +10325,28 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6266470345590963679, guid: d434d44a5c9926b4d847888df2c12fdb, type: 3}
   m_PrefabInstance: {fileID: 2462750736360516060}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &664138361257123939
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1123864628}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 46
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!222 &672260415902118756
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -14489,7 +14516,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 739465786896664657, guid: d434d44a5c9926b4d847888df2c12fdb, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 664138361257123939}
   m_SourcePrefab: {fileID: 100100000, guid: d434d44a5c9926b4d847888df2c12fdb, type: 3}
 --- !u!222 &2465711001419223448
 CanvasRenderer:
