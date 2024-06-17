@@ -189,6 +189,8 @@ GameObject:
   - component: {fileID: 2983923768142573700}
   - component: {fileID: 2879924616368682405}
   - component: {fileID: 370852572710560357}
+  - component: {fileID: 6586813946680175039}
+  - component: {fileID: 5439033789029369707}
   m_Layer: 0
   m_Name: Pan
   m_TagString: Pan
@@ -315,6 +317,7 @@ MonoBehaviour:
   fireObject: {fileID: 0}
   dangerIndicator: {fileID: 0}
   dangerSprite: {fileID: 21300000, guid: f991fd3b10e35644d8759f9d82a60590, type: 3}
+  PanStartPosition: {fileID: 0}
 --- !u!54 &2983923768142573700
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -376,11 +379,53 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2436eae4429806947a16ae5569b8d04b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  panObject: {fileID: 0}
-  FireEffect: {fileID: 0}
   _isOnFire: 0
+  fireEffect: {fileID: 0}
   contactTime: 0
-  isFireActive: 1
+--- !u!114 &6586813946680175039
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2678483795670061968}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
+--- !u!114 &5439033789029369707
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2678483795670061968}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!1 &3572471689333510232
 GameObject:
   m_ObjectHideFlags: 0
@@ -1306,6 +1351,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 8580231701211850249}
     m_Modifications:
+    - target: {fileID: -6844304727264855708, guid: 09c82e14ad342694ea7e2efd0dd36f17, type: 3}
+      propertyPath: sceneViewId
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1116258676682652161, guid: 09c82e14ad342694ea7e2efd0dd36f17, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

@@ -19,7 +19,6 @@ public class Stove : CookStand
     {
         _originalPlacePosition = base.PlacePosition;
         fireObject = GetComponent<FireObject>();
-
     }
 
     protected override void Update()
