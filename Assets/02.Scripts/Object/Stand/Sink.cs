@@ -25,6 +25,7 @@ public class Sink : MonoBehaviourPun
     private DirtyPlate dirtyPlate;
     private DishObject dishObject;
 
+    private PhotonView _pv;
 
     private Character _nearbyCharacter;
     private bool isPlayerNearby => _nearbyCharacter != null;
@@ -32,6 +33,8 @@ public class Sink : MonoBehaviourPun
 
     private void Awake()
     {
+        _pv = GetComponent<PhotonView>();
+
         BubbleEffect.SetActive(false);
 
         foreach (GameObject plate in DirtyPlates)
@@ -195,7 +198,11 @@ public class Sink : MonoBehaviourPun
     {
         CleanPlateNum--;
         UpdatePlates();
-        characterHoldAbility.SpawnPlateOnHand();
+
+        if (_nearbyCharacter != null)
+        {
+            _nearbyCharacter.PhotonView.RPC("RequestSpawnPlateOnHand", RpcTarget.MasterClient);
+        }
     }
 
     private void GetDirtyPlateNum()

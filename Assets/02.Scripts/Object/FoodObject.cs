@@ -47,13 +47,11 @@ public class FoodObject : IHoldable, IThrowable
     public float CuttingTime = 3f;
     public float BakeTime = 3f;
 
-
-
-
     public override Vector3 DropOffset => new Vector3(0.3f, 0.1f, 0f);
     //public override Quaternion DropOffset_Rotation => Quaternion.Euler(0, 0, 0);
 
     public override bool IsProcessed => false;
+
 
 
     private void Awake()
@@ -95,7 +93,7 @@ public class FoodObject : IHoldable, IThrowable
 
     private void Update()
     {
-       
+        
 
         if (IsCooking && cookingCoroutine == null)
         {
@@ -159,6 +157,7 @@ public class FoodObject : IHoldable, IThrowable
     {
         Destroy(gameObject);
     }
+
     public void ThrowObject(Vector3 direction, float throwPower)
     {
         _rigidbody.isKinematic = false;
@@ -350,5 +349,4 @@ public class FoodObject : IHoldable, IThrowable
         IsCooking = false;
     }
 
- 
 }
