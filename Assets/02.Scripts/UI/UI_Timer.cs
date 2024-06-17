@@ -7,6 +7,7 @@ using Photon.Pun;
 public class UI_Timer : MonoBehaviourPunCallbacks
 {
     public TextMeshProUGUI TimerTextUI;
+    public Color TimerTextColor;
 
     private int _totalTime = 0;
 
@@ -30,7 +31,7 @@ public class UI_Timer : MonoBehaviourPunCallbacks
         yield return new WaitForSeconds(2f);
         if (PhotonNetwork.IsMasterClient)
         {
-            Debug.Log("aaa");
+           // Debug.Log("aaa");
             _totalTime = 180;
 
             StartCoroutine(Timer_Coroution());
@@ -46,7 +47,7 @@ public class UI_Timer : MonoBehaviourPunCallbacks
         while (true)
         {
             yield return wait;
-            if (_totalTime == 10)
+            if (_totalTime == 30)
             {
                 PV.RPC("AnimationPlay", RpcTarget.All);
             }
@@ -68,7 +69,7 @@ public class UI_Timer : MonoBehaviourPunCallbacks
     [PunRPC]
     void ShowTimer(int number) 
     {
-        Debug.Log("aaa");
+        //Debug.Log("aaa");
 
         int minutes = number / 60;
         int seconds = number % 60;
@@ -81,6 +82,8 @@ public class UI_Timer : MonoBehaviourPunCallbacks
     void AnimationPlay() 
     {
         SpeedUpFireUI.gameObject.SetActive(true);
+
+        TimerTextUI.color = TimerTextColor;
 
         TimerAnimator.SetTrigger("SpeedUp");
         FireAnimator.SetTrigger("SpeedUp");

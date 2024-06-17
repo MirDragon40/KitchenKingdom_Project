@@ -55,17 +55,20 @@ public class FoodCombination : MonoBehaviour
     }
     private void LateUpdate()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && IsSubmitable)
+        if (Input.GetKeyDown(KeyCode.Space) && IsSubmitable && _holdableObject != null)
         {
             FoodObject ingrediant = null;
+            PanObject panObject = null;
             if (_holdableObject.TryGetComponent<FoodObject>(out ingrediant))
             {
-                SubmitIngrediant(ingrediant);
-                Debug.Log(ingrediant);
+                 SubmitIngrediant(ingrediant);
             }
-            else
+            else if (_holdableObject.TryGetComponent<PanObject>(out panObject))
             {
-                SubmitIngrediant(_holdableObject.GetComponent<PanObject>().GrillingIngrediant.GetComponent<FoodObject>());
+                if (panObject.GrillingIngrediant != null)
+                {
+                    SubmitIngrediant(panObject.GrillingIngrediant.GetComponent<FoodObject>());
+                }
             }
         }
 
@@ -100,38 +103,52 @@ public class FoodCombination : MonoBehaviour
     {
         Ingrediants[key] = true;
     }
+    [PunRPC]
     private void SubmitIngrediant(FoodObject submittedFood)
     {
         if (submittedFood.ItemType == EItemType.Food && submittedFood.FoodType == FoodType.Bread && !Ingrediants["bread"])
         {
-            //Ingrediants["bread"] = true;
+            Ingrediants["bread"] = true;
             _pv.RPC("SetActiveIngrediant", RpcTarget.All, "bread");
-            PhotonNetwork.Destroy(submittedFood.gameObject);
-            RefreshPlate();
+            if (PhotonNetwork.IsMasterClient)
+            {
+                PhotonNetwork.Destroy(submittedFood.gameObject);
+            }
+            _pv.RPC("RefreshPlate", RpcTarget.All);
         }
         else if (submittedFood.ItemType == EItemType.Food && submittedFood.FoodType == FoodType.Lettuce && !Ingrediants["lettuce"] && submittedFood.State == FoodState.Cut)
         {
             _pv.RPC("SetActiveIngrediant", RpcTarget.All, "lettuce");
             //Ingrediants["lettuce"] = true;
-            PhotonNetwork.Destroy(submittedFood.gameObject);
+            if (PhotonNetwork.IsMasterClient)
+            {
+                PhotonNetwork.Destroy(submittedFood.gameObject);
+            }
             RefreshPlate();
         }
         else if (submittedFood.ItemType == EItemType.Coke && !Ingrediants["coke"])
         {
             _pv.RPC("SetActiveIngrediant", RpcTarget.All, "coke");
             //Ingrediants["coke"] = true;
-            PhotonNetwork.Destroy(submittedFood.gameObject);
+            if (PhotonNetwork.IsMasterClient)
+            {
+                PhotonNetwork.Destroy(submittedFood.gameObject);
+            }
             RefreshPlate();
         }
         else if (submittedFood.ItemType == EItemType.Food && !Ingrediants["patty"] && submittedFood.State == FoodState.Grilled)
         {
             _pv.RPC("SetActiveIngrediant", RpcTarget.All, "patty");
             // Ingrediants["patty"] = true;
-            PhotonNetwork.Destroy(submittedFood.gameObject);
+            if (PhotonNetwork.IsMasterClient)
+            {
+                PhotonNetwork.Destroy(submittedFood.gameObject);
+            }
             RefreshPlate();
         }
 
     }
+    [PunRPC]
     private void RefreshPlate()
     {
         switch (Stage)

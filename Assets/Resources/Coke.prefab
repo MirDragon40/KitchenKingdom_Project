@@ -105,6 +105,7 @@ MonoBehaviour:
   ThrownEffectTriggerTime: 1
   CuttingTime: 3
   BakeTime: 3
+  DAMPING: 1
 --- !u!114 &8780124581705800450
 MonoBehaviour:
   m_ObjectHideFlags: 0

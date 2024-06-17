@@ -55,7 +55,7 @@ public class Makefood : MonoBehaviourPun
                     StartCoroutine(BoxOpenAnimation());
                 }
             }
-        }
+        }     
 
         if (!_nearbyCharacter.HoldAbility.IsHolding && Input.GetKeyDown(KeyCode.Space))
         {
