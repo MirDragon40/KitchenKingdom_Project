@@ -10,10 +10,13 @@ public class Ready_Start_Font : MonoBehaviour
     private void Start()
     {
         StartFont.gameObject.SetActive(false);
+        ReadyFont.gameObject.SetActive(false);
         StartCoroutine(ReadyFont_false());
     }
     private IEnumerator ReadyFont_false()
     {
+        yield return new WaitForSeconds(0.5f);
+        ReadyFont.gameObject.SetActive(true);
         yield return new WaitForSeconds(1.5f);
         ReadyFont.gameObject.SetActive(false);
         StartFont.gameObject.SetActive(true);
