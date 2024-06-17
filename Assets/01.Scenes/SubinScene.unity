@@ -534,6 +534,14 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5439033789029369707, guid: f1dfd9727d7247b4bb99cac0ec8a435b, type: 3}
+      propertyPath: sceneViewId
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 6586813946680175039, guid: f1dfd9727d7247b4bb99cac0ec8a435b, type: 3}
+      propertyPath: sceneViewId
+      value: 41
+      objectReference: {fileID: 0}
     - target: {fileID: 8467508025856497003, guid: f1dfd9727d7247b4bb99cac0ec8a435b, type: 3}
       propertyPath: sceneViewId
       value: 31
@@ -586,7 +594,8 @@ PrefabInstance:
       propertyPath: InitialPlacePosition
       value: 
       objectReference: {fileID: 959817662}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 5439033789029369707, guid: f1dfd9727d7247b4bb99cac0ec8a435b, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -6209,8 +6218,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ceb8f4d9b5d3dd44c877201f67aadc94, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DirtyPlates: {fileID: 7435229658286963103, guid: 28cbbb98799a37947bcca3e11beed3ac, type: 3}
-  Plate_Stage1_Object: {fileID: 2637595923753635810, guid: b9ef09793d1751d4385da8e2b378132a, type: 3}
 --- !u!4 &1343925966
 Transform:
   m_ObjectHideFlags: 0
@@ -8760,6 +8767,14 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5439033789029369707, guid: f1dfd9727d7247b4bb99cac0ec8a435b, type: 3}
+      propertyPath: sceneViewId
+      value: 42
+      objectReference: {fileID: 0}
+    - target: {fileID: 6586813946680175039, guid: f1dfd9727d7247b4bb99cac0ec8a435b, type: 3}
+      propertyPath: sceneViewId
+      value: 43
+      objectReference: {fileID: 0}
     - target: {fileID: 8467508025856497003, guid: f1dfd9727d7247b4bb99cac0ec8a435b, type: 3}
       propertyPath: sceneViewId
       value: 20
@@ -8812,7 +8827,8 @@ PrefabInstance:
       propertyPath: InitialPlacePosition
       value: 
       objectReference: {fileID: 1522549035}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 5439033789029369707, guid: f1dfd9727d7247b4bb99cac0ec8a435b, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []

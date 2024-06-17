@@ -69,6 +69,8 @@ MonoBehaviour:
   - RPC_MakeFire
   - RequestSpawnFood
   - ResponseHold
+  - Shot
+  - SetPressState
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

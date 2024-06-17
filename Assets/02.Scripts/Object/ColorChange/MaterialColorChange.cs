@@ -61,6 +61,10 @@ public class MaterialColorChange: MonoBehaviour
             _isReached = true;
 
         }
+        else
+        {
+            RendererThisMaterial.material = ThisMaterial;
+        }
         
     }
 
