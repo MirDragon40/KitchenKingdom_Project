@@ -117,7 +117,7 @@ public class CharacterHoldAbility : CharacterAbility
                 Table[] nearbyTables = pan.NearbyTables;
                 foreach (Table table in nearbyTables)
                 {
-                    if (table != null && table._isOnFire)
+                    if (table != null && table.IsOnFire)
                     {
                         return; // 팬을 들 수 없도록 반환
                     }
@@ -198,13 +198,23 @@ public class CharacterHoldAbility : CharacterAbility
         }
 
         Collider[] colliders = Physics.OverlapSphere(transform.position, 1.0f); // 예시로 1.0f 반경으로 체크
+        bool canPlace = true;
         foreach (Collider collider in colliders)
         {
             Stove stove = collider.GetComponent<Stove>();
+            Table table = collider.GetComponent<Table>(); // Table 클래스를 기반으로 가정
+
             if (stove != null && stove.IsOnFire)
             {
-                Debug.Log(000);
-                return;
+                Debug.Log("Stove is on fire! Cannot place pan.");
+                canPlace = false;
+                break;
+            }
+            else if (table != null && table.IsOnFire)
+            {
+                Debug.Log("Table is on fire! Cannot place pan.");
+                canPlace = false;
+                break;
             }
         }
 

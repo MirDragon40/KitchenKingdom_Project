@@ -177,14 +177,6 @@ public class PanObject : IHoldable
 
     public override void Hold(Character character, Transform handTransform)
     {
-       foreach (var table in NearbyTables)
-        {
-            if (table._isOnFire)
-            {
-                Debug.Log("가까운 책상에 불이 나서 팬을 들 수 없습니다.");
-                return;
-            }
-        }
         GetComponent<Rigidbody>().isKinematic = true;
         transform.parent = handTransform;
         transform.localPosition = new Vector3(0, 0, 0.3f);
@@ -212,10 +204,6 @@ public class PanObject : IHoldable
 
     public override void Place(Transform place)
     {
-        if (place == null)
-        {
-            return;
-        }
         GetComponent<Rigidbody>().isKinematic = true;
         transform.position = place.position;
         Quaternion panplaceRotation = Quaternion.Euler(-90, 0, 180);
