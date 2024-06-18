@@ -6754,6 +6754,7 @@ MonoBehaviour:
   MaxOrderNumber: 5
   NormalOrderPoints: 25
   GeneratedOrderList: []
+  DirtyPlateStand: {fileID: 0}
 --- !u!4 &1746525627
 Transform:
   m_ObjectHideFlags: 0

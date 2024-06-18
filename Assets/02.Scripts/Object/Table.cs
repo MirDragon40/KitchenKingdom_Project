@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class Table : MonoBehaviour
 {
-    public bool _isOnFire = false;
+    public bool IsOnFire = false;
     public ParticleSystem fireEffect;
 
     public Table[] NearbyTables;
@@ -21,7 +21,7 @@ public class Table : MonoBehaviour
 
     public void Ignite()
     {
-        _isOnFire = true;
+        IsOnFire = true;
         fireEffect.Play();
         Debug.Log("이그나이트");
 
@@ -31,7 +31,7 @@ public class Table : MonoBehaviour
 
     public void Extinguish()
     {
-        _isOnFire = false;
+        IsOnFire = false;
         fireEffect.Stop();
     }
 
@@ -41,7 +41,7 @@ public class Table : MonoBehaviour
 
         foreach (var table in NearbyTables)
         {
-            if (!table._isOnFire)
+            if (!table.IsOnFire)
             {
                 table.Ignite();
             }
@@ -64,7 +64,7 @@ public class Table : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if (_isOnFire && other.CompareTag("Powder"))
+        if (IsOnFire && other.CompareTag("Powder"))
         {
             isPowderTouching = true;
             powderContactTime += Time.deltaTime;
@@ -78,7 +78,7 @@ public class Table : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (_isOnFire && other.CompareTag("Powder"))
+        if (IsOnFire && other.CompareTag("Powder"))
         {
             isPowderTouching = false;
             powderContactTime = 0f;
@@ -86,6 +86,6 @@ public class Table : MonoBehaviour
     }
     public void SetOnFire(bool isOnFire)
     {
-        _isOnFire = isOnFire;
+        IsOnFire = isOnFire;
     }
 }

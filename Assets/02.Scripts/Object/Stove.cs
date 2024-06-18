@@ -86,7 +86,7 @@ public class Stove : CookStand
         
         foreach (var table in NearbyTables)
         {
-            if (!table._isOnFire)
+            if (!table.IsOnFire)
             {
                 table.Ignite();
             }

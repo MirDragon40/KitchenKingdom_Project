@@ -179,7 +179,7 @@ public class PanObject : IHoldable
     {
        foreach (var table in NearbyTables)
         {
-            if (table._isOnFire)
+            if (table.IsOnFire)
             {
                 Debug.Log("가까운 책상에 불이 나서 팬을 들 수 없습니다.");
                 return;
