@@ -13,7 +13,10 @@ public class Table : MonoBehaviour
 
     private void Start()
     {
-        fireEffect = GetComponentInChildren<ParticleSystem>();
+        if (fireEffect == null)
+        {
+            fireEffect = GetComponentInChildren<ParticleSystem>();
+        }
     }
 
     public void Ignite()
