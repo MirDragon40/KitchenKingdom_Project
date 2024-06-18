@@ -10,7 +10,6 @@ public class FireObject : MonoBehaviour
 
     private void Start()
     {
-    
     }
 
     public void MakeFire()

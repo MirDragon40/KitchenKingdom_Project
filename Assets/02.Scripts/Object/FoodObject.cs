@@ -30,7 +30,7 @@ public class FoodObject : IHoldable, IThrowable
     public GameObject FoodPrefab3;
 
 
-    public PhotonView PV;
+    private PhotonView _photonView;
 
     private Rigidbody _rigidbody;
 
@@ -57,7 +57,7 @@ public class FoodObject : IHoldable, IThrowable
     private void Awake()
     {
 
-        PV = GetComponent<PhotonView>();
+        _photonView = GetComponent<PhotonView>();
         State = FoodState.Raw;
         _rigidbody = GetComponent<Rigidbody>();
         colliderThis = GetComponent<BoxCollider>();
@@ -114,10 +114,7 @@ public class FoodObject : IHoldable, IThrowable
     {
         if(PhotonNetwork.IsMasterClient)
         {
-            if (PV.OwnerActorNr != character.PhotonView.OwnerActorNr)
-            {
-                PV.TransferOwnership(character.PhotonView.OwnerActorNr);
-            }
+            _photonView.TransferOwnership(character.PhotonView.OwnerActorNr);
         }
 
         _rigidbody.isKinematic = true;
@@ -130,7 +127,6 @@ public class FoodObject : IHoldable, IThrowable
         transform.parent = handTransform;
         transform.localPosition = Vector3.zero;
         transform.localRotation = Quaternion.identity;
-
     }
 
 

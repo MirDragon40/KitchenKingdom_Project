@@ -26,7 +26,7 @@ public class Stove : CookStand
         base.Update();
         if (PlacedItem != null)
         {
-            if (PlacedItem.TryGetComponent<PanObject>(out PlacedPan))
+            if (PlacedItem != null && PlacedItem.TryGetComponent<PanObject>(out PlacedPan))
             {
                 if (PlacedPan.MyStove == null)
                 {
@@ -38,41 +38,51 @@ public class Stove : CookStand
                 PlacedPan = null;
             }
         }
-        if (PlacedPan != null)
+        if (IsPanPlaced && PlacedPan.MyStove == this)
         {
-
-            if (PlacedPan.fireObject._isOnFire)
+            if (PlacedPan != null)
             {
-                if (!fireObject._isOnFire)
-                {
-                    fireObject.MakeFire();
 
-                }
-                else if (isFireExtinguished)
+                if (PlacedPan.fireObject._isOnFire)
                 {
-                    igniteCoroutine = StartCoroutine(IgniteNearbyTables());
+                    if (!fireObject._isOnFire)
+                    {
+                        fireObject.MakeFire();
+
+                    }
+                    else if (isFireExtinguished)
+                    {
+                        igniteCoroutine = StartCoroutine(IgniteNearbyTables());
+                    }
+                }
+                else
+                {
+                    if (igniteCoroutine != null)
+                    {
+                        StopCoroutine(igniteCoroutine);
+                        igniteCoroutine = null;
+                        isFireExtinguished = true;
+                    }
                 }
             }
             else
             {
-                if (igniteCoroutine != null)
+
+                if (fireObject._isOnFire)
                 {
-                    StopCoroutine(igniteCoroutine); 
-                    igniteCoroutine = null;
+                    fireObject.Extinguish();
                     isFireExtinguished = true;
+                    if (igniteCoroutine != null)
+                    {
+                        StopCoroutine(igniteCoroutine);
+                        igniteCoroutine = null;
+                    }
                 }
             }
-        }
-        else
-        {
-      
-            if (fireObject._isOnFire)
-            {
-                fireObject.Extinguish();
-            }
+
+
         }
 
-   
     }
 
     public IEnumerator IgniteNearbyTables()
@@ -82,11 +92,16 @@ public class Stove : CookStand
         
         foreach (var table in NearbyTables)
         {
-            if (!table._isOnFire)
+            if (!table.IsOnFire)
             {
                 table.Ignite();
             }
         }
+        // 코루틴이 끝나면 초기화
+        igniteCoroutine = null;
+        isFireExtinguished = true;
     }
+
+
 
 }
