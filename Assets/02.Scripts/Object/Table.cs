@@ -84,5 +84,8 @@ public class Table : MonoBehaviour
             powderContactTime = 0f;
         }
     }
-
+    public void SetOnFire(bool isOnFire)
+    {
+        _isOnFire = isOnFire;
+    }
 }
