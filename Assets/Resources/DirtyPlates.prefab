@@ -714,6 +714,7 @@ MonoBehaviour:
   - {fileID: 8588535264286269589}
   - {fileID: 1335041104003961128}
   DirtyPlateNum: 5
+  PhotonView: {fileID: 0}
 --- !u!64 &-8449686282262255424
 MeshCollider:
   m_ObjectHideFlags: 0
