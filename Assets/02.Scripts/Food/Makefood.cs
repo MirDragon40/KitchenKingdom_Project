@@ -53,14 +53,15 @@ public class Makefood : MonoBehaviourPun
                    _pv.RPC(nameof(RequestSpawnFood), RpcTarget.MasterClient, FoodType.ToString(), spawnPoint.position, spawnPoint.rotation);
                     _nearbyCharacter.GetComponent<Animator>().SetBool("Carry", true);
                     StartCoroutine(BoxOpenAnimation());
+                    //_nearbyCharacter = null;
                 }
             }
         }     
 
-        if (!_nearbyCharacter.HoldAbility.IsHolding && Input.GetKeyDown(KeyCode.Space))
+/*        if (!_nearbyCharacter.HoldAbility.IsHolding && Input.GetKeyDown(KeyCode.Space))
         {
             _nearbyCharacter = null;
-        }
+        }*/
     }
 
     private bool IsNearbyHoldable()

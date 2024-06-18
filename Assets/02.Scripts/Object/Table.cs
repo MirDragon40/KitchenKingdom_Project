@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class Table : MonoBehaviour
 {
-    public bool _isOnFire = false;
+    public bool IsOnFire = false;
     public ParticleSystem fireEffect;
 
     public Table[] NearbyTables;
@@ -11,6 +11,8 @@ public class Table : MonoBehaviour
     private bool isPowderTouching = false;
     private float powderContactTime = 0;
 
+    private Coroutine igniteNearbyTablesCoroutine;
+    private Coroutine igniteNearbyStovesCoroutine;
     private void Start()
     {
         if (fireEffect == null)
@@ -21,18 +23,36 @@ public class Table : MonoBehaviour
 
     public void Ignite()
     {
-        _isOnFire = true;
-        fireEffect.Play();
+        IsOnFire = true;
+        if (fireEffect != null)
+        {
+            fireEffect.Play(); // 파티클 재생
+        }
         Debug.Log("이그나이트");
 
-        StartCoroutine(IgniteNearbyTables());
-        StartCoroutine(IgniteNearbyStoves());
+        igniteNearbyTablesCoroutine = StartCoroutine(IgniteNearbyTables());
+        igniteNearbyStovesCoroutine = StartCoroutine(IgniteNearbyStoves());
     }
 
     public void Extinguish()
     {
-        _isOnFire = false;
-        fireEffect.Stop();
+        IsOnFire = false;
+        if (fireEffect != null)
+        {
+            fireEffect.Stop(); // 파티클 정지
+        }
+
+        if (igniteNearbyTablesCoroutine != null)
+        {
+            StopCoroutine(igniteNearbyTablesCoroutine);
+            igniteNearbyTablesCoroutine = null;
+        }
+
+        if (igniteNearbyStovesCoroutine != null)
+        {
+            StopCoroutine(igniteNearbyStovesCoroutine);
+            igniteNearbyStovesCoroutine = null;
+        }
     }
 
     IEnumerator IgniteNearbyTables()
@@ -41,7 +61,7 @@ public class Table : MonoBehaviour
 
         foreach (var table in NearbyTables)
         {
-            if (!table._isOnFire)
+            if (!table.IsOnFire)
             {
                 table.Ignite();
             }
@@ -54,7 +74,7 @@ public class Table : MonoBehaviour
 
         foreach (var stove in NearbyStoves)
         {
-            if (!stove.fireObject._isOnFire)
+            if (stove != null && !stove.IsOnFire)
             {
                 stove.fireObject.MakeFire();
                 stove.StartCoroutine(stove.IgniteNearbyTables());
@@ -64,7 +84,7 @@ public class Table : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if (_isOnFire && other.CompareTag("Powder"))
+        if (IsOnFire && other.CompareTag("Powder"))
         {
             isPowderTouching = true;
             powderContactTime += Time.deltaTime;
@@ -78,14 +98,10 @@ public class Table : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (_isOnFire && other.CompareTag("Powder"))
+        if (IsOnFire && other.CompareTag("Powder"))
         {
             isPowderTouching = false;
             powderContactTime = 0f;
         }
-    }
-    public void SetOnFire(bool isOnFire)
-    {
-        _isOnFire = isOnFire;
     }
 }

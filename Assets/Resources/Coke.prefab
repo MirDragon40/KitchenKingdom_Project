@@ -74,6 +74,7 @@ MonoBehaviour:
   ItemType: 4
   IsDroppable: 0
   CokeObject: {fileID: 7614338842891485007}
+  PV: {fileID: 0}
   CokeRenderer: {fileID: 5424280954798669590}
   ThisCokeMaterial: {fileID: 2100000, guid: ae8d5923de5ea514e95ddf57c6108f10, type: 2}
   ChangeCokeMaterial: {fileID: 2100000, guid: 5294e1b9f82eb50459540445986474b4, type: 2}
@@ -98,6 +99,7 @@ MonoBehaviour:
   FoodPrefab1: {fileID: 0}
   FoodPrefab2: {fileID: 0}
   FoodPrefab3: {fileID: 0}
+  PV: {fileID: 0}
   IsCooking: 0
   IsGrillable: 0
   IsFryable: 0
@@ -122,7 +124,7 @@ MonoBehaviour:
   Group: 0
   prefixField: -1
   Synchronization: 3
-  OwnershipTransfer: 0
+  OwnershipTransfer: 1
   observableSearch: 0
   ObservedComponents:
   - {fileID: -8634069103807543387}
