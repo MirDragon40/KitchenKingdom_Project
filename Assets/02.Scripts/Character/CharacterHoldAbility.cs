@@ -127,7 +127,7 @@ public class CharacterHoldAbility : CharacterAbility
 
             if (holdable != null)
             {
-                Debug.Log("PickUp_Complete");
+               // Debug.Log("PickUp_Complete");
 
                 HoldableItem = holdable;
                 holdable.Hold(_owner, HandTransform);

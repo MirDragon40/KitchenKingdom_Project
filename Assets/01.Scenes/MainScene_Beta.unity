@@ -7581,6 +7581,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8983943682632534526, guid: 596fe3a83e79c75418b0b120934e8209, type: 3}
   m_PrefabInstance: {fileID: 1112392659}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1436514718 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2609837869300703588, guid: c32b7e03142c285419df39e12c4782b6, type: 3}
+  m_PrefabInstance: {fileID: 1591324214}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 942f0ed22415f744f8303d207680a57c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &1443209535 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5498556674941739244, guid: 61a5605c41609634bac5baf8ef0820f1, type: 3}
@@ -8808,6 +8819,7 @@ MonoBehaviour:
   MaxOrderNumber: 5
   NormalOrderPoints: 25
   GeneratedOrderList: []
+  DirtyPlateStand: {fileID: 1436514718}
 --- !u!4 &1746525627
 Transform:
   m_ObjectHideFlags: 0
