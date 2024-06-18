@@ -142,9 +142,9 @@ public class FoodObject : IHoldable, IThrowable
         // 저장한 위치와 회전으로 음식 배치
         /*        transform.position = dropPosition;
                 transform.rotation = dropRotation;*/
+        
 
-
-        transform.parent = null;
+        transform.SetParent(null);
         //각 아이템이 떼어질 때 해줄 초기화 로직
         _holdCharacter = null;
 
@@ -190,7 +190,7 @@ public class FoodObject : IHoldable, IThrowable
                         transform.rotation = Quaternion.identity;
                         if (panObject.GrillingIngrediant == null)
                         {
-                            Place(panObject.PanPlacePositon);
+                            Place(panObject.PanPlacePosition);
                         }
                         colliders = null;
                         break;

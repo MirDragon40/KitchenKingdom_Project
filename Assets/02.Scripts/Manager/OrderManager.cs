@@ -1,4 +1,5 @@
 using Photon.Pun;
+using Photon.Pun.Demo.PunBasics;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Collections;
@@ -16,13 +17,16 @@ public class OrderManager : MonoBehaviourPun
     public int MaxOrderNumber = 5;
     [Header("일반주문서 점수")]
     public int NormalOrderPoints = 25;
-   
+
 
     public List<string> GeneratedOrderList = new List<string>();
 
 
     public Dictionary<string, List<string>> Recipies = new Dictionary<string, List<string>>();
     private PhotonView _pv;
+
+
+    public DirtyPlateStand DirtyPlateStand;
 
 
     private void Awake()
@@ -41,13 +45,13 @@ public class OrderManager : MonoBehaviourPun
 
         Recipies["burger"] = new List<string> { "bread", "patty", "lettuce" };
         Recipies["burgerCoke"] = new List<string> { "bread", "patty", "lettuce", "coke" };
-        Recipies["burgerCokeFry"] = new List<string> { "bread", "patty", "lettuce", "coke","fry" };
+        Recipies["burgerCokeFry"] = new List<string> { "bread", "patty", "lettuce", "coke", "fry" };
 
 
     }
     void Update()
     {
-        
+
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             string orderName = "burger";
@@ -67,6 +71,12 @@ public class OrderManager : MonoBehaviourPun
         {
             MyScrollView.OnSubmitIncorrectPlateEffect();
         }
+
+        if (Input.GetKeyDown(KeyCode.Alpha5))
+        {
+            RPC_AddDirtyPlateNum();
+        }
+
 
 
         if (_stage == 1 && !_isGenerating && _orderCount < MaxOrderNumber && PhotonNetwork.IsMasterClient)
@@ -90,10 +100,11 @@ public class OrderManager : MonoBehaviourPun
         StartCoroutine(GenerateOrder(orderName));
     }
 
+    [PunRPC]
     public bool SubmitOrder(string submittedFood)
     {
         bool HasFoundMatchedItem = false;
-        for (int i = 0; i<GeneratedOrderList.Count; i++)
+        for (int i = 0; i < GeneratedOrderList.Count; i++)
         {
             if (GeneratedOrderList[i] == submittedFood)
             {
@@ -117,7 +128,7 @@ public class OrderManager : MonoBehaviourPun
     public void AddTotalScore(int score)
     {
         GameManager.Instance.TotalScore += score;
-        
+
     }
 
 
@@ -134,6 +145,13 @@ public class OrderManager : MonoBehaviourPun
         float waitTime = Random.Range(MinOrderTimeSpan, MaxOrderTimeSpan);
         yield return new WaitForSeconds(waitTime);
         _isGenerating = false;
+    }
+
+    private void RPC_AddDirtyPlateNum()
+    {
+        PhotonView pv = DirtyPlateStand.GetComponent<PhotonView>();
+        pv.RPC("UpdatePlateNum", RpcTarget.AllBuffered, DirtyPlateStand.DirtyPlateNum + 1);
+
     }
 
 
