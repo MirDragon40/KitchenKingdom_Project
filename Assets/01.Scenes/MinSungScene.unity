@@ -300,6 +300,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 370852572710560357, guid: f1dfd9727d7247b4bb99cac0ec8a435b, type: 3}
+      propertyPath: fireEffect
+      value: 
+      objectReference: {fileID: 1881262623}
     - target: {fileID: 2678483795670061968, guid: f1dfd9727d7247b4bb99cac0ec8a435b, type: 3}
       propertyPath: m_Name
       value: Pan (2)
@@ -369,9 +373,37 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8870465150211464664, guid: f1dfd9727d7247b4bb99cac0ec8a435b, type: 3}
+      propertyPath: PanPlacePosition
+      value: 
+      objectReference: {fileID: 486802289}
+    - target: {fileID: 8870465150211464664, guid: f1dfd9727d7247b4bb99cac0ec8a435b, type: 3}
       propertyPath: PanStartPosition
       value: 
       objectReference: {fileID: 1518645000}
+    - target: {fileID: 8870465150211464664, guid: f1dfd9727d7247b4bb99cac0ec8a435b, type: 3}
+      propertyPath: NearbyTables.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8870465150211464664, guid: f1dfd9727d7247b4bb99cac0ec8a435b, type: 3}
+      propertyPath: NearbyTables.Array.data[0]
+      value: 
+      objectReference: {fileID: 1784679385}
+    - target: {fileID: 8870465150211464664, guid: f1dfd9727d7247b4bb99cac0ec8a435b, type: 3}
+      propertyPath: NearbyTables.Array.data[1]
+      value: 
+      objectReference: {fileID: 1324958273}
+    - target: {fileID: 8870465150211464664, guid: f1dfd9727d7247b4bb99cac0ec8a435b, type: 3}
+      propertyPath: NearbyTables.Array.data[2]
+      value: 
+      objectReference: {fileID: 1500750752}
+    - target: {fileID: 8870465150211464664, guid: f1dfd9727d7247b4bb99cac0ec8a435b, type: 3}
+      propertyPath: NearbyTables.Array.data[3]
+      value: 
+      objectReference: {fileID: 293293992}
+    - target: {fileID: 8870465150211464664, guid: f1dfd9727d7247b4bb99cac0ec8a435b, type: 3}
+      propertyPath: NearbyTables.Array.data[4]
+      value: 
+      objectReference: {fileID: 1909819920}
     m_RemovedComponents:
     - {fileID: 5439033789029369707, guid: f1dfd9727d7247b4bb99cac0ec8a435b, type: 3}
     m_RemovedGameObjects: []
@@ -524,6 +556,11 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 47856100}
   m_Mesh: {fileID: 5080731651295093379, guid: 5707a37165e6cb6468515cb24d9dcc33, type: 3}
+--- !u!198 &66043605 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 3577894712288337792, guid: 55073aa0f5aa99d4a9c9d86c44518107, type: 3}
+  m_PrefabInstance: {fileID: 1094757179}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &70404518 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5498556674941739244, guid: 61a5605c41609634bac5baf8ef0820f1, type: 3}
@@ -2329,6 +2366,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 471008179}
   m_CullTransparentMesh: 1
+--- !u!4 &486802289 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2606031458985759316, guid: f1dfd9727d7247b4bb99cac0ec8a435b, type: 3}
+  m_PrefabInstance: {fileID: 31523737}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &518541134
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2337,6 +2379,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 292883106}
     m_Modifications:
+    - target: {fileID: 5329096209907429438, guid: 61a5605c41609634bac5baf8ef0820f1, type: 3}
+      propertyPath: NearbyTables.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5498556674941739244, guid: 61a5605c41609634bac5baf8ef0820f1, type: 3}
       propertyPath: m_LocalPosition.x
       value: -5.499
@@ -2407,6 +2453,11 @@ Transform:
 Transform:
   m_CorrespondingSourceObject: {fileID: 5498556674941739244, guid: 61a5605c41609634bac5baf8ef0820f1, type: 3}
   m_PrefabInstance: {fileID: 80561715}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &586628026 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 4017290402090673689, guid: f1dfd9727d7247b4bb99cac0ec8a435b, type: 3}
+  m_PrefabInstance: {fileID: 2025766078}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &595222662
 GameObject:
@@ -2716,7 +2767,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _isOnFire: 0
-  fireEffect: {fileID: 0}
+  fireEffect: {fileID: 1539906702}
   NearbyTables:
   - {fileID: 1324958273}
   NearbyStoves: []
@@ -3674,6 +3725,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 146018329}
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+--- !u!4 &925935044 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2606031458985759316, guid: f1dfd9727d7247b4bb99cac0ec8a435b, type: 3}
+  m_PrefabInstance: {fileID: 2025766078}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &950731369
 GameObject:
   m_ObjectHideFlags: 0
@@ -4091,6 +4147,10 @@ PrefabInstance:
       propertyPath: sceneViewId
       value: 36
       objectReference: {fileID: 0}
+    - target: {fileID: 6399313835028673102, guid: 55073aa0f5aa99d4a9c9d86c44518107, type: 3}
+      propertyPath: fireEffect
+      value: 
+      objectReference: {fileID: 66043605}
     - target: {fileID: 7378703333766003518, guid: 55073aa0f5aa99d4a9c9d86c44518107, type: 3}
       propertyPath: m_LocalPosition.x
       value: -5.517
@@ -4480,6 +4540,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 292883106}
     m_Modifications:
+    - target: {fileID: 5329096209907429438, guid: 61a5605c41609634bac5baf8ef0820f1, type: 3}
+      propertyPath: NearbyTables.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5498556674941739244, guid: 61a5605c41609634bac5baf8ef0820f1, type: 3}
       propertyPath: m_LocalPosition.x
       value: -5.499
@@ -5735,6 +5799,10 @@ PrefabInstance:
       propertyPath: sceneViewId
       value: 43
       objectReference: {fileID: 0}
+    - target: {fileID: 6399313835028673102, guid: 55073aa0f5aa99d4a9c9d86c44518107, type: 3}
+      propertyPath: fireEffect
+      value: 
+      objectReference: {fileID: 1539906702}
     - target: {fileID: 7378703333766003518, guid: 55073aa0f5aa99d4a9c9d86c44518107, type: 3}
       propertyPath: m_LocalPosition.x
       value: -5.517
@@ -5786,6 +5854,11 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 727802604}
   m_SourcePrefab: {fileID: 100100000, guid: 55073aa0f5aa99d4a9c9d86c44518107, type: 3}
+--- !u!198 &1539906702 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 3577894712288337792, guid: 55073aa0f5aa99d4a9c9d86c44518107, type: 3}
+  m_PrefabInstance: {fileID: 1521458550}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1549963923
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6996,6 +7069,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1788572048}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!198 &1881262623 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 4017290402090673689, guid: f1dfd9727d7247b4bb99cac0ec8a435b, type: 3}
+  m_PrefabInstance: {fileID: 31523737}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1895857303
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7131,7 +7209,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _isOnFire: 0
-  fireEffect: {fileID: 0}
+  fireEffect: {fileID: 66043605}
   NearbyTables:
   - {fileID: 1500750752}
   NearbyStoves: []
@@ -7237,6 +7315,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 370852572710560357, guid: f1dfd9727d7247b4bb99cac0ec8a435b, type: 3}
+      propertyPath: fireEffect
+      value: 
+      objectReference: {fileID: 586628026}
     - target: {fileID: 2678483795670061968, guid: f1dfd9727d7247b4bb99cac0ec8a435b, type: 3}
       propertyPath: m_Name
       value: Pan (1)
@@ -7306,9 +7388,37 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8870465150211464664, guid: f1dfd9727d7247b4bb99cac0ec8a435b, type: 3}
+      propertyPath: PanPlacePosition
+      value: 
+      objectReference: {fileID: 925935044}
+    - target: {fileID: 8870465150211464664, guid: f1dfd9727d7247b4bb99cac0ec8a435b, type: 3}
       propertyPath: PanStartPosition
       value: 
       objectReference: {fileID: 611877964}
+    - target: {fileID: 8870465150211464664, guid: f1dfd9727d7247b4bb99cac0ec8a435b, type: 3}
+      propertyPath: NearbyTables.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8870465150211464664, guid: f1dfd9727d7247b4bb99cac0ec8a435b, type: 3}
+      propertyPath: NearbyTables.Array.data[0]
+      value: 
+      objectReference: {fileID: 1784679385}
+    - target: {fileID: 8870465150211464664, guid: f1dfd9727d7247b4bb99cac0ec8a435b, type: 3}
+      propertyPath: NearbyTables.Array.data[1]
+      value: 
+      objectReference: {fileID: 1324958273}
+    - target: {fileID: 8870465150211464664, guid: f1dfd9727d7247b4bb99cac0ec8a435b, type: 3}
+      propertyPath: NearbyTables.Array.data[2]
+      value: 
+      objectReference: {fileID: 1500750752}
+    - target: {fileID: 8870465150211464664, guid: f1dfd9727d7247b4bb99cac0ec8a435b, type: 3}
+      propertyPath: NearbyTables.Array.data[3]
+      value: 
+      objectReference: {fileID: 293293992}
+    - target: {fileID: 8870465150211464664, guid: f1dfd9727d7247b4bb99cac0ec8a435b, type: 3}
+      propertyPath: NearbyTables.Array.data[4]
+      value: 
+      objectReference: {fileID: 1909819920}
     m_RemovedComponents:
     - {fileID: 5439033789029369707, guid: f1dfd9727d7247b4bb99cac0ec8a435b, type: 3}
     m_RemovedGameObjects: []
@@ -8560,6 +8670,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TimerTextUI: {fileID: 2079287454378475147}
+  TimerTextColor: {r: 0, g: 0, b: 0, a: 0}
   SpeedUpFireUI: {fileID: 2014254991206864388}
   TimerAnimator: {fileID: 20844018}
   FireAnimator: {fileID: 3264322695334518198}
