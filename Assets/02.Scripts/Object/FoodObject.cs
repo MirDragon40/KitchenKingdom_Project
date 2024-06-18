@@ -127,8 +127,6 @@ public class FoodObject : IHoldable, IThrowable
         transform.parent = handTransform;
         transform.localPosition = Vector3.zero;
         transform.localRotation = Quaternion.identity;
-
-        Debug.Log("Hold!");
     }
 
 

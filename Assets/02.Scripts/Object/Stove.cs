@@ -38,41 +38,45 @@ public class Stove : CookStand
                 PlacedPan = null;
             }
         }
-        if (PlacedPan != null)
+        if (IsPanPlaced && PlacedPan.MyStove == this)
         {
-
-            if (PlacedPan.fireObject._isOnFire)
+            if (PlacedPan != null)
             {
-                if (!fireObject._isOnFire)
-                {
-                    fireObject.MakeFire();
 
-                }
-                else if (isFireExtinguished)
+                if (PlacedPan.fireObject._isOnFire)
                 {
-                    igniteCoroutine = StartCoroutine(IgniteNearbyTables());
+                    if (!fireObject._isOnFire)
+                    {
+                        fireObject.MakeFire();
+
+                    }
+                    else if (isFireExtinguished)
+                    {
+                        igniteCoroutine = StartCoroutine(IgniteNearbyTables());
+                    }
+                }
+                else
+                {
+                    if (igniteCoroutine != null)
+                    {
+                        StopCoroutine(igniteCoroutine);
+                        igniteCoroutine = null;
+                        isFireExtinguished = true;
+                    }
                 }
             }
             else
             {
-                if (igniteCoroutine != null)
+
+                if (fireObject._isOnFire)
                 {
-                    StopCoroutine(igniteCoroutine); 
-                    igniteCoroutine = null;
-                    isFireExtinguished = true;
+                    fireObject.Extinguish();
                 }
             }
-        }
-        else
-        {
-      
-            if (fireObject._isOnFire)
-            {
-                fireObject.Extinguish();
-            }
+
+
         }
 
-   
     }
 
     public IEnumerator IgniteNearbyTables()
