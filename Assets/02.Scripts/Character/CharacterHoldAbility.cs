@@ -113,16 +113,16 @@ public class CharacterHoldAbility : CharacterAbility
                     return;
                 }
 
+
                 Table[] nearbyTables = pan.NearbyTables;
                 foreach (Table table in nearbyTables)
                 {
-                    Stove nearbyStove = table.GetComponentInParent<Stove>();
-                    if (nearbyStove != null && nearbyStove.IsOnFire)
+                    if (table != null && table._isOnFire)
                     {
-                        Debug.Log("Cannot pick up the pan as a nearby stove is on fire.");
                         return; // 팬을 들 수 없도록 반환
                     }
                 }
+
             }
 
             if (holdable != null)
@@ -195,6 +195,17 @@ public class CharacterHoldAbility : CharacterAbility
         if (!IsHolding || HoldableItem == null)
         {
             return;
+        }
+
+        Collider[] colliders = Physics.OverlapSphere(transform.position, 1.0f); // 예시로 1.0f 반경으로 체크
+        foreach (Collider collider in colliders)
+        {
+            Stove stove = collider.GetComponent<Stove>();
+            if (stove != null && stove.IsOnFire)
+            {
+                Debug.Log(000);
+                return;
+            }
         }
 
         //Quaternion placeRotation = Quaternion.identity;
