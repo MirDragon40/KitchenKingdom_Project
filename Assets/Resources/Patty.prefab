@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 3757478980130211427}
   - component: {fileID: -8342433054677339084}
   - component: {fileID: -7492036033876983784}
-  - component: {fileID: 7251022453392405714}
+  - component: {fileID: 1762178573807447212}
   m_Layer: 6
   m_Name: Patty
   m_TagString: Food
@@ -59,6 +59,7 @@ MonoBehaviour:
   FoodPrefab1: {fileID: 5885740718741481365}
   FoodPrefab2: {fileID: 1053155172243632331}
   FoodPrefab3: {fileID: 8769421262871732046}
+  PV: {fileID: 0}
   IsCooking: 0
   IsGrillable: 0
   IsFryable: 0
@@ -131,11 +132,11 @@ MonoBehaviour:
   Group: 0
   prefixField: -1
   Synchronization: 3
-  OwnershipTransfer: 2
+  OwnershipTransfer: 1
   observableSearch: 2
   ObservedComponents:
   - {fileID: -7492036033876983784}
-  - {fileID: 7251022453392405714}
+  - {fileID: 1762178573807447212}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
@@ -155,7 +156,7 @@ MonoBehaviour:
   m_SynchronizeAngularVelocity: 0
   m_TeleportEnabled: 1
   m_TeleportIfDistanceGreaterThan: 0.1
---- !u!114 &7251022453392405714
+--- !u!114 &1762178573807447212
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -168,7 +169,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_SynchronizePosition: 1
-  m_SynchronizeRotation: 1
+  m_SynchronizeRotation: 0
   m_SynchronizeScale: 0
   m_UseLocal: 0
 --- !u!1001 &2121469566277964529

@@ -22,6 +22,13 @@ public class Extinguisher : IHoldable
     }
     public override void Hold(Character character, Transform handTransform)
     {
+        if (PhotonNetwork.IsMasterClient)
+        {
+            if (_pv.OwnerActorNr != character.PhotonView.OwnerActorNr)
+            {
+                _pv.TransferOwnership(character.PhotonView.OwnerActorNr);
+            }
+        }
         _holdCharacter = character;
 
         // 각 아이템이 잡혔을 때 해줄 초기화 로직

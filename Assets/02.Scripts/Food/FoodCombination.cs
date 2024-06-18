@@ -14,16 +14,15 @@ public class FoodCombination : MonoBehaviour
     public bool IsSubmitable;
     private IHoldable _holdableObject;
     public bool IsReadyServe = false;
-    private PhotonView _pv;
+    [HideInInspector]
+    public PhotonView PV;
     private Character _nearbyCharacter;
 
-    public void Awake()
-    {
-    }
+
     private void Start()
     {
         Init();
-        _pv = GetComponent<PhotonView>();
+        PV = GetComponent<PhotonView>();
     }
     public void Init()
     {
@@ -109,37 +108,37 @@ public class FoodCombination : MonoBehaviour
         if (submittedFood.ItemType == EItemType.Food && submittedFood.FoodType == FoodType.Bread && !Ingrediants["bread"])
         {
             //Ingrediants["bread"] = true;
-            _pv.RPC("SetActiveIngrediant", RpcTarget.All, "bread");
+            PV.RPC("SetActiveIngrediant", RpcTarget.All, "bread");
 
             PhotonNetwork.Destroy(submittedFood.gameObject);
             
-            _pv.RPC("RefreshPlate", RpcTarget.All);
+            PV.RPC("RefreshPlate", RpcTarget.All);
         }
         else if (submittedFood.ItemType == EItemType.Food && submittedFood.FoodType == FoodType.Lettuce && !Ingrediants["lettuce"] && submittedFood.State == FoodState.Cut)
         {
-            _pv.RPC("SetActiveIngrediant", RpcTarget.All, "lettuce");
+            PV.RPC("SetActiveIngrediant", RpcTarget.All, "lettuce");
             //Ingrediants["lettuce"] = true;
 
             PhotonNetwork.Destroy(submittedFood.gameObject);
 
-            _pv.RPC("RefreshPlate", RpcTarget.All);
+            PV.RPC("RefreshPlate", RpcTarget.All);
         }
         else if (submittedFood.ItemType == EItemType.Coke && !Ingrediants["coke"])
         {
-            _pv.RPC("SetActiveIngrediant", RpcTarget.All, "coke");
+            PV.RPC("SetActiveIngrediant", RpcTarget.All, "coke");
             //Ingrediants["coke"] = true;
 
             PhotonNetwork.Destroy(submittedFood.gameObject);
 
-            _pv.RPC("RefreshPlate", RpcTarget.All);
+            PV.RPC("RefreshPlate", RpcTarget.All);
         }
         else if (submittedFood.ItemType == EItemType.Food && !Ingrediants["patty"] && submittedFood.State == FoodState.Grilled)
         {
-            _pv.RPC("SetActiveIngrediant", RpcTarget.All, "patty");
+            PV.RPC("SetActiveIngrediant", RpcTarget.All, "patty");
             // Ingrediants["patty"] = true;
             PhotonNetwork.Destroy(submittedFood.gameObject);
 
-            _pv.RPC("RefreshPlate", RpcTarget.All);
+            PV.RPC("RefreshPlate", RpcTarget.All);
 
         }
 

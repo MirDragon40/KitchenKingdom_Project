@@ -376,6 +376,7 @@ MonoBehaviour:
   FoodPrefab1: {fileID: 6204901731045512369}
   FoodPrefab2: {fileID: 6204901731045512369}
   FoodPrefab3: {fileID: 529897316006389098}
+  PV: {fileID: 0}
   IsCooking: 0
   IsGrillable: 0
   IsFryable: 0
@@ -448,7 +449,7 @@ MonoBehaviour:
   Group: 0
   prefixField: -1
   Synchronization: 3
-  OwnershipTransfer: 2
+  OwnershipTransfer: 1
   observableSearch: 2
   ObservedComponents:
   - {fileID: 6380058794730998311}
@@ -468,6 +469,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_SynchronizePosition: 1
-  m_SynchronizeRotation: 1
+  m_SynchronizeRotation: 0
   m_SynchronizeScale: 0
-  m_UseLocal: 1
+  m_UseLocal: 0

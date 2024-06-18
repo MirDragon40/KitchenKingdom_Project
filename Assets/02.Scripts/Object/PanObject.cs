@@ -1,3 +1,4 @@
+using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Mathematics;
@@ -26,6 +27,7 @@ public class PanObject : IHoldable
     public FireObject fireObject;
     public DangerIndicator dangerIndicator;
     public Sprite dangerSprite;
+    private PhotonView _pv;
 
     private bool isPowderTouching = false;
 
@@ -40,6 +42,7 @@ public class PanObject : IHoldable
     public Table[] NearbyTables;
     private void Awake()
     {
+        _pv = GetComponent<PhotonView>();
         BoxCollider = GetComponent<BoxCollider>();
         fireObject = GetComponent<FireObject>();
         dangerIndicator = GetComponentInChildren<DangerIndicator>();
@@ -177,7 +180,18 @@ public class PanObject : IHoldable
 
     public override void Hold(Character character, Transform handTransform)
     {
-       foreach (var table in NearbyTables)
+        if (PhotonNetwork.IsMasterClient)
+        {
+            if (_pv.OwnerActorNr != character.PhotonView.OwnerActorNr)
+            {
+                _pv.TransferOwnership(character.PhotonView.OwnerActorNr);
+                if (GrillingIngrediant != null)
+                {
+                    GrillingIngrediant.PV.TransferOwnership(character.PhotonView.OwnerActorNr);
+                }
+            }
+        }
+        foreach (var table in NearbyTables)
         {
             if (table._isOnFire)
             {
