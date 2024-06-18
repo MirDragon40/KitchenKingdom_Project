@@ -89,7 +89,7 @@ public class OrderManager : MonoBehaviourPun
     {
         StartCoroutine(GenerateOrder(orderName));
     }
-
+    [PunRPC]
     public bool SubmitOrder(string submittedFood)
     {
         bool HasFoundMatchedItem = false;

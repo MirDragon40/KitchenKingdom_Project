@@ -144,7 +144,7 @@ public class FoodObject : IHoldable, IThrowable
                 transform.rotation = dropRotation;*/
 
 
-        transform.parent = null;
+        transform.SetParent(null);
         //각 아이템이 떼어질 때 해줄 초기화 로직
         _holdCharacter = null;
 

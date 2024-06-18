@@ -25,7 +25,6 @@ public class CharacterThrowAbility : CharacterAbility
     private Rigidbody _rigid;
     void Update()
     {
-
         if (_holdAbility.IsHolding && Throwable == null)
         {
             IsThrowable = _holdAbility.HoldableItem.TryGetComponent<IThrowable>(out Throwable);
@@ -43,7 +42,7 @@ public class CharacterThrowAbility : CharacterAbility
             IsThrowable = false;
             Throwable = null;
         }
-        if (IsThrowable && Input.GetKey(KeyCode.LeftControl))
+        if (IsThrowable && Input.GetKey(KeyCode.LeftControl) && _owner.PhotonView.IsMine)
         {
             ThrowingDirectionSprite.SetActive(true);
         }
