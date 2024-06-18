@@ -13,7 +13,10 @@ public class Table : MonoBehaviour
 
     private void Start()
     {
-        fireEffect = GetComponentInChildren<ParticleSystem>();
+        if (fireEffect == null)
+        {
+            fireEffect = GetComponentInChildren<ParticleSystem>();
+        }
     }
 
     public void Ignite()
@@ -81,5 +84,8 @@ public class Table : MonoBehaviour
             powderContactTime = 0f;
         }
     }
-
+    public void SetOnFire(bool isOnFire)
+    {
+        _isOnFire = isOnFire;
+    }
 }

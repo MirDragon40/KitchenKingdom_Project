@@ -12,6 +12,7 @@ public class PanObject : IHoldable
     public Slider GrillingSlider;
     public BoxCollider BoxCollider;
     public Stove MyStove;
+    public Table table;
 
     public GameObject PlusImage;
 
@@ -35,6 +36,8 @@ public class PanObject : IHoldable
     public Transform PanStartPosition; // 팬 초기위치
 
     private bool hasCaughtFireOnce = false;
+
+    public Table[] NearbyTables;
     private void Awake()
     {
         BoxCollider = GetComponent<BoxCollider>();
@@ -174,6 +177,14 @@ public class PanObject : IHoldable
 
     public override void Hold(Character character, Transform handTransform)
     {
+       foreach (var table in NearbyTables)
+        {
+            if (table._isOnFire)
+            {
+                Debug.Log("가까운 책상에 불이 나서 팬을 들 수 없습니다.");
+                return;
+            }
+        }
         GetComponent<Rigidbody>().isKinematic = true;
         transform.parent = handTransform;
         transform.localPosition = new Vector3(0, 0, 0.3f);

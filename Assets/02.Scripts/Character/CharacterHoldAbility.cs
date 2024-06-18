@@ -110,7 +110,18 @@ public class CharacterHoldAbility : CharacterAbility
                 Stove stove = pan.GetComponentInParent<Stove>();
                 if (stove != null && stove.IsOnFire)
                 {
-                    continue;
+                    return;
+                }
+
+                Table[] nearbyTables = pan.NearbyTables;
+                foreach (Table table in nearbyTables)
+                {
+                    Stove nearbyStove = table.GetComponentInParent<Stove>();
+                    if (nearbyStove != null && nearbyStove.IsOnFire)
+                    {
+                        Debug.Log("Cannot pick up the pan as a nearby stove is on fire.");
+                        return; // 팬을 들 수 없도록 반환
+                    }
                 }
             }
 

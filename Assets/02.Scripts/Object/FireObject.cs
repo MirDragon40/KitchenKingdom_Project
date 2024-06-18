@@ -10,11 +10,12 @@ public class FireObject : MonoBehaviour
 
     private void Start()
     {
-        fireEffect = GetComponentInChildren<ParticleSystem>();
+    
     }
 
     public void MakeFire()
     {
+        Debug.Log(gameObject.name);
         _isOnFire = true;
         fireEffect.Play();
     }
