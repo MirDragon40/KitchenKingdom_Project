@@ -198,6 +198,7 @@ public class CharacterHoldAbility : CharacterAbility
         }
 
         Collider[] colliders = Physics.OverlapSphere(transform.position, 1.0f); // 예시로 1.0f 반경으로 체크
+        bool canPlace = true;
         foreach (Collider collider in colliders)
         {
             Stove stove = collider.GetComponent<Stove>();
@@ -206,12 +207,14 @@ public class CharacterHoldAbility : CharacterAbility
             if (stove != null && stove.IsOnFire)
             {
                 Debug.Log("Stove is on fire! Cannot place pan.");
-                return;
+                canPlace = false;
+                break;
             }
             else if (table != null && table.IsOnFire)
             {
                 Debug.Log("Table is on fire! Cannot place pan.");
-                return;
+                canPlace = false;
+                break;
             }
         }
 

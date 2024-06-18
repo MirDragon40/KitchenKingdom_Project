@@ -26,7 +26,7 @@ public class Stove : CookStand
         base.Update();
         if (PlacedItem != null)
         {
-            if (PlacedItem.TryGetComponent<PanObject>(out PlacedPan))
+            if (PlacedItem != null && PlacedItem.TryGetComponent<PanObject>(out PlacedPan))
             {
                 if (PlacedPan.MyStove == null)
                 {
@@ -71,6 +71,12 @@ public class Stove : CookStand
                 if (fireObject._isOnFire)
                 {
                     fireObject.Extinguish();
+                    isFireExtinguished = true;
+                    if (igniteCoroutine != null)
+                    {
+                        StopCoroutine(igniteCoroutine);
+                        igniteCoroutine = null;
+                    }
                 }
             }
 
@@ -91,6 +97,11 @@ public class Stove : CookStand
                 table.Ignite();
             }
         }
+        // 코루틴이 끝나면 초기화
+        igniteCoroutine = null;
+        isFireExtinguished = true;
     }
+
+
 
 }
