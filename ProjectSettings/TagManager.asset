@@ -15,6 +15,7 @@ TagManager:
   - DirtyPlates
   - FireTable
   - Stove
+  - Sound
   layers:
   - Default
   - TransparentFX

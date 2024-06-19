@@ -1,11 +1,11 @@
 using Photon.Pun;
-using System.Collections; 
-using System.Collections.Generic; 
-using UnityEngine; 
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 
-public class DirtyPlateStand : MonoBehaviourPun 
+public class DirtyPlateStand : MonoBehaviourPun
 {
-    public List<GameObject> DirtyPlates; 
+    public List<GameObject> DirtyPlates;
     public int DirtyPlateNum;
 
     private CharacterHoldAbility characterHoldAbility;
@@ -13,15 +13,15 @@ public class DirtyPlateStand : MonoBehaviourPun
 
     private DirtyPlate dirtyPlate;
 
-    private bool isPlayerInTrigger = false; 
+    private bool isPlayerInTrigger = false;
     private bool isPlayerHoldingDirtyPlate = false;
 
 
     // 플레이어가 근처에 있는지 여부
     private bool isPlayerNearby => _nearbyCharacter != null;
-    
 
-    private PhotonView _pv;
+
+    public PhotonView PV;
 
     private void Awake()
     {
@@ -30,10 +30,10 @@ public class DirtyPlateStand : MonoBehaviourPun
             plate.SetActive(false);
         }
 
-        _pv = GetComponent<PhotonView>();
+        PV = GetComponent<PhotonView>();
     }
 
-    private void Start() 
+    private void Start()
     {
         // 처음 시작할때의 접시 개수 설정
         DirtyPlateNum = 0;
@@ -43,7 +43,7 @@ public class DirtyPlateStand : MonoBehaviourPun
 
     private void Update()
     {
-        if (!isPlayerNearby) 
+        if (!isPlayerNearby)
         {
             return;
         }
@@ -63,18 +63,18 @@ public class DirtyPlateStand : MonoBehaviourPun
         }
     }
 
-    private void OnTriggerEnter(Collider other) 
+    private void OnTriggerEnter(Collider other)
     {
-        if (isPlayerNearby) 
+        if (isPlayerNearby)
         {
             return;
         }
 
         if (other.CompareTag("Player"))
         {
-            characterHoldAbility = other.GetComponent<CharacterHoldAbility>(); 
+            characterHoldAbility = other.GetComponent<CharacterHoldAbility>();
             _nearbyCharacter = other.GetComponent<Character>();
-            isPlayerInTrigger = true; 
+            isPlayerInTrigger = true;
 
             UpdateDirtyPlateStatus(); // 더러운 접시 상태 업데이트
         }
@@ -88,7 +88,7 @@ public class DirtyPlateStand : MonoBehaviourPun
         }
     }
 
-    private void OnTriggerExit(Collider other) 
+    private void OnTriggerExit(Collider other)
     {
         if (other.CompareTag("Player"))
         {
@@ -97,36 +97,36 @@ public class DirtyPlateStand : MonoBehaviourPun
 
             dirtyPlate = null;
             characterHoldAbility = null;
-            _nearbyCharacter = null; 
+            _nearbyCharacter = null;
         }
     }
 
-    private void GiveDirtyPlates() 
+    private void GiveDirtyPlates()
     {
         // 더러운 접시가 남아있고 근처 캐릭터가 있을 때
-        if (DirtyPlateNum > 0 && _nearbyCharacter != null) 
+        if (DirtyPlateNum > 0 && _nearbyCharacter != null)
         {
             UpdateDirtyPlateStatus();
 
             // 플레이어가 더러운 접시를 들고 있을 때
-            if (isPlayerHoldingDirtyPlate) 
+            if (isPlayerHoldingDirtyPlate)
             {
 
                 // 플레이어가 들고 있는 접시 개수에 더러운 접시 개수 추가
-                dirtyPlate.DirtyPlateNum += DirtyPlateNum; 
+                dirtyPlate.DirtyPlateNum += DirtyPlateNum;
             }
-            else 
+            else
             {
                 _nearbyCharacter.PhotonView.RPC("RequestSpawnDirtyPlateOnHand", RpcTarget.MasterClient); // 마스터 클라이언트에게 RPC 요청
                 dirtyPlate = characterHoldAbility.gameObject.GetComponentInChildren<DirtyPlate>(); // 새로 생성된 더러운 접시 객체 가져오기
 
-                if (dirtyPlate != null) 
+                if (dirtyPlate != null)
                 {
                     dirtyPlate.DirtyPlateNum = DirtyPlateNum;
                 }
             }
 
-            _pv.RPC(nameof(UpdatePlateNum), RpcTarget.AllBuffered, 0); // 모든 클라이언트에게 접시 개수 업데이트 RPC 호출
+            PV.RPC(nameof(UpdatePlateNum), RpcTarget.AllBuffered, 0); // 모든 클라이언트에게 접시 개수 업데이트 RPC 호출
             UpdatePlates(); // 접시 상태 업데이트
         }
     }
