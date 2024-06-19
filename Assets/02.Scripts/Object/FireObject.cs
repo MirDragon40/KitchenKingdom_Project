@@ -8,8 +8,10 @@ public class FireObject : MonoBehaviour
     private bool isPowderTouching = false;
     public float contactTime = 0;
 
+    public SoundManager soundManager;
     private void Start()
     {
+        soundManager = FindObjectOfType<SoundManager>();
     }
 
     public void MakeFire()

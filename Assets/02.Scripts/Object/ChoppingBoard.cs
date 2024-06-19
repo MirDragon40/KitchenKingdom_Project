@@ -11,6 +11,7 @@ public class ChoppingBoard : CookStand
     private bool _isPossibleChopping = false;
     public OnChoppingBoard_Collider onChoppingBoard;
     private PhotonView _photonView;
+    
 
     private void Awake()
     {
@@ -33,6 +34,7 @@ public class ChoppingBoard : CookStand
                 }
                 _photonView.RPC("StartChoppingRPC", RpcTarget.All, 3.0f);
             }
+            
         }
     }
 

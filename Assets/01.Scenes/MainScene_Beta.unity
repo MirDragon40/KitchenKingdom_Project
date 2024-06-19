@@ -367,11 +367,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 39586274}
   m_CullTransparentMesh: 1
---- !u!1 &42070920 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7935356144928406868, guid: 61a5605c41609634bac5baf8ef0820f1, type: 3}
-  m_PrefabInstance: {fileID: 701863020}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &47856100
 GameObject:
   m_ObjectHideFlags: 0
@@ -3540,10 +3535,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 7935356144928406868, guid: 61a5605c41609634bac5baf8ef0820f1, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1909819927}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 61a5605c41609634bac5baf8ef0820f1, type: 3}
 --- !u!1 &712349124
 GameObject:
@@ -5235,6 +5227,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   IsOnFire: 0
   fireEffect: {fileID: 228785442}
+  soundManager: {fileID: 0}
   NearbyTables:
   - {fileID: 1500750752}
   NearbyStoves: []
@@ -5369,8 +5362,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d523cd7d79c438c43ae16095b6d79227, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ReadyFont: {fileID: 689301577}
-  StartFont: {fileID: 892712449}
+  ReadyText: {fileID: 689301577}
+  StartText: {fileID: 892712449}
 --- !u!1 &1106267567
 GameObject:
   m_ObjectHideFlags: 0
@@ -6695,6 +6688,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 292883106}
     m_Modifications:
+    - target: {fileID: 5329096209907429438, guid: 61a5605c41609634bac5baf8ef0820f1, type: 3}
+      propertyPath: soundManager
+      value: 
+      objectReference: {fileID: 1382118747}
     - target: {fileID: 5329096209907429438, guid: 61a5605c41609634bac5baf8ef0820f1, type: 3}
       propertyPath: NearbyTables.Array.data[0]
       value: 
@@ -8705,6 +8702,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   IsOnFire: 0
   fireEffect: {fileID: 563996358}
+  soundManager: {fileID: 0}
   NearbyTables:
   - {fileID: 1324958273}
   NearbyStoves: []
@@ -9534,28 +9532,12 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5329096209907429438, guid: 61a5605c41609634bac5baf8ef0820f1, type: 3}
   m_PrefabInstance: {fileID: 701863020}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 42070920}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 363aef87f6ff8a347b101ad47fb838f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1909819927
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 42070920}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2436eae4429806947a16ae5569b8d04b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _isOnFire: 0
-  fireEffect: {fileID: 0}
-  contactTime: 0
-  soundManager: {fileID: 0}
 --- !u!1001 &1982346316
 PrefabInstance:
   m_ObjectHideFlags: 0

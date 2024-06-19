@@ -13,6 +13,7 @@ public class PanObject : IHoldable
     public BoxCollider BoxCollider;
     public Stove MyStove;
     public Table table;
+    public SoundManager soundManager;
 
     public GameObject PlusImage;
 
@@ -44,6 +45,7 @@ public class PanObject : IHoldable
         fireObject = GetComponent<FireObject>();
         dangerIndicator = GetComponentInChildren<DangerIndicator>();
         FireSlider.gameObject.SetActive(false);
+        soundManager = FindObjectOfType<SoundManager>();
     }
     private void Start()
     {
@@ -96,11 +98,8 @@ public class PanObject : IHoldable
                         fireObject.MakeFire();
                         FireSlider.gameObject.SetActive(true);
                         hasCaughtFireOnce = true;
-                    }
-                    else if (GrillingIngrediant.CookProgress < 3f && fireObject._isOnFire)
-                    {
-                        fireObject.Extinguish();
-                        FireSlider.gameObject.SetActive(false);
+
+                        soundManager.PlayFireSound();
                     }
                 }
 
@@ -130,11 +129,6 @@ public class PanObject : IHoldable
         {
             PlusImage.SetActive(true);
 
-            // 팬이 불타고 있으면 불 끄기
-            if (fireObject._isOnFire)
-            {
-                fireObject.Extinguish();
-            }
 
             // 음식 그릴링 중단
             if (GrillingIngrediant != null)
@@ -270,6 +264,7 @@ public class PanObject : IHoldable
             if (fireObject.contactTime >= 2f)
             {
                 fireObject.Extinguish();
+                soundManager.StopFireSound();
             }
         }
     }
