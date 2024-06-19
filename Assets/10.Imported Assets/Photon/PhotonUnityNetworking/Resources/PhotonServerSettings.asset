@@ -85,6 +85,10 @@ MonoBehaviour:
   - SubmitIngrediant
   - SubmitPlate
   - SubmitOrder
+  - ExtinguishRPC
+  - MakeFireRPC
+  - RPC_IgniteNearbyTables
+  - RPC_StopIgniteCoroutine
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1
