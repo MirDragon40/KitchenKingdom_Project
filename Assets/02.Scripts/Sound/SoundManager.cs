@@ -1,14 +1,18 @@
+using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SoundManager : MonoBehaviour
+public class SoundManager : MonoBehaviourPun
+
 {
     public AudioClip[] audioClips;
     public AudioClip bgmClip;
 
     public AudioSource bgmSource;
     private Dictionary<string, AudioSource> audioSources = new Dictionary<string, AudioSource>();
+
+    private PhotonView _photonView;
 
     private void Awake()
     {
@@ -18,6 +22,14 @@ public class SoundManager : MonoBehaviour
         bgmSource.loop = true;
         bgmSource.clip = bgmClip;
         bgmSource.Play();
+
+        _photonView = GetComponent<PhotonView>();
+
+        // PhotonView가 로컬 플레이어의 것이 아니라면 해당 GameObject를 비활성화합니다.
+        if (!_photonView.IsMine)
+        {
+            gameObject.SetActive(false);
+        }
     }
 
     public AudioClip GetAudioClip(string clipname)
@@ -29,7 +41,7 @@ public class SoundManager : MonoBehaviour
         }
         return null;
     }
-
+    [PunRPC]
     public void PlayAudio(string clipName, bool loop = false)
     {
         if (!audioSources.ContainsKey(clipName))
@@ -39,6 +51,8 @@ public class SoundManager : MonoBehaviour
             audioSource.clip = GetAudioClip(clipName);
             audioSource.loop = loop;
             audioSources.Add(clipName, audioSource);
+
+            photonView.RPC("PlayAudioRPC", RpcTarget.All, clipName);
         }
 
         AudioSource source = audioSources[clipName];
@@ -56,11 +70,11 @@ public class SoundManager : MonoBehaviour
             StartCoroutine(FadeOutAndDestroy(source, clipName));
         }
     }
-
+    [PunRPC]
     private IEnumerator FadeOutAndDestroy(AudioSource source, string clipName)
     {
 
-        float fadeOutDuration = 1.0f;
+        float fadeOutDuration = 0.1f;
         float startVolume = source.volume;
 
 

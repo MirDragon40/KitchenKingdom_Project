@@ -56,6 +56,7 @@ MonoBehaviour:
   IsDroppable: 0
   State: 0
   FoodType: 2
+  soundManager: {fileID: 0}
   FoodPrefab1: {fileID: 5885740718741481365}
   FoodPrefab2: {fileID: 1053155172243632331}
   FoodPrefab3: {fileID: 8769421262871732046}

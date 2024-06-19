@@ -24,6 +24,7 @@ public class FoodObject : IHoldable, IThrowable
     public FoodState State;
     public FoodType FoodType;
 
+    public SoundManager soundManager;
 
     public GameObject FoodPrefab1;
     public GameObject FoodPrefab2;
@@ -61,6 +62,7 @@ public class FoodObject : IHoldable, IThrowable
         State = FoodState.Raw;
         _rigidbody = GetComponent<Rigidbody>();
         colliderThis = GetComponent<BoxCollider>();
+        soundManager = FindAnyObjectByType<SoundManager>();
 
         CookProgress = 0f;
 
@@ -241,7 +243,7 @@ public class FoodObject : IHoldable, IThrowable
             colliderThis.enabled = false;
 
             CookProgress += Time.deltaTime / CuttingTime; // 3초동안 CookProgress 증가
-            CookProgress = Mathf.Clamp(CookProgress, 0f, 1.1f);
+            CookProgress = Mathf.Clamp(CookProgress, 0f, 1f);
 
             if (CookProgress >= 0.6f && FoodPrefab1.activeSelf)
             {
@@ -271,7 +273,6 @@ public class FoodObject : IHoldable, IThrowable
 
             CookProgress += Time.deltaTime / BakeTime;
             CookProgress = Mathf.Clamp(CookProgress, 0f, 3f);
-
             if (State == FoodState.Raw && CookProgress >= 1f && FoodPrefab1.activeSelf)
             {
                 FoodPrefab1.SetActive(false);
@@ -328,6 +329,7 @@ public class FoodObject : IHoldable, IThrowable
         {
             IsCooking = true;
             cookingCoroutine = StartCoroutine(CookPatty_Coroutine());
+            soundManager.PlayAudio("Patty",true);
         }
     }
 
@@ -338,6 +340,7 @@ public class FoodObject : IHoldable, IThrowable
         if (cookingCoroutine != null)
         {
             StopCoroutine(cookingCoroutine);
+            soundManager.StopAudio("Patty",false);
             cookingCoroutine = null;
         }
     }

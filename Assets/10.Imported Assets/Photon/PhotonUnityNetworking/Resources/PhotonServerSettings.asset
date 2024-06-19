@@ -89,6 +89,8 @@ MonoBehaviour:
   - MakeFireRPC
   - RPC_IgniteNearbyTables
   - RPC_StopIgniteCoroutine
+  - FadeOutAndDestroy
+  - PlayAudio
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1
