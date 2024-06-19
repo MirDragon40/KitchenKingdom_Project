@@ -75,13 +75,11 @@ public class CharacterMoveAbility : CharacterAbility
         {
           //  WalkEffectPlay();
             _pv.RPC("WalkEffectPlay", RpcTarget.All);
-            soundManager.PlayAudio("Walk",true);
         }
         else if (_dirMagnitude == 0 && PowderEffect.isPlaying)
         {
            // WalkEffectStop();
             _pv.RPC("WalkEffectStop", RpcTarget.All);
-            soundManager.StopAudio("Walk",false);
         }
 
         // 이동하는 방향을 바라보도록 회전
@@ -94,11 +92,7 @@ public class CharacterMoveAbility : CharacterAbility
         if (Input.GetKeyDown(KeyCode.LeftAlt) && !isDashing)
         {
             DashPlay();
-            soundManager.PlayAudio("Run", true);
-        }
-        else
-        {
-            soundManager.StopAudio("Run",false);
+
         }
     }
     [PunRPC]
