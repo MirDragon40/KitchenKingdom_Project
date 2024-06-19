@@ -12,6 +12,8 @@ public class ChoppingBoard : CookStand
     public OnChoppingBoard_Collider onChoppingBoard;
     private PhotonView _photonView;
 
+    
+
     private void Awake()
     {
         _photonView = GetComponent<PhotonView>();
@@ -25,7 +27,7 @@ public class ChoppingBoard : CookStand
 
         if (_isPossibleChopping && onChoppingBoard.FoodOnBoard != null)
         {
-            if (Input.GetKeyDown(KeyCode.LeftControl))
+            if (Input.GetKeyDown(KeyCode.LeftControl) && PlacedItem != null)
             {
                 if (fillSliderCoroutine != null)
                 {
@@ -96,6 +98,7 @@ public class ChoppingBoard : CookStand
             }
         }
     }
+
 
     [PunRPC]
     private void StopChoppingRPC()
