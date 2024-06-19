@@ -221,11 +221,11 @@ public class PanObject : IHoldable
 
             if (fireObject._isOnFire)
             {
-                MyStove.fireObject.MakeFire();
+                MyStove.fireObject.RequestMakeFire();
             }
             else
             {
-                MyStove.fireObject.Extinguish();
+                MyStove.fireObject.RequestExtinguish();
             }
         }
     }

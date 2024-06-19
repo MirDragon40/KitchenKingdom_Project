@@ -3535,6 +3535,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 7935356144928406868, guid: 61a5605c41609634bac5baf8ef0820f1, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1909819927}
+    - targetCorrespondingSourceObject: {fileID: 7935356144928406868, guid: 61a5605c41609634bac5baf8ef0820f1, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1909819928}
   m_SourcePrefab: {fileID: 100100000, guid: 61a5605c41609634bac5baf8ef0820f1, type: 3}
 --- !u!4 &708427588 stripped
 Transform:
@@ -5386,6 +5389,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8fadd84b9de3814ab6c28bbc0e6622e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1070576595
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 192859557}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 52
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!1 &1090696729
 GameObject:
   m_ObjectHideFlags: 0
@@ -6269,6 +6294,10 @@ PrefabInstance:
       propertyPath: fireEffect
       value: 
       objectReference: {fileID: 563996358}
+    - target: {fileID: 6603206696403277271, guid: 55073aa0f5aa99d4a9c9d86c44518107, type: 3}
+      propertyPath: sceneViewId
+      value: 48
+      objectReference: {fileID: 0}
     - target: {fileID: 7039993099648873508, guid: 55073aa0f5aa99d4a9c9d86c44518107, type: 3}
       propertyPath: NearbyTables.Array.size
       value: 1
@@ -6331,6 +6360,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 2046235622856534948, guid: 55073aa0f5aa99d4a9c9d86c44518107, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1715679744}
+    - targetCorrespondingSourceObject: {fileID: 2046235622856534948, guid: 55073aa0f5aa99d4a9c9d86c44518107, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1715679747}
   m_SourcePrefab: {fileID: 100100000, guid: 55073aa0f5aa99d4a9c9d86c44518107, type: 3}
 --- !u!1001 &1238174327
 PrefabInstance:
@@ -7761,6 +7793,10 @@ PrefabInstance:
       propertyPath: fireEffect
       value: 
       objectReference: {fileID: 228785442}
+    - target: {fileID: 6603206696403277271, guid: 55073aa0f5aa99d4a9c9d86c44518107, type: 3}
+      propertyPath: sceneViewId
+      value: 49
+      objectReference: {fileID: 0}
     - target: {fileID: 7378703333766003518, guid: 55073aa0f5aa99d4a9c9d86c44518107, type: 3}
       propertyPath: m_LocalPosition.x
       value: -5.517
@@ -7811,6 +7847,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 2046235622856534948, guid: 55073aa0f5aa99d4a9c9d86c44518107, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1070576593}
+    - targetCorrespondingSourceObject: {fileID: 2046235622856534948, guid: 55073aa0f5aa99d4a9c9d86c44518107, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1070576595}
   m_SourcePrefab: {fileID: 100100000, guid: 55073aa0f5aa99d4a9c9d86c44518107, type: 3}
 --- !u!1 &1396489272
 GameObject:
@@ -8901,6 +8940,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8fadd84b9de3814ab6c28bbc0e6622e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1715679747
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1715679735}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 51
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!1 &1717404923
 GameObject:
   m_ObjectHideFlags: 0
@@ -9866,6 +9927,28 @@ MonoBehaviour:
   fireEffect: {fileID: 0}
   contactTime: 0
   soundManager: {fileID: 0}
+--- !u!114 &1909819928
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 42070920}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 50
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!224 &1954804375 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 8827348115579374974, guid: b9ef09793d1751d4385da8e2b378132a, type: 3}

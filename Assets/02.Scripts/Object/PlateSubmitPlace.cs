@@ -54,7 +54,7 @@ public class PlateSubmitPlace : MonoBehaviour
         {
             ShowScoreUI(OrderManager.Instance.NormalOrderPoints);
         }
-        if (_pv.IsMine)
+        if (PhotonNetwork.IsMasterClient)
         {
             PhotonNetwork.Destroy(_foodCombo.gameObject);
         }
