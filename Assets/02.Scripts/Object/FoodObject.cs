@@ -276,18 +276,10 @@ public class FoodObject : IHoldable, IThrowable
             {
                 FoodPrefab1.SetActive(false);
                 FoodPrefab2.SetActive(true);
+                
                 State = FoodState.Grilled; // 수정: 상태를 Grilled로 변경
             }
-            /*            if (State == FoodState.Grilled && CookProgress >= 2f && CookProgress < 2.9f && FoodPrefab2.activeSelf)
-                        {
-                            // DangerIndicator 컴포넌트의 ShowDangerInRange 메서드를 사용하여 경고창을 표시합니다.
-                            dangerIndicator.ShowDangerIndicator(dangerSprite);
-                        }
-                        else
-                        {
-                            // 그 외의 경우에는 경고창을 숨깁니다.
-                            dangerIndicator.HideDangerIndicator();
-                        }*/
+
             if (State == FoodState.Grilled && CookProgress >= 3f && FoodPrefab2.activeSelf)
             {
                 FoodPrefab2.SetActive(false);

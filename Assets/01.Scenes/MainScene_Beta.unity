@@ -7530,6 +7530,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   audioClips:
   - {fileID: 8300000, guid: 447e97f44e7d0fd4eb6ddec82c319992, type: 3}
+  - {fileID: 8300000, guid: 1ea1e403474063c4ca7b36494c0bb93a, type: 3}
   bgmClip: {fileID: 0}
   bgmSource: {fileID: 0}
 --- !u!4 &1382118748

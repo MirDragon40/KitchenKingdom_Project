@@ -75,9 +75,9 @@ public class PanObject : IHoldable
                     if (GrillingIngrediant != newGrillingIngredient)
                     {
                         GrillingIngrediant = newGrillingIngredient;
+                     
                         hasCaughtFireOnce = false;
                     }
-
                     GrillingIngrediant.StartGrilling();
                     GrillingSlider.gameObject.SetActive(true);
                     GrillingSlider.value = GrillingIngrediant.CookProgress;
