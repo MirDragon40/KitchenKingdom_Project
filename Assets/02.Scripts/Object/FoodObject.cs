@@ -91,7 +91,11 @@ public class FoodObject : IHoldable, IThrowable
 
     private void Update()
     {
-        
+        if(_holdCharacter != null)
+        {
+            transform.localPosition = Vector3.zero;
+            transform.localRotation = Quaternion.identity;
+        }
 
         if (IsCooking && cookingCoroutine == null)
         {
@@ -114,7 +118,10 @@ public class FoodObject : IHoldable, IThrowable
     {
         if(PhotonNetwork.IsMasterClient)
         {
-            _photonView.TransferOwnership(character.PhotonView.OwnerActorNr);
+            if (_photonView.OwnerActorNr != character.PhotonView.OwnerActorNr)
+            {
+                _photonView.TransferOwnership(character.PhotonView.OwnerActorNr);
+            }
         }
 
         _rigidbody.isKinematic = true;

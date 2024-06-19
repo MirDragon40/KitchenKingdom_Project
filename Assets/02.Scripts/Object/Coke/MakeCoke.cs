@@ -39,6 +39,7 @@ public class MakeCoke : MonoBehaviour
 
     private void SpawnCoke() 
     {
-        PhotonNetwork.Instantiate("Coke", CokeSpawnPoint.position, Quaternion.identity);
+        GameObject newCoke = PhotonNetwork.Instantiate("Coke", CokeSpawnPoint.position, Quaternion.identity);
+        newCoke.transform.parent = CokeSpawnPoint;
     }
 }

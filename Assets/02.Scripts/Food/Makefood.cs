@@ -50,7 +50,7 @@ public class Makefood : MonoBehaviourPun
                 {
                     //SpawnFood(FoodType.ToString(), spawnPoint.position, spawnPoint.rotation);
                     // 룸 오브젝트 생성은 방장만이 할 수 있으므로 -> 방장에게만 요청한다.
-                   _pv.RPC(nameof(RequestSpawnFood), RpcTarget.MasterClient, FoodType.ToString(), spawnPoint.position, spawnPoint.rotation);
+                   _pv.RPC(nameof(RequestSpawnFood), RpcTarget.MasterClient, FoodType.ToString(), _nearbyCharacter.PhotonView.ViewID, _nearbyCharacter.PhotonView.OwnerActorNr, spawnPoint.position, spawnPoint.rotation);
                     _nearbyCharacter.GetComponent<Animator>().SetBool("Carry", true);
                     StartCoroutine(BoxOpenAnimation());
                     //_nearbyCharacter = null;
@@ -85,7 +85,7 @@ public class Makefood : MonoBehaviourPun
     }
 
     [PunRPC]
-    public void RequestSpawnFood(string foodName, Vector3 position, Quaternion rotation)
+    public void RequestSpawnFood(string foodName, int characterViewID, int actorNumber, Vector3 position, Quaternion rotation)
     {
         if(PhotonNetwork.IsMasterClient == false)
         {
@@ -101,6 +101,9 @@ public class Makefood : MonoBehaviourPun
             // 룸에 종속되는 룸 오브젝트 생성 <- '방장'만 할 수 있다.
             //GameObject food = PhotonNetwork.InstantiateRoomObject(foodPrefab.name, position, rotation);
             GameObject food = PhotonNetwork.InstantiateRoomObject(foodName, position, rotation);
+            food.GetComponent<PhotonView>().TransferOwnership(actorNumber);
+
+
             // 방장이 룸 오브젝트를 생성하면 자동으로 나머지 컴퓨터에서도 생성된다 -> 동기화
 
 
@@ -116,7 +119,7 @@ public class Makefood : MonoBehaviourPun
 
                 // Answer: RPC를 이용해 모든 컴퓨터들에게 실행해준다.
                 // RPC에서 허용 가능한 매개변수 자료형 -> 숫자, 문자, 벡터, 쿼터니언이므로 viewID를 넘겨준다.
-                _pv.RPC(nameof(ResponseHold), RpcTarget.AllBuffered, food.GetComponent<PhotonView>().ViewID, _nearbyCharacter.PhotonView.ViewID);
+                _pv.RPC(nameof(ResponseHold), RpcTarget.AllBuffered, food.GetComponent<PhotonView>().ViewID, characterViewID);
             }
         }
     }
