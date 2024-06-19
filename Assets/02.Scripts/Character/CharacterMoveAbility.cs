@@ -18,17 +18,20 @@ public class CharacterMoveAbility : CharacterAbility
 
     private CharacterController _characterController;
     private Animator _animator;
+    public SoundManager soundManager;
 
     public ParticleSystem PowderEffect;
     public ParticleSystem PowderEffect_Dash;
 
     private bool isDashing = false;
 
+
     private void Start()
     {
         _characterController = GetComponent<CharacterController>();
         _animator = GetComponent<Animator>();
         _pv = GetComponent<PhotonView>();
+        soundManager = FindObjectOfType<SoundManager>();
 
         MoveSpeed = 5f;
         DashSpeed = 7f;
@@ -72,11 +75,13 @@ public class CharacterMoveAbility : CharacterAbility
         {
           //  WalkEffectPlay();
             _pv.RPC("WalkEffectPlay", RpcTarget.All);
+            soundManager.PlayAudio("Walk",true);
         }
         else if (_dirMagnitude == 0 && PowderEffect.isPlaying)
         {
            // WalkEffectStop();
             _pv.RPC("WalkEffectStop", RpcTarget.All);
+            soundManager.StopAudio("Walk",false);
         }
 
         // 이동하는 방향을 바라보도록 회전
@@ -89,6 +94,11 @@ public class CharacterMoveAbility : CharacterAbility
         if (Input.GetKeyDown(KeyCode.LeftAlt) && !isDashing)
         {
             DashPlay();
+            soundManager.PlayAudio("Run", true);
+        }
+        else
+        {
+            soundManager.StopAudio("Run",false);
         }
     }
     [PunRPC]
