@@ -160,7 +160,11 @@ public class FoodObject : IHoldable, IThrowable
 
     public new void Destroy()
     {
-        Destroy(gameObject);
+        if (_photonView.IsMine)
+        {
+
+            PhotonNetwork.Destroy(gameObject);
+        }
     }
 
     public void ThrowObject(Vector3 direction, float throwPower)
