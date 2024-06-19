@@ -24,6 +24,7 @@ public class FoodObject : IHoldable, IThrowable
     public FoodState State;
     public FoodType FoodType;
 
+    public SoundManager soundManager;
 
     public GameObject FoodPrefab1;
     public GameObject FoodPrefab2;
@@ -61,6 +62,7 @@ public class FoodObject : IHoldable, IThrowable
         State = FoodState.Raw;
         _rigidbody = GetComponent<Rigidbody>();
         colliderThis = GetComponent<BoxCollider>();
+        soundManager = FindAnyObjectByType<SoundManager>();
 
         CookProgress = 0f;
 
@@ -158,7 +160,11 @@ public class FoodObject : IHoldable, IThrowable
 
     public new void Destroy()
     {
-        Destroy(gameObject);
+        if (_photonView.IsMine)
+        {
+
+            PhotonNetwork.Destroy(gameObject);
+        }
     }
 
     public void ThrowObject(Vector3 direction, float throwPower)
@@ -271,23 +277,14 @@ public class FoodObject : IHoldable, IThrowable
 
             CookProgress += Time.deltaTime / BakeTime;
             CookProgress = Mathf.Clamp(CookProgress, 0f, 3f);
-
             if (State == FoodState.Raw && CookProgress >= 1f && FoodPrefab1.activeSelf)
             {
                 FoodPrefab1.SetActive(false);
                 FoodPrefab2.SetActive(true);
+                
                 State = FoodState.Grilled; // 수정: 상태를 Grilled로 변경
             }
-            /*            if (State == FoodState.Grilled && CookProgress >= 2f && CookProgress < 2.9f && FoodPrefab2.activeSelf)
-                        {
-                            // DangerIndicator 컴포넌트의 ShowDangerInRange 메서드를 사용하여 경고창을 표시합니다.
-                            dangerIndicator.ShowDangerIndicator(dangerSprite);
-                        }
-                        else
-                        {
-                            // 그 외의 경우에는 경고창을 숨깁니다.
-                            dangerIndicator.HideDangerIndicator();
-                        }*/
+
             if (State == FoodState.Grilled && CookProgress >= 3f && FoodPrefab2.activeSelf)
             {
                 FoodPrefab2.SetActive(false);
@@ -336,6 +333,7 @@ public class FoodObject : IHoldable, IThrowable
         {
             IsCooking = true;
             cookingCoroutine = StartCoroutine(CookPatty_Coroutine());
+            soundManager.PlayAudio("Patty",true);
         }
     }
 
@@ -346,6 +344,7 @@ public class FoodObject : IHoldable, IThrowable
         if (cookingCoroutine != null)
         {
             StopCoroutine(cookingCoroutine);
+            soundManager.StopAudio("Patty",false);
             cookingCoroutine = null;
         }
     }

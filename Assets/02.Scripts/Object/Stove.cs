@@ -13,12 +13,13 @@ public class Stove : CookStand
     public Table[] NearbyTables;
     private Coroutine igniteCoroutine;
     private bool isFireExtinguished = true;
-
+    public SoundManager SoundManager;
     public bool IsOnFire => fireObject != null && fireObject._isOnFire;
     private void Start()
     {
         _originalPlacePosition = base.PlacePosition;
         fireObject = GetComponent<FireObject>();
+        SoundManager = FindObjectOfType<SoundManager>();
     }
 
     protected override void Update()
@@ -48,7 +49,7 @@ public class Stove : CookStand
                     if (!fireObject._isOnFire)
                     {
                         fireObject.MakeFire();
-
+                        SoundManager.PlayFireSound();
                     }
                     else if (isFireExtinguished)
                     {
