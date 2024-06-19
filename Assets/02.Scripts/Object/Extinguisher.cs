@@ -12,6 +12,7 @@ public class Extinguisher : IHoldable
     public BoxCollider _boxCollider;
     public bool isPress = false;
     private PhotonView _pv;
+    public Transform StartPosition;
 
     public override Vector3 DropOffset => new Vector3(0.3f, 0, 0);
     private void Awake()
@@ -19,6 +20,13 @@ public class Extinguisher : IHoldable
         _powderEffect = GetComponentInChildren<ParticleSystem>();
         _boxCollider.enabled = false;
         _pv = GetComponent<PhotonView>();
+    }
+    private void Start()
+    {
+        if(StartPosition != null)
+        {
+            Place(StartPosition);
+        }
     }
     public override void Hold(Character character, Transform handTransform)
     {
