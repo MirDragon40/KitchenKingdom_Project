@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SoundManager : MonoBehaviourPun
+public class SoundManager : MonoBehaviour
 
 {
     public AudioClip[] audioClips;
@@ -41,7 +41,7 @@ public class SoundManager : MonoBehaviourPun
         }
         return null;
     }
-    [PunRPC]
+
     public void PlayAudio(string clipName, bool loop = false)
     {
         if (!audioSources.ContainsKey(clipName))
@@ -51,8 +51,6 @@ public class SoundManager : MonoBehaviourPun
             audioSource.clip = GetAudioClip(clipName);
             audioSource.loop = loop;
             audioSources.Add(clipName, audioSource);
-
-            photonView.RPC("PlayAudioRPC", RpcTarget.All, clipName);
         }
 
         AudioSource source = audioSources[clipName];
@@ -70,7 +68,6 @@ public class SoundManager : MonoBehaviourPun
             StartCoroutine(FadeOutAndDestroy(source, clipName));
         }
     }
-    [PunRPC]
     private IEnumerator FadeOutAndDestroy(AudioSource source, string clipName)
     {
 

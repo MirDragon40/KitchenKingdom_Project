@@ -1,7 +1,9 @@
+using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.TextCore.Text;
 using UnityEngine.UI;
 
 public class PanObject : IHoldable
@@ -29,6 +31,7 @@ public class PanObject : IHoldable
     public Sprite dangerSprite;
 
     private bool isPowderTouching = false;
+    private PhotonView _pv;
 
     internal bool isOnFire;
     private bool isNearTrashBin = false;
@@ -41,6 +44,7 @@ public class PanObject : IHoldable
     public Table[] NearbyTables;
     private void Awake()
     {
+        _pv = GetComponent<PhotonView>();
         BoxCollider = GetComponent<BoxCollider>();
         fireObject = GetComponent<FireObject>();
         dangerIndicator = GetComponentInChildren<DangerIndicator>();
@@ -61,6 +65,14 @@ public class PanObject : IHoldable
     }
     private void Update()
     {
+        if (GrillingIngrediant != null)
+        {
+            if (_pv.OwnerActorNr != GrillingIngrediant.GetComponent<PhotonView>().OwnerActorNr)
+            {
+                Debug.Log(_pv.OwnerActorNr);
+                GrillingIngrediant.GetComponent<PhotonView>().OwnerActorNr = _pv.OwnerActorNr;
+            }
+        }
         // 팬이 스토브에 놓인 경우
         if (PanPlacePosition.childCount != 0)
         {
@@ -171,6 +183,17 @@ public class PanObject : IHoldable
 
     public override void Hold(Character character, Transform handTransform)
     {
+        if (PhotonNetwork.IsMasterClient)
+        {
+            if (_pv.OwnerActorNr != character.PhotonView.OwnerActorNr)
+            {
+                _pv.TransferOwnership(character.PhotonView.OwnerActorNr);
+                if (GrillingIngrediant != null)
+                {
+                    GrillingIngrediant.GetComponent<PhotonView>().TransferOwnership(character.PhotonView.OwnerActorNr);
+                }
+            }
+        }
         GetComponent<Rigidbody>().isKinematic = true;
         transform.parent = handTransform;
         transform.localPosition = new Vector3(0, 0, 0.3f);
@@ -203,11 +226,7 @@ public class PanObject : IHoldable
         Quaternion panplaceRotation = Quaternion.Euler(-90, 0, 180);
         transform.rotation = place.rotation * panplaceRotation;
         transform.parent = place;
-/*        Stove stoveInParent = place.GetComponentInParent<Stove>();
-        if (stoveInParent != null)
-        {
-            MyStove = stoveInParent;
-        }*/
+
         if (_holdCharacter != null)
         {
             _holdCharacter = null;
@@ -305,9 +324,9 @@ public class PanObject : IHoldable
             {
                 Transform child = PanPlacePosition.GetChild(i);
                 FoodObject childFoodObject = child.GetComponent<FoodObject>();
-                if (childFoodObject != null)
+                if (childFoodObject != null && _pv.IsMine)
                 {
-                    Destroy(child.gameObject);
+                    PhotonNetwork.Destroy(child.gameObject);
                 }
             }
         }

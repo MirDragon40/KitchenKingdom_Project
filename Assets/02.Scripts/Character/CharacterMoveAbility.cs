@@ -18,17 +18,20 @@ public class CharacterMoveAbility : CharacterAbility
 
     private CharacterController _characterController;
     private Animator _animator;
+    public SoundManager soundManager;
 
     public ParticleSystem PowderEffect;
     public ParticleSystem PowderEffect_Dash;
 
     private bool isDashing = false;
 
+
     private void Start()
     {
         _characterController = GetComponent<CharacterController>();
         _animator = GetComponent<Animator>();
         _pv = GetComponent<PhotonView>();
+        soundManager = FindObjectOfType<SoundManager>();
 
         MoveSpeed = 5f;
         DashSpeed = 7f;
@@ -89,6 +92,7 @@ public class CharacterMoveAbility : CharacterAbility
         if (Input.GetKeyDown(KeyCode.LeftAlt) && !isDashing)
         {
             DashPlay();
+
         }
     }
     [PunRPC]
