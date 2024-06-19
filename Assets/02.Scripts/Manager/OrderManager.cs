@@ -67,10 +67,6 @@ public class OrderManager : MonoBehaviourPun
             SubmitOrder("burger");
         }
 
-        if (Input.GetKeyDown(KeyCode.Alpha3))
-        {
-            MyScrollView.OnSubmitIncorrectPlateEffect();
-        }
 
         if (Input.GetKeyDown(KeyCode.Alpha5))
         {
