@@ -5,6 +5,7 @@ public class Table : MonoBehaviour
 {
     public bool IsOnFire = false;
     public ParticleSystem fireEffect;
+    public SoundManager soundManager;
 
     public Table[] NearbyTables;
     public Stove[] NearbyStoves;
@@ -13,25 +14,42 @@ public class Table : MonoBehaviour
 
     private Coroutine igniteNearbyTablesCoroutine;
     private Coroutine igniteNearbyStovesCoroutine;
+
+    
+
     private void Start()
     {
         if (fireEffect == null)
         {
             fireEffect = GetComponentInChildren<ParticleSystem>();
         }
+        soundManager = FindObjectOfType<SoundManager>();
     }
 
     public void Ignite()
     {
-        IsOnFire = true;
-        if (fireEffect != null)
+        if (!IsOnFire) // 이미 불이 붙어있는 경우 다시 붙지 않도록 체크
         {
-            fireEffect.Play(); // 파티클 재생
-        }
-        Debug.Log("이그나이트");
+            IsOnFire = true;
+            if (fireEffect != null)
+            {
+                fireEffect.Play(); // 파티클 재생
+            }
+            Debug.Log("이그나이트");
 
-        igniteNearbyTablesCoroutine = StartCoroutine(IgniteNearbyTables());
-        igniteNearbyStovesCoroutine = StartCoroutine(IgniteNearbyStoves());
+
+            if (igniteNearbyTablesCoroutine != null)
+            {
+                StopCoroutine(igniteNearbyTablesCoroutine);
+            }
+            igniteNearbyTablesCoroutine = StartCoroutine(IgniteNearbyTables());
+
+            if (igniteNearbyStovesCoroutine != null)
+            {
+                StopCoroutine(igniteNearbyStovesCoroutine);
+            }
+            igniteNearbyStovesCoroutine = StartCoroutine(IgniteNearbyStoves());
+        }
     }
 
     public void Extinguish()
@@ -42,6 +60,7 @@ public class Table : MonoBehaviour
             fireEffect.Stop(); // 파티클 정지
         }
 
+        // 불이 꺼지면 코루틴을 중지하고 null로 설정
         if (igniteNearbyTablesCoroutine != null)
         {
             StopCoroutine(igniteNearbyTablesCoroutine);
@@ -57,7 +76,13 @@ public class Table : MonoBehaviour
 
     IEnumerator IgniteNearbyTables()
     {
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(20f);
+
+        // 불이 붙는 과정 중 불이 꺼지면 종료
+        if (!IsOnFire)
+        {
+            yield break;
+        }
 
         foreach (var table in NearbyTables)
         {
@@ -70,7 +95,13 @@ public class Table : MonoBehaviour
 
     IEnumerator IgniteNearbyStoves()
     {
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(20f);
+
+        // 불이 붙는 과정 중 불이 꺼지면 종료
+        if (!IsOnFire)
+        {
+            yield break;
+        }
 
         foreach (var stove in NearbyStoves)
         {
@@ -92,6 +123,18 @@ public class Table : MonoBehaviour
             if (powderContactTime >= 2f)
             {
                 Extinguish();
+
+                if (igniteNearbyTablesCoroutine != null)
+                {
+                    StopCoroutine(igniteNearbyTablesCoroutine);
+                    igniteNearbyTablesCoroutine = null;
+                }
+
+                if (igniteNearbyStovesCoroutine != null)
+                {
+                    StopCoroutine(igniteNearbyStovesCoroutine);
+                    igniteNearbyStovesCoroutine = null;
+                }
             }
         }
     }
