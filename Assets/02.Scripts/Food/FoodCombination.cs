@@ -18,7 +18,6 @@ public class FoodCombination : MonoBehaviour
     public PhotonView PV;
     private Character _nearbyCharacter;
 
-
     private void Start()
     {
         Init();
