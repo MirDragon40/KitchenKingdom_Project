@@ -812,6 +812,7 @@ MonoBehaviour:
   - {fileID: 8424799755787072411}
   IsSubmitable: 0
   IsReadyServe: 0
+  PV: {fileID: 0}
 --- !u!65 &1010523499004131602
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -849,7 +850,7 @@ MonoBehaviour:
   Group: 0
   prefixField: -1
   Synchronization: 3
-  OwnershipTransfer: 2
+  OwnershipTransfer: 1
   observableSearch: 2
   ObservedComponents:
   - {fileID: -8513559806767863457}

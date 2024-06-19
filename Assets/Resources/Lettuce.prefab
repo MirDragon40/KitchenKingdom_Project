@@ -437,8 +437,8 @@ GameObject:
   - component: {fileID: 6614939764616523437}
   - component: {fileID: 8774262675901293282}
   - component: {fileID: 5131074517677934456}
-  - component: {fileID: -4230451837290151419}
   - component: {fileID: 9211162882280487015}
+  - component: {fileID: -774416345947046759}
   m_Layer: 6
   m_Name: Lettuce
   m_TagString: Food
@@ -483,6 +483,7 @@ MonoBehaviour:
   FoodPrefab1: {fileID: 6410814361109289822}
   FoodPrefab2: {fileID: 3129230248354665751}
   FoodPrefab3: {fileID: 8143262538006736201}
+  PV: {fileID: 0}
   IsCooking: 0
   IsGrillable: 0
   IsFryable: 0
@@ -555,30 +556,14 @@ MonoBehaviour:
   Group: 0
   prefixField: -1
   Synchronization: 3
-  OwnershipTransfer: 2
+  OwnershipTransfer: 1
   observableSearch: 2
   ObservedComponents:
-  - {fileID: -4230451837290151419}
   - {fileID: 9211162882280487015}
+  - {fileID: -774416345947046759}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
---- !u!114 &-4230451837290151419
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7788963802100874181}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_SynchronizePosition: 1
-  m_SynchronizeRotation: 1
-  m_SynchronizeScale: 0
-  m_UseLocal: 0
 --- !u!114 &9211162882280487015
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -595,6 +580,22 @@ MonoBehaviour:
   m_SynchronizeAngularVelocity: 0
   m_TeleportEnabled: 1
   m_TeleportIfDistanceGreaterThan: 0.1
+--- !u!114 &-774416345947046759
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7788963802100874181}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SynchronizePosition: 1
+  m_SynchronizeRotation: 0
+  m_SynchronizeScale: 0
+  m_UseLocal: 0
 --- !u!1 &8143262538006736201
 GameObject:
   m_ObjectHideFlags: 0

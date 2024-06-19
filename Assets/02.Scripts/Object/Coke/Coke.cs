@@ -1,3 +1,4 @@
+using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,7 +6,7 @@ using UnityEngine;
 public class Coke : IHoldable
 {
     public GameObject CokeObject;
-
+    public PhotonView PV;
     public MeshRenderer CokeRenderer;
     public Material ThisCokeMaterial;
     public Material ChangeCokeMaterial;
@@ -14,7 +15,10 @@ public class Coke : IHoldable
     public Collider CokeCollider;
 
     public override Vector3 DropOffset => new Vector3(-0.5f, 0f, 0f);
-
+    private void Awake()
+    {
+        PV = GetComponent<PhotonView>();
+    }
     private void Start()
     {
         CokePour();
@@ -46,8 +50,15 @@ public class Coke : IHoldable
 
     public override void Hold(Character character, Transform handTransform)
     {
-        _holdCharacter = character;
 
+        if (PhotonNetwork.IsMasterClient)
+        {
+            if (PV.OwnerActorNr != character.PhotonView.OwnerActorNr)
+            {
+                PV.TransferOwnership(character.PhotonView.OwnerActorNr);
+            }
+        }
+        _holdCharacter = character;
         // 각 아이템이 잡혔을 때 해줄 초기화 로직
         // 찾은 음식을 플레이어의 손 위치로 이동시킴
         transform.parent = handTransform;

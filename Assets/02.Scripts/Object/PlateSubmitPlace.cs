@@ -27,7 +27,7 @@ public class PlateSubmitPlace : MonoBehaviour
         if (IsServeable && Input.GetKeyDown(KeyCode.Space))
         {
             Debug.Log(_plateContent);
-            _pv.RPC("SubmitPlate", RpcTarget.MasterClient);
+            _pv.RPC("SubmitPlate", RpcTarget.All);
 
         }
         if (Input.GetKeyDown(KeyCode.Alpha3))
