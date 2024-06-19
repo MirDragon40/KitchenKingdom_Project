@@ -241,7 +241,7 @@ public class FoodObject : IHoldable, IThrowable
             colliderThis.enabled = false;
 
             CookProgress += Time.deltaTime / CuttingTime; // 3초동안 CookProgress 증가
-            CookProgress = Mathf.Clamp(CookProgress, 0f, 1f);
+            CookProgress = Mathf.Clamp(CookProgress, 0f, 1.1f);
 
             if (CookProgress >= 0.6f && FoodPrefab1.activeSelf)
             {
