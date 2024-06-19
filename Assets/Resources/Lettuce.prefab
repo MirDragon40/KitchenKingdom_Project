@@ -483,7 +483,6 @@ MonoBehaviour:
   FoodPrefab1: {fileID: 6410814361109289822}
   FoodPrefab2: {fileID: 3129230248354665751}
   FoodPrefab3: {fileID: 8143262538006736201}
-  PV: {fileID: 0}
   IsCooking: 0
   IsGrillable: 0
   IsFryable: 0
