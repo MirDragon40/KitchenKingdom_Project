@@ -11,6 +11,7 @@ public class ChoppingBoard : CookStand
     private bool _isPossibleChopping = false;
     public OnChoppingBoard_Collider onChoppingBoard;
     private PhotonView _photonView;
+    public SoundManager SoundManager;
     
 
     
@@ -20,6 +21,7 @@ public class ChoppingBoard : CookStand
         _photonView = GetComponent<PhotonView>();
         ChoppingProgressSlider.value = 0f; // 슬라이더 초기화
         ChoppingProgressSlider.gameObject.SetActive(false);
+        SoundManager = FindObjectOfType<SoundManager>();
     }
 
     protected override void Update()
@@ -35,7 +37,9 @@ public class ChoppingBoard : CookStand
                     StopCoroutine(fillSliderCoroutine);
                 }
                 _photonView.RPC("StartChoppingRPC", RpcTarget.All, 3.0f);
+                SoundManager.PlayAudio("Cut", true);
             }
+
             
         }
     }
@@ -84,6 +88,7 @@ public class ChoppingBoard : CookStand
             if (onChoppingBoard.FoodObject != null)
             {
                 onChoppingBoard.FoodObject.StopCooking();
+                SoundManager.StopAudio("Cut");
             }
 
             Animator.SetBool("Chopping", false); // 슬라이더가 진행되지 않을 때 애니메이션을 중지
@@ -144,5 +149,6 @@ public class ChoppingBoard : CookStand
         Animator.SetBool("Chopping", false); // 슬라이더가 완료되면 애니메이션을 중지
         foodObject.StopCooking();
         ChoppingProgressSlider.gameObject.SetActive(false);
+        SoundManager.StopAudio("Cut");
     }
 }
