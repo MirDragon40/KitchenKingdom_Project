@@ -15,7 +15,8 @@ public class Table : MonoBehaviour
     private Coroutine igniteNearbyTablesCoroutine;
     private Coroutine igniteNearbyStovesCoroutine;
 
-    
+    private bool anyFireIsOn = false;   // 모든 불이 꺼졌는지
+
 
     private void Start()
     {
@@ -36,7 +37,7 @@ public class Table : MonoBehaviour
                 fireEffect.Play(); // 파티클 재생
             }
             Debug.Log("이그나이트");
-
+            soundManager.PlayFireSound();
 
             if (igniteNearbyTablesCoroutine != null)
             {
@@ -60,6 +61,31 @@ public class Table : MonoBehaviour
             fireEffect.Stop(); // 파티클 정지
         }
 
+        // 모든 불이 꺼졌는지 확인
+        anyFireIsOn = false;
+        foreach (var table in NearbyTables)
+        {
+            if (table.IsOnFire)
+            {
+                anyFireIsOn = true;
+                break;
+            }
+        }
+        foreach (var stove in NearbyStoves)
+        {
+            if (stove != null && stove.IsOnFire)
+            {
+                anyFireIsOn = true;
+                break;
+            }
+        }
+
+        // 모든 불이 꺼졌다면 사운드 정지
+        if (!anyFireIsOn)
+        {
+            soundManager.StopFireSound();
+        }
+
         // 불이 꺼지면 코루틴을 중지하고 null로 설정
         if (igniteNearbyTablesCoroutine != null)
         {
@@ -76,7 +102,7 @@ public class Table : MonoBehaviour
 
     IEnumerator IgniteNearbyTables()
     {
-        yield return new WaitForSeconds(20f);
+        yield return new WaitForSeconds(5f);
 
         // 불이 붙는 과정 중 불이 꺼지면 종료
         if (!IsOnFire)
@@ -95,7 +121,7 @@ public class Table : MonoBehaviour
 
     IEnumerator IgniteNearbyStoves()
     {
-        yield return new WaitForSeconds(20f);
+        yield return new WaitForSeconds(5f);
 
         // 불이 붙는 과정 중 불이 꺼지면 종료
         if (!IsOnFire)

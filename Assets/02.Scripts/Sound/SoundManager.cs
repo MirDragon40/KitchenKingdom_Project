@@ -45,11 +45,14 @@ public class SoundManager : MonoBehaviour
         source.Play();
     }
 
-    public void StopAudio(string clipName)
+    public void StopAudio(string clipName, bool loop = false)
     {
         if (audioSources.ContainsKey(clipName))
         {
+            GameObject soundObject = new GameObject(clipName);
+            AudioSource audioSource = soundObject.AddComponent<AudioSource>();
             AudioSource source = audioSources[clipName];
+            audioSource.loop = loop;
             StartCoroutine(FadeOutAndDestroy(source, clipName));
         }
     }
@@ -80,6 +83,6 @@ public class SoundManager : MonoBehaviour
     }
     public void StopFireSound()
     {
-        StopAudio("FireSound");
+        StopAudio("FireSound", false);
     }
 }
