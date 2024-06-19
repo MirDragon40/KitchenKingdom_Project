@@ -16,8 +16,8 @@ GameObject:
   - component: {fileID: 4888542727501278136}
   - component: {fileID: 1988628860302868169}
   - component: {fileID: 7174963116619267826}
-  - component: {fileID: 9001212337090537461}
   - component: {fileID: 8950374576819016000}
+  - component: {fileID: 6696533168991699348}
   m_Layer: 0
   m_Name: Bread
   m_TagString: Food
@@ -131,6 +131,7 @@ MonoBehaviour:
   FoodPrefab1: {fileID: 0}
   FoodPrefab2: {fileID: 0}
   FoodPrefab3: {fileID: 0}
+  PV: {fileID: 0}
   IsCooking: 0
   IsGrillable: 0
   IsFryable: 0
@@ -203,30 +204,14 @@ MonoBehaviour:
   Group: 0
   prefixField: -1
   Synchronization: 3
-  OwnershipTransfer: 2
+  OwnershipTransfer: 1
   observableSearch: 2
   ObservedComponents:
-  - {fileID: 9001212337090537461}
   - {fileID: 8950374576819016000}
+  - {fileID: 6696533168991699348}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
---- !u!114 &9001212337090537461
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1786338197292552992}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_SynchronizePosition: 1
-  m_SynchronizeRotation: 1
-  m_SynchronizeScale: 0
-  m_UseLocal: 0
 --- !u!114 &8950374576819016000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -243,3 +228,19 @@ MonoBehaviour:
   m_SynchronizeAngularVelocity: 0
   m_TeleportEnabled: 1
   m_TeleportIfDistanceGreaterThan: 0.1
+--- !u!114 &6696533168991699348
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1786338197292552992}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SynchronizePosition: 1
+  m_SynchronizeRotation: 0
+  m_SynchronizeScale: 0
+  m_UseLocal: 0

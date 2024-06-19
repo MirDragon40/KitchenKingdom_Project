@@ -1,3 +1,4 @@
+using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -14,7 +15,11 @@ public class DishObject : IHoldable
 
     public DishState State;
     public Transform StartPosition;
-
+    private PhotonView _pv;
+    private void Awake()
+    {
+        _pv = GetComponent<PhotonView>();
+    }
 
     private void Start()
     {
@@ -25,13 +30,21 @@ public class DishObject : IHoldable
     }
     public override void Hold(Character character, Transform handTransform)
     {
-
+        if (PhotonNetwork.IsMasterClient)
+        {
+            if (_pv.OwnerActorNr != character.PhotonView.OwnerActorNr)
+            {
+                _pv.TransferOwnership(character.PhotonView.OwnerActorNr);
+            }
+        }
         Debug.Log("플레이어가 접시를 들고있다.");
-        transform.parent = handTransform;
+
         GetComponent<Rigidbody>().isKinematic = true;
         GetComponent<BoxCollider>().enabled = false;
+        transform.parent = handTransform;
         transform.localPosition = Vector3.zero;
         transform.localRotation = Quaternion.identity;
+
     }
 
     public override void Place(Transform place)
