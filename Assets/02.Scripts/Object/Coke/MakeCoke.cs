@@ -10,10 +10,16 @@ public class MakeCoke : MonoBehaviour
     public Transform CokeSpawnPoint;
 
     private bool _isPlayerAround;
+    public SoundManager soundManager;
+    private bool isCokeSpawned = false;
 
+    public void Start()
+    {
+        soundManager = FindObjectOfType<SoundManager>();
+    }
     private void Update()
     {
-        if (_isPlayerAround && Input.GetKeyDown(KeyCode.LeftControl)) 
+        if (_isPlayerAround && Input.GetKeyDown(KeyCode.Space)) 
         {
             if(CokeSpawnPoint.childCount == 0) 
             {
@@ -41,5 +47,7 @@ public class MakeCoke : MonoBehaviour
     {
         GameObject newCoke = PhotonNetwork.Instantiate("Coke", CokeSpawnPoint.position, Quaternion.identity);
         newCoke.transform.parent = CokeSpawnPoint;
+        soundManager.PlayAudio("Cola", true);
+        isCokeSpawned = true;
     }
 }
