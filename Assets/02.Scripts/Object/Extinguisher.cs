@@ -59,7 +59,16 @@ public class Extinguisher : IHoldable
             _boxCollider.enabled = false;
         }
     }
-
+    [PunRPC]
+    public void PlayPowderSound()
+    {
+        soundManager.PlayAudio("Powder", true);
+    }
+    [PunRPC]
+    public void StopPowderSound()
+    {
+        soundManager.StopAudio("Powder");
+    }
 
     private void Update()
     {
@@ -68,14 +77,14 @@ public class Extinguisher : IHoldable
             if (Input.GetKeyDown(KeyCode.LeftControl))
             {
                 photonView.RPC("Shot", RpcTarget.All, true); // true를 전달하여 Shot RPC 메서드 호출
-                soundManager.PlayAudio("Powder", true);
-                
+                photonView.RPC("PlayPowderSound", RpcTarget.All);
+
             }
 
             if (Input.GetKeyUp(KeyCode.LeftControl))
             {
                 photonView.RPC("Shot", RpcTarget.All, false); // false를 전달하여 Shot RPC 메서드 호출
-                soundManager.StopAudio("Powder");
+                photonView.RPC("StopPowderSound", RpcTarget.All);
             }
         }
     }
