@@ -52,11 +52,13 @@ public class Extinguisher : IHoldable
         {
             _powderEffect.Play();
             _boxCollider.enabled = true;
+            photonView.RPC("PlayPowderSound", RpcTarget.All);
         }
         else
         {
             _powderEffect.Stop();
             _boxCollider.enabled = false;
+            photonView.RPC("StopPowderSound", RpcTarget.All);
         }
     }
     [PunRPC]
@@ -78,20 +80,22 @@ public class Extinguisher : IHoldable
 
     private void Update()
     {
-        if (IsHold)
+        if (_pv.IsMine)
         {
-            if (Input.GetKeyDown(KeyCode.LeftControl))
+            if (IsHold)
             {
-                photonView.RPC("Shot", RpcTarget.All, true); // true를 전달하여 Shot RPC 메서드 호출
-                photonView.RPC("PlayPowderSound", RpcTarget.All, photonView.OwnerActorNr);
-            }
+                if (Input.GetKeyDown(KeyCode.LeftControl))
+                {
+                    photonView.RPC("Shot", RpcTarget.All, true); // true를 전달하여 Shot RPC 메서드 호출
+                }
 
-            if (Input.GetKeyUp(KeyCode.LeftControl))
-            {
-                photonView.RPC("Shot", RpcTarget.All, false); // false를 전달하여 Shot RPC 메서드 호출
-                photonView.RPC("StopPowderSound", RpcTarget.All, photonView.OwnerActorNr);
+                if (Input.GetKeyUp(KeyCode.LeftControl))
+                {
+                    photonView.RPC("Shot", RpcTarget.All, false); // false를 전달하여 Shot RPC 메서드 호출
+                }
             }
         }
+
     }
 
     public override void UnHold(Vector3 dropPosition, Quaternion dropRotation)
