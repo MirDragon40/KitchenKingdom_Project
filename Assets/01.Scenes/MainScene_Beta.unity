@@ -2074,6 +2074,9 @@ MonoBehaviour:
   - {fileID: 1649265657}
   - {fileID: 1577349093}
   - {fileID: 1852115681}
+  Stage1_Score: 0
+  Stage2_Score: 0
+  Stage3_Score: 0
   TotalScore: 0
   OptionUl: {fileID: 1474762658}
 --- !u!4 &362806178
@@ -8027,7 +8030,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ObservedComponentsFoldoutOpen: 1
+  ObservedComponentsFoldoutOpen: 0
   Group: 0
   prefixField: -1
   Synchronization: 3
@@ -24109,7 +24112,7 @@ PrefabInstance:
     - target: {fileID: 3557536189269446390, guid: 66d895dab0f101c4b80051140132a9a0, type: 3}
       propertyPath: audioClips.Array.data[0]
       value: 
-      objectReference: {fileID: 8300000, guid: 1ea1e403474063c4ca7b36494c0bb93a, type: 3}
+      objectReference: {fileID: 8300000, guid: bd8011355c4212c46a9ab3c9e7788ffd, type: 3}
     - target: {fileID: 3557536189269446390, guid: 66d895dab0f101c4b80051140132a9a0, type: 3}
       propertyPath: audioClips.Array.data[2]
       value: 

@@ -35,11 +35,12 @@ public class CharacterHoldAbility : CharacterAbility
     private bool nearTrashBin = false;
     private Transform panTransform; // 팬 오브젝트를 참조하기 위한 변수
 
-    public FireObject fireObject;
+    public SoundManager soundManager;
     void Start()
     {
         animator = GetComponent<Animator>();
         _pv = _owner.PhotonView;
+        soundManager = FindObjectOfType<SoundManager>();
     }
 
     private void LateUpdate()
@@ -66,9 +67,7 @@ public class CharacterHoldAbility : CharacterAbility
 
                 if (IsPlaceable)
                 {
-
                     _pv.RPC("Place", RpcTarget.All);
-
                 }
               
                 else if (IsDroppable)
@@ -223,6 +222,15 @@ public class CharacterHoldAbility : CharacterAbility
         HoldableItem.Place(PlacePosition);
         HoldableItem = null;
         animator.SetBool("Carry", false);
+
+        if (HoldableItem != null && HoldableItem is DishObject)
+        {
+            Debug.Log("HoldableItem is a DishObject.");
+            soundManager.PlayAudio("Dish", true);
+            Debug.Log(soundManager + "사운드나옴");
+        }
+
+
     }
 
 

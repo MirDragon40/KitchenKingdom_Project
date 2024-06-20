@@ -21,7 +21,7 @@ public class Extinguisher : IHoldable
     }
     private void Start()
     {
-        if(StartPosition != null)
+        if (StartPosition != null)
         {
             Place(StartPosition);
         }
@@ -29,11 +29,11 @@ public class Extinguisher : IHoldable
     public override void Hold(Character character, Transform handTransform)
     {
 
-            if (_pv.OwnerActorNr != character.PhotonView.OwnerActorNr)
-            {
-                _pv.TransferOwnership(character.PhotonView.OwnerActorNr);
-            }
-        
+        if (_pv.OwnerActorNr != character.PhotonView.OwnerActorNr)
+        {
+            _pv.TransferOwnership(character.PhotonView.OwnerActorNr);
+        }
+
         _holdCharacter = character;
 
         // 각 아이템이 잡혔을 때 해줄 초기화 로직
@@ -52,11 +52,13 @@ public class Extinguisher : IHoldable
         {
             _powderEffect.Play();
             _boxCollider.enabled = true;
+            soundManager.PlayAudio("Powder", true);
         }
         else
         {
             _powderEffect.Stop();
             _boxCollider.enabled = false;
+            soundManager.StopAudio("Powder");
         }
     }
 
@@ -68,14 +70,11 @@ public class Extinguisher : IHoldable
             if (Input.GetKeyDown(KeyCode.LeftControl))
             {
                 photonView.RPC("Shot", RpcTarget.All, true); // true를 전달하여 Shot RPC 메서드 호출
-                soundManager.PlayAudio("Powder", true);
-                
             }
 
             if (Input.GetKeyUp(KeyCode.LeftControl))
             {
                 photonView.RPC("Shot", RpcTarget.All, false); // false를 전달하여 Shot RPC 메서드 호출
-                soundManager.StopAudio("Powder");
             }
         }
     }
