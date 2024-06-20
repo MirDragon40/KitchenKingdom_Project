@@ -611,8 +611,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 295468242}
+  - component: {fileID: 295468243}
   m_Layer: 0
-  m_Name: Receipt
+  m_Name: ClipBoard
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -627,7 +628,7 @@ Transform:
   m_GameObject: {fileID: 295468241}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -960, y: -540, z: 0}
+  m_LocalPosition: {x: -1569, y: 12, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -635,6 +636,27 @@ Transform:
   - {fileID: 1888203798}
   m_Father: {fileID: 1129394045}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &295468243
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 295468241}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: ee29caf812ed76042a40e2eb79ff0b19, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &325855173
 GameObject:
   m_ObjectHideFlags: 0
@@ -1019,7 +1041,7 @@ GameObject:
   - component: {fileID: 647985651}
   - component: {fileID: 647985650}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: Canvas_Result
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1135,14 +1157,14 @@ RectTransform:
   m_GameObject: {fileID: 696997885}
   m_LocalRotation: {x: -0, y: -0, z: 0.09144646, w: 0.99581}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.1202002, y: 1.1538061, z: 1.1202}
+  m_LocalScale: {x: 1.1202004, y: 1.1538063, z: 1.1202}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 295468242}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 10.494}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 972, y: 549}
+  m_AnchoredPosition: {x: -19, y: -3}
   m_SizeDelta: {x: 657.3956, y: 898.4683}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &696997887
@@ -2107,13 +2129,14 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1476946533}
+  - component: {fileID: 1476946534}
   m_Layer: 5
   m_Name: Reviews
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1476946533
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2135,9 +2158,30 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: -238, y: -1074}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!95 &1476946534
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1476946532}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 88bb291c76dc9d4419e4311fd64a825a, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1625089180
 GameObject:
   m_ObjectHideFlags: 0
@@ -2147,6 +2191,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1625089181}
+  - component: {fileID: 1625089182}
+  - component: {fileID: 1625089183}
   m_Layer: 0
   m_Name: ResultSceneManager
   m_TagString: Untagged
@@ -2169,6 +2215,51 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1625089182
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1625089180}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c2c7b490899e014c86bd9837d9c2eef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Review_Star1: {fileID: 1336678496}
+  Review_Star2: {fileID: 465004129}
+  Review_Star3: {fileID: 778980450}
+  Review_Star4: {fileID: 1135739011}
+  Review_Star5: {fileID: 875330510}
+  Review_Anim: {fileID: 1476946534}
+  ClipBoard_Anim: {fileID: 295468243}
+  Stage1_Text: {fileID: 282970461}
+  Stage2_Text: {fileID: 1352327958}
+  Stage3_Text: {fileID: 81345953}
+  Total_Text: {fileID: 857096418}
+--- !u!114 &1625089183
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1625089180}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 1
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!1 &1808938372
 GameObject:
   m_ObjectHideFlags: 0
@@ -2288,7 +2379,7 @@ RectTransform:
   m_GameObject: {fileID: 1888203797}
   m_LocalRotation: {x: -0, y: -0, z: 0.09144646, w: 0.99581}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.1202002, y: 1.1538061, z: 1.1202}
+  m_LocalScale: {x: 1.1202004, y: 1.1538063, z: 1.1202}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 205596915}
@@ -2300,7 +2391,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 10.494}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 946.4868, y: 570.2088}
+  m_AnchoredPosition: {x: -44.513184, y: 18.208862}
   m_SizeDelta: {x: 657.3956, y: 898.4683}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1888203799
