@@ -45,8 +45,6 @@ public class GameManager : MonoBehaviour
         Stage = 1;
 
         DontDestroyOnLoad(gameObject);
-        Debug.Log("GameManager가 초기화되었습니다.");
-
         OptionUl.gameObject.SetActive(false);
     }
 
