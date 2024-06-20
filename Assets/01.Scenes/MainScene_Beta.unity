@@ -8698,9 +8698,9 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 96775701312640860, guid: d280921563a8a6e49936dd41b408cdb0, type: 3}
-      propertyPath: StartPosition
-      value: 
+    - target: {fileID: -5043375483358767100, guid: d280921563a8a6e49936dd41b408cdb0, type: 3}
+      propertyPath: sceneViewId
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 1816714927406644451, guid: d280921563a8a6e49936dd41b408cdb0, type: 3}
       propertyPath: m_Name
@@ -8708,19 +8708,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2029509002001760405, guid: d280921563a8a6e49936dd41b408cdb0, type: 3}
       propertyPath: sceneViewId
-      value: 44
-      objectReference: {fileID: 0}
-    - target: {fileID: 3738908403537369989, guid: d280921563a8a6e49936dd41b408cdb0, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -0.102
-      objectReference: {fileID: 0}
-    - target: {fileID: 5400166647897815554, guid: d280921563a8a6e49936dd41b408cdb0, type: 3}
-      propertyPath: m_Size.y
-      value: 1.0651474
-      objectReference: {fileID: 0}
-    - target: {fileID: 5400166647897815554, guid: d280921563a8a6e49936dd41b408cdb0, type: 3}
-      propertyPath: m_Center.y
-      value: -0.40770325
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5592269904853668084, guid: d280921563a8a6e49936dd41b408cdb0, type: 3}
       propertyPath: m_LocalPosition.x
@@ -8761,10 +8749,6 @@ PrefabInstance:
     - target: {fileID: 5592269904853668084, guid: d280921563a8a6e49936dd41b408cdb0, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8205988261458577940, guid: d280921563a8a6e49936dd41b408cdb0, type: 3}
-      propertyPath: sceneViewId
-      value: 45
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -23962,7 +23946,7 @@ PrefabInstance:
     - target: {fileID: 3557536189269446390, guid: 66d895dab0f101c4b80051140132a9a0, type: 3}
       propertyPath: audioClips.Array.data[4]
       value: 
-      objectReference: {fileID: 8300000, guid: 6ad0cf00f050bee41a2dee098475dc78, type: 3}
+      objectReference: {fileID: 8300000, guid: e9a13b42f47ea414fb7dae7533a7da87, type: 3}
     - target: {fileID: 5446973797983412925, guid: 66d895dab0f101c4b80051140132a9a0, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
