@@ -27,12 +27,16 @@ public class GameManager : MonoBehaviour
     public GameObject OptionUl;
     private bool _optionUlOpen = false;
 
+    
+
     public int Stage { get; private set; }
     private void Awake()
     {
         if (Instance == null)
         {
             Instance = this;
+            
+
         }
         else
         {
@@ -41,6 +45,7 @@ public class GameManager : MonoBehaviour
         Stage = 1;
 
         DontDestroyOnLoad(gameObject);
+        Debug.Log("GameManager가 초기화되었습니다.");
 
         OptionUl.gameObject.SetActive(false);
     }
