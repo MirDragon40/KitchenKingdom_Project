@@ -37,7 +37,7 @@ public class Table : MonoBehaviour
                 fireEffect.Play(); // 파티클 재생
             }
             Debug.Log("이그나이트");
-            soundManager.PlayFireSound();
+            soundManager.PlayAudio("Fire", true);
 
             if (igniteNearbyTablesCoroutine != null)
             {
@@ -83,7 +83,7 @@ public class Table : MonoBehaviour
         // 모든 불이 꺼졌다면 사운드 정지
         if (!anyFireIsOn)
         {
-            soundManager.StopFireSound();
+            soundManager.StopAudio("Fire");
         }
 
         // 불이 꺼지면 코루틴을 중지하고 null로 설정
@@ -118,7 +118,7 @@ public class Table : MonoBehaviour
             }
         }
     }
-
+        
     IEnumerator IgniteNearbyStoves()
     {
         yield return new WaitForSeconds(5f);
@@ -134,7 +134,6 @@ public class Table : MonoBehaviour
             if (stove != null && !stove.IsOnFire)
             {
                 stove.fireObject.MakeFire();
-                stove.StartCoroutine(stove.IgniteNearbyTables());
             }
         }
     }

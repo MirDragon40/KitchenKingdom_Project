@@ -344,7 +344,7 @@ public class FoodObject : IHoldable, IThrowable
         if (cookingCoroutine != null)
         {
             StopCoroutine(cookingCoroutine);
-            soundManager.StopAudio("Patty",false);
+            soundManager.StopAudio("Patty");
             cookingCoroutine = null;
         }
     }

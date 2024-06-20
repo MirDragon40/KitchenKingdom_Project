@@ -111,7 +111,7 @@ public class PanObject : IHoldable
                         FireSlider.gameObject.SetActive(true);
                         hasCaughtFireOnce = true;
 
-                        soundManager.PlayFireSound();
+                        soundManager.PlayAudio("Fire", true);
                     }
                 }
 
@@ -283,7 +283,7 @@ public class PanObject : IHoldable
             if (fireObject.contactTime >= 2f)
             {
                 fireObject.Extinguish();
-                soundManager.StopFireSound();
+                soundManager.StopAudio("Fire");
             }
         }
     }
