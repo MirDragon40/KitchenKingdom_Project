@@ -48,8 +48,8 @@ public class Stove : CookStand
                 {
                     if (!fireObject._isOnFire)
                     {
-                        fireObject.MakeFire();
-                        SoundManager.PlayFireSound();
+                        fireObject.RequestMakeFire();
+                        SoundManager.PlayAudio("FireSound",true); 
                     }
                     else if (isFireExtinguished)
                     {
@@ -71,7 +71,7 @@ public class Stove : CookStand
 
                 if (fireObject._isOnFire)
                 {
-                    fireObject.Extinguish();
+                    fireObject.RequestExtinguish();
                     isFireExtinguished = true;
                     if (igniteCoroutine != null)
                     {

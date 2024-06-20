@@ -1,9 +1,4 @@
-using ExitGames.Client.Photon;
 using Photon.Pun;
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using Unity.Mathematics;
 using UnityEngine;
 
 public class Extinguisher : IHoldable
@@ -13,6 +8,8 @@ public class Extinguisher : IHoldable
     public bool isPress = false;
     private PhotonView _pv;
     public Transform StartPosition;
+    public SoundManager soundManager;
+    private bool isShooting = false; // 소화기 분말 연사중
 
     public override Vector3 DropOffset => new Vector3(0.3f, 0, 0);
     private void Awake()
@@ -20,6 +17,7 @@ public class Extinguisher : IHoldable
         _powderEffect = GetComponentInChildren<ParticleSystem>();
         _boxCollider.enabled = false;
         _pv = GetComponent<PhotonView>();
+        soundManager = FindObjectOfType<SoundManager>();
     }
     private void Start()
     {
@@ -30,17 +28,16 @@ public class Extinguisher : IHoldable
     }
     public override void Hold(Character character, Transform handTransform)
     {
-        if (PhotonNetwork.IsMasterClient)
-        {
+
             if (_pv.OwnerActorNr != character.PhotonView.OwnerActorNr)
             {
                 _pv.TransferOwnership(character.PhotonView.OwnerActorNr);
             }
-        }
+        
         _holdCharacter = character;
 
         // 각 아이템이 잡혔을 때 해줄 초기화 로직
-        transform.parent = handTransform;
+        transform.SetParent(handTransform);
         transform.localPosition = new Vector3(0, 0, 0);
         transform.localRotation = Quaternion.Euler(0, 90, 0);
 
@@ -71,10 +68,14 @@ public class Extinguisher : IHoldable
             if (Input.GetKeyDown(KeyCode.LeftControl))
             {
                 photonView.RPC("Shot", RpcTarget.All, true); // true를 전달하여 Shot RPC 메서드 호출
+                soundManager.PlayAudio("Powder", true);
+                
             }
+
             if (Input.GetKeyUp(KeyCode.LeftControl))
             {
                 photonView.RPC("Shot", RpcTarget.All, false); // false를 전달하여 Shot RPC 메서드 호출
+                soundManager.StopAudio("Powder");
             }
         }
     }
@@ -101,7 +102,7 @@ public class Extinguisher : IHoldable
     {
         transform.parent = place;
         transform.position = place.position;
-        //Quaternion additionalRotation = Quaternion.Euler(0, -90, 0);
+        Quaternion additionalRotation = Quaternion.Euler(0, -90, 0);
 
 
         _powderEffect.Stop();

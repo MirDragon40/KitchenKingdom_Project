@@ -629,6 +629,7 @@ GameObject:
   - component: {fileID: 8495361445182428136}
   - component: {fileID: 1010523499004131602}
   - component: {fileID: 2842866395247592431}
+  - component: {fileID: -915981768704955079}
   m_Layer: 0
   m_Name: Plate_Stage1
   m_TagString: Untagged
@@ -855,6 +856,22 @@ MonoBehaviour:
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
+--- !u!114 &-915981768704955079
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2637595923753635810}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SynchronizePosition: 1
+  m_SynchronizeRotation: 1
+  m_SynchronizeScale: 0
+  m_UseLocal: 1
 --- !u!1 &3097367294394038093
 GameObject:
   m_ObjectHideFlags: 0

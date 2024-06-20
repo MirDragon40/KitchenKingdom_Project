@@ -25,7 +25,6 @@ public class CharacterMoveAbility : CharacterAbility
 
     private bool isDashing = false;
 
-
     private void Start()
     {
         _characterController = GetComponent<CharacterController>();
@@ -43,7 +42,7 @@ public class CharacterMoveAbility : CharacterAbility
     {
         if (!_owner.PhotonView.IsMine && PhotonNetwork.IsConnected)
         {
-           // SynchronizeAnimation();
+            // SynchronizeAnimation();
             return;
         }
         // 사용자 키보드 입력
@@ -67,21 +66,37 @@ public class CharacterMoveAbility : CharacterAbility
 
         _characterController.Move(move);
 
+       
+        
         _dirMagnitude = dir.magnitude;
         _animator.SetFloat("Move", _dirMagnitude);
 
-        // 파티클 시스템 제어
-        if (_dirMagnitude > 0 && !PowderEffect.isPlaying)
-        {
-          //  WalkEffectPlay();
-            _pv.RPC("WalkEffectPlay", RpcTarget.All);
-        }
-        else if (_dirMagnitude == 0 && PowderEffect.isPlaying)
-        {
-           // WalkEffectStop();
-            _pv.RPC("WalkEffectStop", RpcTarget.All);
-        }
 
+        // 파티클 시스템 제어
+        if (_dirMagnitude > 0)
+        {
+            if (!PowderEffect.isPlaying)
+            {
+                _pv.RPC("WalkEffectPlay", RpcTarget.All);
+            }
+
+            if (!soundManager.IsPlaying("Walk"))
+            {
+                soundManager.PlayAudio("Walk", true);
+            }
+        }
+        else
+        {
+            if (PowderEffect.isPlaying)
+            {
+                _pv.RPC("WalkEffectStop", RpcTarget.All);
+            }
+
+            if (soundManager.IsPlaying("Walk"))
+            {
+                soundManager.StopAudio("Walk");
+            }
+        }
         // 이동하는 방향을 바라보도록 회전
         if (dir != Vector3.zero)
         {
@@ -92,7 +107,6 @@ public class CharacterMoveAbility : CharacterAbility
         if (Input.GetKeyDown(KeyCode.LeftAlt) && !isDashing)
         {
             DashPlay();
-
         }
     }
     [PunRPC]
@@ -109,6 +123,7 @@ public class CharacterMoveAbility : CharacterAbility
     {
         PowderEffect_Dash.Play();
         StartCoroutine(Dash());
+        soundManager.PlayAudio("Run", true);
     }
     // 대쉬 코루틴 함수
     private IEnumerator Dash()
@@ -120,27 +135,27 @@ public class CharacterMoveAbility : CharacterAbility
         {
             Vector3 dashDirection = transform.forward;
             _characterController.Move(dashDirection * (DashSpeed * Time.deltaTime));
-
             yield return null; // 다음 프레임까지 대기
         }
 
         isDashing = false;
         PowderEffect_Dash.Stop();
+        soundManager.StopAudio("Run");
     }
 
-/*    void SynchronizeAnimation()
-    {
-        // 애니메이터 파라미터 동기화
-        foreach (var param in _animator.parameters)
+    /*    void SynchronizeAnimation()
         {
-            if (param.type == AnimatorControllerParameterType.Float)
+            // 애니메이터 파라미터 동기화
+            foreach (var param in _animator.parameters)
             {
-                _animator.SetFloat(param.name, _animator.GetFloat(param.name));
+                if (param.type == AnimatorControllerParameterType.Float)
+                {
+                    _animator.SetFloat(param.name, _animator.GetFloat(param.name));
+                }
+                else if (param.type == AnimatorControllerParameterType.Bool)
+                {
+                    _animator.SetBool(param.name, _animator.GetBool(param.name));
+                }
             }
-            else if (param.type == AnimatorControllerParameterType.Bool)
-            {
-                _animator.SetBool(param.name, _animator.GetBool(param.name));
-            }
-        }
-    }*/
+        }*/
 }

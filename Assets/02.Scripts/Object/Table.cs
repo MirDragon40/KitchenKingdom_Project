@@ -1,11 +1,14 @@
+using Photon.Pun;
 using System.Collections;
 using UnityEngine;
 
-public class Table : MonoBehaviour
+public class Table : MonoBehaviourPun
 {
     public bool IsOnFire = false;
     public ParticleSystem fireEffect;
     public SoundManager soundManager;
+    private PhotonView _pv;
+
 
     public Table[] NearbyTables;
     public Stove[] NearbyStoves;
@@ -20,13 +23,25 @@ public class Table : MonoBehaviour
 
     private void Start()
     {
+        _pv = GetComponent<PhotonView>();
         if (fireEffect == null)
         {
             fireEffect = GetComponentInChildren<ParticleSystem>();
         }
         soundManager = FindObjectOfType<SoundManager>();
     }
-
+    public void RequestIgnite()
+    {
+        if (IsOnFire)
+        {
+            return;
+        }
+        if (PhotonNetwork.IsMasterClient)
+        { 
+            _pv.RPC("Ignite", RpcTarget.All);
+        }
+    }
+    [PunRPC]
     public void Ignite()
     {
         if (!IsOnFire) // 이미 불이 붙어있는 경우 다시 붙지 않도록 체크
@@ -37,7 +52,7 @@ public class Table : MonoBehaviour
                 fireEffect.Play(); // 파티클 재생
             }
             Debug.Log("이그나이트");
-            soundManager.PlayFireSound();
+            soundManager.PlayAudio("Fire", true);
 
             if (igniteNearbyTablesCoroutine != null)
             {
@@ -52,9 +67,24 @@ public class Table : MonoBehaviour
             igniteNearbyStovesCoroutine = StartCoroutine(IgniteNearbyStoves());
         }
     }
-
-    public void Extinguish()
+    public void RequestExtinguish()
     {
+        if (!IsOnFire)
+        {
+            return;
+        }
+        if (PhotonNetwork.IsMasterClient)
+        {
+            _pv.RPC("ExtinguishTable", RpcTarget.All);
+        }
+    }
+    [PunRPC]
+    public void ExtinguishTable()
+    {
+        if (!IsOnFire)
+        {
+            return;
+        }
         IsOnFire = false;
         if (fireEffect != null)
         {
@@ -65,7 +95,7 @@ public class Table : MonoBehaviour
         anyFireIsOn = false;
         foreach (var table in NearbyTables)
         {
-            if (table.IsOnFire)
+            if (table != null && table.IsOnFire)
             {
                 anyFireIsOn = true;
                 break;
@@ -83,7 +113,7 @@ public class Table : MonoBehaviour
         // 모든 불이 꺼졌다면 사운드 정지
         if (!anyFireIsOn)
         {
-            soundManager.StopFireSound();
+            soundManager.StopAudio("Fire");
         }
 
         // 불이 꺼지면 코루틴을 중지하고 null로 설정
@@ -102,7 +132,7 @@ public class Table : MonoBehaviour
 
     IEnumerator IgniteNearbyTables()
     {
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(8f);
 
         // 불이 붙는 과정 중 불이 꺼지면 종료
         if (!IsOnFire)
@@ -112,16 +142,16 @@ public class Table : MonoBehaviour
 
         foreach (var table in NearbyTables)
         {
-            if (!table.IsOnFire)
+            if (table != null && !table.IsOnFire)
             {
-                table.Ignite();
+                table.RequestIgnite();
             }
         }
     }
-
+        
     IEnumerator IgniteNearbyStoves()
     {
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(8f);
 
         // 불이 붙는 과정 중 불이 꺼지면 종료
         if (!IsOnFire)
@@ -133,22 +163,21 @@ public class Table : MonoBehaviour
         {
             if (stove != null && !stove.IsOnFire)
             {
-                stove.fireObject.MakeFire();
-                stove.StartCoroutine(stove.IgniteNearbyTables());
+                stove.fireObject.RequestMakeFire();
             }
         }
     }
 
     private void OnTriggerStay(Collider other)
     {
-        if (IsOnFire && other.CompareTag("Powder"))
+        if (PhotonNetwork.IsMasterClient && other.CompareTag("Powder"))
         {
             isPowderTouching = true;
             powderContactTime += Time.deltaTime;
             Debug.Log(powderContactTime);
             if (powderContactTime >= 2f)
             {
-                Extinguish();
+                RequestExtinguish();
 
                 if (igniteNearbyTablesCoroutine != null)
                 {

@@ -93,9 +93,9 @@ MonoBehaviour:
   - Extinguish
   - FadeOutAndDestroy
   - PlayAudio
-  - Play_ShowResultAnim
-  - Play_ShowReviewAnim
-  - StartResultSceneAnimation
+  - Ignite
+  - ExtinguishFireObject
+  - ExtinguishTable
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

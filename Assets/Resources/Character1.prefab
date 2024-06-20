@@ -6321,6 +6321,7 @@ MonoBehaviour:
   DashSpeed: 7
   RotationSpeed: 0
   DashDuration: 0.2
+  soundManager: {fileID: 0}
   PowderEffect: {fileID: 3722399461594868742}
   PowderEffect_Dash: {fileID: 227133561062748886}
 --- !u!114 &1332226470673453758
@@ -6341,6 +6342,7 @@ MonoBehaviour:
   IsSubmitable: 0
   IsServeable: 0
   JustHold: 0
+  SelectedDish: {fileID: 0}
   _pv: {fileID: 0}
   PlacePosition: {fileID: 0}
   fireObject: {fileID: 0}

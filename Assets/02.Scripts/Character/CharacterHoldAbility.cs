@@ -26,7 +26,8 @@ public class CharacterHoldAbility : CharacterAbility
     public bool IsServeable = false;
     public bool IsHolding => HoldableItem != null;
     public bool JustHold = false;
-    
+
+    public FoodCombination SelectedDish;
 
     public PhotonView _pv;
     public Transform PlacePosition = null;
@@ -162,9 +163,12 @@ public class CharacterHoldAbility : CharacterAbility
     [PunRPC]
     private void DropFood()
     {
-        if (HoldableItem is FoodObject || HoldableItem is DishObject)
+        if (HoldableItem != null)
         {
-            FoodTrashDrop();
+            if (HoldableItem is FoodObject || HoldableItem is DishObject)
+            {
+                FoodTrashDrop();
+            }
         }
 
     }
