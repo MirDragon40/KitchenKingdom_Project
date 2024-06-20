@@ -1,9 +1,4 @@
-using ExitGames.Client.Photon;
 using Photon.Pun;
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using Unity.Mathematics;
 using UnityEngine;
 
 public class Extinguisher : IHoldable
@@ -30,17 +25,16 @@ public class Extinguisher : IHoldable
     }
     public override void Hold(Character character, Transform handTransform)
     {
-        if (PhotonNetwork.IsMasterClient)
-        {
+
             if (_pv.OwnerActorNr != character.PhotonView.OwnerActorNr)
             {
                 _pv.TransferOwnership(character.PhotonView.OwnerActorNr);
             }
-        }
+        
         _holdCharacter = character;
 
         // 각 아이템이 잡혔을 때 해줄 초기화 로직
-        transform.parent = handTransform;
+        transform.SetParent(handTransform);
         transform.localPosition = new Vector3(0, 0, 0);
         transform.localRotation = Quaternion.Euler(0, 90, 0);
 
@@ -101,7 +95,7 @@ public class Extinguisher : IHoldable
     {
         transform.parent = place;
         transform.position = place.position;
-        //Quaternion additionalRotation = Quaternion.Euler(0, -90, 0);
+        Quaternion additionalRotation = Quaternion.Euler(0, -90, 0);
 
 
         _powderEffect.Stop();
