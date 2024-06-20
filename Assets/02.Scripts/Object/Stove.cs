@@ -49,7 +49,7 @@ public class Stove : CookStand
                     if (!fireObject._isOnFire)
                     {
                         fireObject.MakeFire();
-                        SoundManager.PlayFireSound();
+                        SoundManager.PlayAudio("FireSound",true); 
                     }
                     else if (isFireExtinguished)
                     {

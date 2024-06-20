@@ -116,7 +116,7 @@ GameObject:
   - component: {fileID: 5592269904853668084}
   - component: {fileID: 96775701312640860}
   - component: {fileID: 6654251320375364341}
-  - component: {fileID: 8205988261458577940}
+  - component: {fileID: -5043375483358767100}
   m_Layer: 0
   m_Name: Extinguisher
   m_TagString: Extinguisher
@@ -156,6 +156,7 @@ MonoBehaviour:
   IsDroppable: 0
   _boxCollider: {fileID: 5400166647897815554}
   isPress: 0
+  StartPosition: {fileID: 0}
 --- !u!65 &6654251320375364341
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -175,9 +176,9 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.1907314, y: 0.45082155, z: 0.29043466}
-  m_Center: {x: -0.013950348, y: 0.2745888, z: 0}
---- !u!114 &8205988261458577940
+  m_Size: {x: 0.340928, y: 0.4508216, z: 0.1398759}
+  m_Center: {x: 0.061147, y: 0.274588, z: -0.001786114}
+--- !u!114 &-5043375483358767100
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1287,7 +1288,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4529282608138346, guid: 2d375605610a4e84d8e1d80a70c9340a, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.208
+      value: -0.102
       objectReference: {fileID: 0}
     - target: {fileID: 4529282608138346, guid: 2d375605610a4e84d8e1d80a70c9340a, type: 3}
       propertyPath: m_LocalPosition.y
