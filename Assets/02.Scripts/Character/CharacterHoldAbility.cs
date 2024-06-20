@@ -163,9 +163,12 @@ public class CharacterHoldAbility : CharacterAbility
     [PunRPC]
     private void DropFood()
     {
-        if (HoldableItem is FoodObject || HoldableItem is DishObject)
+        if (HoldableItem != null)
         {
-            FoodTrashDrop();
+            if (HoldableItem is FoodObject || HoldableItem is DishObject)
+            {
+                FoodTrashDrop();
+            }
         }
 
     }

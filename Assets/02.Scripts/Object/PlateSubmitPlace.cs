@@ -53,10 +53,14 @@ public class PlateSubmitPlace : MonoBehaviour
         {
             ShowScoreUI(OrderManager.Instance.NormalOrderPoints);
         }
-        if (_foodCombo.PV.IsMine)
+        if (_foodCombo != null)
         {
-            PhotonNetwork.Destroy(_foodCombo.gameObject);
+            if (_foodCombo.PV.IsMine)
+            {
+                PhotonNetwork.Destroy(_foodCombo.gameObject);
+            }
         }
+
         _foodCombo = null;
         _plateContent = string.Empty;
 
