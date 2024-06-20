@@ -42,7 +42,11 @@ public class SoundManager : MonoBehaviour
             audioSource.loop = loop;
             audioSource.Play();
             audioSources.Add(clipName, soundObject);
-            StartCoroutine(DestroyAfterPlay(audioSource, soundObject));
+
+            if (!loop)
+            {
+                StartCoroutine(DestroyAfterPlay(audioSource, soundObject));
+            }
         }
     }
 

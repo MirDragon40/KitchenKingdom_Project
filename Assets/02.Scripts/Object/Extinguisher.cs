@@ -13,6 +13,8 @@ public class Extinguisher : IHoldable
     public bool isPress = false;
     private PhotonView _pv;
     public Transform StartPosition;
+    public SoundManager soundManager;
+    private bool isShooting = false; // 소화기 분말 연사중
 
     public override Vector3 DropOffset => new Vector3(0.3f, 0, 0);
     private void Awake()
@@ -20,6 +22,7 @@ public class Extinguisher : IHoldable
         _powderEffect = GetComponentInChildren<ParticleSystem>();
         _boxCollider.enabled = false;
         _pv = GetComponent<PhotonView>();
+        soundManager = FindObjectOfType<SoundManager>();
     }
     private void Start()
     {
@@ -71,10 +74,14 @@ public class Extinguisher : IHoldable
             if (Input.GetKeyDown(KeyCode.LeftControl))
             {
                 photonView.RPC("Shot", RpcTarget.All, true); // true를 전달하여 Shot RPC 메서드 호출
+                soundManager.PlayAudio("Powder", true);
+                
             }
+
             if (Input.GetKeyUp(KeyCode.LeftControl))
             {
                 photonView.RPC("Shot", RpcTarget.All, false); // false를 전달하여 Shot RPC 메서드 호출
+                soundManager.StopAudio("Powder");
             }
         }
     }
