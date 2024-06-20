@@ -170,7 +170,7 @@ public class FoodObject : IHoldable, IThrowable
     public void ThrowObject(Vector3 direction, float throwPower)
     {
         _rigidbody.isKinematic = false;
-        transform.parent = null;
+        transform.SetParent(null);
         _holdCharacter = null;
         _rigidbody.AddForce(direction * throwPower, ForceMode.Impulse);
         StartCoroutine(TriggerThrownItem_Coroutine());
@@ -234,9 +234,9 @@ public class FoodObject : IHoldable, IThrowable
     }
     public override void Place(Transform place)
     {
-        transform.position = place.position;
         _rigidbody.isKinematic = true;
-        transform.parent = place;
+        transform.position = place.position;
+        transform.SetParent(place);
         _holdCharacter = null;
     }
 

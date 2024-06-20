@@ -50,12 +50,13 @@ public class DishObject : IHoldable
     public override void Place(Transform place)
     {
        // Debug.Log("접시 내려놓기");
-        transform.position = place.position;
+
         GetComponent<Rigidbody>().isKinematic = true;
         GetComponent<BoxCollider>().enabled = true;
         transform.rotation = place.rotation;
+        transform.position = place.position;
         //placeRotation = Quaternion.Euler(0, 0, 0);
-        transform.parent = place;
+        transform.SetParent(place);
         _holdCharacter = null;
 
 

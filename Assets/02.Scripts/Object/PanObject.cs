@@ -72,6 +72,8 @@ public class PanObject : IHoldable
                 Debug.Log(_pv.OwnerActorNr);
                 GrillingIngrediant.GetComponent<PhotonView>().OwnerActorNr = _pv.OwnerActorNr;
             }
+            GrillingIngrediant.transform.localPosition = Vector3.zero;
+
         }
         // 팬이 스토브에 놓인 경우
         if (PanPlacePosition.childCount != 0)
@@ -183,19 +185,20 @@ public class PanObject : IHoldable
 
     public override void Hold(Character character, Transform handTransform)
     {
+        int charOwnerActorNr = character.PhotonView.OwnerActorNr;
         if (PhotonNetwork.IsMasterClient)
         {
-            if (_pv.OwnerActorNr != character.PhotonView.OwnerActorNr)
+            if (_pv.OwnerActorNr != charOwnerActorNr)
             {
-                _pv.TransferOwnership(character.PhotonView.OwnerActorNr);
+                _pv.TransferOwnership(charOwnerActorNr);
                 if (GrillingIngrediant != null)
                 {
-                    GrillingIngrediant.GetComponent<PhotonView>().TransferOwnership(character.PhotonView.OwnerActorNr);
+                    GrillingIngrediant.GetComponent<PhotonView>().TransferOwnership(charOwnerActorNr);
                 }
             }
         }
         GetComponent<Rigidbody>().isKinematic = true;
-        transform.parent = handTransform;
+        transform.SetParent(handTransform);
         transform.localPosition = new Vector3(0, 0, 0.3f);
         transform.localRotation = Quaternion.Euler(-90f, 180f, 0f);
 
@@ -225,7 +228,7 @@ public class PanObject : IHoldable
         transform.position = place.position;
         Quaternion panplaceRotation = Quaternion.Euler(-90, 0, 180);
         transform.rotation = place.rotation * panplaceRotation;
-        transform.parent = place;
+        transform.SetParent(place);
 
         if (_holdCharacter != null)
         {
