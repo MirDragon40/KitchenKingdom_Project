@@ -1,4 +1,3 @@
-
 using System.Collections;
 using TMPro;
 using UnityEngine;
@@ -21,6 +20,11 @@ public class ResultSceneManager : MonoBehaviour
     public TextMeshProUGUI Stage3_Text;
     public TextMeshProUGUI Total_Text;
 
+    public TextMeshProUGUI Stage1_Score_Text;
+    public TextMeshProUGUI Stage2_Score_Text;
+    public TextMeshProUGUI Stage3_Score_Text;
+    public TextMeshProUGUI Total_Score_Text;
+
     private float _timeGap = 0.3f;
 
 
@@ -41,15 +45,20 @@ public class ResultSceneManager : MonoBehaviour
         Review_Star4.SetActive(false);
         Review_Star5.SetActive(false);
 
-        Stage1_Text.gameObject.SetActive(false);
-        Stage2_Text.gameObject.SetActive(false);
-        Stage3_Text.gameObject.SetActive(false);
-        Total_Text.gameObject.SetActive(false);
+
+        Total_Score_Text.text = $"{GameManager.Instance.TotalScore}";
+
 
     }
 
     private void Start()
     {
+
+        Stage1_Text.gameObject.SetActive(false);
+        Stage2_Text.gameObject.SetActive(false);
+        Stage3_Text.gameObject.SetActive(false);
+        Total_Text.gameObject.SetActive(false);
+
 
         StartCoroutine(ResultSceneAnimation_Coroutine());
 

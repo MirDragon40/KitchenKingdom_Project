@@ -17,10 +17,16 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance { get; private set; }
     public GameState State = GameState.Go; // 게임 상태, TimeScale관리
     public Transform[] SpawnPoints= new Transform[4];
+
+    public int Stage1_Score;
+    public int Stage2_Score;
+    public int Stage3_Score;
+
     public int TotalScore = 0;
 
     public GameObject OptionUl;
     private bool _optionUlOpen = false;
+
     public int Stage { get; private set; }
     private void Awake()
     {
@@ -54,7 +60,6 @@ public class GameManager : MonoBehaviour
                 OptionUl.gameObject.SetActive(true);
                 _optionUlOpen = true;
             }
-            
         }
     }
 
@@ -65,6 +70,7 @@ public class GameManager : MonoBehaviour
             SpawnPlayer();
         }*/
     }
+
     public void SpawnPlayer()
     {
         int actorNumber = PhotonNetwork.LocalPlayer.ActorNumber;
@@ -73,7 +79,6 @@ public class GameManager : MonoBehaviour
         Vector3 spawnPosition = SpawnPoints[spawnIndex].position;
         Quaternion spawnRotation = SpawnPoints[spawnIndex].rotation;
         PhotonNetwork.Instantiate("Character1", spawnPosition, spawnRotation);
-
     }
 
 
