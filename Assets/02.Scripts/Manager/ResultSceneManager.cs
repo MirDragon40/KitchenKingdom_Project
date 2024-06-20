@@ -39,16 +39,28 @@ public class ResultSceneManager : MonoBehaviour
             Destroy(gameObject);
         }
 
+        // 디버깅 코드 추가
+        if (GameManager.Instance == null)
+        {
+            Debug.LogError("GameManager.Instance가 null입니다.");
+        }
+
+        if (Total_Score_Text == null)
+        {
+            Debug.LogError("Total_Score_Text가 null입니다.");
+        }
+
+        // 기존 코드
         Review_Star1.SetActive(true);
         Review_Star2.SetActive(false);
         Review_Star3.SetActive(false);
         Review_Star4.SetActive(false);
         Review_Star5.SetActive(false);
 
-
-        Total_Score_Text.text = $"{GameManager.Instance.TotalScore}";
-
-
+        if (GameManager.Instance != null)
+        {
+            Total_Score_Text.text = $"{GameManager.Instance.TotalScore}";
+        }
     }
 
     private void Start()
