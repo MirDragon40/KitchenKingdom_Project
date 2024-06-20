@@ -96,6 +96,7 @@ MonoBehaviour:
   - Ignite
   - ExtinguishFireObject
   - ExtinguishTable
+  - SpawnCoke
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

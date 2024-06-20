@@ -11359,6 +11359,7 @@ GameObject:
   - component: {fileID: 8305480253519202773}
   - component: {fileID: 7767501187672386128}
   - component: {fileID: 6015978452498771504}
+  - component: {fileID: 8305480253519202774}
   m_Layer: 0
   m_Name: CokeMachine (1)
   m_TagString: Untagged
@@ -28905,6 +28906,28 @@ MonoBehaviour:
   RendererThisMaterial: {fileID: 5205300497710079469}
   ThisMaterial: {fileID: 2100000, guid: 6493a5714a5eddc45bb33d006de5b93e, type: 2}
   ChangeMaterial: {fileID: 2100000, guid: 76a2fc3e91ab917438620a1ceed1bb8c, type: 2}
+--- !u!114 &8305480253519202774
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 318153581729805185}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 51
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!4 &8327392029356696513
 Transform:
   m_ObjectHideFlags: 0
