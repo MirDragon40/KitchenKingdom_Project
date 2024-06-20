@@ -49,5 +49,12 @@ public class MakeCoke : MonoBehaviour
         newCoke.transform.parent = CokeSpawnPoint;
         soundManager.PlayAudio("Cola", true);
         isCokeSpawned = true;
+        StartCoroutine(Coroutine_CokeSoundStop());
     }
+    public IEnumerator Coroutine_CokeSoundStop()
+    {
+        yield return new WaitForSeconds(3.5f);
+        soundManager.StopAudio("Cola");
+    }
+
 }
