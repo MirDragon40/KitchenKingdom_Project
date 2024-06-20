@@ -12,6 +12,8 @@ public class SoundManager : MonoBehaviour
     private AudioSource bgmSource;
     private Dictionary<string, GameObject> audioSources = new Dictionary<string, GameObject>();
 
+    public static SoundManager Instance;
+
     private void Awake()
     {
         // BGM AudioSource 설정
@@ -33,6 +35,14 @@ public class SoundManager : MonoBehaviour
     }
 
     public void PlayAudio(string clipName, bool loop = false)
+    {
+       // -> RPC       
+        _PlayAudio(clipName, loop);
+    }
+
+
+    [PunRPC]
+    private void _PlayAudio(string clipName, bool loop = false)
     {
         if (!audioSources.ContainsKey(clipName))
         {
