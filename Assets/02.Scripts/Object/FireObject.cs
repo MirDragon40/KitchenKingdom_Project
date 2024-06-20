@@ -18,7 +18,10 @@ public class FireObject : MonoBehaviourPun
     }
     public void RequestMakeFire()
     {
-        _pv.RPC("MakeFire", RpcTarget.All);
+        if (PhotonNetwork.IsMasterClient)
+        {
+            _pv.RPC("MakeFire", RpcTarget.All);
+        }
 
     }
     [PunRPC]
@@ -30,13 +33,18 @@ public class FireObject : MonoBehaviourPun
     }
     public void RequestExtinguish()
     {
-        _pv.RPC("Extinguish", RpcTarget.All);
+
+            _pv.RPC("ExtinguishFireObject", RpcTarget.All);
+        
     }
     [PunRPC]
-    public void Extinguish()
+    public void ExtinguishFireObject()
     {
         _isOnFire = false;
-        fireEffect.Stop();
+        if (fireEffect != null)
+        {
+            fireEffect.Stop();
+        }
     }
 
     private void OnTriggerStay(Collider other)
@@ -47,7 +55,7 @@ public class FireObject : MonoBehaviourPun
             contactTime += Time.deltaTime;
             if (contactTime >= 2f)
             {
-                Extinguish();
+                RequestExtinguish();
             }
         }
     }

@@ -123,7 +123,7 @@ public class PanObject : IHoldable
                 }
                 else if (!fireObject._isOnFire && MyStove.fireObject._isOnFire)
                 {
-                    MyStove.fireObject.Extinguish();
+                    MyStove.fireObject.RequestExtinguish();
                 }
             }
             else
@@ -292,9 +292,9 @@ public class PanObject : IHoldable
             isPowderTouching = true;
             fireObject.contactTime += Time.deltaTime;
             Debug.Log(fireObject.contactTime);
-            if (fireObject.contactTime >= 2f)
+            if (fireObject.contactTime >= 1f)
             {
-                fireObject.Extinguish();
+                fireObject.RequestExtinguish();
                 soundManager.StopAudio("Fire");
             }
         }
