@@ -26,7 +26,8 @@ public class CharacterHoldAbility : CharacterAbility
     public bool IsServeable = false;
     public bool IsHolding => HoldableItem != null;
     public bool JustHold = false;
-    
+
+    public FoodCombination SelectedDish;
 
     public PhotonView _pv;
     public Transform PlacePosition = null;

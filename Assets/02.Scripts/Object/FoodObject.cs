@@ -234,6 +234,10 @@ public class FoodObject : IHoldable, IThrowable
     }
     public override void Place(Transform place)
     {
+        if (place == null)
+        {
+            return;
+        }
         _rigidbody.isKinematic = true;
         transform.position = place.position;
         transform.SetParent(place);
@@ -275,7 +279,7 @@ public class FoodObject : IHoldable, IThrowable
         {
             colliderThis.enabled = false;
 
-            CookProgress += Time.deltaTime / BakeTime;
+            CookProgress += Time.fixedDeltaTime / BakeTime;
             CookProgress = Mathf.Clamp(CookProgress, 0f, 3f);
             if (State == FoodState.Raw && CookProgress >= 1f && FoodPrefab1.activeSelf)
             {
@@ -292,7 +296,7 @@ public class FoodObject : IHoldable, IThrowable
                 State = FoodState.Burnt; // 수정: 상태를 Burnt로 변경
 
             }
-            yield return null;
+            yield return new WaitForFixedUpdate();
         }
 
         cookingCoroutine = null;
@@ -305,7 +309,7 @@ public class FoodObject : IHoldable, IThrowable
         {
             colliderThis.enabled = false;
 
-            CookProgress += Time.deltaTime / BakeTime;
+            CookProgress += Time.fixedDeltaTime / BakeTime;
             CookProgress = Mathf.Clamp(CookProgress, 0f, 2.5f);
 
             if (State == FoodState.Raw && CookProgress >= 1f && FoodPrefab1.activeSelf)
@@ -320,7 +324,7 @@ public class FoodObject : IHoldable, IThrowable
                 FoodPrefab3.SetActive(true);
                 State = FoodState.Burnt; // 수정: 상태를 Burnt로 변경
             }
-            yield return null;
+            yield return new WaitForFixedUpdate();
         }
         cookingCoroutine = null;
         colliderThis.enabled = true;

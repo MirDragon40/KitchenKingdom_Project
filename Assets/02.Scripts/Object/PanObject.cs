@@ -69,7 +69,6 @@ public class PanObject : IHoldable
         {
             if (_pv.OwnerActorNr != GrillingIngrediant.GetComponent<PhotonView>().OwnerActorNr)
             {
-                Debug.Log(_pv.OwnerActorNr);
                 GrillingIngrediant.GetComponent<PhotonView>().OwnerActorNr = _pv.OwnerActorNr;
             }
             GrillingIngrediant.transform.localPosition = Vector3.zero;
@@ -183,20 +182,14 @@ public class PanObject : IHoldable
         }
     }
 
+
     public override void Hold(Character character, Transform handTransform)
     {
-        int charOwnerActorNr = character.PhotonView.OwnerActorNr;
-        if (PhotonNetwork.IsMasterClient)
+        if (character == null || handTransform == null)
         {
-            if (_pv.OwnerActorNr != charOwnerActorNr)
-            {
-                _pv.TransferOwnership(charOwnerActorNr);
-                if (GrillingIngrediant != null)
-                {
-                    GrillingIngrediant.GetComponent<PhotonView>().TransferOwnership(charOwnerActorNr);
-                }
-            }
+            return;
         }
+
         GetComponent<Rigidbody>().isKinematic = true;
         transform.SetParent(handTransform);
         transform.localPosition = new Vector3(0, 0, 0.3f);
@@ -224,6 +217,10 @@ public class PanObject : IHoldable
 
     public override void Place(Transform place)
     {
+        if (place == null)
+        {
+            return;
+        }
         GetComponent<Rigidbody>().isKinematic = true;
         transform.position = place.position;
         Quaternion panplaceRotation = Quaternion.Euler(-90, 0, 180);
@@ -278,6 +275,18 @@ public class PanObject : IHoldable
 
     private void OnTriggerStay(Collider other)
     {
+        if (other.CompareTag("Player"))
+        {
+            int charOwnerActorNr = other.GetComponent<Character>().PhotonView.OwnerActorNr;
+            if (_pv.OwnerActorNr != charOwnerActorNr)
+            {
+                _pv.TransferOwnership(charOwnerActorNr);
+                if (GrillingIngrediant != null)
+                {
+                    GrillingIngrediant.GetComponent<PhotonView>().TransferOwnership(charOwnerActorNr);
+                }
+            }
+        }
         if (fireObject._isOnFire && other.CompareTag("Powder"))
         {
             isPowderTouching = true;
