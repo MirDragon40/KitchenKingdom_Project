@@ -131,8 +131,11 @@ public class CharacterMoveAbility : CharacterAbility
         isDashing = true;
         float startTime = Time.time;
 
+        if (photonView.IsMine)
+        {
+            soundManager.PlayAudio("Run", false);
+        }
 
-        soundManager.PlayAudio("Run", false);
         while (Time.time < startTime + DashDuration)
         {
             Vector3 dashDirection = transform.forward;
