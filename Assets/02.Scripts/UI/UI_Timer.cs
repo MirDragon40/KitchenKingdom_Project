@@ -114,6 +114,8 @@ public class UI_Timer : MonoBehaviourPunCallbacks
     [PunRPC]
     void TimerEnded()
     {
+        Debug.Log("TimerEnded 함수 실행");
+
         TimeOverTextUI.gameObject.SetActive(true);
 
         TimeOverAnimator.SetTrigger("TimeOver");
