@@ -1060,6 +1060,10 @@ PrefabInstance:
       propertyPath: sceneViewId
       value: 13
       objectReference: {fileID: 0}
+    - target: {fileID: 6603206696403277271, guid: 55073aa0f5aa99d4a9c9d86c44518107, type: 3}
+      propertyPath: sceneViewId
+      value: 42
+      objectReference: {fileID: 0}
     - target: {fileID: 7378703333766003518, guid: 55073aa0f5aa99d4a9c9d86c44518107, type: 3}
       propertyPath: m_LocalPosition.x
       value: -5.517
@@ -1830,6 +1834,7 @@ MonoBehaviour:
   - {fileID: 1649265657}
   - {fileID: 1577349093}
   - {fileID: 1852115681}
+  StageScore: 00000000000000000000000000000000000000000000000000000000
   TotalScore: 0
   OptionUl: {fileID: 925381851}
 --- !u!4 &362806178
@@ -7448,6 +7453,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -5043375483358767100, guid: d280921563a8a6e49936dd41b408cdb0, type: 3}
+      propertyPath: sceneViewId
+      value: 45
+      objectReference: {fileID: 0}
     - target: {fileID: 1816714927406644451, guid: d280921563a8a6e49936dd41b408cdb0, type: 3}
       propertyPath: m_Name
       value: Extinguisher
@@ -7551,6 +7560,10 @@ PrefabInstance:
     - target: {fileID: 3064645624665545083, guid: 55073aa0f5aa99d4a9c9d86c44518107, type: 3}
       propertyPath: sceneViewId
       value: 23
+      objectReference: {fileID: 0}
+    - target: {fileID: 6603206696403277271, guid: 55073aa0f5aa99d4a9c9d86c44518107, type: 3}
+      propertyPath: sceneViewId
+      value: 44
       objectReference: {fileID: 0}
     - target: {fileID: 7378703333766003518, guid: 55073aa0f5aa99d4a9c9d86c44518107, type: 3}
       propertyPath: m_LocalPosition.x
@@ -8146,6 +8159,7 @@ MonoBehaviour:
   MaxOrderNumber: 5
   NormalOrderPoints: 25
   GeneratedOrderList: []
+  DirtyPlateStand: {fileID: 0}
 --- !u!4 &1746525627
 Transform:
   m_ObjectHideFlags: 0
@@ -10110,10 +10124,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TimerTextUI: {fileID: 2079287454378475147}
+  TimeOverTextUI: {fileID: 0}
   TimerTextColor: {r: 0, g: 0, b: 0, a: 0}
   SpeedUpFireUI: {fileID: 2014254991206864388}
   TimerAnimator: {fileID: 20844018}
   FireAnimator: {fileID: 3264322695334518198}
+  TimeOverAnimator: {fileID: 0}
   PV: {fileID: 0}
 --- !u!1 &507799676960800384
 GameObject:
@@ -19171,7 +19187,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!33 &4643000246055162447
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -25781,6 +25797,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CokePrefab: {fileID: 1796028654022039200, guid: 501928fb08b948b4fbfd3c6d3857f8d4, type: 3}
   CokeSpawnPoint: {fileID: 5814889416791338617}
+  soundManager: {fileID: 0}
 --- !u!23 &7773163389309336555
 MeshRenderer:
   m_ObjectHideFlags: 0
