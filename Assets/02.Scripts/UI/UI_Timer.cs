@@ -101,19 +101,19 @@ public class UI_Timer : MonoBehaviourPunCallbacks
         Time.timeScale = 0f;
 
         // 디버그 로그 추가
-        Debug.Log("Time.timeScale을 0으로 설정했습니다.");
+        Debug.Log("Time.timeScale을 0으로 설정.");
 
         // Reset time scale before scene change
         yield return new WaitForSecondsRealtime(3f);  // Use WaitForSecondsRealtime to ensure the wait is in real-time
         Time.timeScale = 1f;
 
         // 디버그 로그 추가
-        Debug.Log("씬 전환 시도 직전입니다. Time.timeScale을 1로 설정했습니다.");
+        Debug.Log("씬 전환 시도 직전. Time.timeScale을 1로 설정.");
 
         // Load the scene by name
         SceneManager.LoadScene("ResultScene");
 
         // 디버그 로그 추가
-        Debug.Log("씬 전환을 시도했습니다.");
+        Debug.Log("씬 전환을 시도.");
     }
 }

@@ -2506,10 +2506,12 @@ MonoBehaviour:
   Stage1_Text: {fileID: 282970461}
   Stage2_Text: {fileID: 1352327958}
   Stage3_Text: {fileID: 81345953}
+  Stage4_Text: {fileID: 1548782388}
   Total_Text: {fileID: 857096418}
   Stage1_Score_Text: {fileID: 290298580}
   Stage2_Score_Text: {fileID: 1272642371}
   Stage3_Score_Text: {fileID: 433706352}
+  Stage4_Score_Text: {fileID: 227570074}
   Total_Score_Text: {fileID: 985621810}
 --- !u!114 &1625089183
 MonoBehaviour:
