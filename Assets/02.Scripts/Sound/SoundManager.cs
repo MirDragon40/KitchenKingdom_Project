@@ -13,9 +13,19 @@ public class SoundManager : MonoBehaviour
     private Dictionary<string, GameObject> audioSources = new Dictionary<string, GameObject>();
 
     public static SoundManager Instance;
-
+    public PhotonView PhotonView;
     private void Awake()
     {
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+        PhotonView = GetComponent<PhotonView>();
         // BGM AudioSource 설정
         GameObject bgmObject = new GameObject("BGM");
         bgmSource = bgmObject.AddComponent<AudioSource>();
@@ -36,8 +46,8 @@ public class SoundManager : MonoBehaviour
 
     public void PlayAudio(string clipName, bool loop = false)
     {
-       // -> RPC       
-        _PlayAudio(clipName, loop);
+        // -> RPC       
+        PhotonView.RPC("_PlayAudio", RpcTarget.All, clipName, loop);
     }
 
 
