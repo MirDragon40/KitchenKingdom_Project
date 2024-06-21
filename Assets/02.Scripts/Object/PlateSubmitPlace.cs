@@ -16,6 +16,7 @@ public class PlateSubmitPlace : MonoBehaviour
     private string _plateContent = string.Empty;
     public TMP_Text ScoreUI;
     private PhotonView _pv;
+   
     private void Awake()
     {
         _pv = GetComponent<PhotonView>();
@@ -27,7 +28,7 @@ public class PlateSubmitPlace : MonoBehaviour
         {
             Debug.Log(_plateContent);
             _pv.RPC("SubmitPlate", RpcTarget.All);
-
+            SoundManager.Instance.PlayAudio("Reappearance", false, true);
         }
         if (Input.GetKeyDown(KeyCode.Alpha3))
         {
