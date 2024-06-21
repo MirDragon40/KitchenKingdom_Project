@@ -127,7 +127,13 @@ public class CharacterMoveAbility : CharacterAbility
     {
         StartCoroutine(Dash());
         PowderEffect_Dash.Play();
-        soundManager.PlayAudio("Run", false, false);
+
+
+        if (_pv.IsMine)
+        {
+            soundManager.PlayAudio("Run", false, false);
+        }
+
     }
     // 대쉬 코루틴 함수
     private IEnumerator Dash()
