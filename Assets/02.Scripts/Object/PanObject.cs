@@ -112,7 +112,7 @@ public class PanObject : IHoldable
                         FireSlider.gameObject.SetActive(true);
                         hasCaughtFireOnce = true;
 
-                        soundManager.PlayAudio("Fire", true);
+                        soundManager.PlayAudio("Fire", true, true);
                     }
                 }
 
