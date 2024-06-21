@@ -22,7 +22,7 @@ public class UI_Timer : MonoBehaviourPunCallbacks
 
     private void Awake()
     {
-        
+        TimeOverTextUI.gameObject.SetActive(false);
     }
 
     private void Start()
@@ -32,14 +32,18 @@ public class UI_Timer : MonoBehaviourPunCallbacks
         SpeedUpFireUI.gameObject.SetActive(false);
         StartCoroutine(TimerStart_Coroutine());
     }
-    
+    private void Update()
+    {
+        Debug.Log(_totalTime);
+    }
+
     private IEnumerator TimerStart_Coroutine() 
     {
         yield return new WaitForSeconds(2f);
         if (PhotonNetwork.IsMasterClient)
         {
            // Debug.Log("aaa");
-            _totalTime = 10;
+            _totalTime = 180;
 
             StartCoroutine(Timer_Coroution());
 
@@ -60,8 +64,9 @@ public class UI_Timer : MonoBehaviourPunCallbacks
             }
             if (_totalTime > 0)
             {
-                PV.RPC("ShowTimer", RpcTarget.All, _totalTime); //1초 마다 방 모두에게 전달
                 _totalTime -= 1;
+                PV.RPC("ShowTimer", RpcTarget.All, _totalTime); //1초 마다 방 모두에게 전달
+                
 
             }
             if (_totalTime <= 0)
@@ -115,7 +120,6 @@ public class UI_Timer : MonoBehaviourPunCallbacks
     void TimerEnded()
     {
         Debug.Log("TimerEnded 함수 실행");
-
         TimeOverTextUI.gameObject.SetActive(true);
 
         TimeOverAnimator.SetTrigger("TimeOver");
