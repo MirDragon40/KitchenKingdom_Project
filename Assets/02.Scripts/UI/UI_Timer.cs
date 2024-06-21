@@ -4,6 +4,7 @@ using TMPro;
 using UnityEngine;
 using Photon.Realtime;
 using Photon.Pun;
+
 public class UI_Timer : MonoBehaviourPunCallbacks
 {
     public TextMeshProUGUI TimerTextUI;
@@ -32,27 +33,19 @@ public class UI_Timer : MonoBehaviourPunCallbacks
         SpeedUpFireUI.gameObject.SetActive(false);
         StartCoroutine(TimerStart_Coroutine());
     }
-    private void Update()
-    {
-        Debug.Log(_totalTime);
-    }
 
-    private IEnumerator TimerStart_Coroutine() 
+    private IEnumerator TimerStart_Coroutine()
     {
         yield return new WaitForSeconds(2f);
         if (PhotonNetwork.IsMasterClient)
         {
-           // Debug.Log("aaa");
             _totalTime = 180;
-
             StartCoroutine(Timer_Coroution());
-
         }
-
     }
+
     private IEnumerator Timer_Coroution()
     {
-
         var wait = new WaitForSeconds(1f);
 
         while (true)
@@ -66,8 +59,6 @@ public class UI_Timer : MonoBehaviourPunCallbacks
             {
                 _totalTime -= 1;
                 PV.RPC("ShowTimer", RpcTarget.All, _totalTime); //1초 마다 방 모두에게 전달
-                
-
             }
             if (_totalTime <= 0)
             {
@@ -79,49 +70,35 @@ public class UI_Timer : MonoBehaviourPunCallbacks
     }
 
     [PunRPC]
-    void ShowTimer(int number) 
+    void ShowTimer(int number)
     {
-        //Debug.Log("aaa");
-
         int minutes = number / 60;
         int seconds = number % 60;
-
-        //TimerTextUI.text = number.ToString();
         TimerTextUI.text = string.Format("{0:00} : {1:00}", minutes, seconds);
     }
 
     [PunRPC]
-    void AnimationPlay() 
+    void AnimationPlay()
     {
         SpeedUpFireUI.gameObject.SetActive(true);
-
         TimerTextUI.color = TimerTextColor;
-
         TimerAnimator.SetTrigger("SpeedUp");
         FireAnimator.SetTrigger("SpeedUp");
     }
-
-    /*void StartTimer()
-    {
-        _currentTime = _totalTime;
-        timerStarted = true;
-    }
-
-    void DisplayTime(float timeInSeconds)
-    {
-        int minutes = Mathf.FloorToInt(timeInSeconds / 60f);
-        int seconds = Mathf.FloorToInt(timeInSeconds % 60f);
-        string timeString = string.Format("{0:00} : {1:00}", minutes, seconds);
-        TimerTextUI.text = timeString;
-    }
-    */
 
     [PunRPC]
     void TimerEnded()
     {
         Debug.Log("TimerEnded 함수 실행");
         TimeOverTextUI.gameObject.SetActive(true);
-
         TimeOverAnimator.SetTrigger("TimeOver");
+        StartCoroutine(StopGameAfterAnimation());
+    }
+
+    private IEnumerator StopGameAfterAnimation()
+    {
+        yield return new WaitForSeconds(TimeOverAnimator.GetCurrentAnimatorStateInfo(0).length);
+        Time.timeScale = 0f;
+        Debug.Log("게임 시간 멈춤");
     }
 }

@@ -56,11 +56,14 @@ public class ChoppingBoard : CookStand
         fillSliderCoroutine = StartCoroutine(FillSliderOverTime(duration));
     }
 
-    protected void OnTriggerEnter(Collider other)
+    protected void OnTriggerStay(Collider other)
     {
         if (other.CompareTag("Player") && onChoppingBoard.FoodOnBoard != null)
         {
-            _isPossibleChopping = true;
+            if (other.GetComponent<Character>().PhotonView.IsMine)
+            {
+                _isPossibleChopping = true;
+            }
         }
 
         if (other.CompareTag("Player") && !IsOccupied)

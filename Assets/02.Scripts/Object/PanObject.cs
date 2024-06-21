@@ -112,7 +112,7 @@ public class PanObject : IHoldable
                         FireSlider.gameObject.SetActive(true);
                         hasCaughtFireOnce = true;
 
-                        soundManager.PlayAudio("Fire", true);
+                        soundManager.PlayAudio("Fire", true, true);
                     }
                 }
 
@@ -255,22 +255,10 @@ public class PanObject : IHoldable
         {
             isOnSurface = true;
         }
-        else if (other.CompareTag("Player"))
+/*        else if (other.CompareTag("Player"))
         {
-            IHoldable playerHoldingItem = other.GetComponent<CharacterHoldAbility>().HoldableItem;
-            FoodObject food = null;
-            if (playerHoldingItem != null)
-            {
-                if (playerHoldingItem.TryGetComponent<FoodObject>(out food))
-                {
-                    if (food.IsGrillable && GrillingIngrediant == null)
-                    {
-                        other.GetComponent<CharacterHoldAbility>().PlacePosition = PanPlacePosition;
-                        other.GetComponent<CharacterHoldAbility>().IsPlaceable = true;
-                    }
-                }
-            }
-        }
+
+        }*/
     }
 
     private void OnTriggerStay(Collider other)
@@ -284,6 +272,19 @@ public class PanObject : IHoldable
                 if (GrillingIngrediant != null)
                 {
                     GrillingIngrediant.GetComponent<PhotonView>().TransferOwnership(charOwnerActorNr);
+                }
+            }
+            IHoldable playerHoldingItem = other.GetComponent<CharacterHoldAbility>().HoldableItem;
+            FoodObject food = null;
+            if (playerHoldingItem != null)
+            {
+                if (playerHoldingItem.TryGetComponent<FoodObject>(out food))
+                {
+                    if (food.IsGrillable && GrillingIngrediant == null)
+                    {
+                        other.GetComponent<CharacterHoldAbility>().PlacePosition = PanPlacePosition;
+                        other.GetComponent<CharacterHoldAbility>().IsPlaceable = true;
+                    }
                 }
             }
         }
