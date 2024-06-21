@@ -25,7 +25,7 @@ public class FoodCombination : MonoBehaviour
     }
     public void Init()
     {
-        Stage = GameManager.Instance.Stage;
+        Stage = GameManager.Instance.CurrentStage;
         foreach (GameObject ingrediant in AvailableIngrediants)
         {
             ingrediant.SetActive(false);

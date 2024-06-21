@@ -96,7 +96,7 @@ public class CharacterHoldAbility : CharacterAbility
             return;
         }
 
-        Debug.Log("PickUp");
+     //   Debug.Log("PickUp");
 
         // 주변에 있는 잡을 수 있는 아이템을 찾음
         Collider[] colliders = Physics.OverlapSphere(transform.position, _findfood);
