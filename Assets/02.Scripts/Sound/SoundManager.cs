@@ -46,12 +46,17 @@ public class SoundManager : MonoBehaviour
     public void PlayAudio(string clipName, bool loop = false)
     {
         // -> RPC       
-        PhotonView.RPC("_PlayAudio", RpcTarget.All, clipName, loop);
+        PhotonView.RPC("_playAudio", RpcTarget.All, clipName, loop);
+    }
+
+    public void StopAudio(string clipName)
+    {
+        PhotonView.RPC("_stopAudio", RpcTarget.All, clipName);
     }
 
 
     [PunRPC]
-    private void _PlayAudio(string clipName, bool loop = false)
+    private void _playAudio(string clipName, bool loop = false)
     {
         if (!audioSources.ContainsKey(clipName))
         {
@@ -83,8 +88,8 @@ public class SoundManager : MonoBehaviour
             Destroy(soundObject);
         }
     }
-
-    public void StopAudio(string clipName)
+    [PunRPC]
+    public void _stopAudio(string clipName)
     {
         if (audioSources.ContainsKey(clipName))
         {

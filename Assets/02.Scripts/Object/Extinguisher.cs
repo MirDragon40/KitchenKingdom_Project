@@ -62,22 +62,8 @@ public class Extinguisher : IHoldable
             SoundManager.Instance.StopAudio("Powder");
         }
 
-        if (_currentShotCoroutine != null)
-        {
-            StopCoroutine(_currentShotCoroutine);
-        }
-
-        if (!state)
-        {
-            _currentShotCoroutine = StartCoroutine(StopSoundAfterDelay(0.5f));
-        }
     }
 
-    private IEnumerator StopSoundAfterDelay(float delay)
-    {
-        yield return new WaitForSeconds(delay);
-        soundManager.StopAudio("Powder");
-    }
 
     private void Update()
     {
