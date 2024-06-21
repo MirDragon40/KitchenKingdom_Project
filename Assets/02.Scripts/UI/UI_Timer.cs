@@ -39,7 +39,7 @@ public class UI_Timer : MonoBehaviourPunCallbacks
         if (PhotonNetwork.IsMasterClient)
         {
            // Debug.Log("aaa");
-            _totalTime = 180;
+            _totalTime = 30;
 
             StartCoroutine(Timer_Coroution());
 
