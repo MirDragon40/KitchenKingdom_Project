@@ -101,6 +101,9 @@ MonoBehaviour:
   - _PlayAudio
   - SpawnCoke
   - TimerEnded
+  - _playAudio
+  - _stopAudio
+  - UnHold
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

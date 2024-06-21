@@ -82,7 +82,7 @@ public class CharacterMoveAbility : CharacterAbility
 
             if (!soundManager.IsPlaying("Walk"))
             {
-                soundManager.PlayAudio("Walk", true);
+                soundManager.PlayAudio("Walk", false);
             }
         }
         else
@@ -123,7 +123,7 @@ public class CharacterMoveAbility : CharacterAbility
     {
         PowderEffect_Dash.Play();
         StartCoroutine(Dash());
-        soundManager.PlayAudio("Run", true);
+        //soundManager.PlayAudio("Run", false);
     }
     // 대쉬 코루틴 함수
     private IEnumerator Dash()
@@ -131,6 +131,8 @@ public class CharacterMoveAbility : CharacterAbility
         isDashing = true;
         float startTime = Time.time;
 
+
+        soundManager.PlayAudio("Run", false);
         while (Time.time < startTime + DashDuration)
         {
             Vector3 dashDirection = transform.forward;
