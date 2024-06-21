@@ -66,8 +66,8 @@ public class CharacterMoveAbility : CharacterAbility
 
         _characterController.Move(move);
 
-       
-        
+
+
         _dirMagnitude = dir.magnitude;
         _animator.SetFloat("Move", _dirMagnitude);
 
@@ -82,7 +82,7 @@ public class CharacterMoveAbility : CharacterAbility
 
             if (!soundManager.IsPlaying("Walk"))
             {
-                soundManager.PlayAudio("Walk", true);
+                soundManager.PlayAudio("Walk", false);
             }
         }
         else
@@ -106,30 +106,40 @@ public class CharacterMoveAbility : CharacterAbility
 
         if (Input.GetKeyDown(KeyCode.LeftAlt) && !isDashing)
         {
-            DashPlay();
+            _pv.RPC("DashPlay", RpcTarget.All);
         }
     }
     [PunRPC]
     private void WalkEffectPlay()
     {
+
         PowderEffect.Play();
     }
     [PunRPC]
     private void WalkEffectStop()
     {
+
         PowderEffect.Stop();
+
     }
+    [PunRPC]
     private void DashPlay()
     {
-        PowderEffect_Dash.Play();
         StartCoroutine(Dash());
-        soundManager.PlayAudio("Run", true);
+        //soundManager.PlayAudio("Run", false);
     }
     // 대쉬 코루틴 함수
     private IEnumerator Dash()
     {
         isDashing = true;
         float startTime = Time.time;
+
+        PowderEffect_Dash.Play();
+
+        if (photonView.IsMine)
+        {
+            soundManager.PlayAudio("Run", false);
+        }
 
         while (Time.time < startTime + DashDuration)
         {
@@ -140,7 +150,10 @@ public class CharacterMoveAbility : CharacterAbility
 
         isDashing = false;
         PowderEffect_Dash.Stop();
-        soundManager.StopAudio("Run");
+        if (photonView.IsMine)
+        {
+            soundManager.StopAudio("Run");
+        }
     }
 
     /*    void SynchronizeAnimation()
