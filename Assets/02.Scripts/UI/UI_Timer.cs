@@ -7,16 +7,23 @@ using Photon.Pun;
 public class UI_Timer : MonoBehaviourPunCallbacks
 {
     public TextMeshProUGUI TimerTextUI;
+    public TextMeshProUGUI TimeOverTextUI;
     public Color TimerTextColor;
 
-    private int _totalTime = 0;
+    public int _totalTime = 0;
 
     public GameObject SpeedUpFireUI;
 
     public Animator TimerAnimator;
     public Animator FireAnimator;
+    public Animator TimeOverAnimator;
 
     public PhotonView PV;
+
+    private void Awake()
+    {
+        
+    }
 
     private void Start()
     {
@@ -60,7 +67,7 @@ public class UI_Timer : MonoBehaviourPunCallbacks
             if (_totalTime <= 0)
             {
                 PV.RPC("ShowTimer", RpcTarget.All, _totalTime); //1초 마다 방 모두에게 전달
-
+                PV.RPC(nameof(TimerEnded), RpcTarget.All, _totalTime);
                 break;
             }
         }
@@ -102,10 +109,13 @@ public class UI_Timer : MonoBehaviourPunCallbacks
         string timeString = string.Format("{0:00} : {1:00}", minutes, seconds);
         TimerTextUI.text = timeString;
     }
+    */
 
-    public void TimerEnded()
+    [PunRPC]
+    void TimerEnded()
     {
-        // 타이머 종료 시
-        // 종료 시 씬 이동
-    }*/
+        TimeOverTextUI.gameObject.SetActive(true);
+
+        TimeOverAnimator.SetTrigger("TimeOver");
+    }
 }
