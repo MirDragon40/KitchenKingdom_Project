@@ -34,7 +34,7 @@ public class UI_Timer : MonoBehaviourPunCallbacks
     }
     private void Update()
     {
-        Debug.Log(_totalTime);
+  //      Debug.Log(_totalTime);
     }
 
     private IEnumerator TimerStart_Coroutine() 
