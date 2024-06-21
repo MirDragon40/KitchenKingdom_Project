@@ -64,16 +64,18 @@ public class Extinguisher : IHoldable
 
     private void Update()
     {
-        if (IsHold && _pv.IsMine)
+        if (IsHold && _holdCharacter.PhotonView.IsMine) // 소화기를 들고 있는 사람만 소화기를 작동시킬 수 있음
         {
             if (Input.GetKeyDown(KeyCode.LeftControl))
             {
-                photonView.RPC("Shot", RpcTarget.All, true); // true를 전달하여 Shot RPC 메서드 호출
+                Shot(true); 
+                _pv.RPC("Shot", RpcTarget.Others, true); 
             }
 
             if (Input.GetKeyUp(KeyCode.LeftControl))
             {
-                photonView.RPC("Shot", RpcTarget.All, false); // false를 전달하여 Shot RPC 메서드 호출
+                Shot(false); 
+                _pv.RPC("Shot", RpcTarget.Others, false); 
             }
         }
     }
