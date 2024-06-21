@@ -4,6 +4,7 @@ using TMPro;
 using UnityEngine;
 using Photon.Realtime;
 using Photon.Pun;
+
 public class UI_Timer : MonoBehaviourPunCallbacks
 {
     public TextMeshProUGUI TimerTextUI;
@@ -33,23 +34,18 @@ public class UI_Timer : MonoBehaviourPunCallbacks
         StartCoroutine(TimerStart_Coroutine());
     }
 
-    private IEnumerator TimerStart_Coroutine() 
+    private IEnumerator TimerStart_Coroutine()
     {
         yield return new WaitForSeconds(2f);
         if (PhotonNetwork.IsMasterClient)
         {
-           // Debug.Log("aaa");
             _totalTime = 180;
-
             StartCoroutine(Timer_Coroution());
-
         }
-
     }
 
     private IEnumerator Timer_Coroution()
     {
-
         var wait = new WaitForSeconds(1f);
 
         while (true)
@@ -74,24 +70,18 @@ public class UI_Timer : MonoBehaviourPunCallbacks
     }
 
     [PunRPC]
-    void ShowTimer(int number) 
+    void ShowTimer(int number)
     {
-        //Debug.Log("aaa");
-
         int minutes = number / 60;
         int seconds = number % 60;
-
-        //TimerTextUI.text = number.ToString();
         TimerTextUI.text = string.Format("{0:00} : {1:00}", minutes, seconds);
     }
 
     [PunRPC]
-    void AnimationPlay() 
+    void AnimationPlay()
     {
         SpeedUpFireUI.gameObject.SetActive(true);
-
         TimerTextUI.color = TimerTextColor;
-
         TimerAnimator.SetTrigger("SpeedUp");
         FireAnimator.SetTrigger("SpeedUp");
     }
@@ -101,7 +91,14 @@ public class UI_Timer : MonoBehaviourPunCallbacks
     {
         Debug.Log("TimerEnded 함수 실행");
         TimeOverTextUI.gameObject.SetActive(true);
-
         TimeOverAnimator.SetTrigger("TimeOver");
+        StartCoroutine(StopGameAfterAnimation());
+    }
+
+    private IEnumerator StopGameAfterAnimation()
+    {
+        yield return new WaitForSeconds(TimeOverAnimator.GetCurrentAnimatorStateInfo(0).length);
+        Time.timeScale = 0f;
+        Debug.Log("게임 시간 멈춤");
     }
 }
