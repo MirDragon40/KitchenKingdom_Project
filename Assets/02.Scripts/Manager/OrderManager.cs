@@ -8,7 +8,7 @@ using UnityEngine;
 public class OrderManager : MonoBehaviourPun
 {
     public static OrderManager Instance { get; private set; }
-    private int _stage => GameManager.Instance.Stage;
+    private int _stage => GameManager.Instance.CurrentStage;
     [HideInInspector]
     public UI_BilgeScrollView MyScrollView;
     public float MinOrderTimeSpan = 3.0f;
@@ -52,7 +52,7 @@ public class OrderManager : MonoBehaviourPun
     void Update()
     {
 
-        if (Input.GetKeyDown(KeyCode.Alpha1))
+/*        if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             string orderName = "burger";
             _isGenerating = true;
@@ -66,12 +66,12 @@ public class OrderManager : MonoBehaviourPun
         {
             SubmitOrder("burger");
         }
-
-
+*/
+/*
         if (Input.GetKeyDown(KeyCode.Alpha5))
         {
             RPC_AddDirtyPlateNum();
-        }
+        }*/
 
 
 
@@ -142,12 +142,15 @@ public class OrderManager : MonoBehaviourPun
         _isGenerating = false;
     }
 
-    private void RPC_AddDirtyPlateNum()
+    public void RequestAddDirtyPlates()
     {
+        StartCoroutine(SpawnDirtyPlateRPC_Coroutine(3f));
+    }
+    private IEnumerator SpawnDirtyPlateRPC_Coroutine(float duration)
+    {
+        yield return new WaitForSeconds(duration);
         PhotonView pv = DirtyPlateStand.GetComponent<PhotonView>();
         pv.RPC("UpdatePlateNum", RpcTarget.AllBuffered, DirtyPlateStand.DirtyPlateNum + 1);
-
     }
-
 
 }
