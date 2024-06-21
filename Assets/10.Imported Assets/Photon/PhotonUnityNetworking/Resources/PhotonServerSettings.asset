@@ -100,6 +100,8 @@ MonoBehaviour:
   - StopPowderSound
   - _PlayAudio
   - SpawnCoke
+  - _playAudio
+  - _stopAudio
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1
