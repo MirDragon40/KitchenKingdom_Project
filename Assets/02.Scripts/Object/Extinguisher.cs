@@ -1,4 +1,5 @@
 using Photon.Pun;
+using System.Collections;
 using UnityEngine;
 
 public class Extinguisher : IHoldable
@@ -10,6 +11,7 @@ public class Extinguisher : IHoldable
     public Transform StartPosition;
     public SoundManager soundManager;
     private bool isShooting = false; // 소화기 분말 연사중
+    private Coroutine _currentShotCoroutine;
 
     public override Vector3 DropOffset => new Vector3(0.3f, 0, 0);
     private void Awake()
@@ -59,8 +61,23 @@ public class Extinguisher : IHoldable
             _boxCollider.enabled = false;
             SoundManager.Instance.StopAudio("Powder");
         }
+
+        if (_currentShotCoroutine != null)
+        {
+            StopCoroutine(_currentShotCoroutine);
+        }
+
+        if (!state)
+        {
+            _currentShotCoroutine = StartCoroutine(StopSoundAfterDelay(0.5f));
+        }
     }
 
+    private IEnumerator StopSoundAfterDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        soundManager.StopAudio("Powder");
+    }
 
     private void Update()
     {
@@ -68,14 +85,14 @@ public class Extinguisher : IHoldable
         {
             if (Input.GetKeyDown(KeyCode.LeftControl))
             {
-                Shot(true); 
-                _pv.RPC("Shot", RpcTarget.Others, true); 
+                Shot(true);
+                _pv.RPC("Shot", RpcTarget.All, true); 
             }
 
             if (Input.GetKeyUp(KeyCode.LeftControl))
             {
-                Shot(false); 
-                _pv.RPC("Shot", RpcTarget.Others, false); 
+                Shot(false);
+                _pv.RPC("Shot", RpcTarget.All, false); 
             }
         }
     }
@@ -89,7 +106,7 @@ public class Extinguisher : IHoldable
         Quaternion finalRotation = dropRotation * additionalRotation;
 
         _powderEffect.Stop();
-
+        SoundManager.Instance.StopAudio("Powder");
         transform.parent = null;
         // 각 아이템이 놓여질 때 해줄 초기화 로직
 
@@ -106,6 +123,7 @@ public class Extinguisher : IHoldable
 
 
         _powderEffect.Stop();
+        SoundManager.Instance.StopAudio("Powder");
         _holdCharacter = null;
 
     }
