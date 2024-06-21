@@ -23,6 +23,7 @@ public class PhotonManager : MonoBehaviourPunCallbacks //PUN의 다양한 서버
             Destroy(gameObject);
         }
         PhotonNetwork.AutomaticallySyncScene = true;
+        DontDestroyOnLoad(this.gameObject);
     }
 
     private void Start()

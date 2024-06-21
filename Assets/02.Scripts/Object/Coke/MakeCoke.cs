@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MakeCoke : MonoBehaviour
+public class MakeCoke : MonoBehaviourPun
 {
     public GameObject CokePrefab;
 
@@ -12,6 +12,12 @@ public class MakeCoke : MonoBehaviour
     private bool _isPlayerAround;
     public SoundManager soundManager;
     private bool isCokeSpawned = false;
+    private bool _isPickUpable = false;
+    private PhotonView _pv;
+    private void Awake()
+    {
+        _pv = GetComponent<PhotonView>();
+    }
 
     public void Start()
     {
@@ -19,11 +25,11 @@ public class MakeCoke : MonoBehaviour
     }
     private void Update()
     {
-        if (_isPlayerAround && Input.GetKeyDown(KeyCode.Space)) 
+        if (_isPlayerAround && Input.GetKeyDown(KeyCode.LeftControl)) 
         {
             if(CokeSpawnPoint.childCount == 0) 
             {
-                SpawnCoke();
+                _pv.RPC("SpawnCoke", RpcTarget.All);
             }
         }
     }
@@ -42,11 +48,14 @@ public class MakeCoke : MonoBehaviour
             _isPlayerAround = false;
         }
     }
-
-    private void SpawnCoke() 
+    [PunRPC]
+    private void SpawnCoke()
     {
-        GameObject newCoke = PhotonNetwork.Instantiate("Coke", CokeSpawnPoint.position, Quaternion.identity);
-        newCoke.transform.parent = CokeSpawnPoint;
+        if (PhotonNetwork.IsMasterClient)
+        {
+            GameObject newCoke = PhotonNetwork.InstantiateRoomObject("Coke", CokeSpawnPoint.position, Quaternion.identity);
+            newCoke.transform.SetParent(CokeSpawnPoint);
+        }
         soundManager.PlayAudio("Cola", true);
         isCokeSpawned = true;
         StartCoroutine(Coroutine_CokeSoundStop());
