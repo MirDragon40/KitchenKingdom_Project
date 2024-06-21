@@ -106,6 +106,7 @@ public class CharacterMoveAbility : CharacterAbility
 
         if (Input.GetKeyDown(KeyCode.LeftAlt) && !isDashing)
         {
+            soundManager.playAudio("Run", true);
             _pv.RPC("DashPlay", RpcTarget.All);
         }
     }
@@ -126,20 +127,13 @@ public class CharacterMoveAbility : CharacterAbility
     private void DashPlay()
     {
         StartCoroutine(Dash());
-        //soundManager.PlayAudio("Run", false);
+        PowderEffect_Dash.Play();
     }
     // 대쉬 코루틴 함수
     private IEnumerator Dash()
     {
         isDashing = true;
         float startTime = Time.time;
-
-        PowderEffect_Dash.Play();
-
-        if (photonView.IsMine)
-        {
-            soundManager.PlayAudio("Run", false);
-        }
 
         while (Time.time < startTime + DashDuration)
         {
@@ -150,10 +144,7 @@ public class CharacterMoveAbility : CharacterAbility
 
         isDashing = false;
         PowderEffect_Dash.Stop();
-        if (photonView.IsMine)
-        {
-            soundManager.StopAudio("Run");
-        }
+        soundManager.stopAudio("Run");
     }
 
     /*    void SynchronizeAnimation()

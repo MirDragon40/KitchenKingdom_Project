@@ -11945,7 +11945,6 @@ MonoBehaviour:
   TimerTextUI: {fileID: 2079287454378475147}
   TimeOverTextUI: {fileID: 1232719504}
   TimerTextColor: {r: 1, g: 0, b: 0, a: 1}
-  _totalTime: 0
   SpeedUpFireUI: {fileID: 2014254991206864388}
   TimerAnimator: {fileID: 20844018}
   FireAnimator: {fileID: 3264322695334518198}
