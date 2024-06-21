@@ -106,7 +106,7 @@ public class CharacterMoveAbility : CharacterAbility
 
         if (Input.GetKeyDown(KeyCode.LeftAlt) && !isDashing)
         {
-            DashPlay();
+            _pv.RPC("DashPlay", RpcTarget.All);
         }
     }
     [PunRPC]
