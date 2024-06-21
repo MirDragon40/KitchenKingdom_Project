@@ -13,7 +13,6 @@ public class UI_BilgeScrollView : MonoBehaviour
 
     public HorizontalLayoutGroup _horizontalLayoutGroup;
 
-
     public void RemoveItem(string orderName)
     {
         int index = OrderBills.FindIndex(item => item.OrderedFood == orderName);
@@ -62,7 +61,7 @@ public class UI_BilgeScrollView : MonoBehaviour
         Image firstBilge = OrderBills[0].GetComponent<Image>();
         Color originalColor = firstBilge.color;
 
-        // 1초 동안 초록색으로 변경한 후 원래 색상으로 되돌리기
+        // 1초 동안 빨간색으로 변경한 후 원래 색상으로 되돌리기
         firstBilge.DOColor(Color.red, 0.5f).OnComplete(() =>
         {
             firstBilge.DOColor(originalColor, 0.5f);

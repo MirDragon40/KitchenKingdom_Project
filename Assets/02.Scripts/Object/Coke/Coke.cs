@@ -18,6 +18,7 @@ public class Coke : IHoldable
     private void Awake()
     {
         PV = GetComponent<PhotonView>();
+        CokeCollider.enabled = false;
     }
     private void Start()
     {
@@ -80,6 +81,10 @@ public class Coke : IHoldable
 
     public override void Place(Transform place)
     {
+        if (place  == null)
+        {
+            return;
+        }
         transform.position = place.position;
         transform.rotation = place.rotation;
         //placeRotation = Quaternion.Euler(0, 0, 0);

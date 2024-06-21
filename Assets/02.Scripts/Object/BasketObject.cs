@@ -57,7 +57,7 @@ public class BasketObject : IHoldable
     public override void Hold(Character character, Transform handTransform)
     {
         GetComponent<Rigidbody>().isKinematic = true;
-        transform.parent = handTransform;
+        transform.SetParent(handTransform);
         transform.localPosition = new Vector3(0, 0.4f, 0.413f);
         transform.localRotation = Quaternion.Euler(0, 180f, 0f);
 
@@ -85,7 +85,7 @@ public class BasketObject : IHoldable
         transform.position = place.position + new Vector3(0, 0.4f, 0.7f);
         Quaternion basketplaceRotation = Quaternion.Euler(0, 180, 0);
         transform.rotation = place.rotation * basketplaceRotation;
-        transform.parent = place;
+        transform.SetParent(place);
 
         MyFryMachine = place.GetComponentInParent<FryMachine>();
         //transform.rotation = placeRotation;

@@ -95,10 +95,12 @@ MonoBehaviour:
   ItemType: 4
   IsDroppable: 0
   State: 0
-  FoodType: 0
+  FoodType: 6
+  soundManager: {fileID: 0}
   FoodPrefab1: {fileID: 0}
   FoodPrefab2: {fileID: 0}
   FoodPrefab3: {fileID: 0}
+  PV: {fileID: 0}
   IsCooking: 0
   IsGrillable: 0
   IsFryable: 0
@@ -124,7 +126,7 @@ MonoBehaviour:
   prefixField: -1
   Synchronization: 3
   OwnershipTransfer: 1
-  observableSearch: 0
+  observableSearch: 2
   ObservedComponents:
   - {fileID: -8634069103807543387}
   sceneViewId: 0

@@ -18,7 +18,6 @@ public class FoodCombination : MonoBehaviour
     public PhotonView PV;
     private Character _nearbyCharacter;
 
-
     private void Start()
     {
         Init();
@@ -76,11 +75,23 @@ public class FoodCombination : MonoBehaviour
     {
         if (other.CompareTag("Player") && other.GetComponent<PhotonView>().IsMine)
         {
-            if (other.GetComponent<CharacterHoldAbility>().HoldableItem != null)
+            CharacterHoldAbility holdability = other.GetComponent<CharacterHoldAbility>();
+            if (holdability.HoldableItem != null)
             {
                 _nearbyCharacter = other.GetComponent<Character>();
-                _holdableObject = other.GetComponent<CharacterHoldAbility>().HoldableItem;
-                IsSubmitable = true;
+                _holdableObject = holdability.HoldableItem;
+                if (holdability.SelectedDish == null)
+                {
+                    holdability.SelectedDish = this;
+                }
+                if (holdability.SelectedDish == this)
+                {
+                    IsSubmitable = true;
+                }
+                else
+                {
+                    IsSubmitable = false;
+                }
             }
         }
         else if (!GetComponent<BoxCollider>().enabled)
@@ -91,8 +102,11 @@ public class FoodCombination : MonoBehaviour
     }
     private void OnTriggerExit(Collider other)
     {
+
+        CharacterHoldAbility holdability = other.GetComponent<CharacterHoldAbility>();
         if (other.CompareTag("Player") && other.GetComponent<PhotonView>().IsMine)
         {
+            holdability.SelectedDish = null;
             _nearbyCharacter = other.GetComponent<Character>();
             IsSubmitable = false;
         }

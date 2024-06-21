@@ -128,9 +128,11 @@ MonoBehaviour:
   IsDroppable: 0
   State: 0
   FoodType: 0
+  soundManager: {fileID: 0}
   FoodPrefab1: {fileID: 0}
   FoodPrefab2: {fileID: 0}
   FoodPrefab3: {fileID: 0}
+  PV: {fileID: 0}
   IsCooking: 0
   IsGrillable: 0
   IsFryable: 0

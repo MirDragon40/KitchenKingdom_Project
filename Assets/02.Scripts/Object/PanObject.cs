@@ -1,7 +1,9 @@
+using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.TextCore.Text;
 using UnityEngine.UI;
 
 public class PanObject : IHoldable
@@ -29,6 +31,7 @@ public class PanObject : IHoldable
     public Sprite dangerSprite;
 
     private bool isPowderTouching = false;
+    private PhotonView _pv;
 
     internal bool isOnFire;
     private bool isNearTrashBin = false;
@@ -41,6 +44,7 @@ public class PanObject : IHoldable
     public Table[] NearbyTables;
     private void Awake()
     {
+        _pv = GetComponent<PhotonView>();
         BoxCollider = GetComponent<BoxCollider>();
         fireObject = GetComponent<FireObject>();
         dangerIndicator = GetComponentInChildren<DangerIndicator>();
@@ -61,6 +65,15 @@ public class PanObject : IHoldable
     }
     private void Update()
     {
+        if (GrillingIngrediant != null)
+        {
+            if (_pv.OwnerActorNr != GrillingIngrediant.GetComponent<PhotonView>().OwnerActorNr)
+            {
+                GrillingIngrediant.GetComponent<PhotonView>().OwnerActorNr = _pv.OwnerActorNr;
+            }
+            GrillingIngrediant.transform.localPosition = Vector3.zero;
+
+        }
         // 팬이 스토브에 놓인 경우
         if (PanPlacePosition.childCount != 0)
         {
@@ -99,7 +112,7 @@ public class PanObject : IHoldable
                         FireSlider.gameObject.SetActive(true);
                         hasCaughtFireOnce = true;
 
-                        soundManager.PlayFireSound();
+                        soundManager.PlayAudio("Fire", true);
                     }
                 }
 
@@ -110,7 +123,7 @@ public class PanObject : IHoldable
                 }
                 else if (!fireObject._isOnFire && MyStove.fireObject._isOnFire)
                 {
-                    MyStove.fireObject.Extinguish();
+                    MyStove.fireObject.RequestExtinguish();
                 }
             }
             else
@@ -169,10 +182,16 @@ public class PanObject : IHoldable
         }
     }
 
+
     public override void Hold(Character character, Transform handTransform)
     {
+        if (character == null || handTransform == null)
+        {
+            return;
+        }
+
         GetComponent<Rigidbody>().isKinematic = true;
-        transform.parent = handTransform;
+        transform.SetParent(handTransform);
         transform.localPosition = new Vector3(0, 0, 0.3f);
         transform.localRotation = Quaternion.Euler(-90f, 180f, 0f);
 
@@ -198,11 +217,15 @@ public class PanObject : IHoldable
 
     public override void Place(Transform place)
     {
+        if (place == null)
+        {
+            return;
+        }
         GetComponent<Rigidbody>().isKinematic = true;
         transform.position = place.position;
         Quaternion panplaceRotation = Quaternion.Euler(-90, 0, 180);
         transform.rotation = place.rotation * panplaceRotation;
-        transform.parent = place;
+        transform.SetParent(place);
 
         if (_holdCharacter != null)
         {
@@ -252,15 +275,27 @@ public class PanObject : IHoldable
 
     private void OnTriggerStay(Collider other)
     {
+        if (other.CompareTag("Player"))
+        {
+            int charOwnerActorNr = other.GetComponent<Character>().PhotonView.OwnerActorNr;
+            if (_pv.OwnerActorNr != charOwnerActorNr)
+            {
+                _pv.TransferOwnership(charOwnerActorNr);
+                if (GrillingIngrediant != null)
+                {
+                    GrillingIngrediant.GetComponent<PhotonView>().TransferOwnership(charOwnerActorNr);
+                }
+            }
+        }
         if (fireObject._isOnFire && other.CompareTag("Powder"))
         {
             isPowderTouching = true;
             fireObject.contactTime += Time.deltaTime;
             Debug.Log(fireObject.contactTime);
-            if (fireObject.contactTime >= 2f)
+            if (fireObject.contactTime >= 1f)
             {
-                fireObject.Extinguish();
-                soundManager.StopFireSound();
+                fireObject.RequestExtinguish();
+                soundManager.StopAudio("Fire");
             }
         }
     }
@@ -301,9 +336,9 @@ public class PanObject : IHoldable
             {
                 Transform child = PanPlacePosition.GetChild(i);
                 FoodObject childFoodObject = child.GetComponent<FoodObject>();
-                if (childFoodObject != null)
+                if (childFoodObject != null && _pv.IsMine)
                 {
-                    Destroy(child.gameObject);
+                    PhotonNetwork.Destroy(child.gameObject);
                 }
             }
         }

@@ -75,9 +75,8 @@ public class OrderManager : MonoBehaviourPun
 
 
 
-        if (_stage == 1 && !_isGenerating && _orderCount < MaxOrderNumber && PhotonNetwork.IsMasterClient)
+        if (_stage == 1 && !_isGenerating && GeneratedOrderList.Count < MaxOrderNumber && PhotonNetwork.IsMasterClient)
         {
-            _orderCount++;
             int orderRandIndex = Random.Range(0, 10);
             if (orderRandIndex <= 5)
             {

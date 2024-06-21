@@ -2,17 +2,17 @@ using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static Unity.VisualScripting.Member;
 
-public class SoundManager : MonoBehaviourPun
-
+public class SoundManager : MonoBehaviour
 {
     public AudioClip[] audioClips;
     public AudioClip bgmClip;
 
-    public AudioSource bgmSource;
-    private Dictionary<string, AudioSource> audioSources = new Dictionary<string, AudioSource>();
+    private AudioSource bgmSource;
+    private Dictionary<string, GameObject> audioSources = new Dictionary<string, GameObject>();
 
-    private PhotonView _photonView;
+    public static SoundManager Instance;
 
     private void Awake()
     {
@@ -22,81 +22,77 @@ public class SoundManager : MonoBehaviourPun
         bgmSource.loop = true;
         bgmSource.clip = bgmClip;
         bgmSource.Play();
-
-        _photonView = GetComponent<PhotonView>();
-
-        // PhotonView가 로컬 플레이어의 것이 아니라면 해당 GameObject를 비활성화합니다.
-        if (!_photonView.IsMine)
-        {
-            gameObject.SetActive(false);
-        }
     }
 
     public AudioClip GetAudioClip(string clipname)
     {
-        for (int i = 0; i < audioClips.Length; i++)
+        foreach (AudioClip clip in audioClips)
         {
-            if (audioClips[i].name == clipname)
-                return audioClips[i];
+            if (clip.name == clipname)
+                return clip;
         }
         return null;
     }
-    [PunRPC]
+
     public void PlayAudio(string clipName, bool loop = false)
+    {
+       // -> RPC       
+        _PlayAudio(clipName, loop);
+    }
+
+
+    [PunRPC]
+    private void _PlayAudio(string clipName, bool loop = false)
     {
         if (!audioSources.ContainsKey(clipName))
         {
-            GameObject soundObject = new GameObject(clipName);
+            GameObject soundObject = new GameObject(clipName + "AudioSource");
             AudioSource audioSource = soundObject.AddComponent<AudioSource>();
             audioSource.clip = GetAudioClip(clipName);
             audioSource.loop = loop;
-            audioSources.Add(clipName, audioSource);
+            audioSource.Play();
+            audioSources.Add(clipName, soundObject);
 
-            photonView.RPC("PlayAudioRPC", RpcTarget.All, clipName);
+            if (!loop)
+            {
+                StartCoroutine(DestroyAfterPlay(audioSource, soundObject));
+            }
         }
-
-        AudioSource source = audioSources[clipName];
-        source.Play();
     }
 
-    public void StopAudio(string clipName, bool loop = false)
+    private IEnumerator DestroyAfterPlay(AudioSource audioSource, GameObject soundObject)
+    {
+        yield return new WaitForSeconds(audioSource.clip.length);
+
+        if (audioSource != null && soundObject != null)
+        {
+            audioSource.Stop();
+
+            string clipName = audioSource.clip.name;
+            audioSources.Remove(clipName);
+
+            Destroy(soundObject);
+        }
+    }
+
+    public void StopAudio(string clipName)
     {
         if (audioSources.ContainsKey(clipName))
         {
-            GameObject soundObject = new GameObject(clipName);
-            AudioSource audioSource = soundObject.AddComponent<AudioSource>();
-            AudioSource source = audioSources[clipName];
-            audioSource.loop = loop;
-            StartCoroutine(FadeOutAndDestroy(source, clipName));
+            GameObject soundObject = audioSources[clipName];
+            AudioSource audioSource = soundObject.GetComponent<AudioSource>();
+            audioSource.Stop();
+            audioSources.Remove(clipName);
+            Destroy(soundObject);
         }
     }
-    [PunRPC]
-    private IEnumerator FadeOutAndDestroy(AudioSource source, string clipName)
+    public bool IsPlaying(string clipName)
     {
-
-        float fadeOutDuration = 0.1f;
-        float startVolume = source.volume;
-
-
-        while (source.volume > 0)
+        if (audioSources.ContainsKey(clipName))
         {
-            source.volume -= startVolume * Time.deltaTime / fadeOutDuration;
-            yield return null;
+            AudioSource audioSource = audioSources[clipName].GetComponent<AudioSource>();
+            return audioSource.isPlaying;
         }
-
-        // Ensure volume is zero and stop playback
-        source.volume = 0;
-        source.Stop();
-        Destroy(source.gameObject);
-
-        audioSources.Remove(clipName);
-    }
-    public void PlayFireSound()
-    {
-        PlayAudio("FireSound", true);
-    }
-    public void StopFireSound()
-    {
-        StopAudio("FireSound", false);
+        return false;
     }
 }

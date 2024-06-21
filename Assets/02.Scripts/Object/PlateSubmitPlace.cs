@@ -16,7 +16,6 @@ public class PlateSubmitPlace : MonoBehaviour
     private string _plateContent = string.Empty;
     public TMP_Text ScoreUI;
     private PhotonView _pv;
-
     private void Awake()
     {
         _pv = GetComponent<PhotonView>();
@@ -54,13 +53,18 @@ public class PlateSubmitPlace : MonoBehaviour
         {
             ShowScoreUI(OrderManager.Instance.NormalOrderPoints);
         }
-        if (PhotonNetwork.IsMasterClient)
+        if (_foodCombo != null)
         {
-            PhotonNetwork.Destroy(_foodCombo.gameObject);
+            if (_foodCombo.PV.IsMine)
+            {
+                PhotonNetwork.Destroy(_foodCombo.gameObject);
+            }
         }
+
         _foodCombo = null;
         _plateContent = string.Empty;
-        
+
+        _holdability._pv.RPC("Drop", RpcTarget.All);
     }
     // todo : 손에 들고있는 plate에 맞는 음식을 제출했을때 ordermanager의 내용과 비교하여 gamemanager의 totalscore 25점 더하기
     // 
