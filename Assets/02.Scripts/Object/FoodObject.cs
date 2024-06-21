@@ -195,7 +195,7 @@ public class FoodObject : IHoldable, IThrowable
                // Debug.Log(colliderNum);
                 foreach (Collider collider in colliders)
                 {
-                    if (collider.TryGetComponent<PanObject>(out panObject))
+/*                    if (collider.TryGetComponent<PanObject>(out panObject))
                     {
                         Debug.Log("Pan Found");
                         transform.rotation = Quaternion.identity;
@@ -205,8 +205,8 @@ public class FoodObject : IHoldable, IThrowable
                         }
                         colliders = null;
                         break;
-                    }
-                    else if (collider.TryGetComponent<CookStand>(out cookStand))
+                    }*/
+                    if (collider.TryGetComponent<CookStand>(out cookStand))
                     {
                         transform.rotation = Quaternion.identity;
                         if (!cookStand.IsOccupied)

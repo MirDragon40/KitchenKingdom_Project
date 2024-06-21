@@ -67,11 +67,11 @@ public class OrderManager : MonoBehaviourPun
             SubmitOrder("burger");
         }
 */
-/*
+
         if (Input.GetKeyDown(KeyCode.Alpha5))
         {
-            RPC_AddDirtyPlateNum();
-        }*/
+            StartCoroutine(SpawnDirtyPlateRPC_Coroutine(3f));
+        }
 
 
 
