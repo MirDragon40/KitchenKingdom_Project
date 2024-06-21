@@ -64,10 +64,11 @@ public class UI_Story : MonoBehaviour
         FadeImage.gameObject.SetActive(true);
         StartCoroutine(FadeOut());
         yield return new WaitForSeconds(2f);
-        FadeImage.gameObject.SetActive(false);
-        NewsUI.SetActive(false);
+        //FadeImage.gameObject.SetActive(false);
+        //NewsUI.SetActive(false);
         //Third_Text();
-        SceneManager.LoadScene("YejinScene2");
+        // 다음으로 갈 씬 넣기
+        SceneManager.LoadScene("LoadingScene");
     }
 
     // 1
