@@ -10,7 +10,7 @@ public class UI_Timer : MonoBehaviourPunCallbacks
     public TextMeshProUGUI TimeOverTextUI;
     public Color TimerTextColor;
 
-    private int _totalTime = 0;
+    public int _totalTime = 0;
 
     public GameObject SpeedUpFireUI;
 
@@ -67,7 +67,7 @@ public class UI_Timer : MonoBehaviourPunCallbacks
             if (_totalTime <= 0)
             {
                 PV.RPC("ShowTimer", RpcTarget.All, _totalTime); //1초 마다 방 모두에게 전달
-                PV.RPC(nameof(TimerEnded), RpcTarget.All);
+                PV.RPC(nameof(TimerEnded), RpcTarget.All, _totalTime);
                 break;
             }
         }
@@ -112,7 +112,7 @@ public class UI_Timer : MonoBehaviourPunCallbacks
     */
 
     [PunRPC]
-    public void TimerEnded()
+    void TimerEnded()
     {
         TimeOverTextUI.gameObject.SetActive(true);
 
