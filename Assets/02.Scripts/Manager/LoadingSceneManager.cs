@@ -5,11 +5,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public enum SceneNames 
-{
-    SubinScene,  // 임시
-    YejinScene1, // 임시
-}
+
 public class LoadingSceneManager : MonoBehaviour
 {
     public SceneNames NextScene;

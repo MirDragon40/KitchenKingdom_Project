@@ -18,11 +18,13 @@ public class ResultSceneManager : MonoBehaviour
     public TextMeshProUGUI Stage1_Text;
     public TextMeshProUGUI Stage2_Text;
     public TextMeshProUGUI Stage3_Text;
+    public TextMeshProUGUI Stage4_Text;
     public TextMeshProUGUI Total_Text;
 
     public TextMeshProUGUI Stage1_Score_Text;
     public TextMeshProUGUI Stage2_Score_Text;
     public TextMeshProUGUI Stage3_Score_Text;
+    public TextMeshProUGUI Stage4_Score_Text;
     public TextMeshProUGUI Total_Score_Text;
 
     private float _timeGap = 0.3f;
@@ -69,6 +71,8 @@ public class ResultSceneManager : MonoBehaviour
         Stage1_Text.gameObject.SetActive(false);
         Stage2_Text.gameObject.SetActive(false);
         Stage3_Text.gameObject.SetActive(false);
+        Stage4_Text.gameObject.SetActive(false);
+        
         Total_Text.gameObject.SetActive(false);
 
 
@@ -93,10 +97,15 @@ public class ResultSceneManager : MonoBehaviour
         Stage3_Text.gameObject.SetActive(true);
         yield return new WaitForSeconds(_timeGap);
 
+        Stage4_Text.gameObject.SetActive(true);
+        yield return new WaitForSeconds(_timeGap);
+
         Total_Text.gameObject.SetActive(true);
 
         yield return new WaitForSeconds(2);
         Review_Anim.SetTrigger("Show_Review");
+
+        
     }
 }
 

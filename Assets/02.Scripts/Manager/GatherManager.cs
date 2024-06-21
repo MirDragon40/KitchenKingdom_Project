@@ -6,6 +6,8 @@ using UnityEngine.UI;
 using Photon.Realtime;
 using TMPro;
 
+
+
 public struct Slot
 {
     public string Nickname;

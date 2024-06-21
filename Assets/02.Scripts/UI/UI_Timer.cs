@@ -1,9 +1,9 @@
 using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using Photon.Realtime;
 using Photon.Pun;
+using UnityEngine.SceneManagement;
 
 public class UI_Timer : MonoBehaviourPunCallbacks
 {
@@ -39,7 +39,7 @@ public class UI_Timer : MonoBehaviourPunCallbacks
         yield return new WaitForSeconds(2f);
         if (PhotonNetwork.IsMasterClient)
         {
-            _totalTime = 180;
+            _totalTime = 10;
             StartCoroutine(Timer_Coroution());
         }
     }
@@ -99,6 +99,21 @@ public class UI_Timer : MonoBehaviourPunCallbacks
     {
         yield return new WaitForSeconds(TimeOverAnimator.GetCurrentAnimatorStateInfo(0).length);
         Time.timeScale = 0f;
-        Debug.Log("게임 시간 멈춤");
+
+        // 디버그 로그 추가
+        Debug.Log("Time.timeScale을 0으로 설정.");
+
+        // Reset time scale before scene change
+        yield return new WaitForSecondsRealtime(3f);  // Use WaitForSecondsRealtime to ensure the wait is in real-time
+        Time.timeScale = 1f;
+
+        // 디버그 로그 추가
+        Debug.Log("씬 전환 시도 직전. Time.timeScale을 1로 설정.");
+
+        // Load the scene by name
+        SceneManager.LoadScene("ResultScene");
+
+        // 디버그 로그 추가
+        Debug.Log("씬 전환을 시도.");
     }
 }
