@@ -39,7 +39,7 @@ public class UI_Timer : MonoBehaviourPunCallbacks
         if (PhotonNetwork.IsMasterClient)
         {
            // Debug.Log("aaa");
-            _totalTime = 180;
+            _totalTime = 30;
 
             StartCoroutine(Timer_Coroution());
 
@@ -67,7 +67,7 @@ public class UI_Timer : MonoBehaviourPunCallbacks
             if (_totalTime <= 0)
             {
                 PV.RPC("ShowTimer", RpcTarget.All, _totalTime); //1초 마다 방 모두에게 전달
-                PV.RPC("TimerEnded", RpcTarget.All, _totalTime);
+                PV.RPC("TimerEnded", RpcTarget.All);
                 break;
             }
         }
