@@ -337,7 +337,7 @@ public class FoodObject : IHoldable, IThrowable
         {
             IsCooking = true;
             cookingCoroutine = StartCoroutine(CookPatty_Coroutine());
-            soundManager.PlayAudio("Patty",true);
+            soundManager.PlayAudio("Patty",true,true);
         }
     }
 
