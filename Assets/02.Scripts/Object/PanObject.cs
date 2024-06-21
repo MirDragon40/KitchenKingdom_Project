@@ -96,7 +96,7 @@ public class PanObject : IHoldable
                     GrillingSlider.value = GrillingIngrediant.CookProgress;
 
                     // 위험 표시기 표시
-                    if (GrillingIngrediant.CookProgress >= 2f && GrillingIngrediant.CookProgress < 2.9f)
+                    if (GrillingIngrediant.CookProgress >= 2f && GrillingIngrediant.CookProgress < 4.9f)
                     {
                         dangerIndicator.ShowDangerIndicator(dangerSprite);
                     }
@@ -106,7 +106,7 @@ public class PanObject : IHoldable
                     }
 
                     // 불이 켜지는 시점
-                    if (GrillingIngrediant.CookProgress >= 3f && !fireObject._isOnFire && !hasCaughtFireOnce)
+                    if (GrillingIngrediant.CookProgress >= 5f && !fireObject._isOnFire && !hasCaughtFireOnce)
                     {
                         fireObject.MakeFire();
                         FireSlider.gameObject.SetActive(true);
