@@ -100,44 +100,52 @@ public class CharacterHoldAbility : CharacterAbility
 
         // 주변에 있는 잡을 수 있는 아이템을 찾음
         Collider[] colliders = Physics.OverlapSphere(transform.position, _findfood);
-
+        IHoldable holdable = null;
         foreach (Collider collider in colliders)
         {
-            IHoldable holdable = collider.GetComponent<IHoldable>();
-            if (holdable is PanObject pan)
+            if (collider.TryGetComponent<IHoldable>(out holdable))
             {
-                // 스토브가 불이 났다면 팬을 잡을 수 없도록 함
-                Stove stove = pan.GetComponentInParent<Stove>();
-                if (stove != null && stove.IsOnFire)
+                if (holdable is PanObject pan)
                 {
-                    return;
-                }
-
-
-                Table[] nearbyTables = pan.NearbyTables;
-                foreach (Table table in nearbyTables)
-                {
-                    if (table != null && table.IsOnFire)
+                    // 스토브가 불이 났다면 팬을 잡을 수 없도록 함
+                    Stove stove = pan.GetComponentInParent<Stove>();
+                    if (stove != null && stove.IsOnFire)
                     {
-                        return; // 팬을 들 수 없도록 반환
+                        return;
+                    }
+                    Table[] nearbyTables = pan.NearbyTables;
+                    foreach (Table table in nearbyTables)
+                    {
+                        if (table != null && table.IsOnFire)
+                        {
+                            return; // 팬을 들 수 없도록 반환
+                        }
                     }
                 }
-
-            }
-
-            if (holdable != null)
-            {
-               // Debug.Log("PickUp_Complete");
-
-                HoldableItem = holdable;
-                holdable.Hold(_owner, HandTransform);
-                animator.SetBool("Carry", true);
-
-                break;
+                // 잡기 우선순위 설정
+                if (holdable is FoodObject) // 재료를 우선순위로 잡기
+                {
+                    HoldableItem = holdable;
+                    holdable.Hold(_owner, HandTransform);
+                    animator.SetBool("Carry", true);
+                    return;
+                }
             }
         }
-    }
 
+            foreach (Collider collider in colliders)
+            {
+                if (collider.TryGetComponent<IHoldable>(out holdable))
+                {
+                    HoldableItem = holdable;
+                    holdable.Hold(_owner, HandTransform);
+                    animator.SetBool("Carry", true);
+                    break;
+                }
+            }
+        
+
+    }
 
     [PunRPC]
     void Drop()

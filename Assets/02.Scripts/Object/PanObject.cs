@@ -263,7 +263,7 @@ public class PanObject : IHoldable
             {
                 if (playerHoldingItem.TryGetComponent<FoodObject>(out food))
                 {
-                    if (food.IsGrillable)
+                    if (food.IsGrillable && GrillingIngrediant == null)
                     {
                         other.GetComponent<CharacterHoldAbility>().PlacePosition = PanPlacePosition;
                         other.GetComponent<CharacterHoldAbility>().IsPlaceable = true;

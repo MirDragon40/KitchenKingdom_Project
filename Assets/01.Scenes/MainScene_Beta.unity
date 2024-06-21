@@ -3064,8 +3064,28 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 287090299}
     - target: {fileID: 2574735518972578609, guid: f1dfd9727d7247b4bb99cac0ec8a435b, type: 3}
+      propertyPath: m_Size.x
+      value: 0.014583751
+      objectReference: {fileID: 0}
+    - target: {fileID: 2574735518972578609, guid: f1dfd9727d7247b4bb99cac0ec8a435b, type: 3}
+      propertyPath: m_Size.y
+      value: 0.03997023
+      objectReference: {fileID: 0}
+    - target: {fileID: 2574735518972578609, guid: f1dfd9727d7247b4bb99cac0ec8a435b, type: 3}
+      propertyPath: m_Size.z
+      value: 0.0025302474
+      objectReference: {fileID: 0}
+    - target: {fileID: 2574735518972578609, guid: f1dfd9727d7247b4bb99cac0ec8a435b, type: 3}
+      propertyPath: m_Center.x
+      value: 0.00013663044
+      objectReference: {fileID: 0}
+    - target: {fileID: 2574735518972578609, guid: f1dfd9727d7247b4bb99cac0ec8a435b, type: 3}
+      propertyPath: m_Center.y
+      value: -0.010851574
+      objectReference: {fileID: 0}
+    - target: {fileID: 2574735518972578609, guid: f1dfd9727d7247b4bb99cac0ec8a435b, type: 3}
       propertyPath: m_Center.z
-      value: 0.001657524
+      value: 0.0016575237
       objectReference: {fileID: 0}
     - target: {fileID: 2678483795670061968, guid: f1dfd9727d7247b4bb99cac0ec8a435b, type: 3}
       propertyPath: m_Name
@@ -10312,6 +10332,30 @@ PrefabInstance:
       propertyPath: fireEffect
       value: 
       objectReference: {fileID: 1149478857}
+    - target: {fileID: 2574735518972578609, guid: f1dfd9727d7247b4bb99cac0ec8a435b, type: 3}
+      propertyPath: m_Size.x
+      value: 0.014583751
+      objectReference: {fileID: 0}
+    - target: {fileID: 2574735518972578609, guid: f1dfd9727d7247b4bb99cac0ec8a435b, type: 3}
+      propertyPath: m_Size.y
+      value: 0.042188026
+      objectReference: {fileID: 0}
+    - target: {fileID: 2574735518972578609, guid: f1dfd9727d7247b4bb99cac0ec8a435b, type: 3}
+      propertyPath: m_Size.z
+      value: 0.0025302474
+      objectReference: {fileID: 0}
+    - target: {fileID: 2574735518972578609, guid: f1dfd9727d7247b4bb99cac0ec8a435b, type: 3}
+      propertyPath: m_Center.x
+      value: 0.0001366303
+      objectReference: {fileID: 0}
+    - target: {fileID: 2574735518972578609, guid: f1dfd9727d7247b4bb99cac0ec8a435b, type: 3}
+      propertyPath: m_Center.y
+      value: -0.011960482
+      objectReference: {fileID: 0}
+    - target: {fileID: 2574735518972578609, guid: f1dfd9727d7247b4bb99cac0ec8a435b, type: 3}
+      propertyPath: m_Center.z
+      value: 0.0016575241
+      objectReference: {fileID: 0}
     - target: {fileID: 2678483795670061968, guid: f1dfd9727d7247b4bb99cac0ec8a435b, type: 3}
       propertyPath: m_Name
       value: Pan (1)
