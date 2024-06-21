@@ -47,25 +47,24 @@ public class Extinguisher : IHoldable
     public void Shot(bool state)
     {
         isPress = state;
-
         if (state)
         {
             _powderEffect.Play();
             _boxCollider.enabled = true;
-            soundManager.PlayAudio("Powder", true);
+            SoundManager.Instance.PlayAudio("Powder",true);
         }
         else
         {
             _powderEffect.Stop();
             _boxCollider.enabled = false;
-            soundManager.StopAudio("Powder");
+            SoundManager.Instance.StopAudio("Powder");
         }
     }
 
 
     private void Update()
     {
-        if (IsHold)
+        if (IsHold && _pv.IsMine)
         {
             if (Input.GetKeyDown(KeyCode.LeftControl))
             {
