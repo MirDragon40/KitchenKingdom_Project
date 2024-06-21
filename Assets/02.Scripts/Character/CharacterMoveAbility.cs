@@ -66,8 +66,8 @@ public class CharacterMoveAbility : CharacterAbility
 
         _characterController.Move(move);
 
-       
-        
+
+
         _dirMagnitude = dir.magnitude;
         _animator.SetFloat("Move", _dirMagnitude);
 
@@ -112,16 +112,19 @@ public class CharacterMoveAbility : CharacterAbility
     [PunRPC]
     private void WalkEffectPlay()
     {
+
         PowderEffect.Play();
     }
     [PunRPC]
     private void WalkEffectStop()
     {
+
         PowderEffect.Stop();
+
     }
+    [PunRPC]
     private void DashPlay()
     {
-        PowderEffect_Dash.Play();
         StartCoroutine(Dash());
         //soundManager.PlayAudio("Run", false);
     }
@@ -130,6 +133,8 @@ public class CharacterMoveAbility : CharacterAbility
     {
         isDashing = true;
         float startTime = Time.time;
+
+        PowderEffect_Dash.Play();
 
         if (photonView.IsMine)
         {
@@ -145,7 +150,10 @@ public class CharacterMoveAbility : CharacterAbility
 
         isDashing = false;
         PowderEffect_Dash.Stop();
-        soundManager.StopAudio("Run");
+        if (photonView.IsMine)
+        {
+            soundManager.StopAudio("Run");
+        }
     }
 
     /*    void SynchronizeAnimation()
