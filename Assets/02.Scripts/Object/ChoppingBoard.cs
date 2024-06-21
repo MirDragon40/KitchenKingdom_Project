@@ -37,7 +37,7 @@ public class ChoppingBoard : CookStand
                     StopCoroutine(fillSliderCoroutine);
                 }
                 _photonView.RPC("StartChoppingRPC", RpcTarget.All, 3.0f);
-                SoundManager.PlayAudio("Cut", true);
+                SoundManager.PlayAudio("Cut", false, true);
             }
 
             
