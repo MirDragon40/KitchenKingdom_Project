@@ -32,10 +32,6 @@ public class UI_Timer : MonoBehaviourPunCallbacks
         SpeedUpFireUI.gameObject.SetActive(false);
         StartCoroutine(TimerStart_Coroutine());
     }
-    private void Update()
-    {
-  //      Debug.Log(_totalTime);
-    }
 
     private IEnumerator TimerStart_Coroutine() 
     {
@@ -50,6 +46,7 @@ public class UI_Timer : MonoBehaviourPunCallbacks
         }
 
     }
+
     private IEnumerator Timer_Coroution()
     {
 
@@ -66,8 +63,6 @@ public class UI_Timer : MonoBehaviourPunCallbacks
             {
                 _totalTime -= 1;
                 PV.RPC("ShowTimer", RpcTarget.All, _totalTime); //1초 마다 방 모두에게 전달
-                
-
             }
             if (_totalTime <= 0)
             {
@@ -100,21 +95,6 @@ public class UI_Timer : MonoBehaviourPunCallbacks
         TimerAnimator.SetTrigger("SpeedUp");
         FireAnimator.SetTrigger("SpeedUp");
     }
-
-    /*void StartTimer()
-    {
-        _currentTime = _totalTime;
-        timerStarted = true;
-    }
-
-    void DisplayTime(float timeInSeconds)
-    {
-        int minutes = Mathf.FloorToInt(timeInSeconds / 60f);
-        int seconds = Mathf.FloorToInt(timeInSeconds % 60f);
-        string timeString = string.Format("{0:00} : {1:00}", minutes, seconds);
-        TimerTextUI.text = timeString;
-    }
-    */
 
     [PunRPC]
     void TimerEnded()
