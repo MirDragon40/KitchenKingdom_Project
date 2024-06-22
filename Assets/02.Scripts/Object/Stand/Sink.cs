@@ -109,6 +109,7 @@ public class Sink : MonoBehaviourPun
     private IEnumerator WashPlates()
     {
         _pv.RPC(nameof(UpdateWashingState), RpcTarget.AllBuffered, true);
+        SoundManager.Instance.PlayAudio("DishWash", false, true);
 
         while (DirtyPlateNum > 0)
         {
@@ -142,6 +143,7 @@ public class Sink : MonoBehaviourPun
         }
 
         _pv.RPC(nameof(UpdateWashingState), RpcTarget.AllBuffered, false);
+        SoundManager.Instance.StopAudio("DishWash");
 
         ProgressSlider.value = 1f;
         washingCoroutine = null;
@@ -212,6 +214,7 @@ public class Sink : MonoBehaviourPun
 
             dirtyPlate = null;
             dishObject = null;
+            SoundManager.Instance.StopAudio("DishWash");
         }
     }
 
