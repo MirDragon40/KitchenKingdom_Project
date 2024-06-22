@@ -48,6 +48,8 @@ public class FoodObject : IHoldable, IThrowable
     public float CuttingTime = 3f;
     public float BakeTime = 3f;
 
+    private static int grillingCount = 0;
+
     public override Vector3 DropOffset => new Vector3(0.3f, 0.1f, 0f);
     //public override Quaternion DropOffset_Rotation => Quaternion.Euler(0, 0, 0);
 
@@ -195,7 +197,7 @@ public class FoodObject : IHoldable, IThrowable
                // Debug.Log(colliderNum);
                 foreach (Collider collider in colliders)
                 {
-/*                    if (collider.TryGetComponent<PanObject>(out panObject))
+                    if (collider.TryGetComponent<PanObject>(out panObject))
                     {
                         Debug.Log("Pan Found");
                         transform.rotation = Quaternion.identity;
@@ -205,8 +207,8 @@ public class FoodObject : IHoldable, IThrowable
                         }
                         colliders = null;
                         break;
-                    }*/
-                    if (collider.TryGetComponent<CookStand>(out cookStand))
+                    }
+                    else if (collider.TryGetComponent<CookStand>(out cookStand))
                     {
                         transform.rotation = Quaternion.identity;
                         if (!cookStand.IsOccupied)
@@ -337,7 +339,11 @@ public class FoodObject : IHoldable, IThrowable
         {
             IsCooking = true;
             cookingCoroutine = StartCoroutine(CookPatty_Coroutine());
-            soundManager.PlayAudio("Patty",true,true);
+            grillingCount++;
+            if (grillingCount == 1)
+            {
+                soundManager.PlayAudio("Patty", true, true);
+            }
         }
     }
 
@@ -348,8 +354,13 @@ public class FoodObject : IHoldable, IThrowable
         if (cookingCoroutine != null)
         {
             StopCoroutine(cookingCoroutine);
-            soundManager.StopAudio("Patty");
+            //soundManager.StopAudio("Patty");
             cookingCoroutine = null;
+            grillingCount--;
+            if (grillingCount == 0)
+            {
+                soundManager.StopAudio("Patty");
+            }
         }
     }
 
