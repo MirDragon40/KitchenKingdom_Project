@@ -66,6 +66,8 @@ public class GameManager : MonoBehaviour
                 _optionUlOpen = true;
             }
         }
+
+        TotalScore  = Stage1_Score + Stage2_Score + Stage3_Score + Stage4_Score;
     }
 
     private void Start()

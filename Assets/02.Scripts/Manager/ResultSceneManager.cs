@@ -66,7 +66,27 @@ public class ResultSceneManager : MonoBehaviour
             Stage3_Score_Text.text = $"{GameManager.Instance.Stage3_Score}";
             Stage4_Score_Text.text = $"{GameManager.Instance.Stage4_Score}";
             Total_Score_Text.text = $"{GameManager.Instance.TotalScore}";
+
+
+            // 스테이지 마다 리뷰 결과 출력
+            if(GameManager.Instance.Stage1_Score != 0 && GameManager.Instance.Stage2_Score == 0)  // 스테이지 1일때
+            {
+
+            }
+            if(GameManager.Instance.Stage2_Score != 0 && GameManager.Instance.Stage3_Score == 0)  // 스테이지 2일때
+            {
+
+            }
+            if (GameManager.Instance.Stage3_Score != 0 && GameManager.Instance.Stage4_Score == 0)  // 스테이지 3일때
+            {
+
+            }
+            if(GameManager.Instance.Stage4_Score != 0)  // 스테이지 4일때
+            {
+
+            }
         }
+
       
     }
 
