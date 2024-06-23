@@ -20,6 +20,10 @@ public class GameManager : MonoBehaviour
 
     public int[] StageScore = new int[7];
 
+    public int Stage1_Score = 0;
+    public int Stage2_Score = 0;
+    public int Stage3_Score = 0;
+    public int Stage4_Score = 0;
     public int TotalScore = 0;
 
     public GameObject OptionUl;

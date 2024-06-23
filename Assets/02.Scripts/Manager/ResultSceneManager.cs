@@ -44,12 +44,12 @@ public class ResultSceneManager : MonoBehaviour
         // 디버깅 코드 추가
         if (GameManager.Instance == null)
         {
-            Debug.LogError("GameManager.Instance가 null입니다.");
+            Debug.LogError("GameManager.Instance가 null이다.");
         }
 
         if (Total_Score_Text == null)
         {
-            Debug.LogError("Total_Score_Text가 null입니다.");
+            Debug.LogError("Total_Score_Text가 null이다.");
         }
 
         // 기존 코드
@@ -61,8 +61,13 @@ public class ResultSceneManager : MonoBehaviour
 
         if (GameManager.Instance != null)
         {
+            Stage1_Score_Text.text = $"{GameManager.Instance.Stage1_Score}";
+            Stage2_Score_Text.text = $"{GameManager.Instance.Stage2_Score}";
+            Stage3_Score_Text.text = $"{GameManager.Instance.Stage3_Score}";
+            Stage4_Score_Text.text = $"{GameManager.Instance.Stage4_Score}";
             Total_Score_Text.text = $"{GameManager.Instance.TotalScore}";
         }
+      
     }
 
     private void Start()
