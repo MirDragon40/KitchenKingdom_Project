@@ -30,6 +30,7 @@ public class Sink : MonoBehaviourPun
     private bool isPlayerNearby => _nearbyCharacter != null;
 
     private bool isWashing = false;
+    private float savedProgress = 0f;
 
     private void Awake()
     {
@@ -111,11 +112,11 @@ public class Sink : MonoBehaviourPun
         _pv.RPC(nameof(UpdateWashingState), RpcTarget.AllBuffered, true);
         SoundManager.Instance.PlayAudio("DishWash", false, true);
 
+        float duration = 4f;
+        float elapsed = savedProgress * duration;
+
         while (DirtyPlateNum > 0)
         {
-            float duration = 4f;
-            float elapsed = ProgressSlider.value * duration;
-
             while (elapsed < duration)
             {
                 elapsed += Time.deltaTime;
@@ -128,9 +129,8 @@ public class Sink : MonoBehaviourPun
                 if (!isPlayerInTrigger)
                 {
                     washingCoroutine = null;
-
+                    savedProgress = ProgressSlider.value;
                     _pv.RPC(nameof(UpdateSliderAndEffect), RpcTarget.AllBuffered, ProgressSlider.value, false);
-
                     yield break;
                 }
             }
@@ -139,7 +139,9 @@ public class Sink : MonoBehaviourPun
             CleanPlateNum++;
             _pv.RPC(nameof(UpdatePlateNums), RpcTarget.AllBuffered, DirtyPlateNum, CleanPlateNum);
 
+            elapsed = 0f;
             ProgressSlider.value = 0f;
+            savedProgress = 0f;
         }
 
         _pv.RPC(nameof(UpdateWashingState), RpcTarget.AllBuffered, false);
@@ -201,6 +203,13 @@ public class Sink : MonoBehaviourPun
             dishObject = characterHoldAbility.gameObject.GetComponentInChildren<DishObject>();
 
             isPlayerInTrigger = true;
+
+            if (isWashing)
+            {
+                ProgressSlider.gameObject.SetActive(true);
+                ProgressSlider.value = savedProgress;
+                BubbleEffect.SetActive(true);
+            }
         }
     }
 
