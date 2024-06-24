@@ -75,17 +75,37 @@ public class OrderManager : MonoBehaviourPun
 
 
 
-        if (_stage == 1 && !_isGenerating && GeneratedOrderList.Count < MaxOrderNumber && PhotonNetwork.IsMasterClient)
+        if (!_isGenerating && GeneratedOrderList.Count < MaxOrderNumber && PhotonNetwork.IsMasterClient)
         {
-            int orderRandIndex = Random.Range(0, 10);
-            if (orderRandIndex <= 5)
+            if (_stage == 1 )
             {
-                _pv.RPC("GenerateOrderRPC", RpcTarget.AllBuffered, "burger");
+                int orderRandIndex = Random.Range(0, 10);
+                if (orderRandIndex <= 5)
+                {
+                    _pv.RPC("GenerateOrderRPC", RpcTarget.AllBuffered, "burger");
+                }
+                else if (orderRandIndex > 5)
+                {
+                    _pv.RPC("GenerateOrderRPC", RpcTarget.AllBuffered, "burgerCoke");
+                }
             }
-            else if (orderRandIndex > 5)
+            if (_stage == 2)
             {
-                _pv.RPC("GenerateOrderRPC", RpcTarget.AllBuffered, "burgerCoke");
+                int orderRandIndex = Random.Range(0, 10);
+                if (orderRandIndex <= 3)
+                {
+                    _pv.RPC("GenerateOrderRPC", RpcTarget.AllBuffered, "burger");
+                }
+                else if (orderRandIndex < 6)
+                {
+                    _pv.RPC("GenerateOrderRPC", RpcTarget.AllBuffered, "burgerCoke");
+                }
+                else
+                {
+                    _pv.RPC("GenerateOrderRPC", RpcTarget.AllBuffered, "burgerCokeFry");
+                }
             }
+
 
         }
     }
