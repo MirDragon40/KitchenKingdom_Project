@@ -75,6 +75,7 @@ public class CharacterHoldAbility : CharacterAbility
                     if (nearTrashBin)
                     {
                         _pv.RPC("DropFood", RpcTarget.All);
+                        soundManager.PlayAudio("Trash", false, true);
                     }
                     else
                     {
@@ -186,17 +187,18 @@ public class CharacterHoldAbility : CharacterAbility
         {
             return;
         }
-        FoodCombination foodcombo = null;
+
         if (HoldableItem is FoodObject food)
         {
             food.Destroy();
             HoldableItem = null;
             animator.SetBool("Carry", false);
-
         }
-        if (HoldableItem.TryGetComponent<FoodCombination>(out foodcombo))
+        else if (HoldableItem.TryGetComponent<FoodCombination>(out var foodcombo))
         {
-            HoldableItem.GetComponent<FoodCombination>().Init();
+            foodcombo.Init();
+            HoldableItem = null;
+            animator.SetBool("Carry", false);
         }
     }
 

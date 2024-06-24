@@ -3072,6 +3072,30 @@ PrefabInstance:
       propertyPath: sceneViewId
       value: 16
       objectReference: {fileID: 0}
+    - target: {fileID: 6045287352990866434, guid: f1dfd9727d7247b4bb99cac0ec8a435b, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 124.79382
+      objectReference: {fileID: 0}
+    - target: {fileID: 6045287352990866434, guid: f1dfd9727d7247b4bb99cac0ec8a435b, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 201.83185
+      objectReference: {fileID: 0}
+    - target: {fileID: 6045287352990866434, guid: f1dfd9727d7247b4bb99cac0ec8a435b, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 124.79384
+      objectReference: {fileID: 0}
+    - target: {fileID: 6045287352990866434, guid: f1dfd9727d7247b4bb99cac0ec8a435b, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 49
+      objectReference: {fileID: 0}
+    - target: {fileID: 6045287352990866434, guid: f1dfd9727d7247b4bb99cac0ec8a435b, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 172
+      objectReference: {fileID: 0}
+    - target: {fileID: 6045287352990866434, guid: f1dfd9727d7247b4bb99cac0ec8a435b, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 203
+      objectReference: {fileID: 0}
     - target: {fileID: 6586813946680175039, guid: f1dfd9727d7247b4bb99cac0ec8a435b, type: 3}
       propertyPath: sceneViewId
       value: 17
@@ -3168,6 +3192,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 2678483795670061968, guid: f1dfd9727d7247b4bb99cac0ec8a435b, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1979558082}
+    - targetCorrespondingSourceObject: {fileID: 600119585998001655, guid: f1dfd9727d7247b4bb99cac0ec8a435b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1024973079}
   m_SourcePrefab: {fileID: 100100000, guid: f1dfd9727d7247b4bb99cac0ec8a435b, type: 3}
 --- !u!4 &586577845 stripped
 Transform:
@@ -5262,11 +5289,45 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &988066374 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 600119585998001655, guid: f1dfd9727d7247b4bb99cac0ec8a435b, type: 3}
+  m_PrefabInstance: {fileID: 2025766078}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &988066378
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 988066374}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 46979c28fbcc9b249abaa4f55efd5d7b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &1009462799 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5498556674941739244, guid: 61a5605c41609634bac5baf8ef0820f1, type: 3}
   m_PrefabInstance: {fileID: 701863020}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1024973075 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 600119585998001655, guid: f1dfd9727d7247b4bb99cac0ec8a435b, type: 3}
+  m_PrefabInstance: {fileID: 577017551}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1024973079
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1024973075}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 46979c28fbcc9b249abaa4f55efd5d7b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1049632451
 GameObject:
   m_ObjectHideFlags: 0
@@ -9223,6 +9284,11 @@ MonoBehaviour:
   MaxOrderTimeSpan: 10
   MaxOrderNumber: 5
   NormalOrderPoints: 25
+  NormalPenaltyPoint: -10
+  VIPOrderPoints: 50
+  VIPPenaltyPoint: -30
+  RudeOrderPoints: 20
+  RudePenaltyPoint: -50
   GeneratedOrderList: []
   DirtyPlateStand: {fileID: 1436514718}
 --- !u!4 &1746525627
@@ -10292,6 +10358,30 @@ PrefabInstance:
       propertyPath: sceneViewId
       value: 23
       objectReference: {fileID: 0}
+    - target: {fileID: 6045287352990866434, guid: f1dfd9727d7247b4bb99cac0ec8a435b, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 128.25739
+      objectReference: {fileID: 0}
+    - target: {fileID: 6045287352990866434, guid: f1dfd9727d7247b4bb99cac0ec8a435b, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 198.69145
+      objectReference: {fileID: 0}
+    - target: {fileID: 6045287352990866434, guid: f1dfd9727d7247b4bb99cac0ec8a435b, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 128.25739
+      objectReference: {fileID: 0}
+    - target: {fileID: 6045287352990866434, guid: f1dfd9727d7247b4bb99cac0ec8a435b, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 37
+      objectReference: {fileID: 0}
+    - target: {fileID: 6045287352990866434, guid: f1dfd9727d7247b4bb99cac0ec8a435b, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 172
+      objectReference: {fileID: 0}
+    - target: {fileID: 6045287352990866434, guid: f1dfd9727d7247b4bb99cac0ec8a435b, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 194
+      objectReference: {fileID: 0}
     - target: {fileID: 6586813946680175039, guid: f1dfd9727d7247b4bb99cac0ec8a435b, type: 3}
       propertyPath: sceneViewId
       value: 24
@@ -10388,6 +10478,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 2678483795670061968, guid: f1dfd9727d7247b4bb99cac0ec8a435b, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1769608978}
+    - targetCorrespondingSourceObject: {fileID: 600119585998001655, guid: f1dfd9727d7247b4bb99cac0ec8a435b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 988066378}
   m_SourcePrefab: {fileID: 100100000, guid: f1dfd9727d7247b4bb99cac0ec8a435b, type: 3}
 --- !u!1 &2036229703 stripped
 GameObject:
@@ -24110,7 +24203,7 @@ PrefabInstance:
       objectReference: {fileID: 8300000, guid: 653f7492f1573f24ab1942de174088e7, type: 3}
     - target: {fileID: 3557536189269446390, guid: 66d895dab0f101c4b80051140132a9a0, type: 3}
       propertyPath: audioClips.Array.size
-      value: 7
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 3557536189269446390, guid: 66d895dab0f101c4b80051140132a9a0, type: 3}
       propertyPath: audioClips.Array.data[0]
@@ -24136,6 +24229,14 @@ PrefabInstance:
       propertyPath: audioClips.Array.data[6]
       value: 
       objectReference: {fileID: 8300000, guid: 0d1969736ea3c0c469ec255b7f424c59, type: 3}
+    - target: {fileID: 3557536189269446390, guid: 66d895dab0f101c4b80051140132a9a0, type: 3}
+      propertyPath: audioClips.Array.data[7]
+      value: 
+      objectReference: {fileID: 8300000, guid: 3264e67929e782648b6a27f8151cec94, type: 3}
+    - target: {fileID: 3557536189269446390, guid: 66d895dab0f101c4b80051140132a9a0, type: 3}
+      propertyPath: audioClips.Array.data[8]
+      value: 
+      objectReference: {fileID: 8300000, guid: 435145e9d64d1b645b37369e2a5b78ea, type: 3}
     - target: {fileID: 5446973797983412925, guid: 66d895dab0f101c4b80051140132a9a0, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

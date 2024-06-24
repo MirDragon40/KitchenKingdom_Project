@@ -15,9 +15,16 @@ public class OrderManager : MonoBehaviourPun
     public float MaxOrderTimeSpan = 10f;
     private int _orderCount = 0;
     public int MaxOrderNumber = 5;
-    [Header("일반주문서 점수")]
-    public int NormalOrderPoints = 25;
 
+    [Header("일반주문서 점수")]
+    public int NormalOrderPoints = 30;
+    public int NormalPenaltyPoint = -10;
+    [Header("VIP주문서 점수")]
+    public int VIPOrderPoints = 50;
+    public int VIPPenaltyPoint = -30;
+    [Header("진상주문서 점수")]
+    public int RudeOrderPoints = 20;
+    public int RudePenaltyPoint = -50;
 
     public List<string> GeneratedOrderList = new List<string>();
 
@@ -74,41 +81,22 @@ public class OrderManager : MonoBehaviourPun
         }
 
 
-
-        if (!_isGenerating && GeneratedOrderList.Count < MaxOrderNumber && PhotonNetwork.IsMasterClient)
+        if (_stage == 1 && !_isGenerating && GeneratedOrderList.Count < MaxOrderNumber && PhotonNetwork.IsMasterClient)
         {
-            if (_stage == 1 )
+            int orderRandIndex = Random.Range(0, 10);
+            if (orderRandIndex <= 5)
             {
-                int orderRandIndex = Random.Range(0, 10);
-                if (orderRandIndex <= 5)
-                {
-                    _pv.RPC("GenerateOrderRPC", RpcTarget.AllBuffered, "burger");
-                }
-                else if (orderRandIndex > 5)
-                {
-                    _pv.RPC("GenerateOrderRPC", RpcTarget.AllBuffered, "burgerCoke");
-                }
+                _pv.RPC("GenerateOrderRPC", RpcTarget.AllBuffered, "burger");
             }
-            if (_stage == 2)
+            else if (orderRandIndex > 5)
             {
-                int orderRandIndex = Random.Range(0, 10);
-                if (orderRandIndex <= 3)
-                {
-                    _pv.RPC("GenerateOrderRPC", RpcTarget.AllBuffered, "burger");
-                }
-                else if (orderRandIndex < 6)
-                {
-                    _pv.RPC("GenerateOrderRPC", RpcTarget.AllBuffered, "burgerCoke");
-                }
-                else
-                {
-                    _pv.RPC("GenerateOrderRPC", RpcTarget.AllBuffered, "burgerCokeFry");
-                }
+                _pv.RPC("GenerateOrderRPC", RpcTarget.AllBuffered, "burgerCoke");
             }
-
 
         }
     }
+
+
     [PunRPC]
     private void GenerateOrderRPC(string orderName)
     {
