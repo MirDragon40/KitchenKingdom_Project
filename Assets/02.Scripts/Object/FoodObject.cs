@@ -48,7 +48,7 @@ public class FoodObject : IHoldable, IThrowable
     public float CuttingTime = 3f;
     public float BakeTime = 3f;
 
-    private int grillingCount = 0;
+    private static int grillingCount = 0;
 
     public override Vector3 DropOffset => new Vector3(0.3f, 0.1f, 0f);
     //public override Quaternion DropOffset_Rotation => Quaternion.Euler(0, 0, 0);

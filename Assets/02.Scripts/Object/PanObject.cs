@@ -41,6 +41,7 @@ public class PanObject : IHoldable
     public Transform PanStartPosition; // 팬 초기위치
 
     private bool hasCaughtFireOnce = false;
+    private bool hasDangerIndicator = false;
 
     public Table[] NearbyTables;
     private void Awake()
@@ -100,12 +101,13 @@ public class PanObject : IHoldable
                     if (GrillingIngrediant.CookProgress >= 2f && GrillingIngrediant.CookProgress < 4.9f)
                     {
                         dangerIndicator.ShowDangerIndicator(dangerSprite);
-                        soundManager.PlayAudio("Warning",true,true);
+                        soundManager.PlayAudio("Warning", true, true);
+                        hasDangerIndicator = true;
                     }
                     else
                     {
                         dangerIndicator.HideDangerIndicator();
-                        soundManager.StopAudio("Warning");
+                        hasDangerIndicator = false;
                     }
 
                     // 불이 켜지는 시점
@@ -134,7 +136,6 @@ public class PanObject : IHoldable
                 if (GrillingIngrediant != null)
                 {
                     GrillingIngrediant.StopGrilling();
-                    soundManager.StopAudio("Warning");
                 }
             }
 
@@ -202,6 +203,8 @@ public class PanObject : IHoldable
         isOnSurface = false;  // 아이템을 들 때는 표면에 있지 않음
 
         dangerIndicator.HideDangerIndicator();
+
+        soundManager.StopAudio("Warning");
     }
 
     public override void UnHold(Vector3 dropPosition, Quaternion dropRotation)
@@ -347,4 +350,5 @@ public class PanObject : IHoldable
             }
         }
     }
+
 }

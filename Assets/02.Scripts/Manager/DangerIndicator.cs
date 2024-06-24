@@ -5,7 +5,7 @@ public class DangerIndicator : MonoBehaviour
 {
     public SpriteRenderer danger;
     private Coroutine blinkingCoroutine;
-
+    public bool IsDangerous = false;
     private void Awake()
     {
         // 게임 시작 시 경고창을 비활성화
