@@ -2109,6 +2109,10 @@ MonoBehaviour:
   - {fileID: 1577349093}
   - {fileID: 1852115681}
   StageScore: 00000000000000000000000000000000000000000000000000000000
+  Stage1_Score: 0
+  Stage2_Score: 0
+  Stage3_Score: 0
+  Stage4_Score: 0
   TotalScore: 0
   OptionUl: {fileID: 1474762658}
 --- !u!4 &362806178
@@ -24184,7 +24188,7 @@ PrefabInstance:
       objectReference: {fileID: 8300000, guid: 653f7492f1573f24ab1942de174088e7, type: 3}
     - target: {fileID: 3557536189269446390, guid: 66d895dab0f101c4b80051140132a9a0, type: 3}
       propertyPath: audioClips.Array.size
-      value: 8
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 3557536189269446390, guid: 66d895dab0f101c4b80051140132a9a0, type: 3}
       propertyPath: audioClips.Array.data[0]
@@ -24214,6 +24218,10 @@ PrefabInstance:
       propertyPath: audioClips.Array.data[7]
       value: 
       objectReference: {fileID: 8300000, guid: 3264e67929e782648b6a27f8151cec94, type: 3}
+    - target: {fileID: 3557536189269446390, guid: 66d895dab0f101c4b80051140132a9a0, type: 3}
+      propertyPath: audioClips.Array.data[8]
+      value: 
+      objectReference: {fileID: 8300000, guid: 435145e9d64d1b645b37369e2a5b78ea, type: 3}
     - target: {fileID: 5446973797983412925, guid: 66d895dab0f101c4b80051140132a9a0, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
