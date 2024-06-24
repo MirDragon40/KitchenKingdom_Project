@@ -81,7 +81,7 @@ public class GameManager : MonoBehaviour
     public void SpawnPlayer()
     {
         int actorNumber = PhotonNetwork.LocalPlayer.ActorNumber;
-        int spawnIndex = actorNumber % SpawnPoints.Length; // 각각 플레이어가 다른 곳에 spawn
+        int spawnIndex = actorNumber % SpawnPoints.Length -1; // 각각 플레이어가 다른 곳에 spawn
 
         Vector3 spawnPosition = SpawnPoints[spawnIndex].position;
         Quaternion spawnRotation = SpawnPoints[spawnIndex].rotation;
