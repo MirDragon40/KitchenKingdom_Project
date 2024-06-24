@@ -208,7 +208,6 @@ public class Sink : MonoBehaviourPun
             {
                 ProgressSlider.gameObject.SetActive(true);
                 ProgressSlider.value = savedProgress;
-                BubbleEffect.SetActive(true);
             }
         }
     }
