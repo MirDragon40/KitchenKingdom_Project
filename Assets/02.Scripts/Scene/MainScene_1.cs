@@ -38,7 +38,7 @@ public class MainScene_1 : MonoBehaviourPunCallbacks
         {
             return;
         }
-
     }
+
 
 }

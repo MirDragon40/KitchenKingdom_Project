@@ -18,11 +18,13 @@ public class ResultSceneManager : MonoBehaviour
     public TextMeshProUGUI Stage1_Text;
     public TextMeshProUGUI Stage2_Text;
     public TextMeshProUGUI Stage3_Text;
+    public TextMeshProUGUI Stage4_Text;
     public TextMeshProUGUI Total_Text;
 
     public TextMeshProUGUI Stage1_Score_Text;
     public TextMeshProUGUI Stage2_Score_Text;
     public TextMeshProUGUI Stage3_Score_Text;
+    public TextMeshProUGUI Stage4_Score_Text;
     public TextMeshProUGUI Total_Score_Text;
 
     private float _timeGap = 0.3f;
@@ -42,12 +44,12 @@ public class ResultSceneManager : MonoBehaviour
         // 디버깅 코드 추가
         if (GameManager.Instance == null)
         {
-            Debug.LogError("GameManager.Instance가 null입니다.");
+            Debug.LogError("GameManager.Instance가 null이다.");
         }
 
         if (Total_Score_Text == null)
         {
-            Debug.LogError("Total_Score_Text가 null입니다.");
+            Debug.LogError("Total_Score_Text가 null이다.");
         }
 
         // 기존 코드
@@ -59,8 +61,33 @@ public class ResultSceneManager : MonoBehaviour
 
         if (GameManager.Instance != null)
         {
+            Stage1_Score_Text.text = $"{GameManager.Instance.Stage1_Score}";
+            Stage2_Score_Text.text = $"{GameManager.Instance.Stage2_Score}";
+            Stage3_Score_Text.text = $"{GameManager.Instance.Stage3_Score}";
+            Stage4_Score_Text.text = $"{GameManager.Instance.Stage4_Score}";
             Total_Score_Text.text = $"{GameManager.Instance.TotalScore}";
+
+
+            // 스테이지 마다 리뷰 결과 출력
+            if(GameManager.Instance.Stage1_Score != 0 && GameManager.Instance.Stage2_Score == 0)  // 스테이지 1일때
+            {
+
+            }
+            if(GameManager.Instance.Stage2_Score != 0 && GameManager.Instance.Stage3_Score == 0)  // 스테이지 2일때
+            {
+
+            }
+            if (GameManager.Instance.Stage3_Score != 0 && GameManager.Instance.Stage4_Score == 0)  // 스테이지 3일때
+            {
+
+            }
+            if(GameManager.Instance.Stage4_Score != 0)  // 스테이지 4일때
+            {
+
+            }
         }
+
+      
     }
 
     private void Start()
@@ -69,6 +96,8 @@ public class ResultSceneManager : MonoBehaviour
         Stage1_Text.gameObject.SetActive(false);
         Stage2_Text.gameObject.SetActive(false);
         Stage3_Text.gameObject.SetActive(false);
+        Stage4_Text.gameObject.SetActive(false);
+        
         Total_Text.gameObject.SetActive(false);
 
 
@@ -93,10 +122,15 @@ public class ResultSceneManager : MonoBehaviour
         Stage3_Text.gameObject.SetActive(true);
         yield return new WaitForSeconds(_timeGap);
 
+        Stage4_Text.gameObject.SetActive(true);
+        yield return new WaitForSeconds(_timeGap);
+
         Total_Text.gameObject.SetActive(true);
 
         yield return new WaitForSeconds(2);
         Review_Anim.SetTrigger("Show_Review");
+
+        
     }
 }
 

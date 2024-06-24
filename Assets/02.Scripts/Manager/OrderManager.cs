@@ -15,9 +15,16 @@ public class OrderManager : MonoBehaviourPun
     public float MaxOrderTimeSpan = 10f;
     private int _orderCount = 0;
     public int MaxOrderNumber = 5;
-    [Header("일반주문서 점수")]
-    public int NormalOrderPoints = 25;
 
+    [Header("일반주문서 점수")]
+    public int NormalOrderPoints = 30;
+    public int NormalPenaltyPoint = -10;
+    [Header("VIP주문서 점수")]
+    public int VIPOrderPoints = 50;
+    public int VIPPenaltyPoint = -30;
+    [Header("진상주문서 점수")]
+    public int RudeOrderPoints = 20;
+    public int RudePenaltyPoint = -50;
 
     public List<string> GeneratedOrderList = new List<string>();
 
@@ -67,12 +74,11 @@ public class OrderManager : MonoBehaviourPun
             SubmitOrder("burger");
         }
 */
-/*
+
         if (Input.GetKeyDown(KeyCode.Alpha5))
         {
-            RPC_AddDirtyPlateNum();
-        }*/
-
+            StartCoroutine(SpawnDirtyPlateRPC_Coroutine(3f));
+        }
 
 
         if (_stage == 1 && !_isGenerating && GeneratedOrderList.Count < MaxOrderNumber && PhotonNetwork.IsMasterClient)
@@ -89,6 +95,8 @@ public class OrderManager : MonoBehaviourPun
 
         }
     }
+
+
     [PunRPC]
     private void GenerateOrderRPC(string orderName)
     {

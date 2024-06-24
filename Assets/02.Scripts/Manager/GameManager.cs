@@ -20,6 +20,10 @@ public class GameManager : MonoBehaviour
 
     public int[] StageScore = new int[7];
 
+    public int Stage1_Score = 0;
+    public int Stage2_Score = 0;
+    public int Stage3_Score = 0;
+    public int Stage4_Score = 0;
     public int TotalScore = 0;
 
     public GameObject OptionUl;
@@ -62,6 +66,8 @@ public class GameManager : MonoBehaviour
                 _optionUlOpen = true;
             }
         }
+
+        TotalScore  = Stage1_Score + Stage2_Score + Stage3_Score + Stage4_Score;
     }
 
     private void Start()
@@ -75,13 +81,10 @@ public class GameManager : MonoBehaviour
     public void SpawnPlayer()
     {
         int actorNumber = PhotonNetwork.LocalPlayer.ActorNumber;
-        int spawnIndex = actorNumber % SpawnPoints.Length; // 각각 플레이어가 다른 곳에 spawn
+        int spawnIndex = actorNumber % SpawnPoints.Length -1; // 각각 플레이어가 다른 곳에 spawn
 
         Vector3 spawnPosition = SpawnPoints[spawnIndex].position;
         Quaternion spawnRotation = SpawnPoints[spawnIndex].rotation;
         PhotonNetwork.Instantiate("Character1", spawnPosition, spawnRotation);
     }
-
-
-
 }

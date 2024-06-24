@@ -1,3 +1,4 @@
+using ExitGames.Client.Photon;
 using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
@@ -99,10 +100,12 @@ public class PanObject : IHoldable
                     if (GrillingIngrediant.CookProgress >= 2f && GrillingIngrediant.CookProgress < 4.9f)
                     {
                         dangerIndicator.ShowDangerIndicator(dangerSprite);
+                        soundManager.PlayAudio("Warning",true,true);
                     }
                     else
                     {
                         dangerIndicator.HideDangerIndicator();
+                        soundManager.StopAudio("Warning");
                     }
 
                     // 불이 켜지는 시점
@@ -111,8 +114,7 @@ public class PanObject : IHoldable
                         fireObject.MakeFire();
                         FireSlider.gameObject.SetActive(true);
                         hasCaughtFireOnce = true;
-
-                        soundManager.PlayAudio("Fire", true, true);
+                        soundManager.PlayAudio("Fire",true,true);
                     }
                 }
 
@@ -132,6 +134,7 @@ public class PanObject : IHoldable
                 if (GrillingIngrediant != null)
                 {
                     GrillingIngrediant.StopGrilling();
+                    soundManager.StopAudio("Warning");
                 }
             }
 
@@ -150,7 +153,7 @@ public class PanObject : IHoldable
             }
 
             GrillingIngrediant = null;
-            GrillingSlider.gameObject.SetActive(false);
+            GrillingSlider.gameObject.SetActive(false);        
         }
 
         // 분말과의 불 접촉 시간 관리
