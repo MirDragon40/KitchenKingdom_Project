@@ -1,3 +1,4 @@
+using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,6 +13,7 @@ public class BasketObject : IHoldable
     public Slider FryingSlider;
     public BoxCollider BoxCollider;
     public FryMachine MyFryMachine;
+    public Transform BasketStartPosition;
 
     public GameObject PlusImage;
 
@@ -22,6 +24,11 @@ public class BasketObject : IHoldable
     private void Awake()
     {
         BoxCollider = GetComponent<BoxCollider>();
+
+    }
+    private void Start()
+    {
+        Place(BasketStartPosition);
 
     }
     private void Update()
@@ -58,7 +65,7 @@ public class BasketObject : IHoldable
     {
         GetComponent<Rigidbody>().isKinematic = true;
         transform.SetParent(handTransform);
-        transform.localPosition = new Vector3(0, 0.4f, 0.413f);
+        transform.localPosition = Vector3.zero;
         transform.localRotation = Quaternion.Euler(0, 180f, 0f);
 
         MyFryMachine = null;
@@ -99,12 +106,15 @@ public class BasketObject : IHoldable
             return;
         }
         IHoldable playerHoldingItem = other.GetComponent<CharacterHoldAbility>().HoldableItem;
-
-        if (playerHoldingItem.GetComponent<FoodObject>().IsFryable)
+        FoodObject foodObject = null;
+        if (playerHoldingItem.TryGetComponent<FoodObject>(out foodObject))
         {
-            Debug.Log("Fry");
-            other.GetComponent<CharacterHoldAbility>().PlacePosition = BasketPlacePositon;
-            other.GetComponent<CharacterHoldAbility>().IsPlaceable = true;
+            if (foodObject.IsFryable)
+            {
+                Debug.Log("Fry");
+                other.GetComponent<CharacterHoldAbility>().PlacePosition = BasketPlacePositon;
+                other.GetComponent<CharacterHoldAbility>().IsPlaceable = true;
+            }
         }
 
     }
