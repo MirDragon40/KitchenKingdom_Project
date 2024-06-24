@@ -37,7 +37,7 @@ public class DishObject : IHoldable
                 _pv.TransferOwnership(character.PhotonView.OwnerActorNr);
             }
         }
-        Debug.Log("플레이어가 접시를 들고있다.");
+       // Debug.Log("플레이어가 접시를 들고있다.");
 
         GetComponent<Rigidbody>().isKinematic = true;
         GetComponent<BoxCollider>().enabled = false;

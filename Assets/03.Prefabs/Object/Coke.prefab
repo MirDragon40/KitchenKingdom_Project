@@ -55,8 +55,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.41988277, y: 0.48247194, z: 0.8090978}
-  m_Center: {x: 0.004532337, y: 0.13470954, z: -0.21122292}
+  m_Size: {x: 0.41988277, y: 0.48247194, z: 1.138772}
+  m_Center: {x: 0.004532337, y: 0.13470954, z: -0.046385765}
 --- !u!114 &2828123559932534632
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -70,7 +70,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ItemType: 4
+  IsDroppable: 0
   CokeObject: {fileID: 6789706837920808927}
+  PV: {fileID: 0}
   CokeRenderer: {fileID: 3804017872961156233}
   ThisCokeMaterial: {fileID: 2100000, guid: ae8d5923de5ea514e95ddf57c6108f10, type: 2}
   ChangeCokeMaterial: {fileID: 2100000, guid: 5294e1b9f82eb50459540445986474b4, type: 2}
@@ -89,17 +91,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ItemType: 4
+  IsDroppable: 0
   State: 0
   FoodType: 0
+  soundManager: {fileID: 0}
   FoodPrefab1: {fileID: 0}
   FoodPrefab2: {fileID: 0}
   FoodPrefab3: {fileID: 0}
+  PV: {fileID: 0}
   IsCooking: 0
   IsGrillable: 0
   IsFryable: 0
   CookProgress: 0
+  ThrownEffectTriggerTime: 0.5
   CuttingTime: 3
   BakeTime: 3
+  DAMPING: 1
 --- !u!1 &6245819853513931166
 GameObject:
   m_ObjectHideFlags: 0
