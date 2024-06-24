@@ -26,12 +26,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 600119585998001655}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0.7071068, z: -0.7071068, w: 0}
-  m_LocalPosition: {x: -0.00012431147, y: 0, z: 0.029}
-  m_LocalScale: {x: 0.02499999, y: 0.024999995, z: 0.024999995}
+  m_LocalRotation: {x: -0, y: -0.7001247, z: -0, w: 0.71402067}
+  m_LocalPosition: {x: 0.021833112, y: 172.2487, z: 1.112195}
+  m_LocalScale: {x: 223.71358, y: 478.46893, z: 223.7136}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 8580231701211850249}
+  m_Father: {fileID: 3611246404610204945}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &5818103402157276218
 SpriteRenderer:
@@ -215,7 +215,6 @@ Transform:
   - {fileID: 1676351433958173809}
   - {fileID: 5637835956563302748}
   - {fileID: 4975232939131962305}
-  - {fileID: 6045287352990866434}
   - {fileID: 6627957148992542222}
   - {fileID: 3611246404610204945}
   m_Father: {fileID: 0}
@@ -306,18 +305,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ItemType: 3
   IsDroppable: 0
-  PanPlacePositon: {fileID: 2606031458985759316}
+  PanPlacePosition: {fileID: 0}
   GrillingIngrediant: {fileID: 0}
   GrillingTime: 5
   GrillingSlider: {fileID: 6912035356691216558}
   BoxCollider: {fileID: 0}
   MyStove: {fileID: 0}
+  table: {fileID: 0}
+  soundManager: {fileID: 0}
   PlusImage: {fileID: 8844707473171469324}
   FireSlider: {fileID: 2512325139772973454}
   fireObject: {fileID: 0}
   dangerIndicator: {fileID: 0}
   dangerSprite: {fileID: 21300000, guid: f991fd3b10e35644d8759f9d82a60590, type: 3}
   PanStartPosition: {fileID: 0}
+  NearbyTables: []
 --- !u!54 &2983923768142573700
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -382,6 +384,7 @@ MonoBehaviour:
   _isOnFire: 0
   fireEffect: {fileID: 0}
   contactTime: 0
+  soundManager: {fileID: 0}
 --- !u!114 &6586813946680175039
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -578,6 +581,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8676544166557014459}
+  - {fileID: 6045287352990866434}
   m_Father: {fileID: 8580231701211850249}
   m_LocalEulerAnglesHint: {x: -1.126, y: -90, z: -90}
   m_AnchorMin: {x: 0, y: 0}
