@@ -4,11 +4,13 @@ public class TrashBin : MonoBehaviour
 {
     private void OnTriggerEnter(Collider other)
     {
+        Debug.Log(other.tag);
         if (other.CompareTag("Pan"))
         {
             PanObject panObject = other.GetComponent<PanObject>();
             if (panObject != null)
             {
+                Debug.Log("팬");
                 panObject.SetNearTrashBin(true, this);
             }
         }
@@ -17,6 +19,7 @@ public class TrashBin : MonoBehaviour
             CharacterHoldAbility holdAbility = other.GetComponent<CharacterHoldAbility>();
             if (holdAbility != null)
             {
+                Debug.Log("플레이어");
                 holdAbility.SetNearTrashBin(true, this.transform);
 
             }

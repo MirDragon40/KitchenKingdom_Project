@@ -1,27 +1,32 @@
 using DG.Tweening;
 using Photon.Pun;
-using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlateSubmitPlace : MonoBehaviour
 {
     private FoodCombination _foodCombo;
     public bool IsServeable = false;
-    public List<string> IngrediantsInDish = new List<string>();
     private CharacterHoldAbility _holdability;
     private string _plateContent = string.Empty;
     public TMP_Text ScoreUI;
     private PhotonView _pv;
-   
+
+    // 음식별 점수를 저장하는 Dictionary
+    private Dictionary<string, int> foodScores = new Dictionary<string, int>
+    {
+        { "burgerCokeFry", 50 },
+        { "burgerCoke", 30 },
+        { "burger", 15 }
+    };
+
     private void Awake()
     {
         _pv = GetComponent<PhotonView>();
         ScoreUI.text = string.Empty;
     }
+
     private void LateUpdate()
     {
         if (IsServeable && Input.GetKeyDown(KeyCode.Space))
@@ -35,6 +40,7 @@ public class PlateSubmitPlace : MonoBehaviour
             ShowScoreUI(25);
         }
     }
+
     private void ShowScoreUI(int score)
     {
         ScoreUI.text = $"+{score}pts";
@@ -46,19 +52,24 @@ public class PlateSubmitPlace : MonoBehaviour
         ScoreUI.DOColor(Color.green, 2f);
         ScoreUI.DOFade(0, 2.5f);
     }
+
     [PunRPC]
     private void SubmitPlate()
     {
         bool isMatchingOrder = OrderManager.Instance.SubmitOrder(_plateContent);
         if (isMatchingOrder)
         {
-            ShowScoreUI(OrderManager.Instance.NormalOrderPoints);
-            if (PhotonNetwork.IsMasterClient)
+            int score = 0;
+            if (foodScores.TryGetValue(_plateContent, out score))
             {
-                OrderManager.Instance.RequestAddDirtyPlates();
+                ShowScoreUI(score);
+                if (PhotonNetwork.IsMasterClient)
+                {
+                    OrderManager.Instance.RequestAddDirtyPlates();
+                }
             }
-            
         }
+
         if (_foodCombo != null)
         {
             if (_foodCombo.PV.IsMine)
@@ -69,16 +80,16 @@ public class PlateSubmitPlace : MonoBehaviour
         _foodCombo = null;
         _plateContent = string.Empty;
 
+        _holdability._pv.RPC("Drop", RpcTarget.All);
     }
-    // todo : 손에 들고있는 plate에 맞는 음식을 제출했을때 ordermanager의 내용과 비교하여 gamemanager의 totalscore 25점 더하기
-    // 
+
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player") && other.TryGetComponent<CharacterHoldAbility>(out _holdability))
+        if (other.CompareTag("Player") && other.TryGetComponent(out _holdability))
         {
             if (_holdability.HoldableItem != null && _plateContent == string.Empty)
             {
-                if (_holdability.HoldableItem.TryGetComponent<FoodCombination>(out _foodCombo))
+                if (_holdability.HoldableItem.TryGetComponent(out _foodCombo))
                 {
                     if (_foodCombo.IsReadyServe)
                     {
@@ -100,7 +111,6 @@ public class PlateSubmitPlace : MonoBehaviour
                         }
                         IsServeable = true;
                         _holdability.IsServeable = true;
-
                     }
                     else
                     {
@@ -108,7 +118,6 @@ public class PlateSubmitPlace : MonoBehaviour
                         _holdability.IsServeable = true;
                     }
                 }
-
             }
         }
         else
@@ -117,6 +126,7 @@ public class PlateSubmitPlace : MonoBehaviour
             _plateContent = string.Empty;
         }
     }
+
     private void OnTriggerExit(Collider other)
     {
         IsServeable = false;
@@ -126,5 +136,4 @@ public class PlateSubmitPlace : MonoBehaviour
             _holdability.IsServeable = false;
         }
     }
-
 }
