@@ -11375,8 +11375,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1195042162}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
-<<<<<<< HEAD:Assets/01.Scenes/Stage_1_Beta.unity
-=======
 --- !u!1 &1209506979
 GameObject:
   m_ObjectHideFlags: 0
@@ -16228,7 +16226,6 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     vectorLabel1_3: W
->>>>>>> 34417a0cc05c672ab1ffcc1f6209dd96133c5623:Assets/01.Scenes/MainScene_Beta.unity
 --- !u!1 &1211243030
 GameObject:
   m_ObjectHideFlags: 0
