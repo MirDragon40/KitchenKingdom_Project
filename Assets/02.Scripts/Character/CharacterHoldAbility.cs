@@ -233,14 +233,6 @@ public class CharacterHoldAbility : CharacterAbility
         HoldableItem = null;
         animator.SetBool("Carry", false);
 
-        if (HoldableItem != null && HoldableItem is DishObject)
-        {
-            Debug.Log("HoldableItem is a DishObject.");
-            soundManager.PlayAudio("Dish", true);
-            Debug.Log(soundManager + "사운드나옴");
-        }
-
-
     }
 
 
