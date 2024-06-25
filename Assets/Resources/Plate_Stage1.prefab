@@ -796,7 +796,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d025974f2287712488a4d5d0f12d469b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Stage: 1
   AvailableIngrediants:
   - {fileID: 1255705482745809049}
   - {fileID: 431462645374759460}

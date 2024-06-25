@@ -88,6 +88,13 @@ public class FoodObject : IHoldable, IThrowable
             FoodPrefab2.SetActive(false);
             FoodPrefab3.SetActive(false);
         }
+        if(FoodType == FoodType.Chicken)
+        {
+            IsFryable = true;
+            FoodPrefab1.SetActive(true);
+            FoodPrefab2.SetActive(false);
+            FoodPrefab3.SetActive(false);
+        }
         
     }
 
@@ -112,6 +119,14 @@ public class FoodObject : IHoldable, IThrowable
                 cookingCoroutine = StartCoroutine(CookPatty_Coroutine());
             }
             else if (FoodType == FoodType.Potato)
+            {
+                cookingCoroutine = StartCoroutine(CookPotato_Coroutine());
+            }
+            else if (FoodType == FoodType.Tomato)
+            {
+                cookingCoroutine = StartCoroutine(CookLettuce_Coroutine());
+            }
+            else if (FoodType == FoodType.Chicken)
             {
                 cookingCoroutine = StartCoroutine(CookPotato_Coroutine());
             }
