@@ -157,6 +157,7 @@ MonoBehaviour:
   _boxCollider: {fileID: 5400166647897815554}
   isPress: 0
   StartPosition: {fileID: 0}
+  soundManager: {fileID: 0}
 --- !u!65 &6654251320375364341
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -194,7 +195,7 @@ MonoBehaviour:
   Group: 0
   prefixField: -1
   Synchronization: 3
-  OwnershipTransfer: 0
+  OwnershipTransfer: 1
   observableSearch: 2
   ObservedComponents: []
   sceneViewId: 0
