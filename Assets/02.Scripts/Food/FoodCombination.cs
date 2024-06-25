@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 public class FoodCombination : MonoBehaviour 
 {
-    public int Stage = 1;
+    public int Stage => GameManager.Instance.CurrentStage;
     public List<GameObject> AvailableIngrediants = new List<GameObject>(); // 스테이지별 가능한 재료조합 미리 list에 prefab으로 넣어놓음
     public List<Image> UI_FoodIcon = new List<Image>();
     public Dictionary<string, bool> Ingrediants = new Dictionary<string, bool>();
@@ -25,7 +25,6 @@ public class FoodCombination : MonoBehaviour
     }
     public void Init()
     {
-        Stage = GameManager.Instance.CurrentStage;
         foreach (GameObject ingrediant in AvailableIngrediants)
         {
             ingrediant.SetActive(false);
@@ -43,9 +42,14 @@ public class FoodCombination : MonoBehaviour
                 Ingrediants["coke"] = false;
                 Ingrediants["fry"] = false;
                 Ingrediants["burger"] = false;
-
                 break;
             case 2:
+                Ingrediants["bread"] = false;
+                Ingrediants["patty"] = false;
+                Ingrediants["lettuce"] = false;
+                Ingrediants["coke"] = false;
+                Ingrediants["fry"] = false;
+                Ingrediants["burger"] = false;
                 break;
             default:
                 break;
@@ -57,6 +61,7 @@ public class FoodCombination : MonoBehaviour
         {
             FoodObject ingrediant = null;
             PanObject panObject = null;
+            BasketObject basketObject = null;
             if (_holdableObject.TryGetComponent<FoodObject>(out ingrediant))
             {
                  SubmitIngrediant(ingrediant);
@@ -66,6 +71,13 @@ public class FoodCombination : MonoBehaviour
                 if (panObject.GrillingIngrediant != null)
                 {
                     SubmitIngrediant(panObject.GrillingIngrediant.GetComponent<FoodObject>());
+                }
+            }
+            else if (_holdableObject.TryGetComponent<BasketObject>(out basketObject))
+            {
+                if (basketObject.FryingIngrediant != null)
+                {
+                    SubmitIngrediant(basketObject.FryingIngrediant.GetComponent<FoodObject>());
                 }
             }
         }
@@ -153,7 +165,13 @@ public class FoodCombination : MonoBehaviour
             PhotonNetwork.Destroy(submittedFood.gameObject);
 
             PV.RPC("RefreshPlate", RpcTarget.All);
+        }
+        else if (submittedFood.ItemType == EItemType.Food && !Ingrediants["fry"] && submittedFood.State == FoodState.Fried)
+        {
+            PV.RPC("SetActiveIngrediant", RpcTarget.All, "fry");
+            PhotonNetwork.Destroy(submittedFood.gameObject);
 
+            PV.RPC("RefreshPlate", RpcTarget.All);
         }
 
     }
@@ -163,6 +181,7 @@ public class FoodCombination : MonoBehaviour
         switch (Stage)
         {
             case 1: // stage 1
+            case 2:
                 if (Ingrediants["bread"] && Ingrediants["patty"] && Ingrediants["lettuce"])
                 {
                     AvailableIngrediants[0].SetActive(true);

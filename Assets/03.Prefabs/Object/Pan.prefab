@@ -98,6 +98,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   danger: {fileID: 5818103402157276218}
+  IsDangerous: 0
 --- !u!1 &1077569238575558082
 GameObject:
   m_ObjectHideFlags: 0
@@ -191,6 +192,7 @@ GameObject:
   - component: {fileID: 370852572710560357}
   - component: {fileID: 6586813946680175039}
   - component: {fileID: 5439033789029369707}
+  - component: {fileID: 170728548953443869}
   m_Layer: 0
   m_Name: Pan
   m_TagString: Pan
@@ -401,7 +403,7 @@ MonoBehaviour:
   Group: 0
   prefixField: -1
   Synchronization: 3
-  OwnershipTransfer: 0
+  OwnershipTransfer: 1
   observableSearch: 2
   ObservedComponents: []
   sceneViewId: 0
@@ -423,12 +425,28 @@ MonoBehaviour:
   Group: 0
   prefixField: -1
   Synchronization: 3
-  OwnershipTransfer: 0
+  OwnershipTransfer: 1
   observableSearch: 2
   ObservedComponents: []
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
+--- !u!114 &170728548953443869
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2678483795670061968}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SynchronizePosition: 1
+  m_SynchronizeRotation: 1
+  m_SynchronizeScale: 0
+  m_UseLocal: 1
 --- !u!1 &3572471689333510232
 GameObject:
   m_ObjectHideFlags: 0

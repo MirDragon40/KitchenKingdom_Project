@@ -152,7 +152,7 @@ public class CharacterHoldAbility : CharacterAbility
     void Drop()
     {
         // 들고 있는 음식이 없으면 아무 작업도 수행하지 않음
-        if (!IsHolding || HoldableItem is PanObject)
+        if (!IsHolding || HoldableItem is PanObject || HoldableItem is BasketObject)
         {
             return;
         }
@@ -232,14 +232,6 @@ public class CharacterHoldAbility : CharacterAbility
         HoldableItem.Place(PlacePosition);
         HoldableItem = null;
         animator.SetBool("Carry", false);
-
-        if (HoldableItem != null && HoldableItem is DishObject)
-        {
-            Debug.Log("HoldableItem is a DishObject.");
-            soundManager.PlayAudio("Dish", true);
-            Debug.Log(soundManager + "사운드나옴");
-        }
-
 
     }
 

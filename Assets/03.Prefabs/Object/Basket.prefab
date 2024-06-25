@@ -15,9 +15,11 @@ GameObject:
   - component: {fileID: 7909135675499517343}
   - component: {fileID: 6261471473531636052}
   - component: {fileID: 4979079232456703397}
+  - component: {fileID: -5008278951747628576}
+  - component: {fileID: -415906459832736207}
   m_Layer: 0
   m_Name: Basket
-  m_TagString: Food
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -31,7 +33,7 @@ Transform:
   m_GameObject: {fileID: 4971218135040979373}
   serializedVersion: 2
   m_LocalRotation: {x: 0.000000021855694, y: 0, z: -0, w: 1}
-  m_LocalPosition: {x: -0, y: 0, z: 0}
+  m_LocalPosition: {x: -0, y: -0, z: 0.273}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -175,13 +177,54 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ItemType: 5
+  IsDroppable: 0
   BasketPlacePositon: {fileID: 49384614284936354}
   FryingIngrediant: {fileID: 0}
   FryingTime: 5
   FryingSlider: {fileID: 7599073861082113425}
   BoxCollider: {fileID: 0}
   MyFryMachine: {fileID: 0}
+  BasketStartPosition: {fileID: 0}
   PlusImage: {fileID: 6703184377586472717}
+--- !u!114 &-5008278951747628576
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4971218135040979373}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 1
+  observableSearch: 2
+  ObservedComponents:
+  - {fileID: -415906459832736207}
+  sceneViewId: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
+--- !u!114 &-415906459832736207
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4971218135040979373}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SynchronizePosition: 1
+  m_SynchronizeRotation: 1
+  m_SynchronizeScale: 0
+  m_UseLocal: 1
 --- !u!1 &7293233819947724987
 GameObject:
   m_ObjectHideFlags: 0
@@ -194,6 +237,7 @@ GameObject:
   - component: {fileID: 637669026466861457}
   - component: {fileID: 7256540151751323790}
   - component: {fileID: 8665478480690724676}
+  - component: {fileID: 4503214864428667626}
   m_Layer: 0
   m_Name: Smoke
   m_TagString: Untagged
@@ -4983,7 +5027,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2436eae4429806947a16ae5569b8d04b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _isOnFire: 0
   fireEffect: {fileID: 0}
+  contactTime: 0
+  soundManager: {fileID: 0}
+--- !u!114 &4503214864428667626
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7293233819947724987}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!1 &7768263928129191503
 GameObject:
   m_ObjectHideFlags: 0

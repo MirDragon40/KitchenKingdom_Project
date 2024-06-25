@@ -30,6 +30,14 @@ public class OrderManager : MonoBehaviourPun
 
 
     public Dictionary<string, List<string>> Recipies = new Dictionary<string, List<string>>();
+
+    public Dictionary<string, int> FoodScores = new Dictionary<string, int>
+{
+    { "burger", 15 },
+    { "burgerCoke", 30 },
+    { "burgerCokeFry", 50 }
+};
+
     private PhotonView _pv;
 
 
@@ -53,27 +61,35 @@ public class OrderManager : MonoBehaviourPun
         Recipies["burger"] = new List<string> { "bread", "patty", "lettuce" };
         Recipies["burgerCoke"] = new List<string> { "bread", "patty", "lettuce", "coke" };
         Recipies["burgerCokeFry"] = new List<string> { "bread", "patty", "lettuce", "coke", "fry" };
+        Recipies["cokeFry"] = new List<string> {"coke", "fry" };
+        Recipies["tomatoBurger"] = new List<string> { "bread", "patty", "tomato"};
+        Recipies["tomatoBurgerCoke"] = new List<string> { "bread", "patty", "tomato"};
+        Recipies["tomatoBurgerCokeFry"] = new List<string> { "bread", "patty", "tomato"};
+        Recipies["cheeseBurger"] = new List<string> { "bread", "patty", "cheese"};
+        Recipies["cheeseBurgerCoke"] = new List<string> { "bread", "patty", "cheese"};
+        Recipies["cheeseBurgerCokeFry"] = new List<string> { "bread", "patty", "cheese"};
+
 
 
     }
     void Update()
     {
 
-/*        if (Input.GetKeyDown(KeyCode.Alpha1))
-        {
-            string orderName = "burger";
-            _isGenerating = true;
-            UI_Bilge newBill = MyScrollView.AddItem(3);
-            newBill.OrderedFood = orderName;
-            newBill.IngrediantsNameList = Recipies[orderName];
-            GeneratedOrderList.Add(orderName);
-        }
+        /*        if (Input.GetKeyDown(KeyCode.Alpha1))
+                {
+                    string orderName = "burger";
+                    _isGenerating = true;
+                    UI_Bilge newBill = MyScrollView.AddItem(3);
+                    newBill.OrderedFood = orderName;
+                    newBill.IngrediantsNameList = Recipies[orderName];
+                    GeneratedOrderList.Add(orderName);
+                }
 
-        if (Input.GetKeyDown(KeyCode.Alpha2))
-        {
-            SubmitOrder("burger");
-        }
-*/
+                if (Input.GetKeyDown(KeyCode.Alpha2))
+                {
+                    SubmitOrder("burger");
+                }
+        */
 
         if (Input.GetKeyDown(KeyCode.Alpha5))
         {
@@ -81,18 +97,43 @@ public class OrderManager : MonoBehaviourPun
         }
 
 
-        if (_stage == 1 && !_isGenerating && GeneratedOrderList.Count < MaxOrderNumber && PhotonNetwork.IsMasterClient)
+        if (!_isGenerating && GeneratedOrderList.Count < MaxOrderNumber && PhotonNetwork.IsMasterClient)
         {
-            int orderRandIndex = Random.Range(0, 10);
-            if (orderRandIndex <= 5)
+            switch (_stage)
             {
-                _pv.RPC("GenerateOrderRPC", RpcTarget.AllBuffered, "burger");
-            }
-            else if (orderRandIndex > 5)
-            {
-                _pv.RPC("GenerateOrderRPC", RpcTarget.AllBuffered, "burgerCoke");
-            }
+                case 1:
+                    int orderRandIndex = Random.Range(0, 10);
+                    if (orderRandIndex <= 5)
+                    {
+                        _pv.RPC("GenerateOrderRPC", RpcTarget.AllBuffered, "burger");
+                    }
+                    else if (orderRandIndex > 5)
+                    {
+                        _pv.RPC("GenerateOrderRPC", RpcTarget.AllBuffered, "burgerCoke");
+                    }
+                    break;
+                case 2:
+                    orderRandIndex = Random.Range(0, 10);
+                    if (orderRandIndex <= 3)
+                    {
+                        _pv.RPC("GenerateOrderRPC", RpcTarget.AllBuffered, "burger");
+                    }
+                    else if (orderRandIndex < 6)
+                    {
+                        _pv.RPC("GenerateOrderRPC", RpcTarget.AllBuffered, "burgerCoke");
+                    }
+                    else
+                    {
+                        _pv.RPC("GenerateOrderRPC", RpcTarget.AllBuffered, "burgerCokeFry");
+                    }
+                    break;
+                case 3:
+                    break;
 
+                case 4:
+                    break;
+
+            }
         }
     }
 
@@ -102,6 +143,7 @@ public class OrderManager : MonoBehaviourPun
     {
         StartCoroutine(GenerateOrder(orderName));
     }
+
 
     [PunRPC]
     public bool SubmitOrder(string submittedFood)
@@ -114,7 +156,14 @@ public class OrderManager : MonoBehaviourPun
                 HasFoundMatchedItem = true;
                 GeneratedOrderList.RemoveAt(i);
                 // 점수 더하기
-                AddTotalScore(NormalOrderPoints);
+                if (FoodScores.TryGetValue(submittedFood, out int score))
+                {
+                    AddTotalScore(score);
+                }
+                else
+                {
+                    AddTotalScore(NormalOrderPoints); // 기본 점수 추가
+                }
                 // UI 삭제
                 MyScrollView.RemoveItem(submittedFood);
                 break;

@@ -137,6 +137,7 @@ MonoBehaviour:
   IsGrillable: 0
   IsFryable: 0
   CookProgress: 0
+  ColliderThis: {fileID: 0}
   ThrownEffectTriggerTime: 1
   CuttingTime: 3
   BakeTime: 3

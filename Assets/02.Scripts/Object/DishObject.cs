@@ -16,6 +16,7 @@ public class DishObject : IHoldable
     public DishState State;
     public Transform StartPosition;
     private PhotonView _pv;
+    private bool _isInitializing = false;
     private void Awake()
     {
         _pv = GetComponent<PhotonView>();
@@ -25,8 +26,11 @@ public class DishObject : IHoldable
     {
         if (StartPosition != null)
         {
+            _isInitializing = true; 
             Place(StartPosition);
+            _isInitializing = false; 
         }
+
     }
     public override void Hold(Character character, Transform handTransform)
     {
@@ -44,7 +48,7 @@ public class DishObject : IHoldable
         transform.parent = handTransform;
         transform.localPosition = Vector3.zero;
         transform.localRotation = Quaternion.identity;
-
+        SoundManager.Instance.PlayAudio("Dish", false, false);
     }
 
     public override void Place(Transform place)
@@ -62,7 +66,10 @@ public class DishObject : IHoldable
         transform.SetParent(place);
         _holdCharacter = null;
 
-
+        if (!_isInitializing)
+        {
+            SoundManager.Instance.PlayAudio("DishPlace", false, false);
+        }
     }
 
     public override void UnHold(Vector3 dropPosition, Quaternion dropRotation)
@@ -78,6 +85,6 @@ public class DishObject : IHoldable
         //각 아이템이 떼어질 때 해줄 초기화 로직
         _holdCharacter = null;
 
-
+        SoundManager.Instance.PlayAudio("DishPlace", false, false);
     }
 }
