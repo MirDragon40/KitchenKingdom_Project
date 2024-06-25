@@ -30,6 +30,14 @@ public class OrderManager : MonoBehaviourPun
 
 
     public Dictionary<string, List<string>> Recipies = new Dictionary<string, List<string>>();
+
+    public Dictionary<string, int> FoodScores = new Dictionary<string, int>
+{
+    { "burger", 15 },
+    { "burgerCoke", 30 },
+    { "burgerCokeFry", 50 }
+};
+
     private PhotonView _pv;
 
 
@@ -59,21 +67,21 @@ public class OrderManager : MonoBehaviourPun
     void Update()
     {
 
-/*        if (Input.GetKeyDown(KeyCode.Alpha1))
-        {
-            string orderName = "burger";
-            _isGenerating = true;
-            UI_Bilge newBill = MyScrollView.AddItem(3);
-            newBill.OrderedFood = orderName;
-            newBill.IngrediantsNameList = Recipies[orderName];
-            GeneratedOrderList.Add(orderName);
-        }
+        /*        if (Input.GetKeyDown(KeyCode.Alpha1))
+                {
+                    string orderName = "burger";
+                    _isGenerating = true;
+                    UI_Bilge newBill = MyScrollView.AddItem(3);
+                    newBill.OrderedFood = orderName;
+                    newBill.IngrediantsNameList = Recipies[orderName];
+                    GeneratedOrderList.Add(orderName);
+                }
 
-        if (Input.GetKeyDown(KeyCode.Alpha2))
-        {
-            SubmitOrder("burger");
-        }
-*/
+                if (Input.GetKeyDown(KeyCode.Alpha2))
+                {
+                    SubmitOrder("burger");
+                }
+        */
 
         if (Input.GetKeyDown(KeyCode.Alpha5))
         {
@@ -103,6 +111,7 @@ public class OrderManager : MonoBehaviourPun
         StartCoroutine(GenerateOrder(orderName));
     }
 
+
     [PunRPC]
     public bool SubmitOrder(string submittedFood)
     {
@@ -114,7 +123,14 @@ public class OrderManager : MonoBehaviourPun
                 HasFoundMatchedItem = true;
                 GeneratedOrderList.RemoveAt(i);
                 // 점수 더하기
-                AddTotalScore(NormalOrderPoints);
+                if (FoodScores.TryGetValue(submittedFood, out int score))
+                {
+                    AddTotalScore(score);
+                }
+                else
+                {
+                    AddTotalScore(NormalOrderPoints); // 기본 점수 추가
+                }
                 // UI 삭제
                 MyScrollView.RemoveItem(submittedFood);
                 break;
