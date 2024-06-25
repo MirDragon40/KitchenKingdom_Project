@@ -933,7 +933,7 @@ GameObject:
   - component: {fileID: 1069480413}
   - component: {fileID: 1069480414}
   m_Layer: 5
-  m_Name: GameObject
+  m_Name: EndingAnimation
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1433,7 +1433,7 @@ GameObject:
   - component: {fileID: 1819687675}
   - component: {fileID: 1819687674}
   m_Layer: 5
-  m_Name: Image (1)
+  m_Name: R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1583,7 +1583,7 @@ GameObject:
   - component: {fileID: 1907386056}
   - component: {fileID: 1907386055}
   m_Layer: 5
-  m_Name: Image
+  m_Name: L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
