@@ -57,6 +57,7 @@ public class FoodCombination : MonoBehaviour
         {
             FoodObject ingrediant = null;
             PanObject panObject = null;
+            BasketObject basketObject = null;
             if (_holdableObject.TryGetComponent<FoodObject>(out ingrediant))
             {
                  SubmitIngrediant(ingrediant);
@@ -66,6 +67,13 @@ public class FoodCombination : MonoBehaviour
                 if (panObject.GrillingIngrediant != null)
                 {
                     SubmitIngrediant(panObject.GrillingIngrediant.GetComponent<FoodObject>());
+                }
+            }
+            else if (_holdableObject.TryGetComponent<BasketObject>(out basketObject))
+            {
+                if (basketObject.FryingIngrediant != null)
+                {
+                    SubmitIngrediant(basketObject.FryingIngrediant.GetComponent<FoodObject>());
                 }
             }
         }
@@ -153,7 +161,13 @@ public class FoodCombination : MonoBehaviour
             PhotonNetwork.Destroy(submittedFood.gameObject);
 
             PV.RPC("RefreshPlate", RpcTarget.All);
+        }
+        else if (submittedFood.ItemType == EItemType.Food && !Ingrediants["fry"] && submittedFood.State == FoodState.Fried)
+        {
+            PV.RPC("SetActiveIngrediant", RpcTarget.All, "fry");
+            PhotonNetwork.Destroy(submittedFood.gameObject);
 
+            PV.RPC("RefreshPlate", RpcTarget.All);
         }
 
     }

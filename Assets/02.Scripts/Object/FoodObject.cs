@@ -43,7 +43,7 @@ public class FoodObject : IHoldable, IThrowable
 
     private Coroutine cookingCoroutine;
 
-    private BoxCollider colliderThis;
+    public BoxCollider ColliderThis;
     public float ThrownEffectTriggerTime = 0.5f;
     public float CuttingTime = 3f;
     public float BakeTime = 3f;
@@ -63,7 +63,7 @@ public class FoodObject : IHoldable, IThrowable
         PV = GetComponent<PhotonView>();
         State = FoodState.Raw;
         _rigidbody = GetComponent<Rigidbody>();
-        colliderThis = GetComponent<BoxCollider>();
+        ColliderThis = GetComponent<BoxCollider>();
         soundManager = FindAnyObjectByType<SoundManager>();
 
         CookProgress = 0f;
@@ -242,6 +242,7 @@ public class FoodObject : IHoldable, IThrowable
         _rigidbody.isKinematic = true;
         transform.position = place.position;
         transform.SetParent(place);
+        
         _holdCharacter = null;
     }
 
@@ -249,7 +250,7 @@ public class FoodObject : IHoldable, IThrowable
     {
         while (IsCooking && State == FoodState.Raw)  // 잘리지 않은 상태에서의 양배추만 썰기가 가능하도록 설정
         {
-            colliderThis.enabled = false;
+            ColliderThis.enabled = false;
 
             CookProgress += Time.deltaTime / CuttingTime; // 3초동안 CookProgress 증가
             CookProgress = Mathf.Clamp(CookProgress, 0f, 1f);
@@ -264,13 +265,13 @@ public class FoodObject : IHoldable, IThrowable
                 FoodPrefab2.SetActive(false);
                 FoodPrefab3.SetActive(true);
                 State = FoodState.Cut;
-                colliderThis.enabled = true;
+                ColliderThis.enabled = true;
             }
             yield return null;
         }
 
         cookingCoroutine = null;
-        colliderThis.enabled = true;
+        ColliderThis.enabled = true;
     }
 
 
@@ -278,7 +279,7 @@ public class FoodObject : IHoldable, IThrowable
     {
         while (IsCooking && (State == FoodState.Raw || State == FoodState.Grilled || State == FoodState.Burnt))
         {
-            colliderThis.enabled = false;
+            ColliderThis.enabled = false;
 
             CookProgress += Time.fixedDeltaTime / BakeTime;
             CookProgress = Mathf.Clamp(CookProgress, 0f, 5f);
@@ -301,14 +302,14 @@ public class FoodObject : IHoldable, IThrowable
         }
 
         cookingCoroutine = null;
-        colliderThis.enabled = true;
+        ColliderThis.enabled = true;
     }
 
     private IEnumerator CookPotato_Coroutine()
     {
         while (IsCooking && (State == FoodState.Raw || State == FoodState.Fried || State == FoodState.Burnt))
         {
-            colliderThis.enabled = false;
+            ColliderThis.enabled = false;
 
             CookProgress += Time.fixedDeltaTime / BakeTime;
             CookProgress = Mathf.Clamp(CookProgress, 0f, 2.5f);
@@ -328,7 +329,7 @@ public class FoodObject : IHoldable, IThrowable
             yield return new WaitForFixedUpdate();
         }
         cookingCoroutine = null;
-        colliderThis.enabled = true;
+        ColliderThis.enabled = true;
     }
 
 
@@ -343,6 +344,25 @@ public class FoodObject : IHoldable, IThrowable
             {
                 soundManager.PlayAudio("Patty", true, true);
             }
+        }
+    }
+    public void StartFrying()
+    {
+        if (cookingCoroutine == null)
+        {
+            IsCooking = true;
+            cookingCoroutine = StartCoroutine(CookPotato_Coroutine());
+
+        }
+    }
+    public void StopFrying()
+    {
+        IsCooking = false;
+        if (cookingCoroutine != null)
+        {
+            StopCoroutine(cookingCoroutine);
+            cookingCoroutine = null;
+
         }
     }
 

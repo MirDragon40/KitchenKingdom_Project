@@ -53,6 +53,14 @@ public class OrderManager : MonoBehaviourPun
         Recipies["burger"] = new List<string> { "bread", "patty", "lettuce" };
         Recipies["burgerCoke"] = new List<string> { "bread", "patty", "lettuce", "coke" };
         Recipies["burgerCokeFry"] = new List<string> { "bread", "patty", "lettuce", "coke", "fry" };
+        Recipies["cokeFry"] = new List<string> {"coke", "fry" };
+        Recipies["tomatoBurger"] = new List<string> { "bread", "patty", "tomato"};
+        Recipies["tomatoBurgerCoke"] = new List<string> { "bread", "patty", "tomato"};
+        Recipies["tomatoBurgerCokeFry"] = new List<string> { "bread", "patty", "tomato"};
+        Recipies["cheeseBurger"] = new List<string> { "bread", "patty", "cheese"};
+        Recipies["cheeseBurgerCoke"] = new List<string> { "bread", "patty", "cheese"};
+        Recipies["cheeseBurgerCokeFry"] = new List<string> { "bread", "patty", "cheese"};
+
 
 
     }
