@@ -115,6 +115,10 @@ public class FoodObject : IHoldable, IThrowable
             {
                 cookingCoroutine = StartCoroutine(CookPotato_Coroutine());
             }
+            else if (FoodType == FoodType.Tomato)
+            {
+                cookingCoroutine = StartCoroutine(CookLettuce_Coroutine());
+            }
         }
     }
 

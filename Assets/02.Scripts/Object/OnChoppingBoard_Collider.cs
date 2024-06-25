@@ -21,6 +21,12 @@ public class OnChoppingBoard_Collider : MonoBehaviour
                 FoodOnBoard = other.gameObject;
                 FoodObject = foodObject; // FoodObject 할당
             }
+            else if (foodObject.State == FoodState.Raw && foodObject.FoodType == FoodType.Tomato)
+            {
+                IsCuttable = true;
+                FoodOnBoard = other.gameObject;
+                FoodObject = foodObject; // FoodObject 할당
+            }
         }
 
 
