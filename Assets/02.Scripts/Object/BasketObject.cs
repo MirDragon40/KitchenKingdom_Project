@@ -1,4 +1,4 @@
-using Autodesk.Fbx;
+
 using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
@@ -17,6 +17,8 @@ public class BasketObject : IHoldable
     public Transform BasketStartPosition;
     private PhotonView _pv;
 
+    private bool _isNearTrashBin = false;
+    private TrashBin _nearbyTrashBin;
     public GameObject PlusImage;
 
     private Rigidbody _rigid;
@@ -65,6 +67,10 @@ public class BasketObject : IHoldable
 
             FryingSlider.gameObject.SetActive(false);
             PlusImage.SetActive(true);
+        }
+        if (_isNearTrashBin && Input.GetKeyDown(KeyCode.Space))
+        {
+            DropFoodInTrash();
         }
     }
     public override void Hold(Character character, Transform handTransform)
@@ -187,6 +193,27 @@ public class BasketObject : IHoldable
         }
         other.GetComponent<CharacterHoldAbility>().PlacePosition = null;
         other.GetComponent<CharacterHoldAbility>().IsPlaceable = false;
+    }
+    public void SetNearTrashBin(bool isNear, TrashBin trashBin = null)
+    {
+        _isNearTrashBin = isNear;
+        _nearbyTrashBin = trashBin;
+    }
+
+    private void DropFoodInTrash()
+    {
+        if (BasketPlacePositon.childCount > 0)
+        {
+            for (int i = BasketPlacePositon.childCount - 1; i >= 0; i--)
+            {
+                Transform child = BasketPlacePositon.GetChild(i);
+                FoodObject childFoodObject = child.GetComponent<FoodObject>();
+                if (childFoodObject != null && _pv.IsMine)
+                {
+                    PhotonNetwork.Destroy(child.gameObject);
+                }
+            }
+        }
     }
 }
 

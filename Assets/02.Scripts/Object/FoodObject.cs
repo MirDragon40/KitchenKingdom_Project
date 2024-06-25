@@ -207,17 +207,19 @@ public class FoodObject : IHoldable, IThrowable
                         colliders = null;
                         break;
                     }*/
-                    if (collider.TryGetComponent<CookStand>(out cookStand))
+                    if (collider != null)
                     {
-                        transform.rotation = Quaternion.identity;
-                        if (!cookStand.IsOccupied)
+                        if (collider.TryGetComponent<CookStand>(out cookStand))
                         {
-                            Place(cookStand.PlacePosition);
+                            transform.rotation = Quaternion.identity;
+                            if (!cookStand.IsOccupied)
+                            {
+                                Place(cookStand.PlacePosition);
+                            }
+                            //colliders = null;
+                            break;
                         }
-                        colliders = null;
-                        break;
                     }
-
                 }
             }
             if (speed.magnitude < 0.1f)

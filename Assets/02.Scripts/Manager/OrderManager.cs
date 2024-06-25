@@ -126,7 +126,6 @@ public class OrderManager : MonoBehaviourPun
                     {
                         _pv.RPC("GenerateOrderRPC", RpcTarget.AllBuffered, "burgerCokeFry");
                     }
-
                     break;
                 case 3:
                     break;

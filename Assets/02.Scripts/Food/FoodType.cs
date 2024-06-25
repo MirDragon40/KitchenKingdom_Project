@@ -10,4 +10,5 @@ public enum FoodType
     Tomato,
     Cheese,
     Coke,
+    Chicken
 }
