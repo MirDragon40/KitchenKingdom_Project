@@ -16,6 +16,7 @@ TagManager:
   - FireTable
   - Stove
   - Sound
+  - Basket
   layers:
   - Default
   - TransparentFX

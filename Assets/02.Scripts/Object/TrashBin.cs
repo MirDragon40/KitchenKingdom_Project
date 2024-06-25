@@ -14,6 +14,14 @@ public class TrashBin : MonoBehaviour
                 panObject.SetNearTrashBin(true, this);
             }
         }
+        else if (other.CompareTag("Basket"))
+        {
+            BasketObject basketObject = other.GetComponent<BasketObject>();
+            if (basketObject != null)
+            {
+                basketObject.SetNearTrashBin(true, this);
+            }
+        }
         if (other.CompareTag("Player"))
         {
             CharacterHoldAbility holdAbility = other.GetComponent<CharacterHoldAbility>();
