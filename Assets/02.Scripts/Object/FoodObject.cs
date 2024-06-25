@@ -49,6 +49,7 @@ public class FoodObject : IHoldable, IThrowable
     public float BakeTime = 3f;
 
     private static int grillingCount = 0;
+    private static int fryingCount = 0;
 
     public override Vector3 DropOffset => new Vector3(0.3f, 0.1f, 0f);
     //public override Quaternion DropOffset_Rotation => Quaternion.Euler(0, 0, 0);
@@ -369,6 +370,11 @@ public class FoodObject : IHoldable, IThrowable
         {
             IsCooking = true;
             cookingCoroutine = StartCoroutine(CookPotato_Coroutine());
+            fryingCount++;
+            if (fryingCount == 1)
+            {
+                soundManager.PlayAudio("Fried", true, true);
+            }
 
         }
     }
@@ -379,7 +385,11 @@ public class FoodObject : IHoldable, IThrowable
         {
             StopCoroutine(cookingCoroutine);
             cookingCoroutine = null;
-
+            fryingCount--;
+            if (fryingCount == 0)
+            {
+                soundManager.StopAudio("Fried");
+            }
         }
     }
 
