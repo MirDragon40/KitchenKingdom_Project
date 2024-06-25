@@ -1181,7 +1181,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 98042246}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1474762660}
+        m_TargetAssemblyTypeName: UI_Option, Assembly-CSharp
+        m_MethodName: OnQuitButton
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &98042246
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3253,7 +3265,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 281187497}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1474762660}
+        m_TargetAssemblyTypeName: UI_Option, Assembly-CSharp
+        m_MethodName: OnControlsButton
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &281187497
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4182,7 +4206,7 @@ GameObject:
   - component: {fileID: 463984766}
   - component: {fileID: 463984765}
   m_Layer: 5
-  m_Name: RESUME_Button
+  m_Name: CONTINUE_Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4254,7 +4278,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1474762660}
         m_TargetAssemblyTypeName: UI_Option, Assembly-CSharp
-        m_MethodName: ClickResumeButton
+        m_MethodName: OnContinueButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4957,7 +4981,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: RESUME
+  m_Text: CONTINUE
 --- !u!222 &524552340
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -6387,7 +6411,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: RESTART
+  m_Text: RESUME
 --- !u!222 &712349127
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -24227,7 +24251,7 @@ GameObject:
   - component: {fileID: 1868848403}
   - component: {fileID: 1868848402}
   m_Layer: 5
-  m_Name: RESTART_Button
+  m_Name: RESUME_Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -24296,7 +24320,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1868848403}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1474762660}
+        m_TargetAssemblyTypeName: UI_Option, Assembly-CSharp
+        m_MethodName: OnResumeButton
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1868848403
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -28613,9 +28649,9 @@ RectTransform:
   - {fileID: 1247613573204442557}
   - {fileID: 753683490417315325}
   - {fileID: 1099432020}
-  - {fileID: 1474762659}
-  - {fileID: 6290765489751917049}
   - {fileID: 189803489}
+  - {fileID: 6290765489751917049}
+  - {fileID: 1474762659}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}

@@ -1,24 +1,33 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class UI_Option : MonoBehaviour
 {
-    public void ClickResumeButton() 
+    public void OnContinueButton() 
     {
         GameManager.Instance.OptionUl.gameObject.SetActive(false);
     }
-    public void ClickRestartButton() 
+    public void OnResumeButton() 
+    {
+        int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
+        SceneManager.LoadScene(0);
+    }
+    public void OnControlsButton() 
     {
         
     }
-    public void ClickControlsButton() 
+    public void OnQuitButton() 
     {
-        
-    }
-    public void ClickQuitButton() 
-    {
-        
+        Debug.Log("게임종료 버튼 클릭");
+
+        Application.Quit();
+
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#endif
+
     }
 
 }
