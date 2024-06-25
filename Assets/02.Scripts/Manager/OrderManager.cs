@@ -61,6 +61,14 @@ public class OrderManager : MonoBehaviourPun
         Recipies["burger"] = new List<string> { "bread", "patty", "lettuce" };
         Recipies["burgerCoke"] = new List<string> { "bread", "patty", "lettuce", "coke" };
         Recipies["burgerCokeFry"] = new List<string> { "bread", "patty", "lettuce", "coke", "fry" };
+        Recipies["cokeFry"] = new List<string> {"coke", "fry" };
+        Recipies["tomatoBurger"] = new List<string> { "bread", "patty", "tomato"};
+        Recipies["tomatoBurgerCoke"] = new List<string> { "bread", "patty", "tomato"};
+        Recipies["tomatoBurgerCokeFry"] = new List<string> { "bread", "patty", "tomato"};
+        Recipies["cheeseBurger"] = new List<string> { "bread", "patty", "cheese"};
+        Recipies["cheeseBurgerCoke"] = new List<string> { "bread", "patty", "cheese"};
+        Recipies["cheeseBurgerCokeFry"] = new List<string> { "bread", "patty", "cheese"};
+
 
 
     }
@@ -89,18 +97,44 @@ public class OrderManager : MonoBehaviourPun
         }
 
 
-        if (_stage == 1 && !_isGenerating && GeneratedOrderList.Count < MaxOrderNumber && PhotonNetwork.IsMasterClient)
+        if (!_isGenerating && GeneratedOrderList.Count < MaxOrderNumber && PhotonNetwork.IsMasterClient)
         {
-            int orderRandIndex = Random.Range(0, 10);
-            if (orderRandIndex <= 5)
+            switch (_stage)
             {
-                _pv.RPC("GenerateOrderRPC", RpcTarget.AllBuffered, "burger");
-            }
-            else if (orderRandIndex > 5)
-            {
-                _pv.RPC("GenerateOrderRPC", RpcTarget.AllBuffered, "burgerCoke");
-            }
+                case 1:
+                    int orderRandIndex = Random.Range(0, 10);
+                    if (orderRandIndex <= 5)
+                    {
+                        _pv.RPC("GenerateOrderRPC", RpcTarget.AllBuffered, "burger");
+                    }
+                    else if (orderRandIndex > 5)
+                    {
+                        _pv.RPC("GenerateOrderRPC", RpcTarget.AllBuffered, "burgerCoke");
+                    }
+                    break;
+                case 2:
+                    orderRandIndex = Random.Range(0, 10);
+                    if (orderRandIndex <= 3)
+                    {
+                        _pv.RPC("GenerateOrderRPC", RpcTarget.AllBuffered, "burger");
+                    }
+                    else if (orderRandIndex < 6)
+                    {
+                        _pv.RPC("GenerateOrderRPC", RpcTarget.AllBuffered, "burgerCoke");
+                    }
+                    else
+                    {
+                        _pv.RPC("GenerateOrderRPC", RpcTarget.AllBuffered, "burgerCokeFry");
+                    }
 
+                    break;
+                case 3:
+                    break;
+
+                case 4:
+                    break;
+
+            }
         }
     }
 

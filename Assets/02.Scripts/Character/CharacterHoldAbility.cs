@@ -152,7 +152,7 @@ public class CharacterHoldAbility : CharacterAbility
     void Drop()
     {
         // 들고 있는 음식이 없으면 아무 작업도 수행하지 않음
-        if (!IsHolding || HoldableItem is PanObject)
+        if (!IsHolding || HoldableItem is PanObject || HoldableItem is BasketObject)
         {
             return;
         }

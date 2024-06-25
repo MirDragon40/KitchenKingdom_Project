@@ -18,7 +18,10 @@ public class FryMachine : CookStand
         base.Update();
         if (base.PlacedItem != null)
         {
-            base.PlacedItem.TryGetComponent<BasketObject>(out PlacedBasket);
+            if(base.PlacedItem.TryGetComponent<BasketObject>(out PlacedBasket))
+            {
+                PlacedBasket.MyFryMachine = this;
+            }
         }
         else
         {
