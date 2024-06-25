@@ -101,6 +101,10 @@ public class PlateSubmitPlace : MonoBehaviour
                         {
                             _plateContent = "burgerCoke";
                         }
+                        else if (_foodCombo.Ingrediants["burger"] && _foodCombo.Ingrediants["fry"])
+                        {
+                            _plateContent = "burgerFry";
+                        }
                         else if (_foodCombo.Ingrediants["burger"])
                         {
                             _plateContent = "burger";
