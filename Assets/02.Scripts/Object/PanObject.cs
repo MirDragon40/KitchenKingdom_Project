@@ -128,6 +128,7 @@ public class PanObject : IHoldable
                 else if (!fireObject._isOnFire && MyStove.fireObject._isOnFire)
                 {
                     MyStove.fireObject.RequestExtinguish();
+                    soundManager.StopAudio("Warning");
                 }
             }
             else
