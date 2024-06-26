@@ -33,49 +33,21 @@ public class FoodCombination : MonoBehaviour
         {
             icon.gameObject.SetActive(false);
         }
-        switch (Stage)
-        {
-            case 1:
-                Ingrediants["bread"] = false;
-                Ingrediants["patty"] = false;
-                Ingrediants["lettuce"] = false;
-                Ingrediants["coke"] = false;
-                Ingrediants["fry"] = false;
-                Ingrediants["burger"] = false;
-                break;
-            case 2:
-                Ingrediants["bread"] = false;
-                Ingrediants["patty"] = false;
-                Ingrediants["lettuce"] = false;
-                Ingrediants["coke"] = false;
-                Ingrediants["fry"] = false;
-                Ingrediants["burger"] = false;
-                break;
-            case 3:
-                Ingrediants["bread"] = false;
-                Ingrediants["patty"] = false;
-                Ingrediants["lettuce"] = false;
-                Ingrediants["tomato"] = false;
-                Ingrediants["cheese"] = false;
-                Ingrediants["chicken"] = false;
-                Ingrediants["coke"] = false;
-                Ingrediants["fry"] = false;
-                Ingrediants["burger"] = false;
-                break;
-            case 4:
-                Ingrediants["bread"] = false;
-                Ingrediants["patty"] = false;
-                Ingrediants["lettuce"] = false;
-                Ingrediants["tomato"] = false;
-                Ingrediants["cheese"] = false;
-                Ingrediants["chicken"] = false;
-                Ingrediants["coke"] = false;
-                Ingrediants["fry"] = false;
-                Ingrediants["burger"] = false;
-                break;
-            default:
-                break;
-        }
+
+        Ingrediants["bread"] = false;
+        Ingrediants["patty"] = false;
+        Ingrediants["lettuce"] = false;
+        Ingrediants["tomato"] = false;
+        Ingrediants["cheese"] = false;
+        Ingrediants["chicken"] = false;
+        Ingrediants["coke"] = false;
+        Ingrediants["fry"] = false;
+        Ingrediants["burger"] = false;
+        Ingrediants["tomatoBurger"] = false;
+        Ingrediants["cheeseBurger"] = false;
+
+
+
     }
     private void LateUpdate()
     {
@@ -148,6 +120,12 @@ public class FoodCombination : MonoBehaviour
     [PunRPC]
     private void SetActiveIngrediant(string key)
     {
+        if (key == "cheese" || key == "tomato" || key == "lettuce") // 3가지 재료들은 서로 겹쳐서 존재할수 없음
+        {
+            Ingrediants["cheese"] = false;
+            Ingrediants["tomato"] = false;
+            Ingrediants["lettuce"] = false;
+        }
         Ingrediants[key] = true;
     }
 
@@ -155,7 +133,6 @@ public class FoodCombination : MonoBehaviour
     {
         if (submittedFood.ItemType == EItemType.Food && submittedFood.FoodType == FoodType.Bread && !Ingrediants["bread"])
         {
-            //Ingrediants["bread"] = true;
             PV.RPC("SetActiveIngrediant", RpcTarget.All, "bread");
 
             PhotonNetwork.Destroy(submittedFood.gameObject);
@@ -165,7 +142,6 @@ public class FoodCombination : MonoBehaviour
         else if (submittedFood.ItemType == EItemType.Food && submittedFood.FoodType == FoodType.Lettuce && !Ingrediants["lettuce"] && submittedFood.State == FoodState.Cut)
         {
             PV.RPC("SetActiveIngrediant", RpcTarget.All, "lettuce");
-            //Ingrediants["lettuce"] = true;
 
             PhotonNetwork.Destroy(submittedFood.gameObject);
 
@@ -174,13 +150,12 @@ public class FoodCombination : MonoBehaviour
         else if (submittedFood.ItemType == EItemType.Coke && !Ingrediants["coke"])
         {
             PV.RPC("SetActiveIngrediant", RpcTarget.All, "coke");
-            //Ingrediants["coke"] = true;
 
             PhotonNetwork.Destroy(submittedFood.gameObject);
 
             PV.RPC("RefreshPlate", RpcTarget.All);
         }
-        else if (submittedFood.ItemType == EItemType.Food && !Ingrediants["patty"] && submittedFood.State == FoodState.Grilled)
+        else if (submittedFood.ItemType == EItemType.Food && submittedFood.FoodType == FoodType.Patty && !Ingrediants["patty"] && submittedFood.State == FoodState.Grilled)
         {
             PV.RPC("SetActiveIngrediant", RpcTarget.All, "patty");
             // Ingrediants["patty"] = true;
@@ -188,7 +163,7 @@ public class FoodCombination : MonoBehaviour
 
             PV.RPC("RefreshPlate", RpcTarget.All);
         }
-        else if (submittedFood.ItemType == EItemType.Food && !Ingrediants["fry"] && submittedFood.State == FoodState.Fried)
+        else if (submittedFood.ItemType == EItemType.Food &&  submittedFood.FoodType == FoodType.Potato && !Ingrediants["fry"] && submittedFood.State == FoodState.Fried)
         {
             PV.RPC("SetActiveIngrediant", RpcTarget.All, "fry");
             PhotonNetwork.Destroy(submittedFood.gameObject);
@@ -219,75 +194,124 @@ public class FoodCombination : MonoBehaviour
     [PunRPC]
     private void RefreshPlate()
     {
-        switch (Stage)
+        foreach (var ingrediant in AvailableIngrediants) // refresh할때 초기에 전부다 끔
         {
-            case 1: // stage 1
-            case 2:
-                if (Ingrediants["bread"] && Ingrediants["patty"] && Ingrediants["lettuce"])
-                {
-                    AvailableIngrediants[0].SetActive(true);
-                    AvailableIngrediants[1].SetActive(true);
-                    AvailableIngrediants[2].SetActive(true);
-                    AvailableIngrediants[3].SetActive(true);
-                    Ingrediants["burger"] = true;
-
-                    IsReadyServe = true;
-                    UI_FoodIcon[0].gameObject.SetActive(false);
-                    UI_FoodIcon[1].gameObject.SetActive(false);
-                    UI_FoodIcon[2].gameObject.SetActive(false);
-                    UI_FoodIcon[5].gameObject.SetActive(true);
-                }
-                if (!Ingrediants["burger"])
-                {
-                    if (Ingrediants["bread"])
-                    {
-                        AvailableIngrediants[0].SetActive(true);
-                        AvailableIngrediants[3].SetActive(true);
-                        UI_FoodIcon[0].gameObject.SetActive(true);
-                    }
-                    if (Ingrediants["patty"])
-                    {
-                        AvailableIngrediants[1].SetActive(true);
-                        UI_FoodIcon[2].gameObject.SetActive(true);
-                    }
-                    if (Ingrediants["lettuce"])
-                    {
-                        AvailableIngrediants[2].SetActive(true);
-                        UI_FoodIcon[1].gameObject.SetActive(true);
-                    }
-                }
-                if (!Ingrediants["tomatoBurger"])
-                {
-                    if (Ingrediants["bread"])
-                    {
-                        AvailableIngrediants[0].SetActive(true);
-                        AvailableIngrediants[3].SetActive(true);
-                        UI_FoodIcon[0].gameObject.SetActive(true);
-                    }
-                    if (Ingrediants["patty"])
-                    {
-                        AvailableIngrediants[1].SetActive(true);
-                        UI_FoodIcon[2].gameObject.SetActive(true);
-                    }
-                    if (Ingrediants["tomato"])
-                    {
-                        AvailableIngrediants[2].SetActive(true); // *****
-                        UI_FoodIcon[1].gameObject.SetActive(true); // ****
-                    }
-                }
+            ingrediant.SetActive(false);
+        }
+        foreach (var icon in UI_FoodIcon) // 아이콘도 전부다끔
+        {
+            icon.gameObject.SetActive(false);
+        }
 
 
-                if (Ingrediants["coke"])
-                {
-                    UI_FoodIcon[3].gameObject.SetActive(true);
-                    AvailableIngrediants[4].SetActive(true);
-                }
-                if (Ingrediants["fry"])
-                {
-                    UI_FoodIcon[4].gameObject.SetActive(true);
-                    AvailableIngrediants[5].SetActive(true);
-                }
-                break;
+
+        if (!Ingrediants["burger"])
+        {
+            if (Ingrediants["bread"])
+            {
+                AvailableIngrediants[0].SetActive(true); // 빵 윗쪽
+                AvailableIngrediants[3].SetActive(true); // 빵 아래쪽
+                UI_FoodIcon[0].gameObject.SetActive(true);
+            }
+            if (Ingrediants["patty"])
+            {
+                AvailableIngrediants[1].SetActive(true); // 패티
+                UI_FoodIcon[2].gameObject.SetActive(true); 
+            }
+            if (Ingrediants["lettuce"])
+            {
+                AvailableIngrediants[2].SetActive(true);
+                UI_FoodIcon[1].gameObject.SetActive(true);
+            }
+        }
+        if (!Ingrediants["tomatoBurger"])
+        {
+            if (Ingrediants["bread"])
+            {
+                AvailableIngrediants[0].SetActive(true);
+                AvailableIngrediants[3].SetActive(true);
+                UI_FoodIcon[0].gameObject.SetActive(true);
+            }
+            if (Ingrediants["patty"])
+            {
+                AvailableIngrediants[1].SetActive(true);
+                UI_FoodIcon[2].gameObject.SetActive(true);
+            }
+            if (Ingrediants["tomato"])
+            {
+                AvailableIngrediants[6].SetActive(true); // *****
+                UI_FoodIcon[6].gameObject.SetActive(true); // ****
+            }
+        }
+        if (!Ingrediants["cheeseBurger"])
+        {
+            if (Ingrediants["bread"])
+            {
+                AvailableIngrediants[0].SetActive(true);
+                AvailableIngrediants[3].SetActive(true);
+                UI_FoodIcon[0].gameObject.SetActive(true);
+            }
+            if (Ingrediants["patty"])
+            {
+                AvailableIngrediants[1].SetActive(true);
+                UI_FoodIcon[2].gameObject.SetActive(true);
+            }
+            if (Ingrediants["cheese"])
+            {
+                AvailableIngrediants[7].SetActive(true); // *****
+                UI_FoodIcon[7].gameObject.SetActive(true); // ****
+            }
+        }
+
+
+        if (Ingrediants["coke"])
+        {
+            UI_FoodIcon[3].gameObject.SetActive(true);
+            AvailableIngrediants[4].SetActive(true);
+        }
+        if (Ingrediants["fry"])
+        {
+            UI_FoodIcon[4].gameObject.SetActive(true);
+            AvailableIngrediants[5].SetActive(true);
+            IsReadyServe = true;
+        }
+        if (Ingrediants["chicken"])
+        {
+            UI_FoodIcon[8].gameObject.SetActive(true);
+            AvailableIngrediants[8].SetActive(true);
+            IsReadyServe = true;
+        }
+
+        if (Ingrediants["bread"] && Ingrediants["patty"] && (Ingrediants["lettuce"] || Ingrediants["tomato"] || Ingrediants["cheese"]))
+        {
+            AvailableIngrediants[0].SetActive(true); // 0 빵 1 패티 2 양상추 3 빵아래 4 콜라 5 감튀 6 토마토 7 치즈 8 치킨 
+            AvailableIngrediants[1].SetActive(true);
+            AvailableIngrediants[3].SetActive(true);
+            if (Ingrediants["lettuce"])
+            {
+                UI_FoodIcon[5].gameObject.SetActive(true);
+                AvailableIngrediants[2].SetActive(true);
+                Ingrediants["burger"] = true;
+            }
+            else if (Ingrediants["tomato"])
+            {
+                UI_FoodIcon[9].gameObject.SetActive(true);
+                AvailableIngrediants[6].SetActive(true);
+                Ingrediants["tomatoBurger"] = true;
+            }
+            else if (Ingrediants["cheese"])
+            {
+                UI_FoodIcon[10].gameObject.SetActive(true);
+                AvailableIngrediants[7].SetActive(true);
+                Ingrediants["cheeseBurger"] = true;
+            }
+
+            IsReadyServe = true;
+            UI_FoodIcon[0].gameObject.SetActive(false); // 0 빵 1 양상추 2 패티 3 콜라 4 감튀 5 버거 6 토마토 7 치즈 8 치킨
+            UI_FoodIcon[1].gameObject.SetActive(false);
+            UI_FoodIcon[2].gameObject.SetActive(false);
+            UI_FoodIcon[6].gameObject.SetActive(false);
+            UI_FoodIcon[7].gameObject.SetActive(false);
         }
 
     }

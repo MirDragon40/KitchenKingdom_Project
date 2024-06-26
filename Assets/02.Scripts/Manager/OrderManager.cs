@@ -33,9 +33,23 @@ public class OrderManager : MonoBehaviourPun
 
     public Dictionary<string, int> FoodScores = new Dictionary<string, int>
 {
-    { "burger", 15 },
-    { "burgerCoke", 30 },
-    { "burgerCokeFry", 50 }
+        { "burgerCokeFry", 50 },
+        { "burgerCoke", 30 },
+        { "burger", 15 },
+        { "burgerFry", 40 },
+        { "cheeseBurger", 15 },
+        { "cheeseBurgerCoke", 30 },
+        { "cheeseBurgerCokeFry", 50 },
+        { "cheeseBurgerFry", 40 },
+        { "tomatoBurger", 15 },
+        { "tomatoBurgerCoke", 30 },
+        { "tomatoBurgerCokeFry", 50 },
+        { "tomatoBurgerFry", 40 },
+        { "chickenCokeFry", 40 },
+        { "chickenCoke", 20 },
+        { "chicken", 15 },
+        { "cokeFry", 30 },
+        { "fry", 15 },
 };
 
     private PhotonView _pv;
@@ -59,7 +73,7 @@ public class OrderManager : MonoBehaviourPun
         MyScrollView = GameObject.FindObjectOfType<UI_BilgeScrollView>();
 
         Recipies["burger"] = new List<string> { "bread", "patty", "lettuce" };
-        Recipies["burgerFry"] = new List<string> { "bread", "patty", "lettuce", "Fry" };
+        Recipies["burgerFry"] = new List<string> { "bread", "patty", "lettuce", "fry" };
         Recipies["burgerCoke"] = new List<string> { "bread", "patty", "lettuce", "coke" };
         Recipies["burgerCokeFry"] = new List<string> { "bread", "patty", "lettuce", "coke", "fry" };
         Recipies["cokeFry"] = new List<string> {"coke", "fry" };
@@ -71,28 +85,17 @@ public class OrderManager : MonoBehaviourPun
         Recipies["cheeseBurgerCoke"] = new List<string> { "bread", "patty", "cheese", "coke"};
         Recipies["cheeseBurgerCokeFry"] = new List<string> { "bread", "patty", "cheese", "coke", "fry"};
         Recipies["cheeseBurgerFry"] = new List<string> { "bread", "patty", "cheese", "fry"};
+        Recipies["chicken"] = new List<string> {"chicken"};
+        Recipies["chickenCoke"] = new List<string> {"chicken", "coke"};
+        Recipies["chickenCokeFry"] = new List<string> {"chicken", "coke", "fry"};
+        Recipies["fry"] = new List<string> {"fry"};
+
 
 
 
     }
     void Update()
     {
-
-        /*        if (Input.GetKeyDown(KeyCode.Alpha1))
-                {
-                    string orderName = "burger";
-                    _isGenerating = true;
-                    UI_Bilge newBill = MyScrollView.AddItem(3);
-                    newBill.OrderedFood = orderName;
-                    newBill.IngrediantsNameList = Recipies[orderName];
-                    GeneratedOrderList.Add(orderName);
-                }
-
-                if (Input.GetKeyDown(KeyCode.Alpha2))
-                {
-                    SubmitOrder("burger");
-                }
-        */
 
         if (Input.GetKeyDown(KeyCode.Alpha5))
         {
@@ -277,8 +280,23 @@ public class OrderManager : MonoBehaviourPun
     [PunRPC]
     public void AddTotalScore(int score)
     {
-        GameManager.Instance.TotalScore += score;
 
+        if (GameManager.Instance.CurrentStage == 1)
+        {
+            GameManager.Instance.StageScore[0] += score;
+        }
+        else if (GameManager.Instance.CurrentStage == 2)
+        {
+            GameManager.Instance.StageScore[1] += score;
+        }
+        else if (GameManager.Instance.CurrentStage == 3)
+        {
+            GameManager.Instance.StageScore[2] += score;
+        }
+        else if (GameManager.Instance.CurrentStage == 4)
+        {
+            GameManager.Instance.StageScore[3] += score;
+        }
     }
 
 

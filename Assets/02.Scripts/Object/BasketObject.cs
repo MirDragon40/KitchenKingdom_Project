@@ -1,4 +1,3 @@
-
 using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
@@ -7,7 +6,6 @@ using UnityEngine.UI;
 
 public class BasketObject : IHoldable
 {
-
     public Transform BasketPlacePositon;
     public FoodObject FryingIngrediant;
     public float FryingTime = 5.0f;
@@ -21,60 +19,153 @@ public class BasketObject : IHoldable
     private TrashBin _nearbyTrashBin;
     public GameObject PlusImage;
 
+    public FireObject fireObject;
+    public DangerIndicator dangerIndicator;
+    public Sprite dangerSprite;
+    public Slider FireSlider;
+    private SoundManager soundManager;
+    private bool isPowderTouching = false;
+
     private Rigidbody _rigid;
 
+    private bool hasCaughtFireOnce = false;
+    private bool hasDangerIndicator = false;
     public override Vector3 DropOffset => new Vector3(0.3f, 0.1f, 0f);
+    private bool isAnyBasketOnFire = false;
 
     private void Awake()
     {
         BoxCollider = GetComponent<BoxCollider>();
         _rigid = GetComponent<Rigidbody>();
         _pv = GetComponent<PhotonView>();
-
+        dangerIndicator = GetComponentInChildren<DangerIndicator>();
+        FireSlider.gameObject.SetActive(false);
+        fireObject = GetComponent<FireObject>();
+        soundManager = FindObjectOfType<SoundManager>();
     }
+
     private void Start()
     {
-        if (BasketStartPosition != null )
+        if (BasketStartPosition != null)
         {
             Place(BasketStartPosition);
         }
-
+        if (FireSlider != null)
+        {
+            FireSlider.gameObject.SetActive(false);
+        }
     }
+
     private void Update()
     {
         if (BasketPlacePositon.childCount != 0)
         {
             PlusImage.SetActive(false);
 
-                if (MyFryMachine != null)
+            if (MyFryMachine != null)
+            {
+                if (BasketPlacePositon.GetChild(0).TryGetComponent<FoodObject>(out FoodObject newGrillingIngredient))
                 {
-                    if (BasketPlacePositon.GetChild(0).TryGetComponent<FoodObject>(out FryingIngrediant))
+                    if (FryingIngrediant != newGrillingIngredient)
                     {
-                        FryingSlider.gameObject.SetActive(true);
-                        FryingIngrediant.StartFrying(); // Start cooking when placed on the stove
-                        FryingSlider.value = FryingIngrediant.CookProgress;
+                        FryingIngrediant = newGrillingIngredient;
+                        hasCaughtFireOnce = false;
+                    }
+
+                    FryingIngrediant.StartGrilling();
+                    FryingSlider.gameObject.SetActive(true);
+                    FryingSlider.value = FryingIngrediant.CookProgress;
+
+                    // 위험 표시기 표시
+                    if (FryingIngrediant.CookProgress >= 2f && FryingIngrediant.CookProgress < 4.9f)
+                    {
+                        dangerIndicator.ShowDangerIndicator(dangerSprite);
+                        soundManager.PlayAudio("Warning", true, true);
+                        hasDangerIndicator = true;
+                    }
+                    else
+                    {
+                        dangerIndicator.HideDangerIndicator();
+                        hasDangerIndicator = false;
+                    }
+
+                    // 불이 켜지는 시점
+                    if (FryingIngrediant.CookProgress >= 5f && !fireObject._isOnFire && !hasCaughtFireOnce)
+                    {
+                        fireObject.MakeFire();
+                        FireSlider.gameObject.SetActive(true);
+                        hasCaughtFireOnce = true;
+                        soundManager.PlayAudio("Fire", true, true);
                     }
                 }
-                else if (FryingIngrediant != null)
+
+                if (fireObject._isOnFire && !MyFryMachine.fireObject._isOnFire)
                 {
-                    FryingIngrediant.StopFrying();
+                    MyFryMachine.fireObject.MakeFire();
                 }
-            
+                else if (!fireObject._isOnFire && MyFryMachine.fireObject._isOnFire)
+                {
+                    MyFryMachine.fireObject.RequestExtinguish();
+                    soundManager.StopAudio("Warning");
+                }
+            }
+            else
+            {
+                if (FryingIngrediant != null)
+                {
+                    FryingIngrediant.StopGrilling();
+                }
+            }
+
+            FryingSlider.gameObject.SetActive(FryingSlider.value < 1f);
         }
         else
         {
-            FryingIngrediant = null;
-
-            FryingSlider.gameObject.SetActive(false);
             PlusImage.SetActive(true);
+
+            if (FryingIngrediant != null)
+            {
+                FryingIngrediant.StopGrilling();
+            }
+
+            FryingIngrediant = null;
+            FryingSlider.gameObject.SetActive(false);
         }
+
+        // 분말과의 불 접촉 시간 관리
+        if (!isPowderTouching && fireObject.contactTime > 0)
+        {
+            fireObject.contactTime -= Time.deltaTime;
+            if (fireObject.contactTime < 0)
+            {
+                fireObject.contactTime = 0;
+            }
+        }
+
+        isPowderTouching = false; // 매 프레임마다 false로 초기화
+
+        // 불 슬라이더 표시 관리
+        if (fireObject._isOnFire && FireSlider != null)
+        {
+            FireSlider.value = fireObject.contactTime / 2f;
+        }
+        else if (!fireObject._isOnFire && FireSlider.gameObject.activeSelf)
+        {
+            FireSlider.gameObject.SetActive(false);
+        }
+
         if (_isNearTrashBin && Input.GetKeyDown(KeyCode.Space))
         {
             DropFoodInTrash();
         }
     }
+
     public override void Hold(Character character, Transform handTransform)
     {
+        if (character == null || handTransform == null)
+        {
+            return;
+        }
         _holdCharacter = character;
         GetComponent<Rigidbody>().isKinematic = true;
         transform.SetParent(handTransform);
@@ -82,79 +173,56 @@ public class BasketObject : IHoldable
         transform.localRotation = Quaternion.Euler(0, 180f, 0f);
 
         MyFryMachine = null;
+
+        dangerIndicator.HideDangerIndicator();
+        soundManager.StopAudio("Warning");
     }
 
     public override void UnHold(Vector3 dropPosition, Quaternion dropRotation)
     {
         GetComponent<Rigidbody>().isKinematic = false;
-        // 저장한 위치와 회전으로 음식 배치
         transform.position = dropPosition + new Vector3(0, 0.6f, 0f);
-        //transform.rotation = dropRotation;
         Quaternion pandropRotation = Quaternion.Euler(0, 0, 0f);
         Quaternion finalRotation = dropRotation * pandropRotation;
 
-
         transform.parent = null;
-        //각 아이템이 떼어질 때 해줄 초기화 로직
         _holdCharacter = null;
     }
 
     public override void Place(Transform place)
     {
+        if (place == null)
+        {
+            return;
+        }
         GetComponent<Rigidbody>().isKinematic = true;
         transform.SetParent(place);
         transform.localPosition = Vector3.zero;
 
-/*        if (_holdCharacter != null)
-        {*/
-            // 물체 중간 오프셋
-            var pivotOffset = new Vector3(0f, 0.5f, -0.6f);
-
-            // 현재 위치를 기준으로 중간 위치 계산
-            Vector3 pivotPosition = transform.localPosition + pivotOffset;
-
-            // 물체를 중간 위치로 이동
-            transform.localPosition = pivotPosition;
-            //var targetRotation = _holdCharacter.transform.rotation;
-            // 플레이어가 쳐다보는 방향으로 회전 적용
-            // 플레이어가 쳐다보는 방향으로 회전 각도 계산
-            transform.localRotation = Quaternion.identity;
-            //transform.Rotate(new Vector3(0, 180 + targetRotation.eulerAngles.y, 0));
-            transform.Rotate(new Vector3(0, 180, 0));
-/*
-        }*/
-
-        // 선반 오프셋 적용
-        //transform.localPosition += new Vector3(0.3f, 0.4f, 0.7f);
-
-        //transform.position = place.position + GetPositionAfterRotation(new Vector3(0, 0.4f, 0.5f), targetRotation.eulerAngles.y, 1);
-
-
-        //Quaternion basketplaceRotation = Quaternion.Euler(0, 180, 0);
-        //transform.rotation = place.rotation * basketplaceRotation;
-
-
-
+        var pivotOffset = new Vector3(0f, 0.5f, -0.6f);
+        Vector3 pivotPosition = transform.localPosition + pivotOffset;
+        transform.localPosition = pivotPosition;
+        transform.localRotation = Quaternion.identity;
+        transform.Rotate(new Vector3(0, 180, 0));
 
         if (MyFryMachine != null)
         {
             MyFryMachine.PlacedBasket = this;
         }
 
-        _holdCharacter = null;
-    }
+        if (MyFryMachine != null)
+        {
+            MyFryMachine.PlacedBasket = this;
 
-    Vector3 GetPositionAfterRotation(Vector3 startPosition, float angle, float distance)
-    {
-        // 각도를 라디안으로 변환
-        float angleInRadians = angle * Mathf.Deg2Rad;
-
-        // 새로운 위치 계산
-        float newX = startPosition.x + distance * Mathf.Cos(angleInRadians);
-        float newZ = startPosition.z + distance * Mathf.Sin(angleInRadians);
-
-        // y값은 변화가 없다고 가정
-        return new Vector3(newX, startPosition.y, newZ);
+            if (fireObject._isOnFire)
+            {
+                MyFryMachine.fireObject.RequestMakeFire();
+            }
+            else
+            {
+                MyFryMachine.fireObject.RequestExtinguish();
+            }
+        }
     }
 
     private void OnTriggerStay(Collider other)
@@ -176,15 +244,24 @@ public class BasketObject : IHoldable
             {
                 if (foodObject.IsFryable)
                 {
-                   // Debug.Log("Fry");
                     other.GetComponent<CharacterHoldAbility>().PlacePosition = BasketPlacePositon;
                     other.GetComponent<CharacterHoldAbility>().IsPlaceable = true;
                 }
             }
-
         }
-
+        if (fireObject._isOnFire && other.CompareTag("Powder"))
+        {
+            isPowderTouching = true;
+            fireObject.contactTime += Time.deltaTime;
+            Debug.Log(fireObject.contactTime);
+            if (fireObject.contactTime >= 1f)
+            {
+                fireObject.RequestExtinguish();
+                soundManager.StopAudio("Fire");
+            }
+        }
     }
+
     private void OnTriggerExit(Collider other)
     {
         if (!other.CompareTag("Player"))
@@ -193,7 +270,13 @@ public class BasketObject : IHoldable
         }
         other.GetComponent<CharacterHoldAbility>().PlacePosition = null;
         other.GetComponent<CharacterHoldAbility>().IsPlaceable = false;
+
+        if (fireObject._isOnFire && other.CompareTag("Powder"))
+        {
+            isPowderTouching = false;
+        }
     }
+
     public void SetNearTrashBin(bool isNear, TrashBin trashBin = null)
     {
         _isNearTrashBin = isNear;
@@ -216,4 +299,3 @@ public class BasketObject : IHoldable
         }
     }
 }
-
