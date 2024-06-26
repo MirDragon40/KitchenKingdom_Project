@@ -17,7 +17,7 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
     public GameState State = GameState.Go; // 게임 상태, TimeScale관리
-    public Transform[] SpawnPoints= new Transform[4];
+    public Transform[] SpawnPoints = new Transform[4];
 
     public int[] StageScore = new int[4];
     public int TotalScore = 0;
@@ -47,53 +47,49 @@ public class GameManager : MonoBehaviour
     private void Update()
     {
         // 옵션창 켜고 끄기
-        if(Input.GetKeyDown(KeyCode.Escape)) 
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
             if (_optionUlOpen)
             {
                 OptionUl.gameObject.SetActive(false);
                 _optionUlOpen = false;
             }
-            else 
+            else
             {
                 OptionUl.gameObject.SetActive(true);
                 _optionUlOpen = true;
             }
         }
 
-       
+
 
     }
 
     private void Start()
     {
-/*        if (PhotonNetwork.IsConnectedAndReady)
-        {
-            SpawnPlayer();
-        }*/
+        /*        if (PhotonNetwork.IsConnectedAndReady)
+                {
+                    SpawnPlayer();
+                }*/
     }
 
     public void SpawnPlayer()
     {
         int actorNumber = PhotonNetwork.LocalPlayer.ActorNumber;
-        int spawnIndex = actorNumber % SpawnPoints.Length -1; // 각각 플레이어가 다른 곳에 spawn
+        int spawnIndex = actorNumber % SpawnPoints.Length - 1; // 각각 플레이어가 다른 곳에 spawn
 
         Vector3 spawnPosition = SpawnPoints[spawnIndex].position;
         Quaternion spawnRotation = SpawnPoints[spawnIndex].rotation;
         PhotonNetwork.Instantiate("Character1", spawnPosition, spawnRotation);
     }
 
-    public void ScoreInit()
+    public void TotalScoreInit()
     {
-        if (CurrentStage == 1)
-        {
-            //StageScore[0] = OrderManager.Instance.sc
-        }
 
         foreach (int score in StageScore)
         {
             TotalScore += score;
         }
-        
+
     }
 }
