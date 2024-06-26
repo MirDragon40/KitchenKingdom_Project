@@ -158,11 +158,7 @@ MonoBehaviour:
   - {fileID: 341479427}
   - {fileID: 523136918}
   - {fileID: 343851050}
-  StageScore: 00000000000000000000000000000000000000000000000000000000
-  Stage1_Score: 0
-  Stage2_Score: 0
-  Stage3_Score: 0
-  Stage4_Score: 0
+  StageScore: 00000000000000000000000000000000
   TotalScore: 0
   OptionUl: {fileID: 408633272}
 --- !u!4 &1466002
@@ -9179,7 +9175,7 @@ MonoBehaviour:
   RudeOrderPoints: 20
   RudePenaltyPoint: -50
   GeneratedOrderList: []
-  DirtyPlateStand: {fileID: 0}
+  DirtyPlateStand: {fileID: 2089541333}
 --- !u!4 &682217594
 Transform:
   m_ObjectHideFlags: 0
@@ -19078,6 +19074,7 @@ Transform:
   - {fileID: 1431118589}
   - {fileID: 957001188}
   - {fileID: 603621498}
+  - {fileID: 2089541331}
   m_Father: {fileID: 45048703}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1367929678
@@ -27687,6 +27684,83 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2089478292}
   m_Mesh: {fileID: 4300000, guid: 069faa75324807b4d99f059f6622d7c2, type: 3}
+--- !u!1001 &2089541330
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1364089160}
+    m_Modifications:
+    - target: {fileID: 4900252953042953332, guid: c32b7e03142c285419df39e12c4782b6, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 12.82
+      objectReference: {fileID: 0}
+    - target: {fileID: 4900252953042953332, guid: c32b7e03142c285419df39e12c4782b6, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.010121807
+      objectReference: {fileID: 0}
+    - target: {fileID: 4900252953042953332, guid: c32b7e03142c285419df39e12c4782b6, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -3.84
+      objectReference: {fileID: 0}
+    - target: {fileID: 4900252953042953332, guid: c32b7e03142c285419df39e12c4782b6, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 4900252953042953332, guid: c32b7e03142c285419df39e12c4782b6, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4900252953042953332, guid: c32b7e03142c285419df39e12c4782b6, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 4900252953042953332, guid: c32b7e03142c285419df39e12c4782b6, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4900252953042953332, guid: c32b7e03142c285419df39e12c4782b6, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4900252953042953332, guid: c32b7e03142c285419df39e12c4782b6, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 4900252953042953332, guid: c32b7e03142c285419df39e12c4782b6, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7375009279586383005, guid: c32b7e03142c285419df39e12c4782b6, type: 3}
+      propertyPath: sceneViewId
+      value: 58
+      objectReference: {fileID: 0}
+    - target: {fileID: 8630482961449243796, guid: c32b7e03142c285419df39e12c4782b6, type: 3}
+      propertyPath: m_Name
+      value: DirtyPlateStand
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: c32b7e03142c285419df39e12c4782b6, type: 3}
+--- !u!4 &2089541331 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4900252953042953332, guid: c32b7e03142c285419df39e12c4782b6, type: 3}
+  m_PrefabInstance: {fileID: 2089541330}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2089541333 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2609837869300703588, guid: c32b7e03142c285419df39e12c4782b6, type: 3}
+  m_PrefabInstance: {fileID: 2089541330}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 942f0ed22415f744f8303d207680a57c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2098655923
 GameObject:
   m_ObjectHideFlags: 0
@@ -28358,7 +28432,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7935356144928406868, guid: 61a5605c41609634bac5baf8ef0820f1, type: 3}
       propertyPath: m_Name
-      value: CookStand (20)
+      value: CookStand_PlatesOn
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

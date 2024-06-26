@@ -212,6 +212,39 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -271346595549909530, guid: 04a58e06338c410439cd120a79ff6457, type: 3}
+--- !u!1 &821471121975604059
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4105228494529451496}
+  m_Layer: 0
+  m_Name: Chicken
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4105228494529451496
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 821471121975604059}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 6581060751928711258}
+  - {fileID: 67391918926857623}
+  m_Father: {fileID: 2692334987105606399}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1594748465727653731
 GameObject:
   m_ObjectHideFlags: 0
@@ -244,7 +277,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 2692334987105606399}
+  m_Father: {fileID: 4105228494529451496}
   m_LocalEulerAnglesHint: {x: 22.37, y: 45.018, z: 21.114}
 --- !u!33 &5160793999389095299
 MeshFilter:
@@ -387,7 +420,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ItemType: 4
+  IsDroppable: 0
   CokeObject: {fileID: 3685279970376863931}
+  PV: {fileID: 0}
   CokeRenderer: {fileID: 2170630713617299437}
   ThisCokeMaterial: {fileID: 2100000, guid: ae8d5923de5ea514e95ddf57c6108f10, type: 2}
   ChangeCokeMaterial: {fileID: 2100000, guid: 5294e1b9f82eb50459540445986474b4, type: 2}
@@ -406,19 +441,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ItemType: 4
+  IsDroppable: 0
   State: 0
   FoodType: 0
+  soundManager: {fileID: 0}
   FoodPrefab1: {fileID: 0}
   FoodPrefab2: {fileID: 0}
   FoodPrefab3: {fileID: 0}
+  PV: {fileID: 0}
   IsCooking: 0
   IsGrillable: 0
   IsFryable: 0
   CookProgress: 0
+  ColliderThis: {fileID: 0}
+  ThrownEffectTriggerTime: 0.5
   CuttingTime: 3
   BakeTime: 3
-  fireObject: {fileID: 0}
-  dangerIndicator: {fileID: 0}
+  DAMPING: 1
 --- !u!1 &3180355387620280215
 GameObject:
   m_ObjectHideFlags: 0
@@ -987,12 +1026,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5773420445102080736}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.021539055, y: -0.76815647, z: -0.017935686, w: 0.6396483}
-  m_LocalPosition: {x: 0.01, y: 0.555, z: -0.654}
+  m_LocalRotation: {x: -0.021539057, y: -0.7681565, z: -0.017935688, w: 0.6396484}
+  m_LocalPosition: {x: 0.00999999, y: 0.555, z: -0.654}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 2692334987105606399}
+  m_Father: {fileID: 4105228494529451496}
   m_LocalEulerAnglesHint: {x: -3.159, y: -100.447, z: 0.582}
 --- !u!33 &7852945655524153343
 MeshFilter:
@@ -2024,8 +2063,7 @@ Transform:
   - {fileID: 3324296398311966617}
   - {fileID: 6336614293103417038}
   - {fileID: 9182545170136887011}
-  - {fileID: 6581060751928711258}
-  - {fileID: 67391918926857623}
+  - {fileID: 4105228494529451496}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8596615307989024426

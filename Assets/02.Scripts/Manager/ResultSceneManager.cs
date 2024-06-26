@@ -61,27 +61,27 @@ public class ResultSceneManager : MonoBehaviour
 
         if (GameManager.Instance != null)
         {
-            Stage1_Score_Text.text = $"{GameManager.Instance.Stage1_Score}";
-            Stage2_Score_Text.text = $"{GameManager.Instance.Stage2_Score}";
-            Stage3_Score_Text.text = $"{GameManager.Instance.Stage3_Score}";
-            Stage4_Score_Text.text = $"{GameManager.Instance.Stage4_Score}";
+            Stage1_Score_Text.text = $"{GameManager.Instance.StageScore[0]}";
+            Stage2_Score_Text.text = $"{GameManager.Instance.StageScore[1]}";
+            Stage3_Score_Text.text = $"{GameManager.Instance.StageScore[2]}";
+            Stage4_Score_Text.text = $"{GameManager.Instance.StageScore[3]}";
             Total_Score_Text.text = $"{GameManager.Instance.TotalScore}";
 
 
             // 스테이지 마다 리뷰 결과 출력
-            if(GameManager.Instance.Stage1_Score != 0 && GameManager.Instance.Stage2_Score == 0)  // 스테이지 1일때
+            if(GameManager.Instance.StageScore[0] != 0 && GameManager.Instance.StageScore[1] == 0)  // 스테이지 1일때
             {
 
             }
-            if(GameManager.Instance.Stage2_Score != 0 && GameManager.Instance.Stage3_Score == 0)  // 스테이지 2일때
+            if(GameManager.Instance.StageScore[1] != 0 && GameManager.Instance.StageScore[2] == 0)  // 스테이지 2일때
             {
 
             }
-            if (GameManager.Instance.Stage3_Score != 0 && GameManager.Instance.Stage4_Score == 0)  // 스테이지 3일때
+            if (GameManager.Instance.StageScore[2] != 0 && GameManager.Instance.StageScore[3] == 0)  // 스테이지 3일때
             {
 
             }
-            if(GameManager.Instance.Stage4_Score != 0)  // 스테이지 4일때
+            if(GameManager.Instance.StageScore[3] != 0)  // 스테이지 4일때
             {
 
             }

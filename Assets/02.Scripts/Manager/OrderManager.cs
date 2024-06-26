@@ -59,15 +59,23 @@ public class OrderManager : MonoBehaviourPun
         MyScrollView = GameObject.FindObjectOfType<UI_BilgeScrollView>();
 
         Recipies["burger"] = new List<string> { "bread", "patty", "lettuce" };
+        Recipies["burgerFry"] = new List<string> { "bread", "patty", "lettuce", "fry" };
         Recipies["burgerCoke"] = new List<string> { "bread", "patty", "lettuce", "coke" };
         Recipies["burgerCokeFry"] = new List<string> { "bread", "patty", "lettuce", "coke", "fry" };
         Recipies["cokeFry"] = new List<string> {"coke", "fry" };
         Recipies["tomatoBurger"] = new List<string> { "bread", "patty", "tomato"};
-        Recipies["tomatoBurgerCoke"] = new List<string> { "bread", "patty", "tomato"};
-        Recipies["tomatoBurgerCokeFry"] = new List<string> { "bread", "patty", "tomato"};
+        Recipies["tomatoBurgerCoke"] = new List<string> { "bread", "patty", "tomato", "coke"};
+        Recipies["tomatoBurgerCokeFry"] = new List<string> { "bread", "patty", "tomato", "coke", "fry"};
+        Recipies["tomatoBurgerFry"] = new List<string> { "bread", "patty", "tomato", "fry"};
         Recipies["cheeseBurger"] = new List<string> { "bread", "patty", "cheese"};
-        Recipies["cheeseBurgerCoke"] = new List<string> { "bread", "patty", "cheese"};
-        Recipies["cheeseBurgerCokeFry"] = new List<string> { "bread", "patty", "cheese"};
+        Recipies["cheeseBurgerCoke"] = new List<string> { "bread", "patty", "cheese", "coke"};
+        Recipies["cheeseBurgerCokeFry"] = new List<string> { "bread", "patty", "cheese", "coke", "fry"};
+        Recipies["cheeseBurgerFry"] = new List<string> { "bread", "patty", "cheese", "fry"};
+        Recipies["chicken"] = new List<string> {"chicken"};
+        Recipies["chickenCoke"] = new List<string> {"chicken", "coke"};
+        Recipies["chickenCokeFry"] = new List<string> {"chicken", "coke", "fry"};
+        Recipies["fry"] = new List<string> {"fry"};
+
 
 
 
@@ -128,9 +136,104 @@ public class OrderManager : MonoBehaviourPun
                     }
                     break;
                 case 3:
+                    orderRandIndex = Random.Range(0, 12);
+                    switch (orderRandIndex)
+                    {
+                        case 0:
+                            _pv.RPC("GenerateOrderRPC", RpcTarget.AllBuffered, "burgerCokeFry");
+                            break;
+                        case 1:
+                            _pv.RPC("GenerateOrderRPC", RpcTarget.AllBuffered, "burgerCoke");
+                            break;
+                        case 2:
+                            _pv.RPC("GenerateOrderRPC", RpcTarget.AllBuffered, "burgerFry");
+                            break;
+                        case 3:
+                            _pv.RPC("GenerateOrderRPC", RpcTarget.AllBuffered, "burger");
+                            break;
+                        case 4:
+                            _pv.RPC("GenerateOrderRPC", RpcTarget.AllBuffered, "tomatoBurgerCokeFry");
+                            break;
+                        case 5:
+                            _pv.RPC("GenerateOrderRPC", RpcTarget.AllBuffered, "tomatoBurgerCoke");
+                            break;
+                        case 6:
+                            _pv.RPC("GenerateOrderRPC", RpcTarget.AllBuffered, "tomatoBurgerFry");
+                            break;
+                        case 7:
+                            _pv.RPC("GenerateOrderRPC", RpcTarget.AllBuffered, "tomatoBurger");
+                            break;
+                        case 8:
+                            _pv.RPC("GenerateOrderRPC", RpcTarget.AllBuffered, "cheeseBurgerCokeFry");
+                            break;
+                        case 9:
+                            _pv.RPC("GenerateOrderRPC", RpcTarget.AllBuffered, "cheeseBurgerCoke");
+                            break;
+                        case 10:
+                            _pv.RPC("GenerateOrderRPC", RpcTarget.AllBuffered, "cheeseBurgerFry");
+                            break;
+                        case 11:
+                            _pv.RPC("GenerateOrderRPC", RpcTarget.AllBuffered, "cheeseBurger");
+                            break;
+                    }
                     break;
 
                 case 4:
+                    orderRandIndex = Random.Range(0, 17);
+                    switch (orderRandIndex)
+                    {
+                        case 0:
+                            _pv.RPC("GenerateOrderRPC", RpcTarget.AllBuffered, "burgerCokeFry");
+                            break;
+                        case 1:
+                            _pv.RPC("GenerateOrderRPC", RpcTarget.AllBuffered, "burgerCoke");
+                            break;
+                        case 2:
+                            _pv.RPC("GenerateOrderRPC", RpcTarget.AllBuffered, "burgerFry");
+                            break;
+                        case 3:
+                            _pv.RPC("GenerateOrderRPC", RpcTarget.AllBuffered, "burger");
+                            break;
+                        case 4:
+                            _pv.RPC("GenerateOrderRPC", RpcTarget.AllBuffered, "tomatoBurgerCokeFry");
+                            break;
+                        case 5:
+                            _pv.RPC("GenerateOrderRPC", RpcTarget.AllBuffered, "tomatoBurgerCoke");
+                            break;
+                        case 6:
+                            _pv.RPC("GenerateOrderRPC", RpcTarget.AllBuffered, "tomatoBurgerFry");
+                            break;
+                        case 7:
+                            _pv.RPC("GenerateOrderRPC", RpcTarget.AllBuffered, "tomatoBurger");
+                            break;
+                        case 8:
+                            _pv.RPC("GenerateOrderRPC", RpcTarget.AllBuffered, "cheeseBurgerCokeFry");
+                            break;
+                        case 9:
+                            _pv.RPC("GenerateOrderRPC", RpcTarget.AllBuffered, "cheeseBurgerCoke");
+                            break;
+                        case 10:
+                            _pv.RPC("GenerateOrderRPC", RpcTarget.AllBuffered, "cheeseBurgerFry");
+                            break;
+                        case 11:
+                            _pv.RPC("GenerateOrderRPC", RpcTarget.AllBuffered, "cheeseBurger");
+                            break;
+                        case 12:
+                            _pv.RPC("GenerateOrderRPC", RpcTarget.AllBuffered, "cokeFry");
+                            break;
+                        case 13:
+                            _pv.RPC("GenerateOrderRPC", RpcTarget.AllBuffered, "fry");
+                            break;
+                        case 14:
+                            _pv.RPC("GenerateOrderRPC", RpcTarget.AllBuffered, "chickenCokeFry");
+                            break;
+                        case 15:
+                            _pv.RPC("GenerateOrderRPC", RpcTarget.AllBuffered, "chickenCoke");
+                            break;
+                        case 16:
+                            _pv.RPC("GenerateOrderRPC", RpcTarget.AllBuffered, "chicken");
+                            break;
+                    }
                     break;
 
             }

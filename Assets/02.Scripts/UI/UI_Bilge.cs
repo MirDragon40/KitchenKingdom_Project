@@ -35,6 +35,9 @@ public class UI_Bilge : MonoBehaviour
         IngrediantSprites["lettuce"] = IngrediantSpriteList[2];
         IngrediantSprites["coke"] = IngrediantSpriteList[3];
         IngrediantSprites["fry"] = IngrediantSpriteList[4];
+        IngrediantSprites["tomato"] = IngrediantSpriteList[5];
+        IngrediantSprites["cheese"] = IngrediantSpriteList[6];
+        IngrediantSprites["chicken"] = IngrediantSpriteList[7];
 
         CookMethodSprites["grill"] = MethodSpriteList[0];
         CookMethodSprites["fry"] = MethodSpriteList[1];
@@ -42,6 +45,23 @@ public class UI_Bilge : MonoBehaviour
         OrderSprites["burger"] = OrderSpriteList[0];
         OrderSprites["burgerCoke"] = OrderSpriteList[1];
         OrderSprites["burgerCokeFry"] = OrderSpriteList[2];
+        OrderSprites["burgerFry"] = OrderSpriteList[3];
+        OrderSprites["cheeseBurger"] = OrderSpriteList[4];// 
+        OrderSprites["cheeseBurgerCoke"] = OrderSpriteList[5];// 
+        OrderSprites["cheeseBurgerCokeFry"] = OrderSpriteList[6];// 
+        OrderSprites["cheeseBurgerFry"] = OrderSpriteList[7];// 
+
+        OrderSprites["tomatoBurger"] = OrderSpriteList[8];// 
+        OrderSprites["tomatoBurgerCoke"] = OrderSpriteList[9];// 
+        OrderSprites["tomatoBurgerCokeFry"] = OrderSpriteList[10];//
+        OrderSprites["tomatoBurgerFry"] = OrderSpriteList[11];//
+
+        OrderSprites["cokeFry"] = OrderSpriteList[12];//
+        OrderSprites["fry"] = OrderSpriteList[13];//
+
+        OrderSprites["chickenCokeFry"] = OrderSpriteList[14];//
+        OrderSprites["chickenCoke"] = OrderSpriteList[15];//
+        OrderSprites["chicken"] = OrderSpriteList[16];//
 
         
     }
@@ -87,27 +107,8 @@ public class UI_Bilge : MonoBehaviour
         }
         if (OrderedFood != null)
         {
-            switch (OrderedFood)
-            {
-                case "burger":
-                {
-                    OrderFoodImage.sprite = OrderSprites["burger"];
-                    break;
-                }
-                case "burgerCoke":
-                {
-                    OrderFoodImage.sprite = OrderSprites["burgerCoke"];
-                    break;
-                }
-                case "burgerCokeFry":
-                {
-                    OrderFoodImage.sprite = OrderSprites["burgerCokeFry"];
-                    break;
-                }
-                default:
-                    OrderFoodImage.sprite = IngrediantSprites["burger"];
-                    break;
-            }
+            OrderFoodImage.sprite = OrderSprites[OrderedFood];
+
             for (int i=0;i<IngrediantImageSpace.Length;i++)
             {
                 IngrediantImageSpace[i].enabled = false;
@@ -126,6 +127,11 @@ public class UI_Bilge : MonoBehaviour
                 }
 
                 if (IngrediantsNameList[i] == "fry")
+                {
+                    CookingMethodImageSpace[i].enabled = true;
+                    CookingMethodImageSpace[i].sprite = CookMethodSprites["fry"];
+                }
+                if (IngrediantsNameList[i] == "chicken")
                 {
                     CookingMethodImageSpace[i].enabled = true;
                     CookingMethodImageSpace[i].sprite = CookMethodSprites["fry"];

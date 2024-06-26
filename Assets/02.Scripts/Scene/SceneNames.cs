@@ -7,7 +7,10 @@ public enum SceneNames
    GatheringScene,
    StoryScene,
    LoadingScene,
-   MainScene_Beta,
+   Stage_1_Beta,
+   Stage_2_Beta,
+   Stage_3_Beta,    
+   Stage_4_Beta,
    ResultScene,
 
 }
