@@ -203,7 +203,7 @@ public class FoodCombination : MonoBehaviour
             icon.gameObject.SetActive(false);
         }
 
-        if (Ingrediants["bread"] && Ingrediants["patty"] && (Ingrediants["lettuce"] || Ingrediants["tomato"])
+        if (Ingrediants["bread"] && Ingrediants["patty"] && (Ingrediants["lettuce"] || Ingrediants["tomato"] || Ingrediants["cheese"]))
         {
             AvailableIngrediants[0].SetActive(true); // 0 빵 1 패티 2 양상추 3 빵아래 4 콜라 5 감튀 6 토마토 7 치즈 8 치킨 
             AvailableIngrediants[1].SetActive(true);
