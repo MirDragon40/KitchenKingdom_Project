@@ -2299,7 +2299,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8277322042758886477, guid: bcade7d41233828498fd2677070cee82, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1875374383}
   m_SourcePrefab: {fileID: 100100000, guid: bcade7d41233828498fd2677070cee82, type: 3}
 --- !u!4 &413216530 stripped
 Transform:
@@ -10291,6 +10294,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 156909692}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1360332999 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8277322042758886477, guid: bcade7d41233828498fd2677070cee82, type: 3}
+  m_PrefabInstance: {fileID: 1599170752}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1360386892
 GameObject:
   m_ObjectHideFlags: 0
@@ -12577,13 +12585,33 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8277322042758886477, guid: bcade7d41233828498fd2677070cee82, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1599170754}
   m_SourcePrefab: {fileID: 100100000, guid: bcade7d41233828498fd2677070cee82, type: 3}
 --- !u!4 &1599170753 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8760948397501263607, guid: bcade7d41233828498fd2677070cee82, type: 3}
   m_PrefabInstance: {fileID: 1599170752}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1599170754
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1360332999}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 363aef87f6ff8a347b101ad47fb838f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  IsOnFire: 0
+  fireEffect: {fileID: 0}
+  soundManager: {fileID: 0}
+  NearbyTables: []
+  NearbyStoves: []
 --- !u!23 &1615303136
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -15239,6 +15267,28 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1875374382 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8277322042758886477, guid: bcade7d41233828498fd2677070cee82, type: 3}
+  m_PrefabInstance: {fileID: 413216529}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1875374383
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1875374382}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 363aef87f6ff8a347b101ad47fb838f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  IsOnFire: 0
+  fireEffect: {fileID: 0}
+  soundManager: {fileID: 0}
+  NearbyTables: []
+  NearbyStoves: []
 --- !u!1 &1880160940
 GameObject:
   m_ObjectHideFlags: 0

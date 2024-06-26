@@ -330,7 +330,7 @@ public class FoodObject : IHoldable, IThrowable
             ColliderThis.enabled = false;
 
             CookProgress += Time.fixedDeltaTime / BakeTime;
-            CookProgress = Mathf.Clamp(CookProgress, 0f, 2.5f);
+            CookProgress = Mathf.Clamp(CookProgress, 0f, 5f);
 
             if (State == FoodState.Raw && CookProgress >= 1f && FoodPrefab1.activeSelf)
             {
@@ -338,7 +338,7 @@ public class FoodObject : IHoldable, IThrowable
                 FoodPrefab2.SetActive(true);
                 State = FoodState.Fried; // 수정: 상태를 Fried로 변경
             }
-            if (State == FoodState.Fried && CookProgress >= 2.5f && FoodPrefab2.activeSelf)
+            if (State == FoodState.Fried && CookProgress >= 5f && FoodPrefab2.activeSelf)
             {
                 FoodPrefab2.SetActive(false);
                 FoodPrefab3.SetActive(true);
