@@ -174,7 +174,7 @@ public class Table : MonoBehaviourPun
         {
             isPowderTouching = true;
             powderContactTime += Time.deltaTime;
-            Debug.Log(powderContactTime);
+            //Debug.Log(powderContactTime);
             if (powderContactTime >= 2f)
             {
                 RequestExtinguish();

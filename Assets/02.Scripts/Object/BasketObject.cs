@@ -95,7 +95,7 @@ public class BasketObject : IHoldable
                         fireObject.MakeFire();
                         FireSlider.gameObject.SetActive(true);
                         hasCaughtFireOnce = true;
-                        soundManager.PlayAudio("Fire", true, true);
+                        Debug.Log("켜짐");
                     }
                 }
 
@@ -106,7 +106,6 @@ public class BasketObject : IHoldable
                 else if (!fireObject._isOnFire && MyFryMachine.fireObject._isOnFire)
                 {
                     MyFryMachine.fireObject.RequestExtinguish();
-                    soundManager.StopAudio("Warning");
                 }
             }
             else
@@ -257,7 +256,6 @@ public class BasketObject : IHoldable
             if (fireObject.contactTime >= 1f)
             {
                 fireObject.RequestExtinguish();
-                soundManager.StopAudio("Fire");
             }
         }
     }

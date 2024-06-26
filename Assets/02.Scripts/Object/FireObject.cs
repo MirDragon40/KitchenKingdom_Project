@@ -11,10 +11,13 @@ public class FireObject : MonoBehaviourPun
     private PhotonView _pv;
 
     public SoundManager soundManager;
+    private bool isSoundPlaying = false; // 불이 켜져있는 팬이 있는지 체크
+    public FireObject[] fans;
     private void Start()
     {
         _pv = GetComponent<PhotonView>();
         soundManager = FindObjectOfType<SoundManager>();
+        fans = FindObjectsOfType<FireObject>();
     }
     public void RequestMakeFire()
     {
@@ -30,10 +33,15 @@ public class FireObject : MonoBehaviourPun
         Debug.Log(gameObject.name);
         _isOnFire = true;
         fireEffect.Play();
+        if (!isSoundPlaying)
+        {
+            soundManager.PlayAudio("Fire", true, true);
+            isSoundPlaying = true; 
+        }
     }
     public void RequestExtinguish()
     {
-
+        Debug.Log("불꺼짐");
             _pv.RPC("ExtinguishFireObject", RpcTarget.All);
         
     }
@@ -45,8 +53,28 @@ public class FireObject : MonoBehaviourPun
         {
             fireEffect.Stop();
         }
-    }
 
+        if (!IsAnyFanOnFire())
+        {
+            soundManager.StopAudio("Warning");
+            soundManager.StopAudio("Fire");
+            isSoundPlaying = false; // 사운드가 중지됨을 표시
+        }
+
+
+        contactTime = 0f;
+    }
+    private bool IsAnyFanOnFire()
+    {
+        foreach (var fan in fans)
+        {
+            if (fan._isOnFire)
+            {
+                return true; // 하나라도 불이 켜져 있으면 true 반환
+            }
+        }
+        return false; // 모든 팬이 불이 꺼져 있으면 false 반환
+    }
     private void OnTriggerStay(Collider other)
     {
         if (_isOnFire && other.CompareTag("Powder"))
