@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class UI_Option : MonoBehaviour
 {
@@ -16,7 +17,7 @@ public class UI_Option : MonoBehaviour
     }
     public void OnControlsButton() 
     {
-        
+        GameManager.Instance.ControlImage.gameObject.SetActive(true);
     }
     public void OnQuitButton() 
     {

@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting.FullSerializer.Internal;
 using UnityEngine;
+using UnityEngine.UI;
 
 public enum GameState
 {
@@ -25,6 +26,8 @@ public class GameManager : MonoBehaviour
     public GameObject OptionUl;
     private bool _optionUlOpen = false;
 
+    public Image ControlImage;
+
     public int CurrentStage { get; set; }
 
 
@@ -42,6 +45,7 @@ public class GameManager : MonoBehaviour
 
         DontDestroyOnLoad(gameObject);
         OptionUl.gameObject.SetActive(false);
+        ControlImage.gameObject.SetActive(false);
     }
 
     private void Update()
@@ -57,6 +61,7 @@ public class GameManager : MonoBehaviour
             else
             {
                 OptionUl.gameObject.SetActive(true);
+                ControlImage.gameObject.SetActive(false);
                 _optionUlOpen = true;
             }
         }

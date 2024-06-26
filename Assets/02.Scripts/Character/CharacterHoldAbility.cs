@@ -245,11 +245,11 @@ public class CharacterHoldAbility : CharacterAbility
     public void SpawnPlateOnHand()
     {
         Character character = GetComponent<Character>();
-        GameObject dishPrefab = Resources.Load<GameObject>("Plate_Stage1");
+        GameObject dishPrefab = Resources.Load<GameObject>("Plate_Combination");
 
         if (dishPrefab != null)
         {
-            GameObject dish = PhotonNetwork.InstantiateRoomObject("Plate_Stage1", HandTransform.position, HandTransform.rotation);
+            GameObject dish = PhotonNetwork.InstantiateRoomObject("Plate_Combination", HandTransform.position, HandTransform.rotation);
 
             IHoldable holdable = dish.GetComponent<IHoldable>();
 
@@ -272,11 +272,11 @@ public class CharacterHoldAbility : CharacterAbility
             return;
         }
 
-        GameObject dishPrefab = Resources.Load<GameObject>("Plate_Stage1");
+        GameObject dishPrefab = Resources.Load<GameObject>("Plate_Combination");
 
         if (dishPrefab != null)
         {
-            GameObject dish = PhotonNetwork.InstantiateRoomObject("Plate_Stage1", HandTransform.position, HandTransform.rotation);
+            GameObject dish = PhotonNetwork.InstantiateRoomObject("Plate_Combination", HandTransform.position, HandTransform.rotation);
 
 
             IHoldable holdable = dish.GetComponent<IHoldable>();

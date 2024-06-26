@@ -203,20 +203,7 @@ public class FoodCombination : MonoBehaviour
             icon.gameObject.SetActive(false);
         }
 
-        if (Ingrediants["bread"] && Ingrediants["patty"] && (Ingrediants["lettuce"] || Ingrediants["tomato"] || Ingrediants["cheese"]))
-        {
-            AvailableIngrediants[0].SetActive(true); // 0 빵 1 패티 2 양상추 3 빵아래 4 콜라 5 감튀 6 토마토 7 치즈 8 치킨 
-            AvailableIngrediants[1].SetActive(true);
-            AvailableIngrediants[2].SetActive(true);
-            AvailableIngrediants[3].SetActive(true);
-            Ingrediants["burger"] = true;
 
-            IsReadyServe = true;
-            UI_FoodIcon[0].gameObject.SetActive(false); // 0 빵 1 양상추 2 패티 3 콜라 4 감튀 5 버거 6 토마토 7 치즈 8 치킨
-            UI_FoodIcon[1].gameObject.SetActive(false);
-            UI_FoodIcon[2].gameObject.SetActive(false);
-            UI_FoodIcon[5].gameObject.SetActive(true);
-        }
 
         if (!Ingrediants["burger"])
         {
@@ -286,14 +273,46 @@ public class FoodCombination : MonoBehaviour
         {
             UI_FoodIcon[4].gameObject.SetActive(true);
             AvailableIngrediants[5].SetActive(true);
+            IsReadyServe = true;
         }
         if (Ingrediants["chicken"])
         {
             UI_FoodIcon[8].gameObject.SetActive(true);
             AvailableIngrediants[8].SetActive(true);
+            IsReadyServe = true;
         }
 
+        if (Ingrediants["bread"] && Ingrediants["patty"] && (Ingrediants["lettuce"] || Ingrediants["tomato"] || Ingrediants["cheese"]))
+        {
+            AvailableIngrediants[0].SetActive(true); // 0 빵 1 패티 2 양상추 3 빵아래 4 콜라 5 감튀 6 토마토 7 치즈 8 치킨 
+            AvailableIngrediants[1].SetActive(true);
+            AvailableIngrediants[3].SetActive(true);
+            if (Ingrediants["lettuce"])
+            {
+                UI_FoodIcon[5].gameObject.SetActive(true);
+                AvailableIngrediants[2].SetActive(true);
+                Ingrediants["burger"] = true;
+            }
+            else if (Ingrediants["tomato"])
+            {
+                UI_FoodIcon[9].gameObject.SetActive(true);
+                AvailableIngrediants[6].SetActive(true);
+                Ingrediants["tomatoBurger"] = true;
+            }
+            else if (Ingrediants["cheese"])
+            {
+                UI_FoodIcon[10].gameObject.SetActive(true);
+                AvailableIngrediants[7].SetActive(true);
+                Ingrediants["cheeseBurger"] = true;
+            }
 
+            IsReadyServe = true;
+            UI_FoodIcon[0].gameObject.SetActive(false); // 0 빵 1 양상추 2 패티 3 콜라 4 감튀 5 버거 6 토마토 7 치즈 8 치킨
+            UI_FoodIcon[1].gameObject.SetActive(false);
+            UI_FoodIcon[2].gameObject.SetActive(false);
+            UI_FoodIcon[6].gameObject.SetActive(false);
+            UI_FoodIcon[7].gameObject.SetActive(false);
+        }
 
     }
 }

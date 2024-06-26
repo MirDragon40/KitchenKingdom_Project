@@ -18,7 +18,21 @@ public class PlateSubmitPlace : MonoBehaviour
     {
         { "burgerCokeFry", 50 },
         { "burgerCoke", 30 },
-        { "burger", 15 }
+        { "burger", 15 },
+        { "burgerFry", 40 },
+        { "cheeseBurger", 15 },
+        { "cheeseBurgerCoke", 30 },
+        { "cheeseBurgerCokeFry", 50 },
+        { "cheeseBurgerFry", 40 },
+        { "tomatoBurger", 15 },
+        { "tomatoBurgerCoke", 30 },
+        { "tomatoBurgerCokeFry", 50 },
+        { "tomatoBurgerFry", 40 },
+        { "chickenCokeFry", 40 },
+        { "chickenCoke", 20 },
+        { "chicken", 15 },
+        { "cokeFry", 30 },
+        { "fry", 15 },
     };
 
     private void Awake()
@@ -35,10 +49,7 @@ public class PlateSubmitPlace : MonoBehaviour
             _pv.RPC("SubmitPlate", RpcTarget.All);
             SoundManager.Instance.PlayAudio("Reappearance", false, true);
         }
-/*        if (Input.GetKeyDown(KeyCode.Alpha3))
-        {
-            ShowScoreUI(25);
-        }*/
+
     }
 
     private void ShowScoreUI(int score)
@@ -93,6 +104,7 @@ public class PlateSubmitPlace : MonoBehaviour
                 {
                     if (_foodCombo.IsReadyServe)
                     {
+                        _plateContent = string.Empty;
                         if (_foodCombo.Ingrediants["burger"] && _foodCombo.Ingrediants["coke"] && _foodCombo.Ingrediants["fry"])
                         {
                             _plateContent = "burgerCokeFry";
@@ -109,9 +121,64 @@ public class PlateSubmitPlace : MonoBehaviour
                         {
                             _plateContent = "burger";
                         }
-                        else
+                        
+                        if (_foodCombo.Ingrediants["tomatoBurger"] && _foodCombo.Ingrediants["coke"] && _foodCombo.Ingrediants["fry"])
                         {
-                            _plateContent = string.Empty;
+                            _plateContent = "tomatoBurgerCokeFry";
+                        }
+                        else if (_foodCombo.Ingrediants["tomatoBurger"] && _foodCombo.Ingrediants["coke"])
+                        {
+                            _plateContent = "tomatoBurgerCoke";
+                        }
+                        else if (_foodCombo.Ingrediants["tomatoBurger"] && _foodCombo.Ingrediants["fry"])
+                        {
+                            _plateContent = "tomatoBurgerFry";
+                        }
+                        else if (_foodCombo.Ingrediants["tomatoBurger"])
+                        {
+                            _plateContent = "tomatoBurger";
+                        }  
+                        
+                        if (_foodCombo.Ingrediants["cheeseBurger"] && _foodCombo.Ingrediants["coke"] && _foodCombo.Ingrediants["fry"])
+                        {
+                            _plateContent = "cheeseBurgerCokeFry";
+                        }
+                        else if (_foodCombo.Ingrediants["cheeseBurger"] && _foodCombo.Ingrediants["coke"])
+                        {
+                            _plateContent = "cheeseBurgerCoke";
+                        }
+                        else if (_foodCombo.Ingrediants["cheeseBurger"] && _foodCombo.Ingrediants["fry"])
+                        {
+                            _plateContent = "cheeseBurgerFry";
+                        }
+                        else if (_foodCombo.Ingrediants["cheeseBurger"])
+                        {
+                            _plateContent = "cheeseBurger";
+                        }               
+                        
+                        if (_foodCombo.Ingrediants["chicken"] && _foodCombo.Ingrediants["coke"] && _foodCombo.Ingrediants["fry"])
+                        {
+                            _plateContent = "chickenCokeFry";
+                        }
+                        else if (_foodCombo.Ingrediants["chicken"] && _foodCombo.Ingrediants["coke"])
+                        {
+                            _plateContent = "chickenCoke";
+                        }
+                        else if (_foodCombo.Ingrediants["chicken"])
+                        {
+                            _plateContent = "chicken";
+                        }
+
+                        if (_foodCombo.Ingrediants["burger"] && _foodCombo.Ingrediants["tomatoBurger"] && _foodCombo.Ingrediants["cheeseBurger"] && !_foodCombo.Ingrediants["chicken"])
+                        {
+                            if (_foodCombo.Ingrediants["coke"] && _foodCombo.Ingrediants["fry"])
+                            {
+                                _plateContent = "cokeFry";
+                            }
+                            else if (_foodCombo.Ingrediants["fry"])
+                            {
+                                _plateContent = "fry";
+                            }
                         }
                         IsServeable = true;
                         _holdability.IsServeable = true;
