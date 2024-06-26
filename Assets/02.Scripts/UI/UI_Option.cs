@@ -11,8 +11,8 @@ public class UI_Option : MonoBehaviour
     }
     public void OnResumeButton() 
     {
-        int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
-        SceneManager.LoadScene(0);
+        string currentSceneName = SceneManager.GetActiveScene().name;
+        SceneManager.LoadScene(currentSceneName);
     }
     public void OnControlsButton() 
     {
