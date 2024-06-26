@@ -59,7 +59,7 @@ public class OrderManager : MonoBehaviourPun
         MyScrollView = GameObject.FindObjectOfType<UI_BilgeScrollView>();
 
         Recipies["burger"] = new List<string> { "bread", "patty", "lettuce" };
-        Recipies["burgerFry"] = new List<string> { "bread", "patty", "lettuce", "Fry" };
+        Recipies["burgerFry"] = new List<string> { "bread", "patty", "lettuce", "fry" };
         Recipies["burgerCoke"] = new List<string> { "bread", "patty", "lettuce", "coke" };
         Recipies["burgerCokeFry"] = new List<string> { "bread", "patty", "lettuce", "coke", "fry" };
         Recipies["cokeFry"] = new List<string> {"coke", "fry" };
@@ -71,6 +71,11 @@ public class OrderManager : MonoBehaviourPun
         Recipies["cheeseBurgerCoke"] = new List<string> { "bread", "patty", "cheese", "coke"};
         Recipies["cheeseBurgerCokeFry"] = new List<string> { "bread", "patty", "cheese", "coke", "fry"};
         Recipies["cheeseBurgerFry"] = new List<string> { "bread", "patty", "cheese", "fry"};
+        Recipies["chicken"] = new List<string> {"chicken"};
+        Recipies["chickenCoke"] = new List<string> {"chicken", "coke"};
+        Recipies["chickenCokeFry"] = new List<string> {"chicken", "coke", "fry"};
+        Recipies["fry"] = new List<string> {"fry"};
+
 
 
 
