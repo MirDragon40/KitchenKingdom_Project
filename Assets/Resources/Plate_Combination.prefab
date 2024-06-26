@@ -631,7 +631,7 @@ GameObject:
   - component: {fileID: -5982418873564514682}
   - component: {fileID: -8513559806767863457}
   m_Layer: 0
-  m_Name: Plate_Stage1
+  m_Name: Plate_Combination
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

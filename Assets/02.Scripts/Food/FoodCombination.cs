@@ -51,6 +51,28 @@ public class FoodCombination : MonoBehaviour
                 Ingrediants["fry"] = false;
                 Ingrediants["burger"] = false;
                 break;
+            case 3:
+                Ingrediants["bread"] = false;
+                Ingrediants["patty"] = false;
+                Ingrediants["lettuce"] = false;
+                Ingrediants["tomato"] = false;
+                Ingrediants["cheese"] = false;
+                Ingrediants["chicken"] = false;
+                Ingrediants["coke"] = false;
+                Ingrediants["fry"] = false;
+                Ingrediants["burger"] = false;
+                break;
+            case 4:
+                Ingrediants["bread"] = false;
+                Ingrediants["patty"] = false;
+                Ingrediants["lettuce"] = false;
+                Ingrediants["tomato"] = false;
+                Ingrediants["cheese"] = false;
+                Ingrediants["chicken"] = false;
+                Ingrediants["coke"] = false;
+                Ingrediants["fry"] = false;
+                Ingrediants["burger"] = false;
+                break;
             default:
                 break;
         }
@@ -173,6 +195,25 @@ public class FoodCombination : MonoBehaviour
 
             PV.RPC("RefreshPlate", RpcTarget.All);
         }
+        else if (submittedFood.ItemType == EItemType.Food && submittedFood.FoodType == FoodType.Tomato && !Ingrediants["tomato"] && submittedFood.State == FoodState.Cut)
+        {
+            PV.RPC("SetActiveIngrediant", RpcTarget.All, "tomato");
+            PhotonNetwork.Destroy(submittedFood.gameObject);
+
+            PV.RPC("RefreshPlate", RpcTarget.All);
+        }       
+        else if (submittedFood.ItemType == EItemType.Food && submittedFood.FoodType == FoodType.Cheese && !Ingrediants["cheese"])
+        {
+            PV.RPC("SetActiveIngrediant", RpcTarget.All, "cheese");
+            PhotonNetwork.Destroy(submittedFood.gameObject);
+            PV.RPC("RefreshPlate", RpcTarget.All);
+        }
+        else if (submittedFood.ItemType == EItemType.Food && submittedFood.FoodType == FoodType.Chicken && !Ingrediants["chicken"] && submittedFood.State == FoodState.Fried)
+        {
+            PV.RPC("SetActiveIngrediant", RpcTarget.All, "chicken");
+            PhotonNetwork.Destroy(submittedFood.gameObject);
+            PV.RPC("RefreshPlate", RpcTarget.All);
+        }
 
     }
     [PunRPC]
@@ -215,6 +256,26 @@ public class FoodCombination : MonoBehaviour
                         UI_FoodIcon[1].gameObject.SetActive(true);
                     }
                 }
+                if (!Ingrediants["tomatoBurger"])
+                {
+                    if (Ingrediants["bread"])
+                    {
+                        AvailableIngrediants[0].SetActive(true);
+                        AvailableIngrediants[3].SetActive(true);
+                        UI_FoodIcon[0].gameObject.SetActive(true);
+                    }
+                    if (Ingrediants["patty"])
+                    {
+                        AvailableIngrediants[1].SetActive(true);
+                        UI_FoodIcon[2].gameObject.SetActive(true);
+                    }
+                    if (Ingrediants["tomato"])
+                    {
+                        AvailableIngrediants[2].SetActive(true); // *****
+                        UI_FoodIcon[1].gameObject.SetActive(true); // ****
+                    }
+                }
+
 
                 if (Ingrediants["coke"])
                 {
