@@ -282,8 +282,23 @@ public class OrderManager : MonoBehaviourPun
     [PunRPC]
     public void AddTotalScore(int score)
     {
-        GameManager.Instance.TotalScore += score;
 
+        if (GameManager.Instance.CurrentStage == 1)
+        {
+            GameManager.Instance.StageScore[0] += score;
+        }
+        else if (GameManager.Instance.CurrentStage == 2)
+        {
+            GameManager.Instance.StageScore[1] += score;
+        }
+        else if (GameManager.Instance.CurrentStage == 3)
+        {
+            GameManager.Instance.StageScore[2] += score;
+        }
+        else if (GameManager.Instance.CurrentStage == 4)
+        {
+            GameManager.Instance.StageScore[3] += score;
+        }
     }
 
 
