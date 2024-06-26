@@ -9,27 +9,12 @@ EditorBuildSettings:
     path: Assets/01.Scenes/GatheringScene.unity
     guid: da109ba800a58134fb3e169039a91bdd
   - enabled: 0
-    path: Assets/01.Scenes/JoonScene.unity
-    guid: 0fcfab3ab9615ed448fd917ddbaae8a0
-  - enabled: 0
-    path: Assets/01.Scenes/SubinScene.unity
-    guid: bba65f59282b4164abaa782ad7f1289a
-  - enabled: 0
-    path: Assets/01.Scenes/MinSungScene.unity
-    guid: 8f8d02a55c905af479b4a2af70dbaf5f
-  - enabled: 0
-    path: Assets/01.Scenes/ReviewScene.unity
-    guid: 695f8319a5892a64a86207c9d466dd5e
-  - enabled: 0
-    path: Assets/01.Scenes/YejinScene1.unity
-    guid: 7670eae49b71372458cc0aaf3f12f931
-  - enabled: 0
     path: Assets/01.Scenes/LoadingScene.unity
     guid: fdc7e158acbd38e408c38dda88c88a5f
-  - enabled: 0
+  - enabled: 1
     path: Assets/01.Scenes/Stage_1_Beta.unity
     guid: bf3e14e7a73492c4099e6a1a23bb04cb
-  - enabled: 1
+  - enabled: 0
     path: Assets/01.Scenes/Stage_3_Beta.unity
     guid: ca182c5c15045ae4db6196e507fa1a9d
   m_configObjects: {}

@@ -33,9 +33,23 @@ public class OrderManager : MonoBehaviourPun
 
     public Dictionary<string, int> FoodScores = new Dictionary<string, int>
 {
-    { "burger", 15 },
-    { "burgerCoke", 30 },
-    { "burgerCokeFry", 50 }
+        { "burgerCokeFry", 50 },
+        { "burgerCoke", 30 },
+        { "burger", 15 },
+        { "burgerFry", 40 },
+        { "cheeseBurger", 15 },
+        { "cheeseBurgerCoke", 30 },
+        { "cheeseBurgerCokeFry", 50 },
+        { "cheeseBurgerFry", 40 },
+        { "tomatoBurger", 15 },
+        { "tomatoBurgerCoke", 30 },
+        { "tomatoBurgerCokeFry", 50 },
+        { "tomatoBurgerFry", 40 },
+        { "chickenCokeFry", 40 },
+        { "chickenCoke", 20 },
+        { "chicken", 15 },
+        { "cokeFry", 30 },
+        { "fry", 15 },
 };
 
     private PhotonView _pv;
@@ -82,22 +96,6 @@ public class OrderManager : MonoBehaviourPun
     }
     void Update()
     {
-
-        /*        if (Input.GetKeyDown(KeyCode.Alpha1))
-                {
-                    string orderName = "burger";
-                    _isGenerating = true;
-                    UI_Bilge newBill = MyScrollView.AddItem(3);
-                    newBill.OrderedFood = orderName;
-                    newBill.IngrediantsNameList = Recipies[orderName];
-                    GeneratedOrderList.Add(orderName);
-                }
-
-                if (Input.GetKeyDown(KeyCode.Alpha2))
-                {
-                    SubmitOrder("burger");
-                }
-        */
 
         if (Input.GetKeyDown(KeyCode.Alpha5))
         {
