@@ -35,10 +35,10 @@ public class PlateSubmitPlace : MonoBehaviour
             _pv.RPC("SubmitPlate", RpcTarget.All);
             SoundManager.Instance.PlayAudio("Reappearance", false, true);
         }
-        if (Input.GetKeyDown(KeyCode.Alpha3))
+/*        if (Input.GetKeyDown(KeyCode.Alpha3))
         {
             ShowScoreUI(25);
-        }
+        }*/
     }
 
     private void ShowScoreUI(int score)
