@@ -92,7 +92,7 @@ public class UI_Timer : MonoBehaviourPunCallbacks
         Debug.Log("TimerEnded 함수 실행");
         TimeOverTextUI.gameObject.SetActive(true);
         TimeOverAnimator.SetTrigger("TimeOver");
-        GameManager.Instance.ScoreInit();
+        GameManager.Instance.TotalScoreInit();
         StartCoroutine(StopGameAfterAnimation());
     }
 

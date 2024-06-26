@@ -158,11 +158,7 @@ MonoBehaviour:
   - {fileID: 341479427}
   - {fileID: 523136918}
   - {fileID: 343851050}
-  StageScore: 00000000000000000000000000000000000000000000000000000000
-  Stage1_Score: 0
-  Stage2_Score: 0
-  Stage3_Score: 0
-  Stage4_Score: 0
+  StageScore: 00000000000000000000000000000000
   TotalScore: 0
   OptionUl: {fileID: 408633272}
 --- !u!4 &1466002
