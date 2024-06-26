@@ -1,6 +1,7 @@
 using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting.FullSerializer.Internal;
 using UnityEngine;
 
 public enum GameState
@@ -18,18 +19,13 @@ public class GameManager : MonoBehaviour
     public GameState State = GameState.Go; // 게임 상태, TimeScale관리
     public Transform[] SpawnPoints= new Transform[4];
 
-    public int[] StageScore = new int[7];
-
-    public int Stage1_Score = 0;
-    public int Stage2_Score = 0;
-    public int Stage3_Score = 0;
-    public int Stage4_Score = 0;
+    public int[] StageScore = new int[4];
     public int TotalScore = 0;
 
     public GameObject OptionUl;
     private bool _optionUlOpen = false;
 
-    public int CurrentStage { get; private set; }
+    public int CurrentStage { get; set; }
 
 
     private void Awake()
@@ -65,7 +61,8 @@ public class GameManager : MonoBehaviour
             }
         }
 
-        TotalScore  = Stage1_Score + Stage2_Score + Stage3_Score + Stage4_Score;
+       
+
     }
 
     private void Start()
@@ -84,5 +81,19 @@ public class GameManager : MonoBehaviour
         Vector3 spawnPosition = SpawnPoints[spawnIndex].position;
         Quaternion spawnRotation = SpawnPoints[spawnIndex].rotation;
         PhotonNetwork.Instantiate("Character1", spawnPosition, spawnRotation);
+    }
+
+    public void ScoreInit()
+    {
+        if (CurrentStage == 1)
+        {
+            //StageScore[0] = OrderManager.Instance.sc
+        }
+
+        foreach (int score in StageScore)
+        {
+            TotalScore += score;
+        }
+        
     }
 }
