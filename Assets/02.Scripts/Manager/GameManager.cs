@@ -39,7 +39,6 @@ public class GameManager : MonoBehaviour
         {
             Destroy(this.gameObject);
         }
-        CurrentStage = 2;
 
         DontDestroyOnLoad(gameObject);
         OptionUl.gameObject.SetActive(false);

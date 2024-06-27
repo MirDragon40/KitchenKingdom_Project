@@ -32,6 +32,13 @@ public class DishObject : IHoldable
         }
 
     }
+    private void Update()
+    {
+        if (_holdCharacter != null)
+        {
+            transform.localPosition = Vector3.zero;
+        }
+    }
     public override void Hold(Character character, Transform handTransform)
     {
         if (PhotonNetwork.IsMasterClient)
@@ -48,6 +55,7 @@ public class DishObject : IHoldable
         transform.parent = handTransform;
         transform.localPosition = Vector3.zero;
         transform.localRotation = Quaternion.identity;
+        _holdCharacter = character;
         SoundManager.Instance.PlayAudio("Dish", false, false);
     }
 
