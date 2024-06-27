@@ -46,10 +46,6 @@ public class UI_Story : MonoBehaviour
         SpeechBubbleImage_A.gameObject.SetActive(false);
         SpeechBubbleImage_B.gameObject.SetActive(false);
 
-        // 2
-        //ManImage.gameObject.SetActive(false);
-        //ManImageBackgroundImage.gameObject.SetActive(false);
-
         // FadeOut
         FadeImage.gameObject.SetActive(false);
     }
@@ -84,17 +80,8 @@ public class UI_Story : MonoBehaviour
     private void Second_Text()
     {
         SpeechBubbleImage_B.gameObject.SetActive(true);
-        string text = "7일 동안 진행하는 대회!\n우승하고 트로피를 차지하세요!";
+        string text = "4일 동안 진행하는 대회!\n우승하고 트로피를 차지하세요!";
         StartCoroutine(TypeText(StoryText2, text));
-    }
-
-    // 2
-    private void Third_Text() 
-    {
-        ManImageBackgroundImage.gameObject.SetActive(true);
-        StartCoroutine(FadeOut_ManImage());
-        string text = "오 대박";
-        StartCoroutine(TypeText(StoryText3, text));
     }
 
     // 1~2 중간

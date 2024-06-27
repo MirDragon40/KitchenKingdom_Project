@@ -24,6 +24,7 @@ public class Stage1Manager : MonoBehaviour
 
             GameManager.Instance.SpawnPlayer();
         }
+        GameManager.Instance.State = GameState.Ready;
     }
 
 }

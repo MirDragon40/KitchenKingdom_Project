@@ -10,12 +10,14 @@ public enum GameState
     Ready,
     Go,
     TimeOver,
+    Result,
 }
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
     public GameState State = GameState.Go; // 게임 상태, TimeScale관리
+    private GameObject _spawnPoint;
     public Transform[] SpawnPoints = new Transform[4];
 
     public int[] StageScore = new int[4];
@@ -25,6 +27,7 @@ public class GameManager : MonoBehaviour
     private bool _optionUlOpen = false;
 
     public Image ControlImage;
+
 
     public int CurrentStage { get; set; }
 
@@ -44,15 +47,39 @@ public class GameManager : MonoBehaviour
         OptionUl.gameObject.SetActive(false);
         ControlImage.gameObject.SetActive(false);
     }
+    private void OnEnable()
+    {
+
+        _spawnPoint = GameObject.Find("CharacterSpawnPoints");
+        if (_spawnPoint != null )
+        {
+            for (int i = 0; i < SpawnPoints.Length; i++)
+            {
+                SpawnPoints[i] = _spawnPoint.transform.GetChild(i).transform;
+            }
+        }
+
+
+
+    }
 
     private void Update()
     {
+        if (State == GameState.Ready)
+        {
+            Time.timeScale = 0;
+        }
+        else if (State == GameState.Go)
+        {
+            Time.timeScale = 1f;
+        }
+
         // 옵션창 켜고 끄기
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             if (_optionUlOpen)
             {
-                OptionUl.gameObject.SetActive(false);
+                //OptionUl.gameObject.SetActive(false);
                 _optionUlOpen = false;
             }
             else
@@ -61,6 +88,8 @@ public class GameManager : MonoBehaviour
                 ControlImage.gameObject.SetActive(false);
                 _optionUlOpen = true;
             }
+
+
         }
 
 
