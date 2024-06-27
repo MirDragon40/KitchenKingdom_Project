@@ -55,7 +55,7 @@ public class ChoppingBoard : CookStand
         fillSliderCoroutine = StartCoroutine(FillSliderOverTime(duration));
     }
 
-    protected void OnTriggerStay(Collider other)
+    protected override void OnTriggerStay(Collider other)
     {
         if (other.CompareTag("Player") && onChoppingBoard.FoodOnBoard != null)
         {
