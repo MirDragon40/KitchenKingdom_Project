@@ -17313,7 +17313,7 @@ PrefabInstance:
     - target: {fileID: 3557536189269446390, guid: 66d895dab0f101c4b80051140132a9a0, type: 3}
       propertyPath: bgmClip
       value: 
-      objectReference: {fileID: 8300000, guid: 653f7492f1573f24ab1942de174088e7, type: 3}
+      objectReference: {fileID: 8300000, guid: 475f4837af487ce4a9e68bb227455e4c, type: 3}
     - target: {fileID: 3557536189269446390, guid: 66d895dab0f101c4b80051140132a9a0, type: 3}
       propertyPath: audioClips.Array.size
       value: 12
