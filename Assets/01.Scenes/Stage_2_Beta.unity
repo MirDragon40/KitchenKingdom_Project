@@ -160,8 +160,8 @@ MonoBehaviour:
   - {fileID: 343851050}
   StageScore: 00000000000000000000000000000000
   TotalScore: 0
-  OptionUl: {fileID: 0}
-  ControlImage: {fileID: 0}
+  OptionUl: {fileID: 1342483349}
+  ControlImage: {fileID: 1782762873}
 --- !u!4 &1466002
 Transform:
   m_ObjectHideFlags: 0
@@ -2546,27 +2546,27 @@ PrefabInstance:
       objectReference: {fileID: 55455119}
     - target: {fileID: 2574735518972578609, guid: f1dfd9727d7247b4bb99cac0ec8a435b, type: 3}
       propertyPath: m_Size.x
-      value: 0.014583751
+      value: 0.01458375
       objectReference: {fileID: 0}
     - target: {fileID: 2574735518972578609, guid: f1dfd9727d7247b4bb99cac0ec8a435b, type: 3}
       propertyPath: m_Size.y
-      value: 0.042188026
+      value: 0.062379014
       objectReference: {fileID: 0}
     - target: {fileID: 2574735518972578609, guid: f1dfd9727d7247b4bb99cac0ec8a435b, type: 3}
       propertyPath: m_Size.z
-      value: 0.0025302474
+      value: 0.0025302477
       objectReference: {fileID: 0}
     - target: {fileID: 2574735518972578609, guid: f1dfd9727d7247b4bb99cac0ec8a435b, type: 3}
       propertyPath: m_Center.x
-      value: 0.0001366303
+      value: 0.00013663025
       objectReference: {fileID: 0}
     - target: {fileID: 2574735518972578609, guid: f1dfd9727d7247b4bb99cac0ec8a435b, type: 3}
       propertyPath: m_Center.y
-      value: -0.011960482
+      value: -0.0018649551
       objectReference: {fileID: 0}
     - target: {fileID: 2574735518972578609, guid: f1dfd9727d7247b4bb99cac0ec8a435b, type: 3}
       propertyPath: m_Center.z
-      value: 0.0016575241
+      value: 0.001657525
       objectReference: {fileID: 0}
     - target: {fileID: 2678483795670061968, guid: f1dfd9727d7247b4bb99cac0ec8a435b, type: 3}
       propertyPath: m_Name
@@ -11408,6 +11408,18 @@ PrefabInstance:
     - target: {fileID: 2046235622856534948, guid: 55073aa0f5aa99d4a9c9d86c44518107, type: 3}
       propertyPath: m_TagString
       value: Stove
+      objectReference: {fileID: 0}
+    - target: {fileID: 2646201070075244070, guid: 55073aa0f5aa99d4a9c9d86c44518107, type: 3}
+      propertyPath: m_Size.z
+      value: 1.9521546
+      objectReference: {fileID: 0}
+    - target: {fileID: 2646201070075244070, guid: 55073aa0f5aa99d4a9c9d86c44518107, type: 3}
+      propertyPath: m_Center.x
+      value: -0.004718393
+      objectReference: {fileID: 0}
+    - target: {fileID: 2646201070075244070, guid: 55073aa0f5aa99d4a9c9d86c44518107, type: 3}
+      propertyPath: m_Center.z
+      value: -0.038850784
       objectReference: {fileID: 0}
     - target: {fileID: 3064645624665545083, guid: 55073aa0f5aa99d4a9c9d86c44518107, type: 3}
       propertyPath: sceneViewId
@@ -28237,6 +28249,50 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2099905771}
   m_Mesh: {fileID: 4300000, guid: 47c1421697edd00439084088bf4efb68, type: 3}
+--- !u!1 &2103473318
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2103473320}
+  - component: {fileID: 2103473319}
+  m_Layer: 0
+  m_Name: Stage2Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2103473319
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2103473318}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b552d71e08315a44a932f5756c5ef534, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &2103473320
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2103473318}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.83326876, y: 1.4432516, z: -3.9916677}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2106204735 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5329096209907429438, guid: 61a5605c41609634bac5baf8ef0820f1, type: 3}
@@ -28920,6 +28976,7 @@ SceneRoots:
   m_Roots:
   - {fileID: 721303852}
   - {fileID: 1616685700}
+  - {fileID: 2103473320}
   - {fileID: 1469636192}
   - {fileID: 45048703}
   - {fileID: 1055160667}
