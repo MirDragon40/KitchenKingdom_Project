@@ -58,7 +58,11 @@ public class GameManager : MonoBehaviour
                 SpawnPoints[i] = _spawnPoint.transform.GetChild(i).transform;
             }
         }
+        if (PhotonNetwork.IsConnected && _spawnPoint != null)
+        {
 
+            GameManager.Instance.SpawnPlayer();
+        }
 
 
     }
