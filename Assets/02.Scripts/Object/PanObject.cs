@@ -113,10 +113,9 @@ public class PanObject : IHoldable
                     // 불이 켜지는 시점
                     if (GrillingIngrediant.CookProgress >= 5f && !fireObject._isOnFire && !hasCaughtFireOnce)
                     {
-                        fireObject.MakeFire();
+                        fireObject.RequestMakeFire();
                         FireSlider.gameObject.SetActive(true);
                         hasCaughtFireOnce = true;
-                        soundManager.PlayAudio("Fire",true,true);
                     }
                 }
 
@@ -128,7 +127,6 @@ public class PanObject : IHoldable
                 else if (!fireObject._isOnFire && MyStove.fireObject._isOnFire)
                 {
                     MyStove.fireObject.RequestExtinguish();
-                    soundManager.StopAudio("Warning");
                 }
             }
             else
@@ -155,7 +153,9 @@ public class PanObject : IHoldable
             }
 
             GrillingIngrediant = null;
-            GrillingSlider.gameObject.SetActive(false);        
+            GrillingSlider.gameObject.SetActive(false);  
+            
+
         }
 
         // 분말과의 불 접촉 시간 관리
@@ -185,6 +185,7 @@ public class PanObject : IHoldable
         {
             DropFoodInTrash();
         }
+
     }
 
 
@@ -262,10 +263,6 @@ public class PanObject : IHoldable
         {
             isOnSurface = true;
         }
-/*        else if (other.CompareTag("Player"))
-        {
-
-        }*/
     }
 
     private void OnTriggerStay(Collider other)
@@ -303,7 +300,6 @@ public class PanObject : IHoldable
             if (fireObject.contactTime >= 1f)
             {
                 fireObject.RequestExtinguish();
-                soundManager.StopAudio("Fire");
             }
         }
     }
