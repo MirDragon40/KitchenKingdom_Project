@@ -56,6 +56,9 @@ public class DirtyPlate : MonoBehaviourPun
 
     public void RemoveDirtyPlate()
     {
-        PhotonNetwork.Destroy(gameObject);
+        if (PhotonView.IsMine)
+        {
+            PhotonNetwork.Destroy(gameObject);
+        }
     }
 }
