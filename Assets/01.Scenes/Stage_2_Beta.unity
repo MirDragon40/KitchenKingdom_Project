@@ -2546,27 +2546,27 @@ PrefabInstance:
       objectReference: {fileID: 55455119}
     - target: {fileID: 2574735518972578609, guid: f1dfd9727d7247b4bb99cac0ec8a435b, type: 3}
       propertyPath: m_Size.x
-      value: 0.014583751
+      value: 0.01458375
       objectReference: {fileID: 0}
     - target: {fileID: 2574735518972578609, guid: f1dfd9727d7247b4bb99cac0ec8a435b, type: 3}
       propertyPath: m_Size.y
-      value: 0.042188026
+      value: 0.062379014
       objectReference: {fileID: 0}
     - target: {fileID: 2574735518972578609, guid: f1dfd9727d7247b4bb99cac0ec8a435b, type: 3}
       propertyPath: m_Size.z
-      value: 0.0025302474
+      value: 0.0025302477
       objectReference: {fileID: 0}
     - target: {fileID: 2574735518972578609, guid: f1dfd9727d7247b4bb99cac0ec8a435b, type: 3}
       propertyPath: m_Center.x
-      value: 0.0001366303
+      value: 0.00013663025
       objectReference: {fileID: 0}
     - target: {fileID: 2574735518972578609, guid: f1dfd9727d7247b4bb99cac0ec8a435b, type: 3}
       propertyPath: m_Center.y
-      value: -0.011960482
+      value: -0.0018649551
       objectReference: {fileID: 0}
     - target: {fileID: 2574735518972578609, guid: f1dfd9727d7247b4bb99cac0ec8a435b, type: 3}
       propertyPath: m_Center.z
-      value: 0.0016575241
+      value: 0.001657525
       objectReference: {fileID: 0}
     - target: {fileID: 2678483795670061968, guid: f1dfd9727d7247b4bb99cac0ec8a435b, type: 3}
       propertyPath: m_Name
@@ -11408,6 +11408,18 @@ PrefabInstance:
     - target: {fileID: 2046235622856534948, guid: 55073aa0f5aa99d4a9c9d86c44518107, type: 3}
       propertyPath: m_TagString
       value: Stove
+      objectReference: {fileID: 0}
+    - target: {fileID: 2646201070075244070, guid: 55073aa0f5aa99d4a9c9d86c44518107, type: 3}
+      propertyPath: m_Size.z
+      value: 1.9521546
+      objectReference: {fileID: 0}
+    - target: {fileID: 2646201070075244070, guid: 55073aa0f5aa99d4a9c9d86c44518107, type: 3}
+      propertyPath: m_Center.x
+      value: -0.004718393
+      objectReference: {fileID: 0}
+    - target: {fileID: 2646201070075244070, guid: 55073aa0f5aa99d4a9c9d86c44518107, type: 3}
+      propertyPath: m_Center.z
+      value: -0.038850784
       objectReference: {fileID: 0}
     - target: {fileID: 3064645624665545083, guid: 55073aa0f5aa99d4a9c9d86c44518107, type: 3}
       propertyPath: sceneViewId
