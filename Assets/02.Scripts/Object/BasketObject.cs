@@ -72,7 +72,7 @@ public class BasketObject : IHoldable
                         hasCaughtFireOnce = false;
                     }
 
-                    FryingIngrediant.StartGrilling();
+                    FryingIngrediant.StartFrying();
                     FryingSlider.gameObject.SetActive(true);
                     FryingSlider.value = FryingIngrediant.CookProgress;
 
@@ -112,7 +112,7 @@ public class BasketObject : IHoldable
             {
                 if (FryingIngrediant != null)
                 {
-                    FryingIngrediant.StopGrilling();
+                    FryingIngrediant.StopFrying();
                 }
             }
 
@@ -124,7 +124,7 @@ public class BasketObject : IHoldable
 
             if (FryingIngrediant != null)
             {
-                FryingIngrediant.StopGrilling();
+                FryingIngrediant.StopFrying();
             }
 
             FryingIngrediant = null;
