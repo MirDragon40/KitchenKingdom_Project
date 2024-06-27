@@ -37,7 +37,6 @@ public class ChoppingBoard : CookStand
                     StopCoroutine(fillSliderCoroutine);
                 }
                 _photonView.RPC("StartChoppingRPC", RpcTarget.All, 3.0f);
-                SoundManager.PlayAudio("Cut", false, true);
             }
 
             
@@ -56,7 +55,7 @@ public class ChoppingBoard : CookStand
         fillSliderCoroutine = StartCoroutine(FillSliderOverTime(duration));
     }
 
-    protected void OnTriggerStay(Collider other)
+    protected override void OnTriggerStay(Collider other)
     {
         if (other.CompareTag("Player") && onChoppingBoard.FoodOnBoard != null)
         {
@@ -124,6 +123,7 @@ public class ChoppingBoard : CookStand
         if (foodObject == null)
             yield break;
 
+        SoundManager.PlayAudio("Cut", false, true);
         Animator.SetBool("Chopping", true); // 슬라이더가 진행될 때 애니메이션을 시작
 
         float startProgress = foodObject.CookProgress;

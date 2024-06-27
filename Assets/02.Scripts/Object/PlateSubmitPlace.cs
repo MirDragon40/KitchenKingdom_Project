@@ -47,9 +47,7 @@ public class PlateSubmitPlace : MonoBehaviour
         {
             Debug.Log(_plateContent);
             _pv.RPC("SubmitPlate", RpcTarget.All);
-            SoundManager.Instance.PlayAudio("Reappearance", false, true);
         }
-
     }
 
     private void ShowScoreUI(int score)
@@ -77,16 +75,23 @@ public class PlateSubmitPlace : MonoBehaviour
                 if (PhotonNetwork.IsMasterClient)
                 {
                     OrderManager.Instance.RequestAddDirtyPlates();
+                   
+                }
+                SoundManager.Instance.PlayAudio("Reappearance", false, true);
+            }
+
+            if (_foodCombo != null)
+            {
+                if (_foodCombo.PV.IsMine)
+                {
+                    PhotonNetwork.Destroy(_foodCombo.gameObject);
                 }
             }
         }
-
-        if (_foodCombo != null)
+        else
         {
-            if (_foodCombo.PV.IsMine)
-            {
-                PhotonNetwork.Destroy(_foodCombo.gameObject);
-            }
+            // 잘못된 음식 제출 시 사운드 재생
+            SoundManager.Instance.PlayAudio("Wrong", false, true);
         }
         _foodCombo = null;
         _plateContent = string.Empty;
