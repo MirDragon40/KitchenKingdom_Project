@@ -134,17 +134,25 @@ public class CharacterHoldAbility : CharacterAbility
             }
         }
 
-            foreach (Collider collider in colliders)
+        foreach (Collider collider in colliders)
+        {
+            if (collider.TryGetComponent<IHoldable>(out holdable))
             {
-                if (collider.TryGetComponent<IHoldable>(out holdable))
+                // 오브젝트가 스토브나 테이블과 연결된 경우 불이 난 상태를 확인
+                Stove stove = holdable.GetComponentInParent<Stove>();
+                Table table = holdable.GetComponentInParent<Table>();
+                if ((stove != null && stove.IsOnFire) || (table != null && table.IsOnFire))
                 {
-                    HoldableItem = holdable;
-                    holdable.Hold(_owner, HandTransform);
-                    animator.SetBool("Carry", true);
-                    break;
+                    continue;
                 }
+
+                HoldableItem = holdable;
+                holdable.Hold(_owner, HandTransform);
+                animator.SetBool("Carry", true);
+                break;
             }
-        
+        }
+
 
     }
 
@@ -165,6 +173,7 @@ public class CharacterHoldAbility : CharacterAbility
         HoldableItem = null;
 
         animator.SetBool("Carry", false);
+
     }
 
     // 음식 버린후 초기화
@@ -178,6 +187,7 @@ public class CharacterHoldAbility : CharacterAbility
                 FoodTrashDrop();
             }
         }
+
 
     }
 
