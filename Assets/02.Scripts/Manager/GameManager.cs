@@ -28,6 +28,7 @@ public class GameManager : MonoBehaviour
 
     public Image ControlImage;
 
+
     public int CurrentStage { get; set; }
 
 
@@ -66,7 +67,7 @@ public class GameManager : MonoBehaviour
         {
             if (_optionUlOpen)
             {
-                OptionUl.gameObject.SetActive(false);
+                //OptionUl.gameObject.SetActive(false);
                 _optionUlOpen = false;
             }
             else
@@ -75,6 +76,8 @@ public class GameManager : MonoBehaviour
                 ControlImage.gameObject.SetActive(false);
                 _optionUlOpen = true;
             }
+
+
         }
 
 
