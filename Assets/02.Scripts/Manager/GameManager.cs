@@ -10,12 +10,14 @@ public enum GameState
     Ready,
     Go,
     TimeOver,
+    Result,
 }
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
     public GameState State = GameState.Go; // 게임 상태, TimeScale관리
+    private GameObject _spawnPoint;
     public Transform[] SpawnPoints = new Transform[4];
 
     public int[] StageScore = new int[4];
@@ -43,6 +45,18 @@ public class GameManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
         OptionUl.gameObject.SetActive(false);
         ControlImage.gameObject.SetActive(false);
+    }
+    private void OnEnable()
+    {
+
+            _spawnPoint = GameObject.Find("CharacterSpawnPoints");
+        
+        for (int i = 0; i<SpawnPoints.Length; i++)
+        {
+            SpawnPoints[i] = _spawnPoint.transform.GetChild(i).transform;
+        }
+
+
     }
 
     private void Update()
