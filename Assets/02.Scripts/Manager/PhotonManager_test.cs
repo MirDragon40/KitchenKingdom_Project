@@ -11,7 +11,10 @@ public class PhotonManager_test : MonoBehaviourPunCallbacks
 
     private void Awake()
     {
-       // PhotonNetwork.AutomaticallySyncScene = true;
+        if (PhotonManager.Instance != null)
+        {
+            Destroy(this.gameObject);
+        }
     }
 
     private void Start()
@@ -78,6 +81,7 @@ public class PhotonManager_test : MonoBehaviourPunCallbacks
         Debug.Log($"RoomName: {PhotonNetwork.CurrentRoom.Name}");
         Debug.Log($"Current Players: {PhotonNetwork.CurrentRoom.PlayerCount}");
         // GatherManager.Instance.UpdatePlayerSlots();
+
         GameManager.Instance.SpawnPlayer();
 
     }

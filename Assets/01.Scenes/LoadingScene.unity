@@ -914,7 +914,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81699f1b33c8cb944b373f925fb686b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  NextScene: 0
+  NextScene: 3
   LoadingSliderUI: {fileID: 401531784}
 --- !u!114 &1144716113
 MonoBehaviour:

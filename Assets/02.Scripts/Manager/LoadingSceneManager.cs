@@ -8,7 +8,7 @@ using UnityEngine.UI;
 
 public class LoadingSceneManager : MonoBehaviour
 {
-    public SceneNames NextScene;
+    public static SceneNames NextScene;
     public Slider LoadingSliderUI;
 
     private float _minLoadingTime = 3f;  // 최소 로딩 시간
@@ -26,7 +26,7 @@ public class LoadingSceneManager : MonoBehaviour
         float startTime = Time.time;
 
         // 지정한 씬을 "비동기" 방식으로 로드한다.
-        AsyncOperation ao = SceneManager.LoadSceneAsync((int)NextScene);  // 20초가 걸린다고 가정
+        AsyncOperation ao = SceneManager.LoadSceneAsync(NextScene.ToString());  // 20초가 걸린다고 가정
 
         // 로드되는 씬의 모습이 화면에 보이지 않게 한다.
         ao.allowSceneActivation = false;

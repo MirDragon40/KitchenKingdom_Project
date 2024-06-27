@@ -156,7 +156,8 @@ public class GatherManager : MonoBehaviourPunCallbacks
     {
         if (_isStartButton)
         {
-            PhotonNetwork.LoadLevel("MainScene_Beta");
+            //LoadingSceneManager.NextScene = SceneNames.StoryScene;
+            PhotonNetwork.LoadLevel("StoryScene");
         }
         else
         {

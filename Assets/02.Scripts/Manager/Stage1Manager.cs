@@ -1,3 +1,4 @@
+using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -18,6 +19,11 @@ public class Stage1Manager : MonoBehaviour
     private void Start()
     {
         GameManager.Instance.CurrentStage = 1;
+        if (PhotonNetwork.IsConnected)
+        {
+
+            GameManager.Instance.SpawnPlayer();
+        }
     }
 
 }

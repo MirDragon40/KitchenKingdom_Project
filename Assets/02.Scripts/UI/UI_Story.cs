@@ -68,6 +68,7 @@ public class UI_Story : MonoBehaviour
         //NewsUI.SetActive(false);
         //Third_Text();
         // 다음으로 갈 씬 넣기
+        LoadingSceneManager.NextScene = SceneNames.Stage_1_Beta;
         SceneManager.LoadScene("LoadingScene");
     }
 
