@@ -60,6 +60,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 22efd737b28188b4faddbeb6e66e8c5e, type: 3}
   - {fileID: 8300000, guid: c5bb1eae98756f24aae477b70a987012, type: 3}
   - {fileID: 8300000, guid: 189727327941f684188a586ceeba46a5, type: 3}
+  - {fileID: 8300000, guid: 8d172030eb5da1a498c9f7478c10382a, type: 3}
   bgmClip: {fileID: 8300000, guid: 653f7492f1573f24ab1942de174088e7, type: 3}
   PhotonView: {fileID: 0}
 --- !u!114 &5323247829153196319

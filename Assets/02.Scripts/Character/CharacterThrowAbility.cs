@@ -51,7 +51,6 @@ public class CharacterThrowAbility : CharacterAbility
         {
             ThrowingDirectionSprite.SetActive(false);
             _owner.PhotonView.RPC("PlayerThrow",RpcTarget.All);
-
         }
 
     }
@@ -63,6 +62,7 @@ public class CharacterThrowAbility : CharacterAbility
         {
             Throwable.ThrowObject(transform.forward + new Vector3(0,0.4f, 0), ThrowPower);
             _owner.Animator.SetBool("Carry",false);
+            SoundManager.Instance.PlayAudio("Throw", false, true);
         }
         IsThrowable = false;
         Throwable = null;
