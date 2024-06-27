@@ -340,10 +340,12 @@ public class CharacterHoldAbility : CharacterAbility
 
         if (platePV == null || characterPV == null)
         {
-
             return;
         }
-
+        if (platePV.OwnerActorNr != characterPV.OwnerActorNr)
+        {
+            platePV.TransferOwnership(characterPV.OwnerActorNr);
+        }
         IHoldable holdable = platePV.GetComponent<IHoldable>();
         Character character = characterPV.GetComponent<Character>();
 
