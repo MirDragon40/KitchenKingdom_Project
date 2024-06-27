@@ -7,11 +7,9 @@ using UnityEngine.UI;
 
 public enum GameState
 {
-    CutScene,
+    Ready,
     Go,
-    Pause,
-    Over,
-    Ending
+    TimeOver,
 }
 
 public class GameManager : MonoBehaviour
@@ -72,10 +70,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        /*        if (PhotonNetwork.IsConnectedAndReady)
-                {
-                    SpawnPlayer();
-                }*/
+
     }
 
     public void SpawnPlayer()

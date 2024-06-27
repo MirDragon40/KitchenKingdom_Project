@@ -90,7 +90,7 @@ public class Sink : MonoBehaviourPun
         _pv.RPC(nameof(UpdateDirtyPlateNum), RpcTarget.AllBuffered, DirtyPlateNum + dirtyPlate.DirtyPlateNum);
         dishObject.Place(PlacePosition);
         characterHoldAbility.Place();
-        _pv.RPC(nameof(RemoveDirtyPlate), RpcTarget.AllBuffered, dirtyPlate.PhotonView.ViewID);
+        _pv.RPC(nameof(RemoveDirtyPlate), RpcTarget.MasterClient, dirtyPlate.PhotonView.ViewID);
     }
 
     [PunRPC]
