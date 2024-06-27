@@ -50,18 +50,30 @@ public class GameManager : MonoBehaviour
     private void OnEnable()
     {
 
-            _spawnPoint = GameObject.Find("CharacterSpawnPoints");
-        
-        for (int i = 0; i<SpawnPoints.Length; i++)
+        _spawnPoint = GameObject.Find("CharacterSpawnPoints");
+        if (_spawnPoint != null )
         {
-            SpawnPoints[i] = _spawnPoint.transform.GetChild(i).transform;
+            for (int i = 0; i < SpawnPoints.Length; i++)
+            {
+                SpawnPoints[i] = _spawnPoint.transform.GetChild(i).transform;
+            }
         }
+
 
 
     }
 
     private void Update()
     {
+        if (State == GameState.Ready)
+        {
+            Time.timeScale = 0;
+        }
+        else if (State == GameState.Go)
+        {
+            Time.timeScale = 1f;
+        }
+
         // 옵션창 켜고 끄기
         if (Input.GetKeyDown(KeyCode.Escape))
         {
