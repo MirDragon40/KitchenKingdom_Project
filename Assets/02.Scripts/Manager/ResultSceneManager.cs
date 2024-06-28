@@ -54,7 +54,7 @@ public class ResultSceneManager : MonoBehaviour
         }
 
         // 기존 코드
-        Review_Star1.SetActive(false);
+        Review_Star1.SetActive(true);
         Review_Star2.SetActive(false);
         Review_Star3.SetActive(false);
         Review_Star4.SetActive(false);
