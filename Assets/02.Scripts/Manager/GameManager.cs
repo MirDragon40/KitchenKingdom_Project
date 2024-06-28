@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting.FullSerializer.Internal;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public enum GameState
@@ -44,14 +45,14 @@ public class GameManager : MonoBehaviour
         }
 
         DontDestroyOnLoad(gameObject);
+        SceneManager.sceneLoaded += OnSceneLoaded;
         OptionUl.gameObject.SetActive(false);
         ControlImage.gameObject.SetActive(false);
     }
-    private void OnEnable()
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-
         _spawnPoint = GameObject.Find("CharacterSpawnPoints");
-        if (_spawnPoint != null )
+        if (_spawnPoint != null)
         {
             for (int i = 0; i < SpawnPoints.Length; i++)
             {
@@ -63,10 +64,7 @@ public class GameManager : MonoBehaviour
 
             GameManager.Instance.SpawnPlayer();
         }
-
-
     }
-
     private void Update()
     {
         if (State == GameState.Ready)
@@ -93,15 +91,7 @@ public class GameManager : MonoBehaviour
                 _optionUlOpen = true;
             }
 
-
         }
-
-
-
-    }
-
-    private void Start()
-    {
 
     }
 

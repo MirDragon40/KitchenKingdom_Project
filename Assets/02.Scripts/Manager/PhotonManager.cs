@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 
 public class PhotonManager : MonoBehaviourPunCallbacks //PUN의 다양한 서버 이벤트(콜백 함수)를 받는다.
@@ -23,7 +24,6 @@ public class PhotonManager : MonoBehaviourPunCallbacks //PUN의 다양한 서버
             Destroy(gameObject);
         }
         PhotonNetwork.AutomaticallySyncScene = true;
-        DontDestroyOnLoad(this.gameObject);
     }
 
     private void Start()
@@ -88,7 +88,10 @@ public class PhotonManager : MonoBehaviourPunCallbacks //PUN의 다양한 서버
         Debug.Log("방 join 성공!");
         Debug.Log($"RoomName: {PhotonNetwork.CurrentRoom.Name}");
         Debug.Log($"Current Players: {PhotonNetwork.CurrentRoom.PlayerCount}");
-        GatherManager.Instance.UpdatePlayerSlots();
+        if (GatherManager.Instance.gameObject.activeSelf)
+        {
+            GatherManager.Instance.UpdatePlayerSlots();
+        }
     }
     public override void OnCreateRoomFailed(short returnCode, string message)
     {

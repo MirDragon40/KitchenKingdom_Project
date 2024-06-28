@@ -13160,7 +13160,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1148578378
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -26793,7 +26793,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &6108431705815301838
+--- !u!1001 &2138449486
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -26805,21 +26805,9 @@ PrefabInstance:
       propertyPath: m_Name
       value: SoundManager
       objectReference: {fileID: 0}
-    - target: {fileID: 3557536189269446390, guid: 66d895dab0f101c4b80051140132a9a0, type: 3}
-      propertyPath: audioClips.Array.size
-      value: 13
-      objectReference: {fileID: 0}
-    - target: {fileID: 3557536189269446390, guid: 66d895dab0f101c4b80051140132a9a0, type: 3}
-      propertyPath: audioClips.Array.data[11]
-      value: 
-      objectReference: {fileID: 8300000, guid: 22efd737b28188b4faddbeb6e66e8c5e, type: 3}
-    - target: {fileID: 3557536189269446390, guid: 66d895dab0f101c4b80051140132a9a0, type: 3}
-      propertyPath: audioClips.Array.data[12]
-      value: 
-      objectReference: {fileID: 8300000, guid: c5bb1eae98756f24aae477b70a987012, type: 3}
     - target: {fileID: 5323247829153196319, guid: 66d895dab0f101c4b80051140132a9a0, type: 3}
       propertyPath: sceneViewId
-      value: 2
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 5446973797983412925, guid: 66d895dab0f101c4b80051140132a9a0, type: 3}
       propertyPath: m_LocalPosition.x
@@ -26884,4 +26872,4 @@ SceneRoots:
   - {fileID: 1646730903}
   - {fileID: 1692970391}
   - {fileID: 1591324214}
-  - {fileID: 6108431705815301838}
+  - {fileID: 2138449486}

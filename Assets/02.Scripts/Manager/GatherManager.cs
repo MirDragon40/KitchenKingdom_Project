@@ -53,7 +53,7 @@ public class GatherManager : MonoBehaviourPunCallbacks
     }
     private void Start()
     {
-        _pv.RPC("UpdatePlayerSlots", RpcTarget.All);
+        _pv.RPC("UpdatePlayerSlots", RpcTarget.AllBuffered);
     }
     private void Update()
     {
@@ -86,14 +86,14 @@ public class GatherManager : MonoBehaviourPunCallbacks
         base.OnPlayerEnteredRoom(newPlayer);
         Debug.Log($"{newPlayer.NickName}새 플레이어 입장");
         //UpdatePlayerSlots();
-        _pv.RPC("UpdatePlayerSlots", RpcTarget.All);
+        _pv.RPC("UpdatePlayerSlots", RpcTarget.AllBuffered);
     }
 
     public override void OnPlayerLeftRoom(Photon.Realtime.Player otherPlayer)
     {
         base.OnPlayerLeftRoom(otherPlayer);
         Debug.Log($"{otherPlayer.NickName}플레이어 퇴장");
-        _pv.RPC("UpdatePlayerSlots", RpcTarget.All);
+        _pv.RPC("UpdatePlayerSlots", RpcTarget.AllBuffered);
     }
 
     [PunRPC]

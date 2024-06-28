@@ -103,7 +103,7 @@ public class OrderManager : MonoBehaviourPun
         }
 
 
-        if (!_isGenerating && GeneratedOrderList.Count < MaxOrderNumber && PhotonNetwork.IsMasterClient)
+        if (!_isGenerating && GeneratedOrderList.Count < MaxOrderNumber && PhotonNetwork.IsMasterClient && GameManager.Instance.State == GameState.Go)
         {
             switch (_stage)
             {
@@ -259,11 +259,11 @@ public class OrderManager : MonoBehaviourPun
                 // 점수 더하기
                 if (FoodScores.TryGetValue(submittedFood, out int score))
                 {
-                    AddTotalScore(score);
+                    _pv.RPC("AddTotalScore",RpcTarget.AllBuffered,score);
                 }
                 else
                 {
-                    AddTotalScore(NormalOrderPoints); // 기본 점수 추가
+                    _pv.RPC("AddTotalScore", RpcTarget.AllBuffered, NormalOrderPoints); // 기본 점수 추가
                 }
                 // UI 삭제
                 MyScrollView.RemoveItem(submittedFood);
