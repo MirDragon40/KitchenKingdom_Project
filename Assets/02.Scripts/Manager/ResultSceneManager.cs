@@ -1,6 +1,7 @@
 using System.Collections;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SocialPlatforms.Impl;
 
 public class ResultSceneManager : MonoBehaviour
 {
@@ -53,7 +54,7 @@ public class ResultSceneManager : MonoBehaviour
         }
 
         // 기존 코드
-        Review_Star1.SetActive(true);
+        Review_Star1.SetActive(false);
         Review_Star2.SetActive(false);
         Review_Star3.SetActive(false);
         Review_Star4.SetActive(false);
@@ -71,19 +72,175 @@ public class ResultSceneManager : MonoBehaviour
             // 스테이지 마다 리뷰 결과 출력
             if(GameManager.Instance.StageScore[0] != 0 && GameManager.Instance.StageScore[1] == 0)  // 스테이지 1일때
             {
-
+                if (GameManager.Instance.StageScore[0] <= 20)
+                {
+                    Review_Star1.SetActive(true);
+                    Review_Star2.SetActive(false);
+                    Review_Star3.SetActive(false);
+                    Review_Star4.SetActive(false);
+                    Review_Star5.SetActive(false);
+                }
+                else if (GameManager.Instance.StageScore[0] >= 21 && GameManager.Instance.StageScore[0] <= 40)
+                {
+                    Review_Star1.SetActive(false);
+                    Review_Star2.SetActive(true);
+                    Review_Star3.SetActive(false);
+                    Review_Star4.SetActive(false);
+                    Review_Star5.SetActive(false);
+                }
+                else if (GameManager.Instance.StageScore[0] >= 41 && GameManager.Instance.StageScore[0] <= 60)
+                {
+                    Review_Star1.SetActive(false);
+                    Review_Star2.SetActive(false);
+                    Review_Star3.SetActive(true);
+                    Review_Star4.SetActive(false);
+                    Review_Star5.SetActive(false);
+                }
+                else if (GameManager.Instance.StageScore[0] >= 61 && GameManager.Instance.StageScore[0] <= 80)
+                {
+                    Review_Star1.SetActive(false);
+                    Review_Star2.SetActive(false);
+                    Review_Star3.SetActive(false);
+                    Review_Star4.SetActive(true);
+                    Review_Star5.SetActive(false);
+                }
+                else if (GameManager.Instance.StageScore[0] >= 81)
+                {
+                    Review_Star1.SetActive(false);
+                    Review_Star2.SetActive(false);
+                    Review_Star3.SetActive(false);
+                    Review_Star4.SetActive(false);
+                    Review_Star5.SetActive(true);
+                }
             }
             if(GameManager.Instance.StageScore[1] != 0 && GameManager.Instance.StageScore[2] == 0)  // 스테이지 2일때
             {
-
+                if (GameManager.Instance.StageScore[1] <= 20)
+                {
+                    Review_Star1.SetActive(true);
+                    Review_Star2.SetActive(false);
+                    Review_Star3.SetActive(false);
+                    Review_Star4.SetActive(false);
+                    Review_Star5.SetActive(false);
+                }
+                else if (GameManager.Instance.StageScore[1] >= 21 && GameManager.Instance.StageScore[1] <= 40)
+                {
+                    Review_Star1.SetActive(false);
+                    Review_Star2.SetActive(true);
+                    Review_Star3.SetActive(false);
+                    Review_Star4.SetActive(false);
+                    Review_Star5.SetActive(false);
+                }
+                else if (GameManager.Instance.StageScore[1] >= 41 && GameManager.Instance.StageScore[1] <= 60)
+                {
+                    Review_Star1.SetActive(false);
+                    Review_Star2.SetActive(false);
+                    Review_Star3.SetActive(true);
+                    Review_Star4.SetActive(false);
+                    Review_Star5.SetActive(false);
+                }
+                else if (GameManager.Instance.StageScore[1] >= 61 && GameManager.Instance.StageScore[1] <= 80)
+                {
+                    Review_Star1.SetActive(false);
+                    Review_Star2.SetActive(false);
+                    Review_Star3.SetActive(false);
+                    Review_Star4.SetActive(true);
+                    Review_Star5.SetActive(false);
+                }
+                else if (GameManager.Instance.StageScore[1] >= 81)
+                {
+                    Review_Star1.SetActive(false);
+                    Review_Star2.SetActive(false);
+                    Review_Star3.SetActive(false);
+                    Review_Star4.SetActive(false);
+                    Review_Star5.SetActive(true);
+                }
             }
             if (GameManager.Instance.StageScore[2] != 0 && GameManager.Instance.StageScore[3] == 0)  // 스테이지 3일때
             {
-
+                if (GameManager.Instance.StageScore[2] <= 20)
+                {
+                    Review_Star1.SetActive(true);
+                    Review_Star2.SetActive(false);
+                    Review_Star3.SetActive(false);
+                    Review_Star4.SetActive(false);
+                    Review_Star5.SetActive(false);
+                }
+                else if (GameManager.Instance.StageScore[2] >= 21 && GameManager.Instance.StageScore[2] <= 40)
+                {
+                    Review_Star1.SetActive(false);
+                    Review_Star2.SetActive(true);
+                    Review_Star3.SetActive(false);
+                    Review_Star4.SetActive(false);
+                    Review_Star5.SetActive(false);
+                }
+                else if (GameManager.Instance.StageScore[2] >= 41 && GameManager.Instance.StageScore[2] <= 60)
+                {
+                    Review_Star1.SetActive(false);
+                    Review_Star2.SetActive(false);
+                    Review_Star3.SetActive(true);
+                    Review_Star4.SetActive(false);
+                    Review_Star5.SetActive(false);
+                }
+                else if (GameManager.Instance.StageScore[2] >= 61 && GameManager.Instance.StageScore[2] <= 80)
+                {
+                    Review_Star1.SetActive(false);
+                    Review_Star2.SetActive(false);
+                    Review_Star3.SetActive(false);
+                    Review_Star4.SetActive(true);
+                    Review_Star5.SetActive(false);
+                }
+                else if (GameManager.Instance.StageScore[2] >= 81)
+                {
+                    Review_Star1.SetActive(false);
+                    Review_Star2.SetActive(false);
+                    Review_Star3.SetActive(false);
+                    Review_Star4.SetActive(false);
+                    Review_Star5.SetActive(true);
+                }
             }
             if(GameManager.Instance.StageScore[3] != 0)  // 스테이지 4일때
             {
-
+                if (GameManager.Instance.StageScore[3] <= 20)
+                {
+                    Review_Star1.SetActive(true);
+                    Review_Star2.SetActive(false);
+                    Review_Star3.SetActive(false);
+                    Review_Star4.SetActive(false);
+                    Review_Star5.SetActive(false);
+                }
+                else if (GameManager.Instance.StageScore[3] >= 21 && GameManager.Instance.StageScore[3] <= 40)
+                {
+                    Review_Star1.SetActive(false);
+                    Review_Star2.SetActive(true);
+                    Review_Star3.SetActive(false);
+                    Review_Star4.SetActive(false);
+                    Review_Star5.SetActive(false);
+                }
+                else if (GameManager.Instance.StageScore[3] >= 41 && GameManager.Instance.StageScore[3] <= 60)
+                {
+                    Review_Star1.SetActive(false);
+                    Review_Star2.SetActive(false);
+                    Review_Star3.SetActive(true);
+                    Review_Star4.SetActive(false);
+                    Review_Star5.SetActive(false);
+                }
+                else if (GameManager.Instance.StageScore[3] >= 61 && GameManager.Instance.StageScore[3] <= 80)
+                {
+                    Review_Star1.SetActive(false);
+                    Review_Star2.SetActive(false);
+                    Review_Star3.SetActive(false);
+                    Review_Star4.SetActive(true);
+                    Review_Star5.SetActive(false);
+                }
+                else if (GameManager.Instance.StageScore[3] >= 81)
+                {
+                    Review_Star1.SetActive(false);
+                    Review_Star2.SetActive(false);
+                    Review_Star3.SetActive(false);
+                    Review_Star4.SetActive(false);
+                    Review_Star5.SetActive(true);
+                }
             }
         }
 
