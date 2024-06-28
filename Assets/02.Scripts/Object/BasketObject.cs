@@ -234,6 +234,10 @@ public class BasketObject : IHoldable
         if (_pv.OwnerActorNr != charOwnerActorNr)
         {
             _pv.TransferOwnership(charOwnerActorNr);
+            if (FryingIngrediant != null)
+            {
+                FryingIngrediant.GetComponent<PhotonView>().TransferOwnership(charOwnerActorNr);
+            }
         }
         IHoldable playerHoldingItem = other.GetComponent<CharacterHoldAbility>().HoldableItem;
         FoodObject foodObject = null;
