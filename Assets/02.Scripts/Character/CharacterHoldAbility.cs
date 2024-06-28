@@ -223,9 +223,11 @@ public class CharacterHoldAbility : CharacterAbility
         Collider[] colliders = Physics.OverlapSphere(transform.position, 1.0f); // 예시로 1.0f 반경으로 체크
         foreach (Collider collider in colliders)
         {
-            Stove stove = collider.GetComponent<Stove>();
-            Table table = collider.GetComponent<Table>(); // Table 클래스를 기반으로 가정
-
+            Stove stove = null;
+            collider.TryGetComponent<Stove>(out stove);
+            Table table = null;
+            collider.TryGetComponent<Table>(out table); // Table 클래스를 기반으로 가정
+            
             if (stove != null && stove.IsOnFire)
             {
                 Debug.Log("Stove is on fire! Cannot place pan.");
