@@ -1,3 +1,4 @@
+using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -27,7 +28,6 @@ public class LoadingSceneManager : MonoBehaviour
 
         // 지정한 씬을 "비동기" 방식으로 로드한다.
         AsyncOperation ao = SceneManager.LoadSceneAsync(NextScene.ToString());  // 20초가 걸린다고 가정
-
         // 로드되는 씬의 모습이 화면에 보이지 않게 한다.
         ao.allowSceneActivation = false;
 

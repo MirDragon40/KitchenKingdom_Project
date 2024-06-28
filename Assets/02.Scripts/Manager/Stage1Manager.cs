@@ -19,11 +19,7 @@ public class Stage1Manager : MonoBehaviour
     private void Start()
     {
         GameManager.Instance.CurrentStage = 1;
-        if (PhotonNetwork.IsConnected)
-        {
 
-            GameManager.Instance.SpawnPlayer();
-        }
         GameManager.Instance.State = GameState.Ready;
     }
 

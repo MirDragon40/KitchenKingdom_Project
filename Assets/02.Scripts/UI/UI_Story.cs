@@ -1,3 +1,4 @@
+using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -65,7 +66,7 @@ public class UI_Story : MonoBehaviour
         //Third_Text();
         // 다음으로 갈 씬 넣기
         LoadingSceneManager.NextScene = SceneNames.Stage_1_Beta;
-        SceneManager.LoadScene("LoadingScene");
+        PhotonNetwork.LoadLevel("LoadingScene");
     }
 
     // 1
