@@ -165,6 +165,15 @@ public class BasketObject : IHoldable
         {
             return;
         }
+        int charOwnerActorNr = character.PhotonView.OwnerActorNr;
+        if (_pv.OwnerActorNr != charOwnerActorNr)
+        {
+            _pv.TransferOwnership(charOwnerActorNr);
+            if (FryingIngrediant != null)
+            {
+                FryingIngrediant.GetComponent<PhotonView>().TransferOwnership(charOwnerActorNr);
+            }
+        }
         _holdCharacter = character;
         GetComponent<Rigidbody>().isKinematic = true;
         transform.SetParent(handTransform);
@@ -230,15 +239,7 @@ public class BasketObject : IHoldable
         {
             return;
         }
-        int charOwnerActorNr = other.GetComponent<Character>().PhotonView.OwnerActorNr;
-        if (_pv.OwnerActorNr != charOwnerActorNr)
-        {
-            _pv.TransferOwnership(charOwnerActorNr);
-            if (FryingIngrediant != null)
-            {
-                FryingIngrediant.GetComponent<PhotonView>().TransferOwnership(charOwnerActorNr);
-            }
-        }
+
         IHoldable playerHoldingItem = other.GetComponent<CharacterHoldAbility>().HoldableItem;
         FoodObject foodObject = null;
         if (playerHoldingItem != null)

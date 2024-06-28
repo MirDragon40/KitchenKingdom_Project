@@ -684,7 +684,7 @@ MonoBehaviour:
   m_SynchronizePosition: 1
   m_SynchronizeRotation: 1
   m_SynchronizeScale: 0
-  m_UseLocal: 1
+  m_UseLocal: 0
 --- !u!114 &-2911433148497547552
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -701,6 +701,7 @@ MonoBehaviour:
   fireEffect: {fileID: 0}
   contactTime: 0
   soundManager: {fileID: 0}
+  fans: []
 --- !u!1 &7293233819947724987
 GameObject:
   m_ObjectHideFlags: 0
@@ -5507,6 +5508,7 @@ MonoBehaviour:
   fireEffect: {fileID: 0}
   contactTime: 0
   soundManager: {fileID: 0}
+  fans: []
 --- !u!114 &4503214864428667626
 MonoBehaviour:
   m_ObjectHideFlags: 0

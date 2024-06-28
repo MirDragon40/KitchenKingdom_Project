@@ -195,7 +195,15 @@ public class PanObject : IHoldable
         {
             return;
         }
-
+        int charOwnerActorNr = character.PhotonView.OwnerActorNr;
+        if (_pv.OwnerActorNr != charOwnerActorNr)
+        {
+            _pv.TransferOwnership(charOwnerActorNr);
+            if (GrillingIngrediant != null)
+            {
+                GrillingIngrediant.GetComponent<PhotonView>().TransferOwnership(charOwnerActorNr);
+            }
+        }
         GetComponent<Rigidbody>().isKinematic = true;
         transform.SetParent(handTransform);
         transform.localPosition = new Vector3(0, 0, 0.3f);
@@ -269,15 +277,7 @@ public class PanObject : IHoldable
     {
         if (other.CompareTag("Player"))
         {
-            int charOwnerActorNr = other.GetComponent<Character>().PhotonView.OwnerActorNr;
-            if (_pv.OwnerActorNr != charOwnerActorNr)
-            {
-                _pv.TransferOwnership(charOwnerActorNr);
-                if (GrillingIngrediant != null)
-                {
-                    GrillingIngrediant.GetComponent<PhotonView>().TransferOwnership(charOwnerActorNr);
-                }
-            }
+
             IHoldable playerHoldingItem = other.GetComponent<CharacterHoldAbility>().HoldableItem;
             FoodObject food = null;
             if (playerHoldingItem != null)
