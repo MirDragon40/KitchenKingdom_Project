@@ -1,6 +1,7 @@
 using DG.Tweening;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class FinalResultSceneManager : MonoBehaviour
 {
@@ -59,5 +60,9 @@ public class FinalResultSceneManager : MonoBehaviour
 
             yield return new WaitForSeconds(1f);
         }
+
+        yield return new WaitForSeconds(4f);
+
+        SceneManager.LoadScene("EndingScene");
     }
 }

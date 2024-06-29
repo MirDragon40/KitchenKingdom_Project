@@ -12,5 +12,6 @@ public enum SceneNames
    Stage_3_Beta,    
    Stage_4_Beta,
    ResultScene,
+   FinalResultScene
 
 }
