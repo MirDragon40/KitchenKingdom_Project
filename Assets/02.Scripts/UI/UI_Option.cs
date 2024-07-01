@@ -6,9 +6,11 @@ using UnityEngine.UI;
 
 public class UI_Option : MonoBehaviour
 {
+    public Image ControlImage;
+
     public void OnContinueButton() 
     {
-        GameManager.Instance.OptionUl.gameObject.SetActive(false);
+        gameObject.SetActive(false);
     }
     public void OnResumeButton() 
     {
@@ -17,7 +19,7 @@ public class UI_Option : MonoBehaviour
     }
     public void OnControlsButton() 
     {
-        GameManager.Instance.ControlImage.gameObject.SetActive(true);
+        ControlImage.gameObject.SetActive(true);
     }
     public void OnQuitButton() 
     {

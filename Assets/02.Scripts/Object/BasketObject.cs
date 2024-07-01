@@ -58,6 +58,17 @@ public class BasketObject : IHoldable
 
     private void Update()
     {
+        if (FryingIngrediant != null)
+        {
+
+            if (_pv.OwnerActorNr != FryingIngrediant.GetComponent<PhotonView>().OwnerActorNr)
+            {
+                FryingIngrediant.GetComponent<PhotonView>().TransferOwnership(_pv.OwnerActorNr);
+            }
+
+            FryingIngrediant.transform.localPosition = Vector3.zero;
+
+        }
         if (BasketPlacePositon.childCount != 0)
         {
             PlusImage.SetActive(false);

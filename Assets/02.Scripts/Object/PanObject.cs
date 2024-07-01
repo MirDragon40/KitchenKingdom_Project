@@ -69,10 +69,12 @@ public class PanObject : IHoldable
     {
         if (GrillingIngrediant != null)
         {
+
             if (_pv.OwnerActorNr != GrillingIngrediant.GetComponent<PhotonView>().OwnerActorNr)
             {
-                GrillingIngrediant.GetComponent<PhotonView>().OwnerActorNr = _pv.OwnerActorNr;
+                GrillingIngrediant.GetComponent<PhotonView>().TransferOwnership(_pv.OwnerActorNr);
             }
+
             GrillingIngrediant.transform.localPosition = Vector3.zero;
 
         }
