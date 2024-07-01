@@ -87,7 +87,7 @@ public class GameManager : MonoBehaviour
 
     public void TotalScoreInit()
     {
-
+        TotalScore = 0;
         foreach (int score in StageScore)
         {
             TotalScore += score;
