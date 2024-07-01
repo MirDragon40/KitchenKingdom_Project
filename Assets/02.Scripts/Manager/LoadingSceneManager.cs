@@ -18,16 +18,21 @@ public class LoadingSceneManager : MonoBehaviour
 
     private void Start()
     {
-        StartCoroutine(Loading_Coroutine());
+        if (PhotonNetwork.IsMasterClient)
+        {
+            StartCoroutine(Loading_Coroutine());
+        }
     }
 
     public IEnumerator Loading_Coroutine()
     {
         // 로딩 시간 저장
         float startTime = Time.time;
-
+        AsyncOperation ao = null;
         // 지정한 씬을 "비동기" 방식으로 로드한다.
-        AsyncOperation ao = SceneManager.LoadSceneAsync(NextScene.ToString());  // 20초가 걸린다고 가정
+
+            ao = SceneManager.LoadSceneAsync(NextScene.ToString());  // 20초가 걸린다고 가정
+        
         // 로드되는 씬의 모습이 화면에 보이지 않게 한다.
         ao.allowSceneActivation = false;
 

@@ -1,4 +1,5 @@
 using DG.Tweening;
+using Photon.Pun;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -63,6 +64,6 @@ public class FinalResultSceneManager : MonoBehaviour
 
         yield return new WaitForSeconds(4f);
 
-        SceneManager.LoadScene("EndingScene");
+        PhotonNetwork.LoadLevel("EndingScene");
     }
 }
