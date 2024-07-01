@@ -12,12 +12,12 @@ public class FireObject : MonoBehaviourPun
 
     public SoundManager soundManager;
     private bool isSoundPlaying = false; // 불이 켜져있는 팬이 있는지 체크
-    public FireObject[] fans;
+    public FireObject[] Tables;
     private void Start()
     {
         _pv = GetComponent<PhotonView>();
         soundManager = FindObjectOfType<SoundManager>();
-        fans = FindObjectsOfType<FireObject>();
+        Tables = FindObjectsOfType<FireObject>();
     }
     public void RequestMakeFire()
     {
@@ -66,14 +66,14 @@ public class FireObject : MonoBehaviourPun
     }
     private bool IsAnyFanOnFire()
     {
-        foreach (var fan in fans)
+        foreach (var Table in Tables)
         {
-            if (fan._isOnFire)
+            if (Table._isOnFire)
             {
                 return true; // 하나라도 불이 켜져 있으면 true 반환
             }
         }
-        return false; // 모든 팬이 불이 꺼져 있으면 false 반환
+        return false; // 모든 테이블이 불이 꺼져 있으면 false 반환
     }
     private void OnTriggerStay(Collider other)
     {

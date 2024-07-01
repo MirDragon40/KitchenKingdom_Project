@@ -2315,28 +2315,44 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8870465150211464664, guid: f1dfd9727d7247b4bb99cac0ec8a435b, type: 3}
       propertyPath: NearbyTables.Array.size
-      value: 5
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 8870465150211464664, guid: f1dfd9727d7247b4bb99cac0ec8a435b, type: 3}
       propertyPath: NearbyTables.Array.data[0]
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1070576593}
     - target: {fileID: 8870465150211464664, guid: f1dfd9727d7247b4bb99cac0ec8a435b, type: 3}
       propertyPath: NearbyTables.Array.data[1]
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 626776397}
     - target: {fileID: 8870465150211464664, guid: f1dfd9727d7247b4bb99cac0ec8a435b, type: 3}
       propertyPath: NearbyTables.Array.data[2]
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1384070749}
     - target: {fileID: 8870465150211464664, guid: f1dfd9727d7247b4bb99cac0ec8a435b, type: 3}
       propertyPath: NearbyTables.Array.data[3]
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1405754404}
     - target: {fileID: 8870465150211464664, guid: f1dfd9727d7247b4bb99cac0ec8a435b, type: 3}
       propertyPath: NearbyTables.Array.data[4]
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 187918205}
+    - target: {fileID: 8870465150211464664, guid: f1dfd9727d7247b4bb99cac0ec8a435b, type: 3}
+      propertyPath: NearbyTables.Array.data[5]
+      value: 
+      objectReference: {fileID: 1990118973}
+    - target: {fileID: 8870465150211464664, guid: f1dfd9727d7247b4bb99cac0ec8a435b, type: 3}
+      propertyPath: NearbyTables.Array.data[6]
+      value: 
+      objectReference: {fileID: 828575888}
+    - target: {fileID: 8870465150211464664, guid: f1dfd9727d7247b4bb99cac0ec8a435b, type: 3}
+      propertyPath: NearbyTables.Array.data[7]
+      value: 
+      objectReference: {fileID: 532392979}
+    - target: {fileID: 8870465150211464664, guid: f1dfd9727d7247b4bb99cac0ec8a435b, type: 3}
+      propertyPath: NearbyTables.Array.data[8]
+      value: 
+      objectReference: {fileID: 1476460939}
     m_RemovedComponents:
     - {fileID: 5439033789029369707, guid: f1dfd9727d7247b4bb99cac0ec8a435b, type: 3}
     m_RemovedGameObjects: []
@@ -6903,28 +6919,44 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8870465150211464664, guid: f1dfd9727d7247b4bb99cac0ec8a435b, type: 3}
       propertyPath: NearbyTables.Array.size
-      value: 5
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 8870465150211464664, guid: f1dfd9727d7247b4bb99cac0ec8a435b, type: 3}
       propertyPath: NearbyTables.Array.data[0]
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1070576593}
     - target: {fileID: 8870465150211464664, guid: f1dfd9727d7247b4bb99cac0ec8a435b, type: 3}
       propertyPath: NearbyTables.Array.data[1]
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 626776397}
     - target: {fileID: 8870465150211464664, guid: f1dfd9727d7247b4bb99cac0ec8a435b, type: 3}
       propertyPath: NearbyTables.Array.data[2]
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1384070749}
     - target: {fileID: 8870465150211464664, guid: f1dfd9727d7247b4bb99cac0ec8a435b, type: 3}
       propertyPath: NearbyTables.Array.data[3]
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1405754404}
     - target: {fileID: 8870465150211464664, guid: f1dfd9727d7247b4bb99cac0ec8a435b, type: 3}
       propertyPath: NearbyTables.Array.data[4]
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 187918205}
+    - target: {fileID: 8870465150211464664, guid: f1dfd9727d7247b4bb99cac0ec8a435b, type: 3}
+      propertyPath: NearbyTables.Array.data[5]
+      value: 
+      objectReference: {fileID: 1990118973}
+    - target: {fileID: 8870465150211464664, guid: f1dfd9727d7247b4bb99cac0ec8a435b, type: 3}
+      propertyPath: NearbyTables.Array.data[6]
+      value: 
+      objectReference: {fileID: 828575888}
+    - target: {fileID: 8870465150211464664, guid: f1dfd9727d7247b4bb99cac0ec8a435b, type: 3}
+      propertyPath: NearbyTables.Array.data[7]
+      value: 
+      objectReference: {fileID: 532392979}
+    - target: {fileID: 8870465150211464664, guid: f1dfd9727d7247b4bb99cac0ec8a435b, type: 3}
+      propertyPath: NearbyTables.Array.data[8]
+      value: 
+      objectReference: {fileID: 1476460939}
     m_RemovedComponents:
     - {fileID: 5439033789029369707, guid: f1dfd9727d7247b4bb99cac0ec8a435b, type: 3}
     m_RemovedGameObjects: []

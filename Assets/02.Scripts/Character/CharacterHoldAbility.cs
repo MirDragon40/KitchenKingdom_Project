@@ -97,8 +97,6 @@ public class CharacterHoldAbility : CharacterAbility
             return;
         }
 
-        //   Debug.Log("PickUp");
-
         // 주변에 있는 잡을 수 있는 아이템을 찾음
         Collider[] colliders = Physics.OverlapSphere(transform.position, _findfood);
         IHoldable holdable = null;
@@ -106,23 +104,34 @@ public class CharacterHoldAbility : CharacterAbility
         {
             if (collider.TryGetComponent<IHoldable>(out holdable))
             {
-                if (holdable is PanObject pan)
+                // 스토브가 불이 났다면 팬을 잡을 수 없도록 함
+                Stove stove = holdable.GetComponentInParent<Stove>();
+                if (stove != null && stove.IsOnFire)
                 {
-                    // 스토브가 불이 났다면 팬을 잡을 수 없도록 함
-                    Stove stove = pan.GetComponentInParent<Stove>();
-                    if (stove != null && stove.IsOnFire)
-                    {
-                        return;
-                    }
-                    Table[] nearbyTables = pan.NearbyTables;
-                    foreach (Table table in nearbyTables)
-                    {
-                        if (table != null && table.IsOnFire)
-                        {
-                            return; // 팬을 들 수 없도록 반환
-                        }
-                    }
+                    continue;
                 }
+
+                // 테이블이 불이 났다면 팬을 잡을 수 없도록 함
+                Table table = holdable.GetComponentInParent<Table>();
+                if (table != null && table.IsOnFire)
+                {
+                    continue;
+                }
+
+                // 프라이 머신이 불이 났다면 바스켓을 잡을 수 없도록 함
+                FryMachine fryMachine = holdable.GetComponentInParent<FryMachine>();
+                if (fryMachine != null && fryMachine.IsOnFire)
+                {
+                    continue;
+                }
+
+                // 다른 불이 난 오브젝트 검사
+                FireObject fireObject = holdable.GetComponentInParent<FireObject>();
+                if (fireObject != null && fireObject._isOnFire)
+                {
+                    continue;
+                }
+
                 // 잡기 우선순위 설정
                 if (holdable is FoodObject &&
                     holdable.GetComponentInParent<PanObject>() == null &&
@@ -142,30 +151,8 @@ public class CharacterHoldAbility : CharacterAbility
                 }
             }
         }
-
-        foreach (Collider collider in colliders)
-        {
-            if (collider.TryGetComponent<IHoldable>(out holdable))
-            {
-                // 오브젝트가 스토브나 테이블과 연결된 경우 불이 난 상태를 확인
-                Stove stove = holdable.GetComponentInParent<Stove>();
-                Table table = holdable.GetComponentInParent<Table>();
-                if ((stove != null && stove.IsOnFire) || (table != null && table.IsOnFire))
-                {
-                    continue;
-                }
-
-                HoldableItem = holdable;
-                holdable.Hold(_owner, HandTransform);
-                animator.SetBool("Carry", true);
-                break;
-            }
-        }
-
-
     }
-
-    [PunRPC]
+        [PunRPC]
     void Drop()
     {
         // 들고 있는 음식이 없으면 아무 작업도 수행하지 않음
@@ -235,7 +222,9 @@ public class CharacterHoldAbility : CharacterAbility
             Stove stove = null;
             collider.TryGetComponent<Stove>(out stove);
             Table table = null;
-            collider.TryGetComponent<Table>(out table); // Table 클래스를 기반으로 가정
+            collider.TryGetComponent<Table>(out table);
+            FryMachine fryMachine = null;
+            collider.TryGetComponent<FryMachine>(out fryMachine);
 
             if (stove != null && stove.IsOnFire)
             {
@@ -245,6 +234,10 @@ public class CharacterHoldAbility : CharacterAbility
             else if (table != null && table.IsOnFire)
             {
                 Debug.Log("Table is on fire! Cannot place pan.");
+                return;
+            }
+            else if (fryMachine != null && fryMachine.IsOnFire)
+            {
                 return;
             }
         }

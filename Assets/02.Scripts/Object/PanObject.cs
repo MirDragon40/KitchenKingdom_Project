@@ -43,7 +43,7 @@ public class PanObject : IHoldable
     private bool hasCaughtFireOnce = false;
     private bool hasDangerIndicator = false;
 
-    public Table[] NearbyTables;
+    
     private void Awake()
     {
         _pv = GetComponent<PhotonView>();

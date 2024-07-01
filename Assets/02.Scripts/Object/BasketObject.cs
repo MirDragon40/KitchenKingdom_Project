@@ -33,8 +33,6 @@ public class BasketObject : IHoldable
     public override Vector3 DropOffset => new Vector3(0.3f, 0.1f, 0f);
     private bool isAnyBasketOnFire = false;
 
-    public Table[] NearbyTables;
-
     private void Awake()
     {
         BoxCollider = GetComponent<BoxCollider>();
