@@ -18,41 +18,67 @@ public class LoadingSceneManager : MonoBehaviour
 
     private void Start()
     {
-        if (PhotonNetwork.IsMasterClient)
-        {
+
             StartCoroutine(Loading_Coroutine());
-        }
+        
     }
 
     public IEnumerator Loading_Coroutine()
     {
         // 로딩 시간 저장
         float startTime = Time.time;
-        AsyncOperation ao = null;
-        // 지정한 씬을 "비동기" 방식으로 로드한다.
+        if (PhotonNetwork.IsMasterClient)
+        {
+            AsyncOperation ao = null;
+            // 지정한 씬을 "비동기" 방식으로 로드한다.
 
             ao = SceneManager.LoadSceneAsync(NextScene.ToString());  // 20초가 걸린다고 가정
-        
-        // 로드되는 씬의 모습이 화면에 보이지 않게 한다.
-        ao.allowSceneActivation = false;
 
-        // 로딩이 완료될 때까지... 반복
-        while (!ao.isDone)
-        {
-            // 현재 진행률 0과 1사이 정규화
-            float progressValue = Mathf.Clamp01(ao.progress / targetProgress);
-            
-            // 로딩 슬라이더 값 부드럽게 증가
-            LoadingSliderUI.value = Mathf.Lerp(LoadingSliderUI.value, progressValue, _loadingSpeed * Time.deltaTime);
+            // 로드되는 씬의 모습이 화면에 보이지 않게 한다.
+            ao.allowSceneActivation = false;
 
-            // 로딩 진행률이 목표치 이상 && 최소 로딩 시간 지났는지
-            if (ao.progress >= targetProgress && Time.time - startTime >= _minLoadingTime)
+            // 로딩이 완료될 때까지... 반복
+            while (!ao.isDone)
             {
-                LoadingSliderUI.value = 1f;
-                ao.allowSceneActivation = true;
-            }
+                // 현재 진행률 0과 1사이 정규화
+                float progressValue = Mathf.Clamp01(ao.progress / targetProgress);
 
-            yield return null;
+                // 로딩 슬라이더 값 부드럽게 증가
+                LoadingSliderUI.value = Mathf.Lerp(LoadingSliderUI.value, progressValue, _loadingSpeed * Time.deltaTime);
+
+                // 로딩 진행률이 목표치 이상 && 최소 로딩 시간 지났는지
+                if (ao.progress >= targetProgress && Time.time - startTime >= _minLoadingTime)
+                {
+                    LoadingSliderUI.value = 1f;
+
+                    ao.allowSceneActivation = true;
+
+
+                }
+
+                yield return null;
+            }
+        }
+        else
+        {
+            float progress = 0;
+            while (LoadingSliderUI.value < 1)
+            {
+                progress += Time.deltaTime;
+                // 현재 진행률 0과 1사이 정규화
+                float progressValue = Mathf.Clamp01(progress / targetProgress);
+
+                // 로딩 슬라이더 값 부드럽게 증가
+                LoadingSliderUI.value = Mathf.Lerp(LoadingSliderUI.value, progressValue, _loadingSpeed * Time.deltaTime);
+
+                // 로딩 진행률이 목표치 이상 && 최소 로딩 시간 지났는지
+                if (Time.time - startTime >= _minLoadingTime)
+                {
+                    LoadingSliderUI.value = 1f;
+                }
+
+                yield return null;
+            }
         }
     }
 }

@@ -103,6 +103,10 @@ public class CharacterHoldAbility : CharacterAbility
         {
             if (collider.TryGetComponent<IHoldable>(out holdable))
             {
+                if (holdable.IsHold)
+                {
+                    continue;
+                }
                 // 팬인 경우
                 if (holdable is PanObject pan)
                 {
