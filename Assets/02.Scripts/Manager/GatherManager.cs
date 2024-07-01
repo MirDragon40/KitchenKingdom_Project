@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Photon.Realtime;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 
 
@@ -157,7 +158,8 @@ public class GatherManager : MonoBehaviourPunCallbacks
         if (_isStartButton)
         {
             //LoadingSceneManager.NextScene = SceneNames.StoryScene;
-            PhotonNetwork.LoadLevel("StoryScene");
+            // SceneManager.LoadLevel("StoryScene");
+            SceneManager.LoadSceneAsync("StoryScene");
         }
         else
         {

@@ -1,4 +1,6 @@
+using Photon.Pun;
 using System.Collections;
+using System.Reflection;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SocialPlatforms.Impl;
@@ -266,28 +268,55 @@ public class ResultSceneManager : MonoBehaviour
 
     private IEnumerator ResultSceneAnimation_Coroutine()
     {
-
+        int level = GameManager.Instance.CurrentStage;
         ClipBoard_Anim.SetTrigger("Show_Result");
 
         yield return new WaitForSeconds(1.5f);
         Stage1_Text.gameObject.SetActive(true);
         yield return new WaitForSeconds(_timeGap);
-
-        Stage2_Text.gameObject.SetActive(true);
-        yield return new WaitForSeconds(_timeGap);
-
-        Stage3_Text.gameObject.SetActive(true);
-        yield return new WaitForSeconds(_timeGap);
-
-        Stage4_Text.gameObject.SetActive(true);
-        yield return new WaitForSeconds(_timeGap);
-
+        if (level >= 2)
+        {
+            Stage2_Text.gameObject.SetActive(true);
+            yield return new WaitForSeconds(_timeGap);
+        }
+        if (level >= 3)
+        {
+            Stage3_Text.gameObject.SetActive(true);
+            yield return new WaitForSeconds(_timeGap);
+        }
+        if (level >= 4)
+        {
+            Stage4_Text.gameObject.SetActive(true);
+            yield return new WaitForSeconds(_timeGap);
+        }
         Total_Text.gameObject.SetActive(true);
 
         yield return new WaitForSeconds(2);
         Review_Anim.SetTrigger("Show_Review");
+        yield return new WaitForSeconds(2);
+        if (PhotonNetwork.IsMasterClient)
+        {
+            switch (level)
+            {
+                case 1:
+                    PhotonNetwork.LoadLevel("Stage_2_Beta");
+                    break;
+                case 2:
+                    PhotonNetwork.LoadLevel("Stage_3_Beta");
+                    break;
+                case 3:
+                    PhotonNetwork.LoadLevel("Stage_4_Beta");
+                    break;
+                case 4:
+                    PhotonNetwork.LoadLevel("FinalResultScene");
+                    break;
+                default:
+                    break;
+            }
+            
 
-        
+        }
+
     }
 }
 

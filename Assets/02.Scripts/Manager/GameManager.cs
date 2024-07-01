@@ -76,22 +76,7 @@ public class GameManager : MonoBehaviour
             Time.timeScale = 1f;
         }
 
-        // 옵션창 켜고 끄기
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            if (_optionUlOpen)
-            {
-                //OptionUl.gameObject.SetActive(false);
-                _optionUlOpen = false;
-            }
-            else
-            {
-                OptionUl.gameObject.SetActive(true);
-                ControlImage.gameObject.SetActive(false);
-                _optionUlOpen = true;
-            }
 
-        }
 
     }
 
