@@ -123,6 +123,35 @@ public class CharacterHoldAbility : CharacterAbility
                         }
                     }
                 }
+                else if (holdable is BasketObject basket)
+                {
+                    // 바스켓일 경우 스토브와 테이블 불 상태 체크
+                    FryMachine fryMachine = basket.GetComponentInParent<FryMachine>();
+                    if (fryMachine != null && fryMachine.IsOnFire)
+                    {
+                        // 바스켓이 불이 난 프라이머신에 올려져 있으면 바스켓을 잡지 못하도록 반환
+                        return;
+                    }
+
+                    Table[] nearbyTables = basket.NearbyTables;
+                    foreach (Table table in nearbyTables)
+                    {
+                        if (table != null && table.IsOnFire)
+                        {
+                            // 주변 테이블이 불이 나 있으면 바스켓을 잡지 못하도록 반환
+                            return;
+                        }
+                    }
+
+                    // 잡기 우선순위 설정
+                    if (holdable is FoodObject) // 재료를 우선순위로 잡기
+                    {
+                        HoldableItem = holdable;
+                        holdable.Hold(_owner, HandTransform);
+                        animator.SetBool("Carry", true);
+                        return;
+                    }
+                }
                 // 잡기 우선순위 설정
                 if (holdable is FoodObject) // 재료를 우선순위로 잡기
                 {
