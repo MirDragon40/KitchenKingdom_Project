@@ -33,7 +33,7 @@ public class CharacterHoldAbility : CharacterAbility
     public Transform PlacePosition = null;
 
     private bool nearTrashBin = false;
-    private Transform _carryTransform; // 플레이어가 들고있는 객체를 참조
+    private Transform panTransform; // 팬 오브젝트를 참조하기 위한 변수
 
     public SoundManager soundManager;
     void Start()
@@ -97,61 +97,44 @@ public class CharacterHoldAbility : CharacterAbility
             return;
         }
 
+        //   Debug.Log("PickUp");
+
+        // 주변에 있는 잡을 수 있는 아이템을 찾음
         Collider[] colliders = Physics.OverlapSphere(transform.position, _findfood);
         IHoldable holdable = null;
         foreach (Collider collider in colliders)
         {
             if (collider.TryGetComponent<IHoldable>(out holdable))
             {
-                if (holdable.IsHold)
-                {
-                    continue;
-                }
-                // 팬인 경우
                 if (holdable is PanObject pan)
                 {
-                    // 스토브와 테이블 불 상태 체크
+                    // 스토브가 불이 났다면 팬을 잡을 수 없도록 함
                     Stove stove = pan.GetComponentInParent<Stove>();
                     if (stove != null && stove.IsOnFire)
                     {
-                        return; // 스토브가 불이 났으면 팬을 잡지 못하도록 반환
+                        return;
                     }
-
                     Table[] nearbyTables = pan.NearbyTables;
                     foreach (Table table in nearbyTables)
                     {
                         if (table != null && table.IsOnFire)
                         {
-                            return; // 주변 테이블이 불이 났으면 팬을 잡지 못하도록 반환
+                            return; // 팬을 들 수 없도록 반환
                         }
                     }
-
-                    // 팬을 잡을 수 있음
+                }
+                // 잡기 우선순위 설정
+                if (holdable is FoodObject &&
+                    holdable.GetComponentInParent<PanObject>() == null &&
+                    holdable.GetComponentInParent<BasketObject>() == null)
+                {
                     HoldableItem = holdable;
                     holdable.Hold(_owner, HandTransform);
                     animator.SetBool("Carry", true);
                     return;
                 }
-                // 바스켓인 경우
-                else if (holdable is BasketObject basket)
+                else if (holdable is PanObject || holdable is BasketObject)
                 {
-                    // 프라이머신과 테이블 불 상태 체크
-                    FryMachine fryMachine = basket.GetComponentInParent<FryMachine>();
-                    if (fryMachine != null && fryMachine.IsOnFire)
-                    {
-                        return; // 프라이머신이 불이 났으면 바스켓을 잡지 못하도록 반환
-                    }
-
-                    Table[] nearbyTables = basket.NearbyTables;
-                    foreach (Table table in nearbyTables)
-                    {
-                        if (table != null && table.IsOnFire)
-                        {
-                            return; // 주변 테이블이 불이 났으면 바스켓을 잡지 못하도록 반환
-                        }
-                    }
-
-                    // 바스켓을 잡을 수 있음
                     HoldableItem = holdable;
                     holdable.Hold(_owner, HandTransform);
                     animator.SetBool("Carry", true);
@@ -160,7 +143,6 @@ public class CharacterHoldAbility : CharacterAbility
             }
         }
 
-        // 스토브나 테이블 위에 있는 것들도 확인
         foreach (Collider collider in colliders)
         {
             if (collider.TryGetComponent<IHoldable>(out holdable))
@@ -173,25 +155,16 @@ public class CharacterHoldAbility : CharacterAbility
                     continue;
                 }
 
-                // 팬이나 바스켓에 음식이 있는지 다시 확인
-                if (holdable is PanObject pan && pan.GetComponentInChildren<FoodObject>() != null)
-                {
-                    continue;
-                }
-                else if (holdable is BasketObject basket && basket.GetComponentInChildren<FoodObject>() != null)
-                {
-                    continue;
-                }
-
-                // 음식이 없는 경우 잡을 수 있음
                 HoldableItem = holdable;
                 holdable.Hold(_owner, HandTransform);
                 animator.SetBool("Carry", true);
                 break;
             }
-
         }
+
+
     }
+
     [PunRPC]
     void Drop()
     {
@@ -284,10 +257,10 @@ public class CharacterHoldAbility : CharacterAbility
     }
 
 
-    public void SetNearTrashBin(bool value, Transform _carryTranform = null)
+    public void SetNearTrashBin(bool value, Transform pan = null)
     {
         nearTrashBin = value;
-        _carryTransform = _carryTranform;
+        panTransform = pan; // 팬 오브젝트 참조 설정
     }
 
     public void SpawnPlateOnHand()
