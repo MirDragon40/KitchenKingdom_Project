@@ -1,4 +1,6 @@
+using Photon.Pun;
 using System.Collections;
+using System.Reflection;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SocialPlatforms.Impl;
@@ -286,8 +288,28 @@ public class ResultSceneManager : MonoBehaviour
 
         yield return new WaitForSeconds(2);
         Review_Anim.SetTrigger("Show_Review");
+        yield return new WaitForSeconds(2);
+        if (PhotonNetwork.IsMasterClient)
+        {
+            int level = GameManager.Instance.CurrentStage;
+            switch (level)
+            {
+                case 1:
+                    PhotonNetwork.LoadLevel("Stage_2_Beta");
+                    break;
+                case 2:
+                    PhotonNetwork.LoadLevel("Stage_3_Beta");
+                    break;
+                case 3:
+                    PhotonNetwork.LoadLevel("Stage_4_Beta");
+                    break;
+                default:
+                    break;
+            }
+            
 
-        
+        }
+
     }
 }
 

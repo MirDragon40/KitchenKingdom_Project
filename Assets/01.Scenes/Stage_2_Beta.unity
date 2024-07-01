@@ -28388,6 +28388,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b552d71e08315a44a932f5756c5ef534, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  OptionUl: {fileID: 1342483349}
+  ControlImage: {fileID: 1782762873}
 --- !u!4 &2103473320
 Transform:
   m_ObjectHideFlags: 0
