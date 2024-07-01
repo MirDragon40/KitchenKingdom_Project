@@ -24,10 +24,7 @@ public class GameManager : MonoBehaviour
     public int[] StageScore = new int[4];
     public int TotalScore = 0;
 
-    public GameObject OptionUl;
-    private bool _optionUlOpen = false;
 
-    public Image ControlImage;
 
 
     public int CurrentStage { get; set; }
@@ -46,8 +43,6 @@ public class GameManager : MonoBehaviour
 
         DontDestroyOnLoad(gameObject);
         SceneManager.sceneLoaded += OnSceneLoaded;
-        OptionUl.gameObject.SetActive(false);
-        ControlImage.gameObject.SetActive(false);
     }
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {

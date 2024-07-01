@@ -4361,8 +4361,6 @@ MonoBehaviour:
   - {fileID: 0}
   StageScore: 00000000000000000000000000000000000000000000000000000000
   TotalScore: 0
-  OptionUl: {fileID: 682967312}
-  ControlImage: {fileID: 1429129838}
 --- !u!4 &362806178
 Transform:
   m_ObjectHideFlags: 0
@@ -7773,6 +7771,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 889fcf84aca46464f82bb21f700b4168, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ControlImage: {fileID: 1429129838}
 --- !u!114 &682967315
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13293,7 +13292,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1148578378
 MonoBehaviour:
   m_ObjectHideFlags: 0

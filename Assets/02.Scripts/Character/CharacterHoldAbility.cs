@@ -63,13 +63,13 @@ public class CharacterHoldAbility : CharacterAbility
             }
             else
             {
-               
+
 
                 if (IsPlaceable)
                 {
                     _pv.RPC("Place", RpcTarget.All);
                 }
-              
+
                 else if (IsDroppable)
                 {
                     if (nearTrashBin)
@@ -80,7 +80,7 @@ public class CharacterHoldAbility : CharacterAbility
                     else
                     {
 
-                        _pv.RPC("Drop",RpcTarget.All);
+                        _pv.RPC("Drop", RpcTarget.All);
 
                     }
                 }
@@ -97,35 +97,57 @@ public class CharacterHoldAbility : CharacterAbility
             return;
         }
 
-     //   Debug.Log("PickUp");
-
-        // 주변에 있는 잡을 수 있는 아이템을 찾음
         Collider[] colliders = Physics.OverlapSphere(transform.position, _findfood);
         IHoldable holdable = null;
         foreach (Collider collider in colliders)
         {
             if (collider.TryGetComponent<IHoldable>(out holdable))
             {
+                // 팬인 경우
                 if (holdable is PanObject pan)
                 {
-                    // 스토브가 불이 났다면 팬을 잡을 수 없도록 함
+                    // 스토브와 테이블 불 상태 체크
                     Stove stove = pan.GetComponentInParent<Stove>();
                     if (stove != null && stove.IsOnFire)
                     {
-                        return;
+                        return; // 스토브가 불이 났으면 팬을 잡지 못하도록 반환
                     }
+
                     Table[] nearbyTables = pan.NearbyTables;
                     foreach (Table table in nearbyTables)
                     {
                         if (table != null && table.IsOnFire)
                         {
-                            return; // 팬을 들 수 없도록 반환
+                            return; // 주변 테이블이 불이 났으면 팬을 잡지 못하도록 반환
                         }
                     }
+
+                    // 팬을 잡을 수 있음
+                    HoldableItem = holdable;
+                    holdable.Hold(_owner, HandTransform);
+                    animator.SetBool("Carry", true);
+                    return;
                 }
-                // 잡기 우선순위 설정
-                if (holdable is FoodObject) // 재료를 우선순위로 잡기
+                // 바스켓인 경우
+                else if (holdable is BasketObject basket)
                 {
+                    // 프라이머신과 테이블 불 상태 체크
+                    FryMachine fryMachine = basket.GetComponentInParent<FryMachine>();
+                    if (fryMachine != null && fryMachine.IsOnFire)
+                    {
+                        return; // 프라이머신이 불이 났으면 바스켓을 잡지 못하도록 반환
+                    }
+
+                    Table[] nearbyTables = basket.NearbyTables;
+                    foreach (Table table in nearbyTables)
+                    {
+                        if (table != null && table.IsOnFire)
+                        {
+                            return; // 주변 테이블이 불이 났으면 바스켓을 잡지 못하도록 반환
+                        }
+                    }
+
+                    // 바스켓을 잡을 수 있음
                     HoldableItem = holdable;
                     holdable.Hold(_owner, HandTransform);
                     animator.SetBool("Carry", true);
@@ -134,6 +156,7 @@ public class CharacterHoldAbility : CharacterAbility
             }
         }
 
+        // 스토브나 테이블 위에 있는 것들도 확인
         foreach (Collider collider in colliders)
         {
             if (collider.TryGetComponent<IHoldable>(out holdable))
@@ -146,16 +169,25 @@ public class CharacterHoldAbility : CharacterAbility
                     continue;
                 }
 
+                // 팬이나 바스켓에 음식이 있는지 다시 확인
+                if (holdable is PanObject pan && pan.GetComponentInChildren<FoodObject>() != null)
+                {
+                    continue;
+                }
+                else if (holdable is BasketObject basket && basket.GetComponentInChildren<FoodObject>() != null)
+                {
+                    continue;
+                }
+
+                // 음식이 없는 경우 잡을 수 있음
                 HoldableItem = holdable;
                 holdable.Hold(_owner, HandTransform);
                 animator.SetBool("Carry", true);
                 break;
             }
+
         }
-
-
     }
-
     [PunRPC]
     void Drop()
     {
@@ -227,7 +259,7 @@ public class CharacterHoldAbility : CharacterAbility
             collider.TryGetComponent<Stove>(out stove);
             Table table = null;
             collider.TryGetComponent<Table>(out table); // Table 클래스를 기반으로 가정
-            
+
             if (stove != null && stove.IsOnFire)
             {
                 Debug.Log("Stove is on fire! Cannot place pan.");
@@ -312,7 +344,7 @@ public class CharacterHoldAbility : CharacterAbility
             IHoldable holdable = dish.GetComponent<IHoldable>();
 
             if (holdable != null)
-            {                
+            {
                 holdable.Hold(character, HandTransform);
             }
         }

@@ -67,15 +67,19 @@ public class PanObject : IHoldable
     }
     private void Update()
     {
-        if (GrillingIngrediant != null)
+        if (GrillingIngrediant != null && _pv != null)
         {
+
             if (_pv.OwnerActorNr != GrillingIngrediant.GetComponent<PhotonView>().OwnerActorNr)
             {
-                GrillingIngrediant.GetComponent<PhotonView>().OwnerActorNr = _pv.OwnerActorNr;
+                GrillingIngrediant.GetComponent<PhotonView>().TransferOwnership(_pv.OwnerActorNr);
             }
-            GrillingIngrediant.transform.localPosition = Vector3.zero;
-
+            if (GrillingIngrediant.PV.IsMine)
+            {
+                GrillingIngrediant.transform.localPosition = Vector3.zero;
+            }
         }
+
         // 팬이 스토브에 놓인 경우
         if (PanPlacePosition.childCount != 0)
         {
@@ -343,9 +347,9 @@ public class PanObject : IHoldable
                 if (childFoodObject != null && _pv.IsMine)
                 {
                     PhotonNetwork.Destroy(child.gameObject);
+                    GrillingSlider.value = 0;
                 }
             }
         }
     }
-
 }

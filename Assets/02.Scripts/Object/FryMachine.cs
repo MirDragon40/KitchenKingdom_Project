@@ -13,6 +13,7 @@ public class FryMachine : CookStand
     private bool isFireExtinguished = true;
     private Coroutine igniteCoroutine;
     public Table[] NearbyTables;
+    public bool IsOnFire => fireObject != null && fireObject._isOnFire;
     private void Awake()
     {
         fireObject = GetComponent<FireObject>();

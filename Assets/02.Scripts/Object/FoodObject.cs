@@ -136,7 +136,7 @@ public class FoodObject : IHoldable, IThrowable
 
     public override void Hold(Character character, Transform handTransform)
     {
-        if(PhotonNetwork.IsMasterClient)
+        if(PhotonNetwork.IsMasterClient && PV != null)
         {
             if (PV.OwnerActorNr != character.PhotonView.OwnerActorNr)
             {

@@ -33,6 +33,8 @@ public class BasketObject : IHoldable
     public override Vector3 DropOffset => new Vector3(0.3f, 0.1f, 0f);
     private bool isAnyBasketOnFire = false;
 
+    public Table[] NearbyTables;
+
     private void Awake()
     {
         BoxCollider = GetComponent<BoxCollider>();
@@ -58,6 +60,17 @@ public class BasketObject : IHoldable
 
     private void Update()
     {
+        if (FryingIngrediant != null)
+        {
+
+            if (_pv.OwnerActorNr != FryingIngrediant.GetComponent<PhotonView>().OwnerActorNr)
+            {
+                FryingIngrediant.GetComponent<PhotonView>().TransferOwnership(_pv.OwnerActorNr);
+            }
+
+            FryingIngrediant.transform.localPosition = Vector3.zero;
+
+        }
         if (BasketPlacePositon.childCount != 0)
         {
             PlusImage.SetActive(false);
@@ -297,6 +310,7 @@ public class BasketObject : IHoldable
                 if (childFoodObject != null && _pv.IsMine)
                 {
                     PhotonNetwork.Destroy(child.gameObject);
+                    FryingSlider.value = 0f;
                 }
             }
         }
