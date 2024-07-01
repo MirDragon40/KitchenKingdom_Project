@@ -310,6 +310,7 @@ public class BasketObject : IHoldable
                 if (childFoodObject != null && _pv.IsMine)
                 {
                     PhotonNetwork.Destroy(child.gameObject);
+                    FryingSlider.value = 0f;
                 }
             }
         }

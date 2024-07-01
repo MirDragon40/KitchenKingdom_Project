@@ -345,9 +345,9 @@ public class PanObject : IHoldable
                 if (childFoodObject != null && _pv.IsMine)
                 {
                     PhotonNetwork.Destroy(child.gameObject);
+                    GrillingSlider.value = 0;
                 }
             }
         }
     }
-
 }
