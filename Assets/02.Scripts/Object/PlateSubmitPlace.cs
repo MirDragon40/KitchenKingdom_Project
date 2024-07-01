@@ -174,7 +174,7 @@ public class PlateSubmitPlace : MonoBehaviour
                             _plateContent = "chicken";
                         }
 
-                        if (_foodCombo.Ingrediants["burger"] && _foodCombo.Ingrediants["tomatoBurger"] && _foodCombo.Ingrediants["cheeseBurger"] && !_foodCombo.Ingrediants["chicken"])
+                        if (!_foodCombo.Ingrediants["burger"] && !_foodCombo.Ingrediants["tomatoBurger"] && !_foodCombo.Ingrediants["cheeseBurger"] && !_foodCombo.Ingrediants["chicken"])
                         {
                             if (_foodCombo.Ingrediants["coke"] && _foodCombo.Ingrediants["fry"])
                             {
