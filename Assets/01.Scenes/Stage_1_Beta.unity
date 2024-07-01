@@ -4361,8 +4361,6 @@ MonoBehaviour:
   - {fileID: 0}
   StageScore: 00000000000000000000000000000000000000000000000000000000
   TotalScore: 0
-  OptionUl: {fileID: 682967312}
-  ControlImage: {fileID: 1429129838}
 --- !u!4 &362806178
 Transform:
   m_ObjectHideFlags: 0
