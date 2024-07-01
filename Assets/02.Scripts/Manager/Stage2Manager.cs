@@ -2,8 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using static UnityEditor.Progress;
-
 public class Stage2Manager : MonoBehaviour
 {
     public static Stage2Manager Instance { get; private set; }

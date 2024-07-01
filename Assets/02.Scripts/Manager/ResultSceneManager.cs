@@ -268,22 +268,27 @@ public class ResultSceneManager : MonoBehaviour
 
     private IEnumerator ResultSceneAnimation_Coroutine()
     {
-
+        int level = GameManager.Instance.CurrentStage;
         ClipBoard_Anim.SetTrigger("Show_Result");
 
         yield return new WaitForSeconds(1.5f);
         Stage1_Text.gameObject.SetActive(true);
         yield return new WaitForSeconds(_timeGap);
-
-        Stage2_Text.gameObject.SetActive(true);
-        yield return new WaitForSeconds(_timeGap);
-
-        Stage3_Text.gameObject.SetActive(true);
-        yield return new WaitForSeconds(_timeGap);
-
-        Stage4_Text.gameObject.SetActive(true);
-        yield return new WaitForSeconds(_timeGap);
-
+        if (level >= 2)
+        {
+            Stage2_Text.gameObject.SetActive(true);
+            yield return new WaitForSeconds(_timeGap);
+        }
+        if (level >= 3)
+        {
+            Stage3_Text.gameObject.SetActive(true);
+            yield return new WaitForSeconds(_timeGap);
+        }
+        if (level >= 4)
+        {
+            Stage4_Text.gameObject.SetActive(true);
+            yield return new WaitForSeconds(_timeGap);
+        }
         Total_Text.gameObject.SetActive(true);
 
         yield return new WaitForSeconds(2);
@@ -291,7 +296,6 @@ public class ResultSceneManager : MonoBehaviour
         yield return new WaitForSeconds(2);
         if (PhotonNetwork.IsMasterClient)
         {
-            int level = GameManager.Instance.CurrentStage;
             switch (level)
             {
                 case 1:
@@ -302,6 +306,9 @@ public class ResultSceneManager : MonoBehaviour
                     break;
                 case 3:
                     PhotonNetwork.LoadLevel("Stage_4_Beta");
+                    break;
+                case 4:
+                    PhotonNetwork.LoadLevel("FinalResultScene");
                     break;
                 default:
                     break;

@@ -34,6 +34,13 @@ public class UI_Timer : MonoBehaviourPunCallbacks
         StartCoroutine(TimerStart_Coroutine());
     }
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Alpha9) && PhotonNetwork.IsMasterClient)
+        {
+            _totalTime = 3;
+        }
+    }
     private IEnumerator TimerStart_Coroutine()
     {
         yield return new WaitForSeconds(2f);
@@ -112,7 +119,13 @@ public class UI_Timer : MonoBehaviourPunCallbacks
         Debug.Log("씬 전환 시도 직전. Time.timeScale을 1로 설정.");
 
         // Load the scene by name
-        SceneManager.LoadScene("ResultScene");
+        if (PhotonNetwork.IsMasterClient)
+        {
+
+            
+                PhotonNetwork.LoadLevel("ResultScene");
+            
+        }    
 
         // 디버그 로그 추가
         Debug.Log("씬 전환을 시도.");
