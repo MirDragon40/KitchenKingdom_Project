@@ -1861,6 +1861,7 @@ MonoBehaviour:
   StageScore: 00000000000000000000000000000000000000000000000000000000
   TotalScore: 0
   OptionUl: {fileID: 925381851}
+  ControlImage: {fileID: 0}
 --- !u!4 &362806178
 Transform:
   m_ObjectHideFlags: 0
@@ -8230,6 +8231,11 @@ MonoBehaviour:
   MaxOrderTimeSpan: 10
   MaxOrderNumber: 5
   NormalOrderPoints: 25
+  NormalPenaltyPoint: -10
+  VIPOrderPoints: 50
+  VIPPenaltyPoint: -30
+  RudeOrderPoints: 20
+  RudePenaltyPoint: -50
   GeneratedOrderList: []
   DirtyPlateStand: {fileID: 0}
 --- !u!4 &1746525627
@@ -14540,6 +14546,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1780653220}
     m_Modifications:
+    - target: {fileID: -3874953036212124511, guid: d434d44a5c9926b4d847888df2c12fdb, type: 3}
+      propertyPath: sceneViewId
+      value: 67
+      objectReference: {fileID: 0}
     - target: {fileID: 739465786896664657, guid: d434d44a5c9926b4d847888df2c12fdb, type: 3}
       propertyPath: m_Name
       value: PlateSubmitPlace

@@ -33,7 +33,7 @@ public class CharacterHoldAbility : CharacterAbility
     public Transform PlacePosition = null;
 
     private bool nearTrashBin = false;
-    private Transform panTransform; // 팬 오브젝트를 참조하기 위한 변수
+    private Transform _carryTransform; // 플레이어가 들고있는 객체를 참조
 
     public SoundManager soundManager;
     void Start()
@@ -248,10 +248,10 @@ public class CharacterHoldAbility : CharacterAbility
     }
 
 
-    public void SetNearTrashBin(bool value, Transform pan = null)
+    public void SetNearTrashBin(bool value, Transform _carryTranform = null)
     {
         nearTrashBin = value;
-        panTransform = pan; // 팬 오브젝트 참조 설정
+        _carryTransform = _carryTranform;
     }
 
     public void SpawnPlateOnHand()
