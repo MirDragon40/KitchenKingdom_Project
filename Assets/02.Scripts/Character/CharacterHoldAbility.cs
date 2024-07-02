@@ -149,6 +149,13 @@ public class CharacterHoldAbility : CharacterAbility
                     animator.SetBool("Carry", true);
                     return;
                 }
+                else if (holdable is DishObject || holdable is Extinguisher || holdable is Coke)
+                {
+                    HoldableItem = holdable;
+                    holdable.Hold(_owner, HandTransform);
+                    animator.SetBool("Carry", true);
+                    return;
+                }
             }
         }
     }
