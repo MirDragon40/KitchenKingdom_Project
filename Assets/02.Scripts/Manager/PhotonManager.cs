@@ -8,8 +8,8 @@ using TMPro;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-
-public class PhotonManager : MonoBehaviourPunCallbacks //PUN의 다양한 서버 이벤트(콜백 함수)를 받는다.
+// 서버 접속을 시작하고, 접속, 로비, 방 입장 결과를 받아 처리하는 스크립트
+public class PhotonManager : MonoBehaviourPunCallbacks // PUN의 다양한 서버 이벤트(콜백 함수)를 받는다.
 {
     public static PhotonManager Instance { get; private set; }
 
